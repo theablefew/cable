@@ -4,4 +4,5 @@ module AdminHelper
     Rails.application.class.parent.name.underscore.titleize
   end
   
+  
 end
