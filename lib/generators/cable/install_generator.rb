@@ -12,14 +12,14 @@ module Cable
                                        # :desc => "Template engine for the views. Available options are 'erb' and 'haml'."
 
         def copy_views
-            copy_file "app/controllers/cable/admin_controller.rb", "app/controllers/admin_controller.rb"
+            copy_file "app/controllers/admin_controller.rb", "app/controllers/admin_controller.rb"
             copy_file "app/helpers/admin_helper.rb", "app/helpers/admin_helper.rb"
             directory "app/views/cable/admin", "app/views/#{scope || :admin}"
             directory "app/views/cable/layouts", "app/views/layouts"
             directory "lib/generators/cable/templates/javascripts", "public/javascripts"
             directory "lib/generators/cable/templates/stylesheets", "public/stylesheets"
             directory "public/images/cable", "public/images"
-            copy_file "lib/generators/cable/templates/admin_navigation.rb", "config/admin_navigation.rb"
+            copy_file "config/admin_navigation.rb", "config/admin_navigation.rb"
             create_file "config/navigation.rb", "#add navigation"
         end
         
