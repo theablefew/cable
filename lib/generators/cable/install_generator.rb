@@ -18,6 +18,8 @@ module Cable
             directory "app/views/cable/layouts", "app/views/layouts"
             directory "lib/generators/cable/templates/javascripts", "public/javascripts"
             directory "lib/generators/cable/templates/stylesheets", "public/stylesheets"
+            copy_file "lib/generators/cable/templates/admin_navigation.rb", "config/admin_navigation.rb"
+            create_file "config/navigation.rb", "#add navigation"
         end
         
         def install_routes
