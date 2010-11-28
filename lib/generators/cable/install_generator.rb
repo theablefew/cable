@@ -1,6 +1,5 @@
 module Cable
   module Generators
-    # module Admin
       class InstallGenerator < Rails::Generators::Base
         source_root File.expand_path("../../../../", __FILE__)
         desc "Copies all Cable admin views to your application."
@@ -27,10 +26,8 @@ module Cable
           route("match '/admin(/:action(/:id))' => 'admin'")
         end
 
-
       protected
         #add protected methods here
       end
-    # end
   end
 end

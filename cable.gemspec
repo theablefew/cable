@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2010-11-24}
+  s.date = %q{2010-11-25}
   s.files = [
     "app/controllers/admin_controller.rb",
     "app/controllers/cable/cable_controller.rb",
@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
     "lib/cable/cable_menu.rb",
     "lib/cable/cable_menu/acts_as_cable.rb",
     "lib/cable/cable_menu/acts_as_cable_menu.rb",
+    "lib/cable/cable_menu/menu.rb",
+    "lib/cable/cable_menu/simple_navigation_methods.rb",
     "lib/cable/engine.rb",
     "lib/generators/cable/controllers_generator.rb",
     "lib/generators/cable/install_generator.rb",
@@ -150,6 +152,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Cable Admin Engine for Rails 3}
+  s.test_files = [
+    "test/unit/menu_test.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

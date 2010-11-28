@@ -9,6 +9,7 @@ module Cable
     end
     
     protected
+    
     def self.get_version_number
       dir = File.expand_path("../../../", __FILE__)
       File.read("#{dir}/VERSION")
