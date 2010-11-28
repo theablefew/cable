@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.2.1"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2010-11-25}
+  s.date = %q{2010-11-28}
   s.files = [
     "app/controllers/admin_controller.rb",
     "app/controllers/cable/cable_controller.rb",
@@ -22,15 +22,31 @@ Gem::Specification.new do |s|
     "config/navigation.rb",
     "config/routes.rb",
     "lib/cable.rb",
+    "lib/cable/acts_as_cable.rb",
     "lib/cable/base.rb",
-    "lib/cable/cable_menu.rb",
-    "lib/cable/cable_menu/acts_as_cable.rb",
-    "lib/cable/cable_menu/acts_as_cable_menu.rb",
-    "lib/cable/cable_menu/menu.rb",
-    "lib/cable/cable_menu/simple_navigation_methods.rb",
     "lib/cable/engine.rb",
-    "lib/generators/cable/controllers_generator.rb",
+    "lib/cable/menu.rb",
+    "lib/cable/menu/acts_as_cable_menu.rb",
+    "lib/cable/menu/base.rb",
+    "lib/cable/menu/simple_navigation_methods.rb",
+    "lib/cable/menu/url_helper.rb",
+    "lib/cable/page.rb",
+    "lib/cable/rails/routes.rb",
+    "lib/cable/railtie.rb",
     "lib/generators/cable/install_generator.rb",
+    "lib/generators/cable/menu/menu_generator.rb",
+    "lib/generators/cable/menu/templates/migration.rb",
+    "lib/generators/cable/menu/templates/model.rb",
+    "lib/generators/cable/orm_helpers.rb",
+    "lib/generators/cable/page/page_generator.rb",
+    "lib/generators/cable/page/templates/controller.rb",
+    "lib/generators/cable/page/templates/erb/scaffold/_form.html.erb",
+    "lib/generators/cable/page/templates/erb/scaffold/edit.html.erb",
+    "lib/generators/cable/page/templates/erb/scaffold/index.html.erb",
+    "lib/generators/cable/page/templates/erb/scaffold/new.html.erb",
+    "lib/generators/cable/page/templates/erb/scaffold/show.html.erb",
+    "lib/generators/cable/page/templates/migration.rb",
+    "lib/generators/cable/page/templates/model.rb",
     "lib/railties/tasks.rake",
     "public/images/cable/background.png",
     "public/images/cable/event-icon.png",
@@ -147,14 +163,56 @@ Gem::Specification.new do |s|
     "public/stylesheets/cable/blueprint/src/ie.css",
     "public/stylesheets/cable/blueprint/src/print.css",
     "public/stylesheets/cable/blueprint/src/reset.css",
-    "public/stylesheets/cable/blueprint/src/typography.css"
+    "public/stylesheets/cable/blueprint/src/typography.css",
+    "public/stylesheets/formtastic.css",
+    "public/stylesheets/formtastic_changes.css",
+    "public/stylesheets/ui/aristo/aristo.css",
+    "public/stylesheets/ui/aristo/icons.psd",
+    "public/stylesheets/ui/aristo/images/button_bg.png",
+    "public/stylesheets/ui/aristo/images/datepicker.gif",
+    "public/stylesheets/ui/aristo/images/icon_sprite.png",
+    "public/stylesheets/ui/aristo/images/progress_bar.gif",
+    "public/stylesheets/ui/aristo/images/slider_h_bg.gif",
+    "public/stylesheets/ui/aristo/images/slider_handles.png",
+    "public/stylesheets/ui/aristo/images/slider_v_bg.gif",
+    "public/stylesheets/ui/aristo/images/tab_bg.gif",
+    "public/stylesheets/ui/aristo/images/the_gradient.gif",
+    "public/stylesheets/ui/aristo/images/ui-bg_diagonals-thick_18_b81900_40x40.png",
+    "public/stylesheets/ui/aristo/images/ui-bg_diagonals-thick_20_666666_40x40.png",
+    "public/stylesheets/ui/aristo/images/ui-bg_flat_10_000000_40x100.png",
+    "public/stylesheets/ui/aristo/images/ui-bg_glass_100_f6f6f6_1x400.png",
+    "public/stylesheets/ui/aristo/images/ui-bg_glass_100_fdf5ce_1x400.png",
+    "public/stylesheets/ui/aristo/images/ui-bg_glass_65_ffffff_1x400.png",
+    "public/stylesheets/ui/aristo/images/ui-bg_gloss-wave_35_f6a828_500x100.png",
+    "public/stylesheets/ui/aristo/images/ui-bg_highlight-soft_100_eeeeee_1x100.png",
+    "public/stylesheets/ui/aristo/images/ui-bg_highlight-soft_75_ffe45c_1x100.png",
+    "public/stylesheets/ui/aristo/images/ui-icons_222222_256x240.png",
+    "public/stylesheets/ui/aristo/images/ui-icons_228ef1_256x240.png",
+    "public/stylesheets/ui/aristo/images/ui-icons_ef8c08_256x240.png",
+    "public/stylesheets/ui/aristo/images/ui-icons_ffd27a_256x240.png",
+    "public/stylesheets/ui/aristo/images/ui-icons_ffffff_256x240.png",
+    "public/stylesheets/ui/images/sprite-aristo.png",
+    "public/stylesheets/ui/images/uniform/sprite.png",
+    "public/stylesheets/ui/larson/images/ui-bg_flat_0_aaaaaa_40x100.png",
+    "public/stylesheets/ui/larson/images/ui-bg_flat_75_cccccc_40x100.png",
+    "public/stylesheets/ui/larson/images/ui-bg_flat_75_ffffff_40x100.png",
+    "public/stylesheets/ui/larson/images/ui-bg_glass_55_fbf9ee_1x400.png",
+    "public/stylesheets/ui/larson/images/ui-bg_glass_65_ffffff_1x400.png",
+    "public/stylesheets/ui/larson/images/ui-bg_glass_75_dadada_1x400.png",
+    "public/stylesheets/ui/larson/images/ui-bg_glass_95_fef1ec_1x400.png",
+    "public/stylesheets/ui/larson/images/ui-bg_highlight-soft_75_e6e6e6_1x100.png",
+    "public/stylesheets/ui/larson/images/ui-icons_222222_256x240.png",
+    "public/stylesheets/ui/larson/images/ui-icons_2e83ff_256x240.png",
+    "public/stylesheets/ui/larson/images/ui-icons_454545_256x240.png",
+    "public/stylesheets/ui/larson/images/ui-icons_888888_256x240.png",
+    "public/stylesheets/ui/larson/images/ui-icons_cd0a0a_256x240.png",
+    "public/stylesheets/ui/larson/jquery-ui-1.8.4.custom.css",
+    "public/stylesheets/ui/uniform/uniform.aristo.css",
+    "public/stylesheets/ui/uniform/uniform.default.css"
   ]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Cable Admin Engine for Rails 3}
-  s.test_files = [
-    "test/unit/menu_test.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
