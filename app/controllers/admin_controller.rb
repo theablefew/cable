@@ -1,5 +1,4 @@
 class AdminController < Cable::CableController
-  
   def index
   end
   

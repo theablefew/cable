@@ -7,7 +7,7 @@ module Cable
         include Rails::Generators::Migration
         # include Rails::Generators::ActiveModel
         source_root File.expand_path("../templates", __FILE__)
-        desc "Generates a model with the given NAME (if one does not exist) with cable configuration plus a migration file and cable routes."
+        desc "Generates a Cable Menu with the given NAME (if one does not exist) plus a migration file"
         # argument :model_name, :type => :string, :default => "menu"
         argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
         

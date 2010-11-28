@@ -11,10 +11,11 @@
     <%= formtastic_stylesheet_link_tag %>
     <%= stylesheet_link_tag 'cable' %>
 
-    <%= javascript_include_tag 'jquery' , 'jquery-ui', 'rails', 'admin'%>
-    <%= javascript_include_tag 'wymeditor/jquery.wymeditor' %>
-    <%= javascript_include_tag 'wymeditor/plugins/mediabrowser/jquery.wymeditor.mediabrowser'  %>
-    <%= javascript_include_tag 'wymeditor/plugins/fullscreen/jquery.wymeditor.fullscreen'  %>
+    <%= javascript_include_tag 'jquery' , 'jquery-ui', 'rails' %>
+    <%= javascript_include_tag 'wymeditor/jquery.wymeditor.js' %>
+    <%= javascript_include_tag 'wymeditor/plugins/mediabrowser/jquery.wymeditor.mediabrowser.js'  %>
+    <%= javascript_include_tag 'wymeditor/plugins/fullscreen/jquery.wymeditor.fullscreen.js'  %>
+    <%= javascript_include_tag 'admin' %>
     
     <%= yield :scripts %>
     
