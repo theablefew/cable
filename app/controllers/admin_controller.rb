@@ -1,4 +1,4 @@
-class AdminController < Cable::CableController
+class AdminController < Cable::CableAdminController
   def index
   end
   

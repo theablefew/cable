@@ -13,6 +13,7 @@ class Create<%= table_name.camelize %> < ActiveRecord::Migration
       t.string :meta_description
       t.string :meta_keywords
       t.string :special_action
+      t.string :marketable_url
 
 <% for attribute in attributes -%>
       t.<%= attribute.type %> :<%= attribute.name %>
