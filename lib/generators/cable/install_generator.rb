@@ -1,29 +1,46 @@
+require 'rails/generators/migration'
+
 module Cable
   module Generators
       class InstallGenerator < Rails::Generators::Base
+        include Rails::Generators::Migration
+        
         source_root File.expand_path("../../../../", __FILE__)
-        desc "Copies all Cable admin views to your application."
+        desc "Sets up Cable with proper migrations"
+        
+        # invoke "migration", %(create_cable_settings site_title:string keywords:text analytics:string closure:text description:text contact_email:string footer_block_1:text footer_block_2:text copyright:string legal:text)
+        class_option :orm, :type => :string, :default => "active_record"
+        
+        def self.next_migration_number(dirname)
+         if ActiveRecord::Base.timestamped_migrations
+           Time.now.utc.strftime("%Y%m%d%H%M%S")
+         else
+           "%.3d" % (current_migration_number(dirname) + 1)
+         end
+        end
 
-        argument :scope, :required => false, :default => nil,
-                         :desc => "The scope to copy views to"
-
-        # class_option :template_engine, :type => :string, :aliases => "-t",
-                                       # :desc => "Template engine for the views. Available options are 'erb' and 'haml'."
-
-        def copy_views
-            copy_file "app/controllers/admin_controller.rb", "app/controllers/admin_controller.rb"
-            copy_file "app/helpers/admin_helper.rb", "app/helpers/admin_helper.rb"
-            directory "app/views/cable/admin", "app/views/#{scope || :admin}"
-            directory "app/views/cable/layouts", "app/views/layouts"
-            directory "lib/generators/cable/templates/javascripts", "public/javascripts"
-            directory "lib/generators/cable/templates/stylesheets", "public/stylesheets"
-            directory "public/images/cable", "public/images"
-            copy_file "config/admin_navigation.rb", "config/admin_navigation.rb"
-            create_file "config/navigation.rb", "#add navigation"
+        def create_migration_file
+           migration_template 'lib/generators/templates/create_cable_settings.rb', "db/migrate/create_cable_settings.rb"
+        end
+        
+        def copy_simple_nav
+          copy_file 'config/admin_navigation.rb', 'config/admin_navigation.rb'
+          copy_file 'config/navigation.rb', 'config/navigation.rb'
         end
         
         def install_routes
-          route("match '/admin(/:action(/:id))' => 'admin'")
+          route( 'cable_to :cable_settings' )
+        end
+        # hook_for :orm, :as => :migration
+        
+        def print_setup_instructions
+          puts ""
+          puts "Run rake db:migrate to complete setup."
+          puts ""
+          puts "To begin using Cable Menu and Pages use:"
+          puts "rails generate cable:menu MENU_NAME"
+          puts "rails generate cable:page PAGE_NAME field:type field:type ..."
+          puts ""
         end
 
       protected

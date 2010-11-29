@@ -1,0 +1,47 @@
+<ul id="global-settings">
+    <li>
+        <%= label_tag :site_title %>
+        <%= @cable_setting.site_title %>
+   </li> 
+   <li>
+       <%= label_tag :keywords %>
+       <%= @cable_setting.keywords %>
+   </li>
+   <li>
+       <%= label_tag :description %>
+       <%= @cable_setting.description %>
+   </li>
+   <li>
+       <%= label_tag :analytics %>
+       <%= @cable_setting.analytics %>
+   </li>
+   <li>
+       <%= label_tag :closure %>
+       <%=h @cable_setting.closure %>
+   </li>
+   <li>
+       <%= label_tag :contact_email %>
+       <%= @cable_setting.contact_email %>
+   </li>
+   <li>
+       <%= label_tag :footer_block_1 %>
+       <%= @cable_setting.footer_block_1 %>
+   </li>
+   <li>
+       <%= label_tag :footer_block_2 %>
+       <%= @cable_setting.footer_block_2 %>
+   </li>
+   <li>
+       <%= label_tag :copyright %>
+       <%= @cable_setting.copyright %>
+   </li>
+   <li>
+       <%= label_tag :legal %>
+       <%= @cable_setting.legal %>
+   </li>
+   
+</ul>
+
+<div class="actions">
+  <%= link_to 'Edit', edit_admin_cable_setting_path(@cable_setting), :class => "button" %>
+</div>

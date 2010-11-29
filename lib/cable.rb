@@ -7,7 +7,7 @@ module Cable
   autoload :Base, 'cable/base'
   autoload :Menu, 'cable/menu'
   autoload :Page, 'cable/page'
-  
+  autoload :Setting, 'cable/setting'
   module Menu
     autoload :ActsAsCableMenu, "cable/menu/acts_as_cable_menu"
     autoload :SimpleNavigationMethods, "cable/menu/simple_navigation_methods"
