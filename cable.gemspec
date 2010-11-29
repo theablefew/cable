@@ -5,16 +5,19 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2010-11-28}
+  s.date = %q{2010-11-29}
   s.files = [
+    "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
     "app/controllers/cable/cable_controller.rb",
     "app/helpers/admin_helper.rb",
-    "app/models/cable/global_setting.rb",
+    "app/views/admin/cable_settings/_cable_setting.html.erb",
+    "app/views/admin/cable_settings/edit.html.erb",
+    "app/views/admin/cable_settings/index.html.erb",
     "app/views/admin/index.html.erb",
     "app/views/layouts/_messages.html.erb",
     "app/views/layouts/admin.html.erb",
@@ -33,11 +36,13 @@ Gem::Specification.new do |s|
     "lib/cable/page.rb",
     "lib/cable/rails/routes.rb",
     "lib/cable/railtie.rb",
+    "lib/cable/setting.rb",
     "lib/generators/cable/install_generator.rb",
     "lib/generators/cable/menu/menu_generator.rb",
     "lib/generators/cable/menu/templates/migration.rb",
     "lib/generators/cable/menu/templates/model.rb",
     "lib/generators/cable/orm_helpers.rb",
+    "lib/generators/cable/override_generator.rb",
     "lib/generators/cable/page/page_generator.rb",
     "lib/generators/cable/page/templates/controller.rb",
     "lib/generators/cable/page/templates/erb/scaffold/_form.html.erb",
@@ -47,6 +52,7 @@ Gem::Specification.new do |s|
     "lib/generators/cable/page/templates/erb/scaffold/show.html.erb",
     "lib/generators/cable/page/templates/migration.rb",
     "lib/generators/cable/page/templates/model.rb",
+    "lib/generators/templates/create_cable_settings.rb",
     "lib/railties/tasks.rake",
     "public/images/cable/background.png",
     "public/images/cable/event-icon.png",
