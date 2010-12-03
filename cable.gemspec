@@ -5,15 +5,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.3.1"
+  s.version = "0.3.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2010-11-29}
+  s.date = %q{2010-12-03}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
-    "app/controllers/cable/cable_controller.rb",
+    "app/controllers/cable/cable_admin_controller.rb",
     "app/helpers/admin_helper.rb",
     "app/views/admin/cable_settings/_cable_setting.html.erb",
     "app/views/admin/cable_settings/edit.html.erb",
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "lib/cable.rb",
     "lib/cable/acts_as_cable.rb",
     "lib/cable/base.rb",
+    "lib/cable/controllers/cable_controller_helpers.rb",
     "lib/cable/engine.rb",
     "lib/cable/menu.rb",
     "lib/cable/menu/acts_as_cable_menu.rb",
