@@ -9,26 +9,17 @@ module Cable
         include Rails::Generators::Migration
         include Rails::Generators::ResourceHelpers
         
-        # include Rails::Generators::ControllerGenerator
-        # include Rails::Generators::ActiveModel
         source_root File.expand_path("../templates", __FILE__)
         desc "Generates a Cable Page with the given NAME (if one does not exist) with a migration file"
-        # argument :model_name, :type => :string, :default => "menu"
-        argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
-        class_option :admin, :type => :boolean, :default => true, :desc => "Include Admin."
-        class_option :migration, :type => :boolean, :default => true
-        class_option :model, :type => :boolean, :default => true
-        class_option :routes, :type => :boolean, :default => true        
-        class_option :orm, :type => :string, :default => "active_record"
         
-        def self.next_migration_number(dirname)
-         if ActiveRecord::Base.timestamped_migrations
-           Time.now.utc.strftime("%Y%m%d%H%M%S")
-         else
-           "%.3d" % (current_migration_number(dirname) + 1)
-         end
-        end
-
+        argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
+        
+        class_option :admin,      :type => :boolean, :default => true, :desc => "Include Admin."
+        class_option :migration,  :type => :boolean, :default => true
+        class_option :model,      :type => :boolean, :default => true
+        class_option :routes,     :type => :boolean, :default => true
+        class_option :orm,        :type => :string,  :default => "active_record"
+ 
         def create_migration_file
            migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.model?
         end       
@@ -56,9 +47,14 @@ module Cable
         def install_route
           route("cable_to :#{plural_table_name}") if options.routes?
         end
-        # hook_for :template_engine, :in => "cable/page", :as => :scaffold do |instance, template_eng|
-        #   instance.invoke template_eng, [ "admin/#{instance.name}" ]
-        # end
+        
+        def self.next_migration_number(dirname)
+         if ActiveRecord::Base.timestamped_migrations
+           Time.now.utc.strftime("%Y%m%d%H%M%S")
+         else
+           "%.3d" % (current_migration_number(dirname) + 1)
+         end
+        end
         
         private
         

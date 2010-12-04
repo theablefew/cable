@@ -14,6 +14,8 @@
     <td><strong>Template:</strong>
     <td><%%= <%= singular_table_name %>.menu.template.titleize unless <%= singular_table_name %>.menu.blank? %></td>
   </tr>
+  
+  <%% if <%= singular_table_name %>.respond_to?(:blocks) %>
   <tr>
     <td colspan=1>
       <strong>Blocks:</strong>
@@ -26,11 +28,14 @@
       <%% end %>
     </td>
   </tr>
+  <% end %>
+  
+  <%% if <%= singular_table_name %>.respond_to?(:teaser) %>
   <tr>
     <td><strong>Teaser:</strong></td>
     <td><%%= <%= singular_table_name %>.teaser unless <%= singular_table_name %>.teaser.blank? %></td>
   </tr>
-  
+  <% end %>
   <tr>
     <td style="border-bottom:2px solid #333;">
       <strong>URL:</strong>
@@ -42,5 +47,5 @@
 <%% end %>
 </table>
 <script>
-$('.button').button();
+    $('.button').button();
 </script>
