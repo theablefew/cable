@@ -9,7 +9,7 @@ module Cable
   autoload :Page, 'cable/page'
   autoload :Setting, 'cable/setting'
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
-  
+  autoload :Block, 'cable/block'
   module Menu
     autoload :ActsAsCableMenu, "cable/menu/acts_as_cable_menu"
     autoload :SimpleNavigationMethods, "cable/menu/simple_navigation_methods"

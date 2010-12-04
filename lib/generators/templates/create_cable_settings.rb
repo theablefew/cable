@@ -13,7 +13,10 @@ class CreateCableSettings < ActiveRecord::Migration
       t.text :legal
 
       t.timestamps
+      
     end
+    Cable::Setting.create(:site_title => Rails.application.class.parent.name.underscore.titleize )
+    
   end
 
   def self.down

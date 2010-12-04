@@ -8,6 +8,9 @@ module Cable
         source_root File.expand_path("../../../../", __FILE__)
         desc "Sets up Cable with proper migrations"
         
+        class_option :blocks, :type => :boolean, :default => true
+        class_option :settings, :type => :boolean, :default => true
+        class_option :simple_nav, :type => :boolean, :default => true
         # invoke "migration", %(create_cable_settings site_title:string keywords:text analytics:string closure:text description:text contact_email:string footer_block_1:text footer_block_2:text copyright:string legal:text)
         class_option :orm, :type => :string, :default => "active_record"
         
@@ -19,17 +22,30 @@ module Cable
          end
         end
 
-        def create_migration_file
+        def create_settings
+          if options.settings?
            migration_template 'lib/generators/templates/create_cable_settings.rb', "db/migrate/create_cable_settings.rb"
+           route( 'cable_to :cable_settings' ) if options.settings?
+         end
+        end
+        
+        def create_blocks
+          if options.blocks?
+            migration_template 'lib/generators/templates/create_blocks.rb', 'db/migrate/create_blocks.rb'
+            copy_file 'lib/generators/templates/block.rb', 'app/models/block.rb'
+          end
         end
         
         def copy_simple_nav
-          copy_file 'config/admin_navigation.rb', 'config/admin_navigation.rb'
-          copy_file 'config/navigation.rb', 'config/navigation.rb'
+          if options.simple_nav?
+            copy_file 'config/admin_navigation.rb', 'config/admin_navigation.rb'
+            copy_file 'config/navigation.rb', 'config/navigation.rb'
+          end
         end
         
+        
+        
         def install_routes
-          route( 'cable_to :cable_settings' )
         end
         # hook_for :orm, :as => :migration
         
