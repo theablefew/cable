@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.3.3"
+  s.version = "0.3.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "lib/cable.rb",
     "lib/cable/acts_as_cable.rb",
     "lib/cable/base.rb",
+    "lib/cable/block.rb",
     "lib/cable/controllers/cable_controller_helpers.rb",
     "lib/cable/engine.rb",
     "lib/cable/menu.rb",
@@ -53,6 +54,8 @@ Gem::Specification.new do |s|
     "lib/generators/cable/page/templates/erb/scaffold/show.html.erb",
     "lib/generators/cable/page/templates/migration.rb",
     "lib/generators/cable/page/templates/model.rb",
+    "lib/generators/templates/block.rb",
+    "lib/generators/templates/create_blocks.rb",
     "lib/generators/templates/create_cable_settings.rb",
     "lib/railties/tasks.rake",
     "public/images/cable/background.png",
