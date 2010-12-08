@@ -45,7 +45,9 @@ module Cable
           end
         end
         
-        
+        def install_initializer
+          copy_file "lib/generators/templates/partials/initializer.rb", "config/initializers/cable.rb"
+        end
         
         def install_routes
         end
