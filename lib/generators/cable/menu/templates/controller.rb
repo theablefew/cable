@@ -2,7 +2,7 @@ class Admin::<%= class_name %>sController < AdminController
   # GET /pages
   # GET /pages.xml
   def index
-    @<%= plural_table_name %> = <%= class_name %>.roots
+    @<%= plural_table_name %> = [<%= class_name %>.roots.first]
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @<%= plural_table_name %> }
@@ -47,6 +47,11 @@ class Admin::<%= class_name %>sController < AdminController
       page << "$('#dialog').dialog({width:700,modal:true});"
     end
   end
+  
+  def edit_tree
+    @<%= plural_table_name %> = <%= class_name %>.where( :id => params[:id] )
+  end
+  
 
   # POST /pages
   # POST /pages.xml

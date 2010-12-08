@@ -42,6 +42,7 @@ module Cable
             template 'erb/menus/new.html.erb', "app/views/admin/#{plural_table_name}/new.html.erb"
             template 'erb/menus/show.html.erb', "app/views/admin/#{plural_table_name}/show.html.erb"
             template 'erb/menus/table.html.erb', "app/views/admin/#{plural_table_name}/table.html.erb"
+            copy_file 'erb/partials/_block_form.html.erb', 'app/views/admin/partials/_menu_fields.html.erb'
           end
         end
         

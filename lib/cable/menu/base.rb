@@ -91,6 +91,10 @@ class Cable::Menu::Base < ActiveRecord::Base
       self.non_deletable = args
     end
   
+    def template
+      self[:template] || "default"
+    end
+    
     private
   
     # Cancels the nested set :before_destroy callback.
