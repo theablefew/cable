@@ -9,7 +9,7 @@ class Create<%= table_name.camelize %> < ActiveRecord::Migration
       t.integer :rgt
       t.string :url
       t.string :menu_identifier
-      t.boolean :show_in_menu
+      t.boolean :show_in_menu, :default => true
       t.string :meta_description
       t.string :meta_keywords
       t.string :special_action
@@ -17,6 +17,7 @@ class Create<%= table_name.camelize %> < ActiveRecord::Migration
       t.boolean :show_on_landing_page
       t.string :template
       t.string :special_action
+      t.integer :tree_id
       
 <% for attribute in attributes -%>
       t.<%= attribute.type %> :<%= attribute.name %>
@@ -25,9 +26,9 @@ class Create<%= table_name.camelize %> < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :<%= table_name %>, :lft,                :unique => true
-    add_index :<%= table_name %>, :rgt,                :unique => true
-    add_index :<%= table_name %>, :parent_id,          :unique => true
+    # add_index :<%= table_name %>, :lft
+    # add_index :<%= table_name %>, :rgt
+    # add_index :<%= table_name %>, :parent_id
     add_index :<%= table_name %>, :url,                :unique => true
 
   end
