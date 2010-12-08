@@ -1,0 +1,8 @@
+
+<label>Menu ID:</label> <%%= @<%= singular_table_name %>.id %><br />
+<label>Title:</label>   <%%= @<%= singular_table_name %>.title %><br />
+<label>Title:</label>   <%%= @<%= singular_table_name %>.cable_menuable_id  %><br />
+<label>Title:</label>   <%%= @<%= singular_table_name %>.cable_menuable_type %><br />
+<label>Title:</label>   <%%= @<%= singular_table_name %>.parent_id %><br />
+<label>Title:</label>   <%%= @<%= singular_table_name %>.menu_identifier %><br />
+<%%= link_to 'Destroy', [:admin, @<%= singular_table_name %>], :confirm => 'Are you sure?', :method => :delete %>
