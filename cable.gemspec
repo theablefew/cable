@@ -5,15 +5,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.3.4"
+  s.version = "0.3.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2010-12-03}
+  s.date = %q{2010-12-08}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
     "app/controllers/cable/cable_admin_controller.rb",
+    "app/helpers/admin/menus_helper.rb",
     "app/helpers/admin_helper.rb",
     "app/views/admin/cable_settings/_cable_setting.html.erb",
     "app/views/admin/cable_settings/edit.html.erb",
@@ -41,6 +42,16 @@ Gem::Specification.new do |s|
     "lib/cable/setting.rb",
     "lib/generators/cable/install_generator.rb",
     "lib/generators/cable/menu/menu_generator.rb",
+    "lib/generators/cable/menu/templates/controller.rb",
+    "lib/generators/cable/menu/templates/erb/menus/_edit_remote.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/_menu.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/edit.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/edit_tree.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/index.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/new.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/show.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/table.html.erb",
+    "lib/generators/cable/menu/templates/erb/partials/_menu_fields.html.erb",
     "lib/generators/cable/menu/templates/migration.rb",
     "lib/generators/cable/menu/templates/model.rb",
     "lib/generators/cable/orm_helpers.rb",
@@ -57,6 +68,8 @@ Gem::Specification.new do |s|
     "lib/generators/templates/block.rb",
     "lib/generators/templates/create_blocks.rb",
     "lib/generators/templates/create_cable_settings.rb",
+    "lib/generators/templates/partials/_block.html.erb",
+    "lib/generators/templates/partials/_block_form.html.erb",
     "lib/railties/tasks.rake",
     "public/images/cable/background.png",
     "public/images/cable/event-icon.png",
@@ -65,6 +78,28 @@ Gem::Specification.new do |s|
     "public/images/cable/product-icon.jpg",
     "public/images/cable/story-icon.jpg",
     "public/javascripts/admin.js",
+    "public/javascripts/jstree/_lib/jquery.cookie.js",
+    "public/javascripts/jstree/_lib/jquery.hotkeys.js",
+    "public/javascripts/jstree/_lib/jquery.js",
+    "public/javascripts/jstree/jquery.jstree.js",
+    "public/javascripts/jstree/themes/apple/bg.jpg",
+    "public/javascripts/jstree/themes/apple/d.png",
+    "public/javascripts/jstree/themes/apple/dot_for_ie.gif",
+    "public/javascripts/jstree/themes/apple/style.css",
+    "public/javascripts/jstree/themes/apple/throbber.gif",
+    "public/javascripts/jstree/themes/classic/d.png",
+    "public/javascripts/jstree/themes/classic/dot_for_ie.gif",
+    "public/javascripts/jstree/themes/classic/style.css",
+    "public/javascripts/jstree/themes/classic/throbber.gif",
+    "public/javascripts/jstree/themes/default-rtl/d.gif",
+    "public/javascripts/jstree/themes/default-rtl/d.png",
+    "public/javascripts/jstree/themes/default-rtl/dots.gif",
+    "public/javascripts/jstree/themes/default-rtl/style.css",
+    "public/javascripts/jstree/themes/default-rtl/throbber.gif",
+    "public/javascripts/jstree/themes/default/d.gif",
+    "public/javascripts/jstree/themes/default/d.png",
+    "public/javascripts/jstree/themes/default/style.css",
+    "public/javascripts/jstree/themes/default/throbber.gif",
     "public/javascripts/wymeditor/GPL-license.txt",
     "public/javascripts/wymeditor/MIT-license.txt",
     "public/javascripts/wymeditor/README",
