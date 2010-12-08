@@ -13,7 +13,7 @@ module Cable
         def acts_as_cable_menu( reflection_options = {} )
           send :include, InstanceMethods
           belongs_to :cable_menuable, reflection_options.merge( :polymorphic => true )
-          acts_as_nested_set
+          acts_as_nested_set :scope => :tree_id
         end
       end
   

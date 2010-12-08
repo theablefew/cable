@@ -1,19 +1,9 @@
 module Cable
   module Menu
     module SimpleNavigationMethods
-    
-    def self.included( base )
-      # base.extend( ClassMethods )
-      send :include, InstanceMethods 
-    end
-    
-    module ClassMethods
-      
-    end
-    
-    module InstanceMethods
+
       def items
-        self.children.all(:conditions => {:show_in_menu => true})
+        self.children.where(:show_in_menu => true)
       end
 
       def key
@@ -25,5 +15,4 @@ module Cable
       end
     end
   end
-end
 end
