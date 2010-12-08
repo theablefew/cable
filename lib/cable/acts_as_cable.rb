@@ -16,8 +16,8 @@ module Cable
           
           puts "Including blocks! #{with_modules}"
           has_one :menu, reflection_options.merge( :as => :cable_menuable )
-          
           has_many :blocks, :as => :resource if with_modules.include? :blocks
+          accepts_nested_attributes_for :menu
           
         end
       end

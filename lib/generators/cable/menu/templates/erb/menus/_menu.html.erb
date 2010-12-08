@@ -1,0 +1,12 @@
+<%%= semantic_form_for [:admin, @<%= singular_table_name %>] do |f| %>
+  <%% f.inputs do %>
+    <%%= f.input :title %>
+    <%%= f.input :url %>    
+    <%%= f.input :meta_description %>
+    <%%= f.input :meta_keywords %>
+    <%%= f.input :show_in_menu %>
+    <%%= f.input :show_on_landing_page %>
+  <%% end %>
+  
+  <%%= f.buttons %>
+<%% end %>

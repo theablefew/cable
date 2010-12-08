@@ -1,0 +1,11 @@
+  <%= f.inputs :for => :menu do |menu_fields| %> 
+    <%= menu_fields.input :title, :label => "Menu Title" %>
+    <%= menu_fields.input :meta_description, :label => "Meta Description" %>
+    <%= menu_fields.input :meta_keywords, :label => "Meta Keywords", :hint => "Enter Keywords with a comma separating each key" %>    
+    <%= menu_fields.input :menu_identifier, :label => "Menu Identifier (Site Map ID)" %>
+    <%= menu_fields.input :url, :label => "Custom URL" %>
+    <%# menu_fields.input :special_action, :label => "Special Action", :as => :select, :collection => Core::SPECIAL_ACTIONS %>
+    <%# menu_fields.input :template, :as => :select, :collection => Core::PAGE_TEMPLATES %>
+    <%= menu_fields.input :show_in_menu %>
+    <%= menu_fields.input :show_on_landing_page, :hint => "Set this to true if you would like the resource to show up on it's parent landing page" %>  
+  <% end %>

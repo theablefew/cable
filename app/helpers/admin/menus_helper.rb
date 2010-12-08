@@ -1,5 +1,4 @@
-module AdminHelper
-  
+module Admin::MenusHelper
   def display_tree(tree, parent_id)
     ret = "<ul>"
     tree.each do |node|
@@ -10,7 +9,7 @@ module AdminHelper
           ret += "<li rel='#{node.resource.class.name}' url='#{node.resource}' resource_url='#{url_for [:admin, node]}' id='list_#{node.id}'>"
         end
         ret += "<a>"
-        ret += node.title 
+        ret += node.title
         ret += "</a>"
         ret += display_tree(node.children, node.id)
         ret += "</li>"
@@ -18,5 +17,4 @@ module AdminHelper
     end
     ret += "</ul>"
   end
-  
 end

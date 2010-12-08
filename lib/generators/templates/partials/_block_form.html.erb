@@ -1,0 +1,24 @@
+<hr />
+<%= form.inputs "Block" do -%>
+    <%= form.input :title %>
+    <%= form.input :sub_head, :label => "Sub-heading" %>
+    <%= form.input :url , :label => "URL" %>
+    <%= form.input :link_title %>
+    <%= form.input :body, :as => :text %>
+    <%= form.input :region, :as => :select , :collection => Core::REGIONS %>
+    
+    <% if form.object.block_image.exists? %>
+        <div class="left preview-image">
+            <%= image_tag form.object.block_image.url(:small) %>
+        </div>
+        <div class="left">
+          <%= form.input :delete_block_image , :as => :boolean, :value => 0 %>
+        </div>
+        <div class="clearfix"></div>
+    <% end %>
+    
+    <%= form.input :block_image , :as => :file %>
+
+    <br />
+    <%= remove_task_link( form ) %>
+<% end %>
