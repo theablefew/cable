@@ -5,7 +5,7 @@
     <%= form.input :url , :label => "URL" %>
     <%= form.input :link_title %>
     <%= form.input :body, :as => :text %>
-    <%= form.input :region, :as => :select , :collection => Core::REGIONS %>
+    <%= form.input :region, :as => :select , :collection => Cable.regions %>
     
     <% if form.object.block_image.exists? %>
         <div class="left preview-image">

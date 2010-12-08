@@ -4,6 +4,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title><%= @page_title || Cable::Setting.last.site_title %> |  Administration Portal </title>
+
+    <%= csrf_meta_tag %>
+
     <%= stylesheet_link_tag 'cable/blueprint/screen' %>
     <%= formtastic_stylesheet_link_tag %>
     <%= stylesheet_link_tag 'cable' %>

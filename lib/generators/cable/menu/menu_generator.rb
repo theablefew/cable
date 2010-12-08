@@ -55,6 +55,7 @@ cable_to :#{plural_table_name} do |menu|
     get :rebuild
     post :edit_remote
     get :table
+    get "edit_tree(/:id)", :action => :edit_tree
   end
 end
 EOF
