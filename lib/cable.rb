@@ -17,6 +17,19 @@ module Cable
     autoload :Base, "cable/menu/base"
   end
   
+  mattr_accessor :regions
+  @@regions = []
+  
+  mattr_accessor :templates
+  @@templates = ["default"]
+  
+  mattr_accessor :special_actions
+  @@special_actions = []
+  
+  def self.setup
+     yield self
+  end
+  
   # puts "Initializing Cable #{Cable::Base.version}"
   # 
   # def self.add_mapping(resource, options)
