@@ -79,6 +79,9 @@ class Admin::<%= class_name %>sController < AdminController
         format.xml  { head :ok }
         # <%= class_name %>.rebuild!
       else
+        format.js { render :update do |page| 
+           page << "$('#dialog').dialog('close');"
+        end}
         format.html { render :action => "edit" }
         format.xml  { render :xml => @<%= singular_table_name %>.errors, :status => :unprocessable_entity }
       end
@@ -122,10 +125,12 @@ class Admin::<%= class_name %>sController < AdminController
   end
   
   def rebuild
-    <%= class_name %>.rebuild!
+    #<%= class_name %>.rebuild!
     flash[:notice] = "<%= class_name %> Tree Rebuilt."
     <%= class_name %>.find_by_title( "Home" ).generate_marketable_url
-    redirect_to admin_menus_path
+     @<%= singular_table_name %> = <%= class_name %>.where( :id => params[:id] ).first
+     @<%= singular_table_name %>.generate_marketable_url
+    redirect_to admin_menus_path(  @<%= singular_table_name %> )
   end
 
   def table

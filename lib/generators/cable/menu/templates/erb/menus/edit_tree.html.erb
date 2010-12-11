@@ -23,7 +23,7 @@
     <li id="list_0" rel="root"><a><%%= root.title %></a>
       <ul>
         <%% root.children.each do |m| -%>
-          <%% unless m.resource.blank? -%>          
+          <%% unless m.resource.blank? -%>
             <li rel="<%%= m.resource.class.name %>" url="<%%= m.url %>" resource_url="<%%= url_for [:edit, :admin, m.resource] %>" id="list_<%%= m.id %>">
           <%% else -%>
             <li rel="<%%= m.resource.class.name %>" url="<%%= m.resource %>" resource_url="<%%= url_for [:admin, m] %>" id="list_<%%= m.id %>">

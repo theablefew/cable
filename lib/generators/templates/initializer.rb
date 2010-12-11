@@ -6,6 +6,9 @@ Cable.setup do |config|
   # Special actions 
   # config.special_actions = []
   
+  # Template path default is main/templates
+  # config.template_path = ""
+  
   # Assign templates that live in 
   #config.templates = ["default"]
   

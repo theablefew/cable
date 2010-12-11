@@ -1,5 +1,4 @@
 <%%= semantic_remote_form_for [:admin, @<%= singular_table_name %>] do |f| %>
-    <%%= f.input :id, :as => :hidden %>
   <%% f.inputs do %>
     <%%= f.input :title %>
     <%%= f.input :url %>    
@@ -8,6 +7,8 @@
     <%%= f.input :meta_keywords %>
     <%%= f.input :show_in_menu %>
     <%%= f.input :show_on_landing_page %>
+    <%%= f.input :special_action, :label => "Special Action", :as => :select, :collection => Cable.special_actions %>
+    <%%= f.input :template, :as => :select, :collection => Cable.templates %>
   <%% end %>
   
   <%%= f.buttons %>

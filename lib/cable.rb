@@ -32,6 +32,9 @@ module Cable
   mattr_accessor :special_actions
   @@special_actions = []
   
+  mattr_accessor :template_path
+  @@template_path = "main/templates"
+  
   def self.setup
      yield self
   end
