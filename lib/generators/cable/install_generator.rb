@@ -13,14 +13,6 @@ module Cable
         class_option :simple_nav, :type => :boolean, :default => true
         # invoke "migration", %(create_cable_settings site_title:string keywords:text analytics:string closure:text description:text contact_email:string footer_block_1:text footer_block_2:text copyright:string legal:text)
         class_option :orm, :type => :string, :default => "active_record"
-        
-        def self.next_migration_number(dirname)
-         if ActiveRecord::Base.timestamped_migrations
-           Time.now.utc.strftime("%Y%m%d%H%M%S")
-         else
-           "%.3d" % (current_migration_number(dirname) + 1)
-         end
-        end
 
         def create_settings
           if options.settings?
@@ -46,7 +38,7 @@ module Cable
         end
         
         def install_initializer
-          copy_file "lib/generators/templates/partials/initializer.rb", "config/initializers/cable.rb"
+          copy_file "lib/generators/templates/initializer.rb", "config/initializers/cable.rb"
         end
         
         def install_routes
@@ -61,6 +53,14 @@ module Cable
           puts "rails generate cable:menu MENU_NAME"
           puts "rails generate cable:page PAGE_NAME field:type field:type ..."
           puts ""
+        end
+        
+        def self.next_migration_number(dirname)
+         if ActiveRecord::Base.timestamped_migrations
+           Time.now.utc.strftime("%Y%m%d%H%M%S") + (rand(6) + rand(5)).to_s
+         else
+           "%.3d" % (current_migration_number(dirname) + 1)
+         end
         end
 
       protected

@@ -10,11 +10,17 @@ module Cable
   autoload :Setting, 'cable/setting'
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
   autoload :Block, 'cable/block'
+  
   module Menu
     autoload :ActsAsCableMenu, "cable/menu/acts_as_cable_menu"
     autoload :SimpleNavigationMethods, "cable/menu/simple_navigation_methods"
     autoload :UrlHelper, 'cable/menu/url_helper'
     autoload :Base, "cable/menu/base"
+  end
+  
+  module Media
+    autoload :ActsAsAttachable, "cable/media/acts_as_attachable"
+    autoload :Asset, "cable/media/asset"
   end
   
   mattr_accessor :regions

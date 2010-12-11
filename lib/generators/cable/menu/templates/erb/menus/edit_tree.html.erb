@@ -2,7 +2,7 @@
   <%%= javascript_include_tag "jstree/jquery.jstree" %>
 <%% end %>
 <p>Drag and drop the menu to the desired order. When you drop the menu item in it's new location, it will be saved. Exercise caution as these changes are immediate.</p>
-<p>If the menu is acting up, or not saving the correct sorting,  <%%= link_to "Rebuild the Menu", rebuild_admin_<%= plural_table_name %>_path, :class => "button small" %></p>
+<p>If the menu is acting up, or not saving the correct sorting,  <%%= link_to "Rebuild the Menu", rebuild_admin_<%= plural_table_name %>_path(:id => <%% @<%= plural_table_name %>.first ), :class => "button small" %></p>
 <div id="dialog">
   <div id="progressbar"></div>
   <div id="progress"></div>
@@ -22,7 +22,7 @@
   <ul>
     <li id="list_0" rel="root"><a><%%= root.title %></a>
       <ul>
-        <%% root.each do |m| -%>
+        <%% root.children.each do |m| -%>
           <%% unless m.resource.blank? -%>          
             <li rel="<%%= m.resource.class.name %>" url="<%%= m.url %>" resource_url="<%%= url_for [:edit, :admin, m.resource] %>" id="list_<%%= m.id %>">
           <%% else -%>

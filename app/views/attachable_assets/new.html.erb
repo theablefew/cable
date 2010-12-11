@@ -1,0 +1,7 @@
+<h1>New attachment</h1>
+<% form_for @attachable_asset do |f| %>
+  <%= f.hidden_field(:attachable_id, :value => params[:attachable_id]) %>
+  <%= f.hidden_field(:attachable_type, :value => params[:attachable_type]) %>
+  <%= f.file_field :attachment %>
+  <p class="submit"><%= f.submit %></p>
+<% end %>
