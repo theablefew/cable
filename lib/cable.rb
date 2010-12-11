@@ -37,8 +37,14 @@ module Cable
   
   def self.setup
      yield self
+     get_templates
   end
   
+  protected
+  
+  def self.get_templates
+    @@templates = Dir.glob(Rails.root + "app/views/#{@@template_path}/_*").collect{|f| f.split("/").last.split(/_([\w\d-]+)[\.]/).second }
+  end
   # puts "Initializing Cable #{Cable::Base.version}"
   # 
   # def self.add_mapping(resource, options)
