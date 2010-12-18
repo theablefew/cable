@@ -94,7 +94,7 @@ jQuery.extend(WYMeditor, {
     TABLE,TD,TH,
     UL,OL,LI            - HTML elements string representation.
     CLASS,HREF,SRC,
-    TITLE,REL,ALT       - HTML attributes string representation.
+    TITLE,ALT           - HTML attributes string representation.
     DIALOG_LINK         - A link dialog type.
     DIALOG_IMAGE        - An image dialog type.
     DIALOG_TABLE        - A table dialog type.
@@ -183,7 +183,6 @@ jQuery.extend(WYMeditor, {
     HREF                : "href",
     SRC                 : "src",
     TITLE               : "title",
-    REL                 : "rel",
     ALT                 : "alt",
     DIALOG_LINK         : "Link",
     DIALOG_IMAGE        : "Image",
@@ -494,7 +493,6 @@ jQuery.fn.wymeditor = function(options) {
     hrefSelector:      ".wym_href",
     srcSelector:       ".wym_src",
     titleSelector:     ".wym_title",
-    relSelector:       ".wym_rel",
     altSelector:       ".wym_alt",
     textSelector:      ".wym_text",
     
@@ -503,7 +501,7 @@ jQuery.fn.wymeditor = function(options) {
     captionSelector:   ".wym_caption",
     summarySelector:   ".wym_summary",
     
-    submitSelector:    "form",
+    submitSelector:    ".wym_submit",
     cancelSelector:    ".wym_cancel",
     previewSelector:   "",
     
@@ -563,12 +561,8 @@ jQuery.fn.wymeditor = function(options) {
                + "<label>{Title}</label>"
                + "<input type='text' class='wym_title' value='' size='40' />"
                + "</div>"
-               + "<div class='row'>"
-               + "<label>{Relationship}</label>"
-               + "<input type='text' class='wym_rel' value='' size='40' />"
-               + "</div>"
                + "<div class='row row-indent'>"
-               + "<input class='wym_submit' type='submit'"
+               + "<input class='wym_submit' type='button'"
                + " value='{Submit}' />"
                + "<input class='wym_cancel' type='button'"
                + "value='{Cancel}' />"
@@ -599,7 +593,7 @@ jQuery.fn.wymeditor = function(options) {
                + "<input type='text' class='wym_title' value='' size='40' />"
                + "</div>"
                + "<div class='row row-indent'>"
-               + "<input class='wym_submit' type='submit'"
+               + "<input class='wym_submit' type='button'"
                + " value='{Submit}' />"
                + "<input class='wym_cancel' type='button'"
                + "value='{Cancel}' />"
@@ -634,7 +628,7 @@ jQuery.fn.wymeditor = function(options) {
                + "<input type='text' class='wym_cols' value='2' size='3' />"
                + "</div>"
                + "<div class='row row-indent'>"
-               + "<input class='wym_submit' type='submit'"
+               + "<input class='wym_submit' type='button'"
                + " value='{Submit}' />"
                + "<input class='wym_cancel' type='button'"
                + "value='{Cancel}' />"
@@ -656,7 +650,7 @@ jQuery.fn.wymeditor = function(options) {
                + "<textarea class='wym_text' rows='10' cols='50'></textarea>"
                + "</div>"
                + "<div class='row'>"
-               + "<input class='wym_submit' type='submit'"
+               + "<input class='wym_submit' type='button'"
                + " value='{Submit}' />"
                + "<input class='wym_cancel' type='button'"
                + "value='{Cancel}' />"
@@ -1147,14 +1141,10 @@ WYMeditor.editor.prototype.status = function(sMessage) {
  * @description Updates the element and textarea values
  */
 WYMeditor.editor.prototype.update = function() {
-    var html;
-    
-    // Dirty fix to remove stray line breaks (#189)
-    jQuery(this._doc.body).children(WYMeditor.BR).remove();
-    
-    html = this.xhtml();
-    jQuery(this._element).val(html);
-    jQuery(this._box).find(this._options.htmlValSelector).not('.hasfocus').val(html); //#147
+
+  var html = this.xhtml();
+  jQuery(this._element).val(html);
+  jQuery(this._box).find(this._options.htmlValSelector).not('.hasfocus').val(html); //#147
 };
 
 /* @name dialog
@@ -1224,61 +1214,39 @@ WYMeditor.editor.prototype.uniqueStamp = function() {
 	return("wym-" + now.getTime());
 };
 
-/* @name paste
- * @description         Paste text into the editor below the carret,
- *                      used for "Paste from Word".
- * @param String str    String to insert, two or more newlines separates 
- *                      paragraphs. May contain inline HTML.
- */
-WYMeditor.editor.prototype.paste = function(str) {
-    var container = this.selected(),
-        html = '',
-        paragraphs,
-        focusNode;
+WYMeditor.editor.prototype.paste = function(sData) {
 
-    // Split string into paragraphs by two or more newlines
-    paragraphs = str.split(new RegExp(this._newLine + '{2,}', 'g'));
+  var sTmp;
+  var container = this.selected();
+	
+  //split the data, using double newlines as the separator
+  var aP = sData.split(this._newLine + this._newLine);
+  var rExp = new RegExp(this._newLine, "g");
 
-    // Build html
-    for (var i=0, l=paragraphs.length; i < l; i++) {
-        html += '<p>' + 
-            ( paragraphs[i].split(this._newLine).join('<br />') ) + 
-            '</p>';
+  //add a P for each item
+  if(container && container.tagName.toLowerCase() != WYMeditor.BODY) {
+    for(x = aP.length - 1; x >= 0; x--) {
+        sTmp = aP[x];
+        //simple newlines are replaced by a break
+        sTmp = sTmp.replace(rExp, "<br />");
+        jQuery(container).after("<p>" + sTmp + "</p>");
     }
-
-    // Insert where appropriate
-    if (container && container.tagName.toLowerCase() != WYMeditor.BODY) {
-        // No .last() pre jQuery 1.4
-        //focusNode = jQuery(html).insertAfter(container).last()[0];
-        paragraphs = jQuery(html, this._doc).insertAfter(container);
-        focusNode = paragraphs[paragraphs.length - 1];
-    } else {
-        paragraphs = jQuery(html, this._doc).appendTo(this._doc.body);
-        focusNode = paragraphs[paragraphs.length - 1];
+  } else {
+    for(x = 0; x < aP.length; x++) {
+        sTmp = aP[x];
+        //simple newlines are replaced by a break
+        sTmp = sTmp.replace(rExp, "<br />");
+        jQuery(this._doc.body).append("<p>" + sTmp + "</p>");
     }
-    
-    // Do some minor cleanup (#131)
-    if (jQuery(container).text() == '') {
-        jQuery(container).remove(); 
-    }
-    // And remove br (if editor was empty)
-    jQuery('body > br', this._doc).remove();
-    
-    // Restore focus
-    this.setFocusToNode(focusNode);
+  
+  }
 };
 
 WYMeditor.editor.prototype.insert = function(html) {
     // Do we have a selection?
-    var selection = this._iframe.contentWindow.getSelection(),
-        range,
-        node;
-    if (selection.focusNode != null) {
+    if (this._iframe.contentWindow.getSelection().focusNode != null) {
         // Overwrite selection with provided html
-        range = selection.getRangeAt(0);
-        node = range.createContextualFragment(html);
-        range.deleteContents();
-        range.insertNode(node);
+        this._exec( WYMeditor.INSERT_HTML, html);
     } else {
         // Fall back to the internal paste function if there's no selection
         this.paste(html)
@@ -1286,11 +1254,19 @@ WYMeditor.editor.prototype.insert = function(html) {
 };
 
 WYMeditor.editor.prototype.wrap = function(left, right) {
-    this.insert(left + this._iframe.contentWindow.getSelection().toString() + right);
+    // Do we have a selection?
+    if (this._iframe.contentWindow.getSelection().focusNode != null) {
+        // Wrap selection with provided html
+        this._exec( WYMeditor.INSERT_HTML, left + this._iframe.contentWindow.getSelection().toString() + right);
+    }
 };
 
 WYMeditor.editor.prototype.unwrap = function() {
-    this.insert(this._iframe.contentWindow.getSelection().toString());
+    // Do we have a selection?
+    if (this._iframe.contentWindow.getSelection().focusNode != null) {
+        // Unwrap selection
+        this._exec( WYMeditor.INSERT_HTML, this._iframe.contentWindow.getSelection().toString() );
+    }
 };
 
 WYMeditor.editor.prototype.setFocusToNode = function(node, toStart) {
@@ -1480,7 +1456,6 @@ WYMeditor.INIT_DIALOG = function(index) {
     jQuery(wym._options.hrefSelector).val(jQuery(selected).attr(WYMeditor.HREF));
     jQuery(wym._options.srcSelector).val(jQuery(selected).attr(WYMeditor.SRC));
     jQuery(wym._options.titleSelector).val(jQuery(selected).attr(WYMeditor.TITLE));
-    jQuery(wym._options.relSelector).val(jQuery(selected).attr(WYMeditor.REL));
     jQuery(wym._options.altSelector).val(jQuery(selected).attr(WYMeditor.ALT));
   }
 
@@ -1495,7 +1470,7 @@ WYMeditor.INIT_DIALOG = function(index) {
   }
 
   jQuery(wym._options.dialogLinkSelector + " "
-    + wym._options.submitSelector).submit(function() {
+    + wym._options.submitSelector).click(function() {
 
       var sUrl = jQuery(wym._options.hrefSelector).val();
       if(sUrl.length > 0) {
@@ -1509,15 +1484,14 @@ WYMeditor.INIT_DIALOG = function(index) {
         }
 
         link.attr(WYMeditor.HREF, sUrl)
-            .attr(WYMeditor.TITLE, jQuery(wym._options.titleSelector).val())
-            .attr(WYMeditor.REL, jQuery(wym._options.relSelector).val());
+            .attr(WYMeditor.TITLE, jQuery(wym._options.titleSelector).val());
 
       }
       window.close();
   });
 
   jQuery(wym._options.dialogImageSelector + " "
-    + wym._options.submitSelector).submit(function() {
+    + wym._options.submitSelector).click(function() {
 
       var sUrl = jQuery(wym._options.srcSelector).val();
       if(sUrl.length > 0) {
@@ -1533,7 +1507,7 @@ WYMeditor.INIT_DIALOG = function(index) {
   });
 
   jQuery(wym._options.dialogTableSelector + " "
-    + wym._options.submitSelector).submit(function() {
+    + wym._options.submitSelector).click(function() {
 
       var iRows = jQuery(wym._options.rowsSelector).val();
       var iCols = jQuery(wym._options.colsSelector).val();
@@ -1570,7 +1544,7 @@ WYMeditor.INIT_DIALOG = function(index) {
   });
 
   jQuery(wym._options.dialogPasteSelector + " "
-    + wym._options.submitSelector).submit(function() {
+    + wym._options.submitSelector).click(function() {
 
       var sText = jQuery(wym._options.textSelector).val();
       wym.paste(sText);
@@ -1921,10 +1895,10 @@ WYMeditor.XhtmlValidator = {
         "2":"href",
         "3":"hreflang",
         "4":"name",
-        "5":"rel",
-        "6":"rev",
+        "rel":/^(alternate|designates|stylesheet|start|next|prev|contents|index|glossary|copyright|chapter|section|subsection|appendix|help|bookmark| |shortcut|icon)+$/,
+        "rev":/^(alternate|designates|stylesheet|start|next|prev|contents|index|glossary|copyright|chapter|section|subsection|appendix|help|bookmark| |shortcut|icon)+$/,
         "shape":/^(rect|rectangle|circ|circle|poly|polygon)$/,
-        "7":"type"
+        "5":"type"
       }
     },
     "0":"abbr",
@@ -3958,17 +3932,6 @@ WYMeditor.WymClassExplorer.prototype.initIframe = function(iframe) {
     }catch(e){}
 };
 
-(function(editorLoadSkin) {
-    WYMeditor.WymClassExplorer.prototype.loadSkin = function() {
-        // Mark container items as unselectable (#203)
-        // Fix for issue explained: http://stackoverflow.com/questions/1470932/ie8-iframe-designmode-loses-selection
-        jQuery(this._box).find(this._options.containerSelector)
-            .attr('unselectable', 'on');
-        
-        editorLoadSkin.call(this);
-    };
-})(WYMeditor.editor.prototype.loadSkin);
-
 WYMeditor.WymClassExplorer.prototype._exec = function(cmd,param) {
 
     switch(cmd) {
@@ -4007,11 +3970,8 @@ WYMeditor.WymClassExplorer.prototype.saveCaret = function() {
 };
 
 WYMeditor.WymClassExplorer.prototype.addCssRule = function(styles, oCss) {
-    // IE doesn't handle combined selectors (#196)
-    var selectors = oCss.name.split(',');
-    for (var i in selectors) {
-        styles.addRule(selectors[i], oCss.css);
-    }
+
+    styles.addRule(oCss.name, oCss.css);
 };
 
 WYMeditor.WymClassExplorer.prototype.insert = function(html) {
@@ -4329,20 +4289,22 @@ WYMeditor.WymClassMozilla.prototype.enableDesignMode = function() {
 
 WYMeditor.WymClassMozilla.prototype.openBlockTag = function(tag, attributes)
 {
-    var attributes = this.validator.getValidTagAttributes(tag, attributes);
+  var attributes = this.validator.getValidTagAttributes(tag, attributes);
 
-    // Handle Mozilla styled spans
-    if (tag == 'span' && attributes.style) {
-        var new_tag = this.getTagForStyle(attributes.style);
-        if (new_tag) {
-            tag = new_tag;
-            this._tag_stack.pop();
-            this._tag_stack.push(tag);
-            attributes.style = '';
-        }
+  // Handle Mozilla styled spans
+  if(tag == 'span' && attributes.style){
+    var new_tag = this.getTagForStyle(attributes.style);
+    if(new_tag){
+      this._tag_stack.pop();
+      var tag = new_tag;
+      this._tag_stack.push(new_tag);
+      attributes.style = '';
+    }else{
+      return;
     }
-
-    this.output += this.helper.tag(tag, attributes, true);
+  }
+  
+  this.output += this.helper.tag(tag, attributes, true);
 };
 
 WYMeditor.WymClassMozilla.prototype.getTagForStyle = function(style) {
@@ -4693,25 +4655,27 @@ WYMeditor.WymClassSafari.prototype.keyup = function(evt) {
 
 WYMeditor.WymClassSafari.prototype.openBlockTag = function(tag, attributes)
 {
-    var attributes = this.validator.getValidTagAttributes(tag, attributes);
+  var attributes = this.validator.getValidTagAttributes(tag, attributes);
 
-    // Handle Safari styled spans
-    if (tag == 'span' && attributes.style) {
-        var new_tag = this.getTagForStyle(attributes.style);
-        if (new_tag) {
-            tag = new_tag;
-            this._tag_stack.pop();
-            this._tag_stack.push(tag);
-            attributes.style = '';
-
-            // Should fix #125 - also removed the xhtml() override
-            if(typeof attributes['class'] == 'string') {
-                attributes['class'] = attributes['class'].replace(/apple-style-span/gi, '');
-            }
-        }
+  // Handle Safari styled spans
+  if(tag == 'span' && attributes.style) {
+    var new_tag = this.getTagForStyle(attributes.style);
+    if(new_tag){
+      this._tag_stack.pop();
+      var tag = new_tag;
+      this._tag_stack.push(new_tag);
+      attributes.style = '';
+      
+      //should fix #125 - also removed the xhtml() override
+      if(typeof attributes['class'] == 'string')
+        attributes['class'] = attributes['class'].replace(/apple-style-span/gi, '');
+    
+    } else {
+      return;
     }
-
-    this.output += this.helper.tag(tag, attributes, true);
+  }
+  
+  this.output += this.helper.tag(tag, attributes, true);
 };
 
 WYMeditor.WymClassSafari.prototype.getTagForStyle = function(style) {

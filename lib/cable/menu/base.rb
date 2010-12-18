@@ -92,10 +92,6 @@ class Cable::Menu::Base < ActiveRecord::Base
     def self.prevent_deletion( *args )
       self.non_deletable = args
     end
-  
-    def template
-      self[:template] || "default"
-    end
     
     private
   

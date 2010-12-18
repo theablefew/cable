@@ -20,7 +20,7 @@
 /* VISUAL FEEDBACK */
 
 /* basic */
-  body  { background: #eee;}
+  body  { background: #e1e8f1;}
  
 /* make HTML blocs visible */
   p,
@@ -36,9 +36,7 @@
   blockquote,
   pre           { background: #FFFFFF no-repeat 2px 2px;
                   padding:8px 5px 5px;
-                  margin:10px; 
-				  font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
-				}
+                  margin:10px; }
   td            { background: #F0F4F8; }
   th            { background: #ffffcc; }
   ul,
@@ -89,5 +87,4 @@
   { background-color: #ff9999 !important;
     border: 1px solid red !important;
     font-size: 12px !important;
-    font-weight: normal; 
-  }
+    font-weight: normal; }

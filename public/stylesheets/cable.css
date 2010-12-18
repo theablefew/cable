@@ -415,3 +415,7 @@ div.tagsinput div.tags_clear { clear: both; width: 100%; height: 0px; border: no
 	
 display: block;
 }
+
+.yes_no {
+/*	float:left;*/
+}
