@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.5.2"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2010-12-11}
+  s.date = %q{2010-12-18}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
@@ -92,7 +92,14 @@ Gem::Specification.new do |s|
     "public/images/cable/page-icon.png",
     "public/images/cable/product-icon.jpg",
     "public/images/cable/story-icon.jpg",
+    "public/images/iphone-style-checkboxes/off.png",
+    "public/images/iphone-style-checkboxes/on.png",
+    "public/images/iphone-style-checkboxes/slider.png",
+    "public/images/iphone-style-checkboxes/slider_center.png",
+    "public/images/iphone-style-checkboxes/slider_left.png",
+    "public/images/iphone-style-checkboxes/slider_right.png",
     "public/javascripts/admin.js",
+    "public/javascripts/iphone-style-checkboxes.js",
     "public/javascripts/jstree/_lib/jquery.cookie.js",
     "public/javascripts/jstree/_lib/jquery.hotkeys.js",
     "public/javascripts/jstree/_lib/jquery.js",
@@ -226,6 +233,7 @@ Gem::Specification.new do |s|
     "public/stylesheets/cable/blueprint/src/typography.css",
     "public/stylesheets/formtastic.css",
     "public/stylesheets/formtastic_changes.css",
+    "public/stylesheets/iphone_checkboxes.css",
     "public/stylesheets/ui/aristo/aristo.css",
     "public/stylesheets/ui/aristo/icons.psd",
     "public/stylesheets/ui/aristo/images/button_bg.png",

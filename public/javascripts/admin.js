@@ -1,6 +1,5 @@
 $(document).ready(function(){
   $('.wymeditor').wymeditor({
-
 		classesItems: [
 			{'name': 'left', 'title': 'left'},
 			{'name': 'right', 'title': 'right'}
@@ -9,7 +8,6 @@ $(document).ready(function(){
 			{'name': '.left', 'css': 'float:right;'},
 			{'name': '.right', 'css': 'float:left;'},
 			{'name': 'p', 'css': 'overflow:auto;'},
-			
 		],
 		postInit: function(wym) {
 			$(wym._box).find(wym._options.containersSelector).removeClass('wym_dropdown').addClass('wym_panel').find('h2 > span').remove();
@@ -19,6 +17,10 @@ $(document).ready(function(){
 			// wym.embed();
 		}   
 	});
-	$('.button').button();
+  $('.button').button();
   $('.disabled-button').button({disabled: true});
+	$('.yes_no :checkbox').iphoneStyle({
+	  checkedLabel: 'YES',
+	  uncheckedLabel: 'NO'
+	});
 });

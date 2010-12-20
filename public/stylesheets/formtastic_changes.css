@@ -50,3 +50,9 @@ form.formtastic fieldset legend span{
 form.formtastic fieldset.buttons input{
 	font-size:16px;
 }
+
+p.inline-hints {
+	font-style:italic;
+	color:#aaaaaa !important;
+	clear:both;
+}

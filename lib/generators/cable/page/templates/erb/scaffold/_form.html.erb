@@ -10,7 +10,7 @@
           </ul>
         </div>
     <%% end %>
-    <%%= f.inputs do %>
+    <%%= f.inputs :name => "<%= singular_table_name %>" do %>
         <% for attribute in attributes -%>
             <% unless attribute.type == :text -%>
                 <%%= f.input :<%= attribute.name %>, :label => '<%= attribute.name %>' %>
@@ -22,7 +22,7 @@
   
   <hr />
   <div class="submit">
-    <%%= f.commit_button 'Submit',  :input_html => {:class => 'wymupdate'} %>
+    <%%= f.commit_button 'Submit',  :button_html => {:class => 'wymupdate'} %>
   </div>
 
 <%% end %>
