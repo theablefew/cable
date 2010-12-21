@@ -93,6 +93,10 @@ class Cable::Menu::Base < ActiveRecord::Base
       self.non_deletable = args
     end
     
+    def self.get_routes
+      Menu.all.collect( &:url )
+    end
+    
     private
   
     # Cancels the nested set :before_destroy callback.

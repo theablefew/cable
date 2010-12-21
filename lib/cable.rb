@@ -10,6 +10,7 @@ module Cable
   autoload :Setting, 'cable/setting'
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
   autoload :Block, 'cable/block'
+  autoload :SpecialAction, 'cable/special_action'
   
   module Menu
     autoload :ActsAsCableMenu, "cable/menu/acts_as_cable_menu"
