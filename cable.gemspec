@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2010-12-18}
+  s.date = %q{2010-12-20}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
     "lib/cable/rails/routes.rb",
     "lib/cable/railtie.rb",
     "lib/cable/setting.rb",
+    "lib/cable/special_action.rb",
     "lib/generators/cable/install_generator.rb",
     "lib/generators/cable/media/media_generator.rb",
     "lib/generators/cable/media/templates/migration.rb",
@@ -100,6 +101,7 @@ Gem::Specification.new do |s|
     "public/images/iphone-style-checkboxes/slider_right.png",
     "public/javascripts/admin.js",
     "public/javascripts/iphone-style-checkboxes.js",
+    "public/javascripts/jquery.columnview.js",
     "public/javascripts/jstree/_lib/jquery.cookie.js",
     "public/javascripts/jstree/_lib/jquery.hotkeys.js",
     "public/javascripts/jstree/_lib/jquery.js",
