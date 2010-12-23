@@ -2,13 +2,6 @@
 
 form.formtastic fieldset > ol > li { display:block;
 position: relative; }
-form.formtastic fieldset { display: block; 
-padding: 20px;
-	background-color: #f0f0f0;
-	    -moz-border-radius: 8px; 
-  -webkit-border-radius: 8px; 
-          border-radius: 8px; 
-}
 form.formtastic fieldset > ol > li.string input,
 form.formtastic fieldset > ol > li.password input{
 	font-size: 1.5em;
@@ -31,14 +24,8 @@ form.formtastic fieldset > ol > li label { display:block; width:25%; float:left;
 	color: #9da0a6;
 }
 form.formtastic fieldset.inputs  {
-	position:relative;
-	margin-bottom: 1em;
-	padding-top: 5em;
 }
-form.formtastic fieldset legend span{
-	position: relative;
-	top: 34px;
-}
+
 #sales_inquiry_comments {
 	height: 100px;
 	width: 50%;
