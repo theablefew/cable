@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.7.0"
+  s.version = "0.7.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
@@ -248,6 +248,11 @@ Gem::Specification.new do |s|
     "public/javascripts/tinymce/plugins/paste/langs/en_dlg.js",
     "public/javascripts/tinymce/plugins/paste/pastetext.htm",
     "public/javascripts/tinymce/plugins/paste/pasteword.htm",
+    "public/javascripts/tinymce/plugins/pdw/editor_plugin.js",
+    "public/javascripts/tinymce/plugins/pdw/editor_plugin_src.js",
+    "public/javascripts/tinymce/plugins/pdw/img/toolbars.gif",
+    "public/javascripts/tinymce/plugins/pdw/langs/en.js",
+    "public/javascripts/tinymce/plugins/pdw/langs/nl.js",
     "public/javascripts/tinymce/plugins/preview/editor_plugin.js",
     "public/javascripts/tinymce/plugins/preview/editor_plugin_src.js",
     "public/javascripts/tinymce/plugins/preview/example.html",
@@ -410,6 +415,7 @@ Gem::Specification.new do |s|
     "public/stylesheets/ui/aristo/images/datepicker.gif",
     "public/stylesheets/ui/aristo/images/icon_sprite.png",
     "public/stylesheets/ui/aristo/images/progress_bar.gif",
+    "public/stylesheets/ui/aristo/images/right-arrow.png",
     "public/stylesheets/ui/aristo/images/slider_h_bg.gif",
     "public/stylesheets/ui/aristo/images/slider_handles.png",
     "public/stylesheets/ui/aristo/images/slider_v_bg.gif",
