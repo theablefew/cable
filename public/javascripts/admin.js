@@ -23,4 +23,13 @@ $(document).ready(function(){
   //   checkedLabel: 'YES',
   //   uncheckedLabel: 'NO'
   // });
+  
+  $(".collapsible ol").hide();
+  $(".collapsible legend").click(function(){
+    $(this).nextAll("ol").slideToggle(500);
+    $(this).parent().toggleClass("open")
+  });
+  $(".collapsible legend").append(" <span class='expand'>Expand</span> <span class='close'>Close</span>");
+  $(".collapsible legend").css({"cursor":"pointer"});
+  $(".selected").last().addClass("last");
 });
