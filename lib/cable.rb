@@ -12,6 +12,10 @@ module Cable
   autoload :Block, 'cable/block'
   autoload :SpecialAction, 'cable/special_action'
   
+  module Errors
+    autoload :ResourceAssociationError, "cable/errors/resource_association_error"
+  end
+  
   module Menu
     autoload :ActsAsCableMenu, "cable/menu/acts_as_cable_menu"
     autoload :SimpleNavigationMethods, "cable/menu/simple_navigation_methods"
