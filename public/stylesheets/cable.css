@@ -20,9 +20,23 @@ body{
 #header h1{
 	color: white;
 }
+
+#header {
+	padding: 2em 0;
+	overflow: auto;
+	
+	
+}
+
+div.user-session {
+	text-align: right;
+	color: white;
+	font-weight: bold;
+	padding: 0 2em;
+}
 .header-wrapper{
 	margin-bottom: 1em;
-	overflow: auto;
+	min-width: 960px;
 background: #EA8100; /* old browsers */
 background: -moz-linear-gradient(top, #EA8100 0%, #EAAB5D 100%); /* firefox */
 
@@ -32,6 +46,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EA8100', end
 }
 #header.box{
 	padding: 1em 0;
+	overflow: auto;
 }
 
 
@@ -189,6 +204,7 @@ textarea {
   color: #555;
   text-shadow: rgba(255,255,255,0.56) 0 1px 1px;
   opacity: 1;
+  border-bottom: 1px solid #eee;
 }
 
 #secondary-navigation ul li li a {
