@@ -28,11 +28,7 @@
           <h1><%= Cable::Setting.last.site_title %></h1>
           </div>
           <div class="span-12 last">
-            <div class="user-session">
-              <% if admin_signed_in? %>  
-                Signed in as: <%= current_admin.email %> <%= link_to "Sign out", destroy_admin_session_path, :class => 'button'%>
-              <% end %>
-            </div>
+              <%= yield(:admin_login , admin_user_login) %>
           </div>
         </div>
         <div id="main-navigation" class="span-24"><%= render_navigation(:level => 1, :context => :admin) %></div>        
