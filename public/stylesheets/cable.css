@@ -1,6 +1,4 @@
-/* @override 
-	http://localhost:3000/stylesheets/cable.css
-*/
+/* @override http://localhost:3000/stylesheets/cable.css */
 
 body{
   padding-bottom: 5em;
@@ -35,26 +33,33 @@ div.user-session {
 	padding: 0 2em;
 }
 .header-wrapper{
-	margin-bottom: 1em;
 	min-width: 960px;
-background: #EA8100; /* old browsers */
-background: -moz-linear-gradient(top, #EA8100 0%, #EAAB5D 100%); /* firefox */
+  background: #45484d; /* old browsers */
+  background: -moz-linear-gradient(top, #45484d 0%, #000000 100%); /* firefox */
 
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EA8100), color-stop(100%,#EAAB5D)); /* webkit */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000)); /* webkit */
 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#EA8100', endColorstr='#EAAB5D',GradientType=0 ); /* ie */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* ie */
 }
 #header.box{
 	padding: 1em 0;
 	overflow: auto;
 }
-
-
-#main-box {
-  padding: 1em;
-  background: #fff none;
+#main-box{
+	min-height:300px;
 }
 
+#right-col,
+#main-box {
+  background: #fff;
+     -moz-box-shadow: 0px 2px 4px #aaa; 
+  -webkit-box-shadow: 0px 2px 4px #aaa; 
+          box-shadow: 0px 2px 4px #aaa;
+
+}
+#right-col{
+	background: #eee;
+}
 #footer div.box {
   text-align: right;
   padding: 5px;
@@ -184,11 +189,8 @@ textarea {
   border: 1px solid #bdbdbd;
   height: 92px;
 }
-
-#secondary-navigation {
-}
-
 #secondary-navigation ul {
+  padding: 0;
   margin: 0;
 }
 
@@ -209,22 +211,19 @@ textarea {
 
 #secondary-navigation ul li li a {
   padding-left: 2em;
-
+	
 }
-
+.selected{
+ background: #fff;
+}
+.selected.last{
+	background: #fff url(/stylesheets/ui/aristo/images/right-arrow.png) no-repeat 132px center;	
+}
 #secondary-navigation ul li {
   display: block;
   clear: both;
 }
 
-#secondary-navigation ul {
-  padding: 0;
-}
-
-#secondary-navigation ul li {
-  list-style: none;
-  display: block;
-}
 
 #main {
 }
@@ -407,6 +406,7 @@ display: block;
 }
 #main-navigation > ul li:last-child a {
   -webkit-border-top-right-radius: 3px;
+  border-right: none;
 }
 
 #main-navigation ul li a {
@@ -414,6 +414,7 @@ display: block;
   font-weight: bold;
   padding: 4px 8px;
   text-decoration: none;
+  border-right: 2px groove #ddd;
 }
 
 #main-navigation {
@@ -514,6 +515,9 @@ display: block;
 
 #content-wrapper {
 	min-height: 400px;
+	background: #eee;
+	padding: 1em 0;
+	
 }
 
 div.footer-wrapper {
@@ -524,14 +528,14 @@ div.footer-wrapper {
 
 #main-navigation ul li a:hover {
 	color: #000;
-	background-color: #eee;
+	background-color: #ddd;
 }
 
 #main-navigation ul li.selected a:link, 
 #main-navigation ul li.selected a:visited {
 	color: #000;
 	-webkit-transition: background-color 0.2s linear;
-	background:#fff;
+	background:#eee;
 }
 
 /* @end */
@@ -570,3 +574,22 @@ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aebcb
 
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aebcbf', endColorstr='#0a0809',GradientType=0 ); /* ie */
 }
+span.expand,
+span.close{
+  font-weight:normal;
+  font-size:12px;
+  text-transform:uppercase;
+  background: url(/stylesheets/ui/aristo/images/ui-icons_228ef1_256x240.png);
+  text-indent: -99999px;
+  width: 16px;
+  height: 16px;
+}
+span.close{
+	background-position: -98px -191px;
+}
+span.expand{
+	background-position: -66px -191px;
+}
+span.close{visibility: hidden;}
+.open span.close{visibility: visible;}
+.open span.expand{display: none;}

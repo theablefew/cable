@@ -1,29 +1,50 @@
 /* @override http://localhost:3000/stylesheets/formtastic_changes.css */
 
+/* @override http://localhost:3000/stylesheets/formtastic_changes.css */
+
 form.formtastic fieldset > ol > li { display:block;
 position: relative; }
+form.formtastic fieldset > ol > li.email input,
 form.formtastic fieldset > ol > li.string input,
 form.formtastic fieldset > ol > li.password input{
 	font-size: 1.5em;
 	padding: .25em;
-	color: #aaa;
+	color: #444;
+	background: #fff;
+	border: 1px solid #999;
+	display: inline-block;
+     -moz-box-shadow: inset 0px 1px 5px #ccc; 
+  -webkit-box-shadow: inset 0px 1px 5px #ccc; 
+          box-shadow: inset 0px 1px 5px #ccc;  
+	
 }
-
+fieldset legend span {
+	margin: 1em 0;	
+	display: inline-block;
+}
+fieldset.inputs .hide{
+	float: right;
+}
 input#sales_inquiry_office_phone_area_code {
 	width: 30px;
 }
 
 .required abbr {
-	color: #f1594b;
+	color: red;
 	padding-left: 1em;
 }
+form.formtastic fieldset > ol > li.email input,
 form.formtastic fieldset > ol > li.string input { max-width:70%; }
 
 
 form.formtastic fieldset > ol > li label { display:block; width:25%; float:left; padding-top:.2em;
-	color: #9da0a6;
+	color: #222;
+	text-transform: capitalize;
 }
-form.formtastic fieldset.inputs  {
+form.formtastic fieldset  {
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	border-bottom: 2px solid #eee;
 }
 
 #sales_inquiry_comments {
