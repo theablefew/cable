@@ -10,7 +10,7 @@ module Admin::MenusHelper
             ret += "<li rel='#{node.resource.class.name}' url='#{node.resource}' resource_url='#{url_for [:admin, node]}' id='list_#{node.id}'>"
           end
         rescue Exception => e
-          raise Cable::Errors::ResourceAssociationError , "A node has a corrupt resource"
+          raise Cable::Errors::ResourceAssociationError , "A node has a corrupt resource #{node.inspect}"
         end
         ret += "<a>"
         ret += node.title
