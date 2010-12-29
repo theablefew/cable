@@ -3,8 +3,8 @@ module Cable
   require 'cable/engine' if defined?(Rails) && Rails::VERSION::MAJOR == 3
   require 'cable/railtie'
   
-  autoload :ActsAsCable, 'cable/acts_as_cable'
   autoload :Base, 'cable/base'
+  autoload :ActsAsCable, 'cable/acts_as_cable'
   autoload :Menu, 'cable/menu'
   autoload :Page, 'cable/page'
   autoload :Setting, 'cable/setting'

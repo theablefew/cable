@@ -2,7 +2,7 @@ require 'cable'
 
 module Cable
   class Base
-    @@version
+    # @@version
     
     def self.version
       @@version ||= self.get_version_number
