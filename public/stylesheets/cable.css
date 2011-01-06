@@ -3,11 +3,19 @@
 body{
   padding-bottom: 5em;
 }
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
 .box, .rounded-box{
 	background: none;
 	padding: 1em;
 }
-
+.content.box{
+	padding:0 0 1em 0;
+}
 #sections label {
 	margin-bottom: 1em;
 }
@@ -22,8 +30,6 @@ body{
 #header {
 	padding: 2em 0;
 	overflow: auto;
-	
-	
 }
 
 div.user-session {
@@ -286,9 +292,8 @@ th.ui-state-default.ui-th-column {
 	font-size: 1.25em;
 	
 }
-.button.small span{
-	font-size: 1em;
-	padding: 5px 10px;
+.button.small{
+	padding: 1px 8px;
 }
 .jstree-leaf a{
 	cursor: pointer;
@@ -300,31 +305,7 @@ th.ui-state-default.ui-th-column {
 	font-size: 1.1em !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+th.actions,
 td.actions{
   text-align:right;
 }
@@ -544,6 +525,7 @@ div.footer-wrapper {
 li.commit input,
 .button{
 	font-size: 12px !important;
+	margin-bottom: 0;
 	display: inline-block;
 	padding:5px 15px;
 	font-weight:bold;
@@ -593,3 +575,26 @@ span.expand{
 span.close{visibility: hidden;}
 .open span.close{visibility: visible;}
 .open span.expand{display: none;}
+
+
+
+
+.ui-sortable-helper{
+	-webkit-box-shadow:0px 2px 4px #333333;
+	-moz-box-shadow:0px 2px 4px #333333;
+	background: white;
+}
+.ui-sortable-helper a,
+.ui-sortable-helper input{
+	display: none;
+	
+}
+
+.ui-sortable-helper .class,
+.ui-sortable-helper .count,
+.ui-sortable-helper .children{
+	display: none;
+}
+.sortable:hover{
+	cursor: move;
+}

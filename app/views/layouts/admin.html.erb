@@ -24,12 +24,8 @@
     <div class="header-wrapper">
       <div class="container">
         <div id="header">
-          <div class="span-12">
-          <h1><%= Cable::Setting.last.site_title %></h1>
-          </div>
-          <div class="span-12 last">
-              <%= yield(:admin_login , admin_user_login) %>
-          </div>
+          <div class="span-12"><h1><%= Cable::Setting.last.site_title %></h1></div>
+          <div class="span-12 last"><%= yield(:admin_login , admin_user_login) %></div>
         </div>
         <div id="main-navigation" class="span-24"><%= render_navigation(:level => 1, :context => :admin) %></div>        
       </div>
@@ -39,16 +35,14 @@
         <div id="right-col" class="span-4">
           <div id="secondary-navigation"><%= render_navigation(:level => 2..5, :context => :admin) %></div>
           <%= yield :sidebar %>
-          <br />
         </div>
         <div id="main" class="span-20 last">
-          <div id="main-box" class="box">              
+          <div id="main-box" class="box">
             <h2><%= @page_title %></h2>
             <div id="breadcrumb"><%= render_navigation :renderer => :breadcrumbs, :join_with => " &raquo; " %></div>
-              <%= yield :page_menu %>
-              <div id="messages_container"><%= render :partial => 'layouts/messages' %></div>
-              <%= yield %>
-            </div>
+            <%= yield :page_menu %>
+            <div id="messages_container"><%= render :partial => 'layouts/messages' %></div>
+            <%= yield %>
           </div>        
         </div>
       </div>
