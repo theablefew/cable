@@ -598,3 +598,14 @@ span.close{visibility: hidden;}
 .sortable:hover{
 	cursor: move;
 }
+
+
+.inline{
+	float: left;
+}
+.inline.parent{
+	width: 100px;
+}
+.inline.parent select{
+	width: 100px;
+}
