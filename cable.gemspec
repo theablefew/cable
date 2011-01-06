@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.7.2"
+  s.version = "0.7.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2010-12-29}
+  s.date = %q{2011-01-06}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
@@ -90,6 +90,7 @@ Gem::Specification.new do |s|
     "lib/railties/tasks.rake",
     "public/images/cable/background.png",
     "public/images/cable/event-icon.png",
+    "public/images/cable/new-window.png",
     "public/images/cable/nil-icon.png",
     "public/images/cable/page-icon.png",
     "public/images/cable/product-icon.jpg",
