@@ -321,7 +321,7 @@ div.tagsinput span.tag a { font-weight: bold; color: #2494fa; text-decoration:no
 	height: 16px;
 	text-indent: -1090px;
 	display: inline-block;
-	background-image: url(../images/icons/delete.png);
+	background-image: url(../images/cable/delete.png);
 } 
 div.tagsinput input { width:80px; margin:0px; font-family: helvetica; font-size: 12px !important; border:1px solid transparent; padding:5px; background: transparent; color: #000; outline:0px;  margin-right:5px; margin-bottom:5px; }
 div.tagsinput div { display:block; float: left;
