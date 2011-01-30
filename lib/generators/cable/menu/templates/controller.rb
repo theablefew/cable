@@ -100,38 +100,38 @@ class Admin::<%= class_name %>sController < AdminController
     end
   end
   
-  def update_tree
-    
-    @<%= singular_table_name %> = <%= class_name %>.where( :id => params[:id]).first
-    sql = ""
-    conn = ActiveRecord::Base.connection
-    conn.execute "SET autocommit=0";
-    conn.begin_db_transaction
-    
-    if params[:parent].to_i == 0
-      logger.debug("----------------------")
-      sql = "UPDATE `menus` SET lft='#{params[:lft].to_i}', rgt='#{params[:rgt].to_i}' WHERE id='#{params[:id].to_i};'"      
-    else
-      sql = "UPDATE `menus` SET lft='#{params[:lft].to_i}', rgt='#{params[:rgt].to_i}', parent_id='#{params[:parent]}' WHERE id='#{params[:id].to_i};'"      
-    end
-    conn.update(sql)
-    conn.commit_db_transaction
-    # <%= class_name %>.rebuild!
-    render :update do |page|
-      page << "$('#messages_container').html('#{escape_javascript(render(:partial => 'layouts/messages'))}')"
-      # page.replace_html "#messages_container" , :partial => 'layouts/messages'
-      page << "$('#messages_container').fadeOut();"
-    end
-  end
+  # def update_tree
+  #   
+  #   @<%= singular_table_name %> = <%= class_name %>.where( :id => params[:id]).first
+  #   sql = ""
+  #   conn = ActiveRecord::Base.connection
+  #   conn.execute "SET autocommit=0";
+  #   conn.begin_db_transaction
+  #   
+  #   if params[:parent].to_i == 0
+  #     logger.debug("----------------------")
+  #     sql = "UPDATE `menus` SET lft='#{params[:lft].to_i}', rgt='#{params[:rgt].to_i}' WHERE id='#{params[:id].to_i};'"      
+  #   else
+  #     sql = "UPDATE `menus` SET lft='#{params[:lft].to_i}', rgt='#{params[:rgt].to_i}', parent_id='#{params[:parent]}' WHERE id='#{params[:id].to_i};'"      
+  #   end
+  #   conn.update(sql)
+  #   conn.commit_db_transaction
+  #   # <%= class_name %>.rebuild!
+  #   render :update do |page|
+  #     page << "$('#messages_container').html('#{escape_javascript(render(:partial => 'layouts/messages'))}')"
+  #     # page.replace_html "#messages_container" , :partial => 'layouts/messages'
+  #     page << "$('#messages_container').fadeOut();"
+  #   end
+  # end
   
-  def rebuild
-    #<%= class_name %>.rebuild!
-    flash[:notice] = "<%= class_name %> Tree Rebuilt."
-    <%= class_name %>.find_by_title( "Home" ).generate_marketable_url
-     @<%= singular_table_name %> = <%= class_name %>.where( :id => params[:id] ).first
-     @<%= singular_table_name %>.generate_marketable_url
-    redirect_to admin_menus_path(  @<%= singular_table_name %> )
-  end
+  # def rebuild
+  #   #<%= class_name %>.rebuild!
+  #   flash[:notice] = "<%= class_name %> Tree Rebuilt."
+  #   <%= class_name %>.find_by_title( "Home" ).generate_marketable_url
+  #    @<%= singular_table_name %> = <%= class_name %>.where( :id => params[:id] ).first
+  #    @<%= singular_table_name %>.generate_marketable_url
+  #   redirect_to admin_menus_path(  @<%= singular_table_name %> )
+  # end
 
   def table
     @<%= plural_table_name %> = <%= class_name %>.all
