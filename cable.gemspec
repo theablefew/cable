@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.7.3"
+  s.version = "0.7.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2011-01-06}
+  s.date = %q{2011-01-30}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
@@ -89,6 +89,7 @@ Gem::Specification.new do |s|
     "lib/generators/templates/partials/_block_form.html.erb",
     "lib/railties/tasks.rake",
     "public/images/cable/background.png",
+    "public/images/cable/delete.png",
     "public/images/cable/event-icon.png",
     "public/images/cable/new-window.png",
     "public/images/cable/nil-icon.png",
@@ -105,6 +106,7 @@ Gem::Specification.new do |s|
     "public/javascripts/iphone-style-checkboxes.js",
     "public/javascripts/jquery.columnview.js",
     "public/javascripts/jquery.tablesorter.min.js",
+    "public/javascripts/jquery.tagsinput.js",
     "public/javascripts/jstree/_lib/jquery.cookie.js",
     "public/javascripts/jstree/_lib/jquery.hotkeys.js",
     "public/javascripts/jstree/_lib/jquery.js",
