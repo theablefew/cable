@@ -5,8 +5,8 @@ class Cable::Menu::Base < ActiveRecord::Base
     end
     
     # versioned
-    before_destroy :check_prevent_deletion
-    before_destroy :move_child_parent
+    # before_destroy :check_prevent_deletion
+    # before_destroy :move_child_parent
     #all before destroy filters will not run after this line
     # acts_as_cable_menu
     # before_save :generate_marketable_url
@@ -17,6 +17,7 @@ class Cable::Menu::Base < ActiveRecord::Base
   
     include Cable::Menu::SimpleNavigationMethods
     include Cable::Menu::UrlHelper
+    
     
     def left=(v)
       lft = v
@@ -90,7 +91,7 @@ class Cable::Menu::Base < ActiveRecord::Base
     end
     
     def self.prevent_deletion( *args )
-      self.non_deletable = args
+      Menu.non_deletable = args
     end
     
     def self.get_routes
@@ -99,7 +100,7 @@ class Cable::Menu::Base < ActiveRecord::Base
     
     private
   
-    # Cancels the nested set :before_destroy callback.
+    # Cancels the nested set :before_destroy callback by returning false.
     def move_child_parent
       pnode = self.root
       self.children.each do |child|
@@ -111,7 +112,7 @@ class Cable::Menu::Base < ActiveRecord::Base
     end
   
     def check_prevent_deletion
-      return false if self.non_deletable.include?( self.title.downcase.to_sym )
+      return false if Menu.non_deletable.include?( self.title.downcase.to_sym )
       true
     end
 end

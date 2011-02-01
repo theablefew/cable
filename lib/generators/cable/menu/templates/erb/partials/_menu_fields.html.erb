@@ -6,7 +6,7 @@
     <%= menu_fields.input :menu_identifier, :label => "Menu Identifier (Site Map ID)" %>
     <%= menu_fields.input :url, :label => "Custom URL", :wrapper_html => { :class => "string"} %>
     <%= menu_fields.input :special_action, :label => "Special Action", :as => :select, :collection => Cable.special_actions %>
-    <%= menu_fields.input :template, :as => :select, :collection => Cable.templates, :selected => menu_fields.object.template || Winery.default_template %>
+    <%= menu_fields.input :template, :as => :select, :collection => Cable.templates, :selected => menu_fields.object.template %>
     <%= menu_fields.input :show_in_menu, :as => :boolean, :wrapper_html => { :class => "yes_no" } %>
     <%= menu_fields.input :show_on_landing_page, :as => :boolean, :wrapper_html => { :class => "yes_no" }, :hint => "Set this to true if you would like the resource to show up on it's parent landing page" %>  
 <% end %>
