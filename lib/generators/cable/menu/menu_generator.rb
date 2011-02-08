@@ -15,6 +15,7 @@ module Cable
         class_option :migration, :type => :boolean, :default => true
         class_option :views, :type => :boolean, :default => true
         class_option :routes, :type => :boolean, :default => true
+        
         def create_migration_file
           if options.migration?
            migration_template 'migration.rb', "db/migrate/create_#{model_name.pluralize}.rb"
@@ -35,13 +36,9 @@ module Cable
         
         def create_views
           if options.views?
-            template 'erb/menus/_edit_remote.html.erb', "app/views/admin/#{plural_table_name}/_edit_remote.html.erb"
-            template 'erb/menus/_menu.html.erb', "app/views/admin/#{plural_table_name}/_menu.html.erb"
-            template 'erb/menus/edit.html.erb', "app/views/admin/#{plural_table_name}/edit.html.erb"
-            template 'erb/menus/index.html.erb', "app/views/admin/#{plural_table_name}/index.html.erb"
-            template 'erb/menus/new.html.erb', "app/views/admin/#{plural_table_name}/new.html.erb"
-            template 'erb/menus/show.html.erb', "app/views/admin/#{plural_table_name}/show.html.erb"
-            template 'erb/menus/table.html.erb', "app/views/admin/#{plural_table_name}/table.html.erb"
+            Dir.glob(File.expand_path("../templates", __FILE__) + '/erb/menus/*.erb') do |rb_file|
+              template rb_file, "app/views/admin/#{plural_table_name}/#{File.basename(rb_file)}"
+            end
             copy_file 'erb/partials/_menu_fields.html.erb', 'app/views/admin/partials/_menu_fields.html.erb'
           end
         end
@@ -51,11 +48,11 @@ module Cable
           route_string = <<EOF
 cable_to :#{plural_table_name} do |menu|
   collection do
-    post :update_tree
     get :rebuild
-    post :edit_remote
     get :table
-    get "edit_tree(/:id)", :action => :edit_tree
+    post :sort
+    post :move
+    post :remove_resource
   end
 end
 EOF

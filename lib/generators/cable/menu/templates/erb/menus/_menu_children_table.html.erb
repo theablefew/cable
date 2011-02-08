@@ -1,0 +1,60 @@
+<%% content_for :scripts do %>
+  <script>
+    $(document).ready(function(){
+      $(".sortable").sortable({
+        cursor:     'move',
+        axis:       'y',
+        update: function(e, ui) {
+          sorted = $(this).sortable("serialize");
+          $.ajax({
+            type:   'POST',
+            url:    "/admin/menus/sort",
+            data:   sorted
+          });
+        }
+      });
+      $(".check-all").click(function(){
+        $("input").each(function(){
+          $(this).attr('checked', !$(this).attr('checked'));
+        });
+      });
+    });
+  </script>
+<%% end %>
+
+
+<%% unless @<%= singular_table_name %>.children.blank? %>
+  <%%= semantic_form_for :index, :url => {:controller => "menus", :action => "bulk" } do |f| %>
+    <table id="<%%= dom_id(@<%= singular_table_name %>) %>">
+      <thead>
+        <tr>
+          <th><a class="check-all">All</a></th>
+          <th>Title</th>
+          <th>Children</th>
+          <th>Resource Type</th>
+          <th class="action">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="sortable">
+        <%% @<%= singular_table_name %>.children.each do |menu| %>
+          <tr id="<%%= dom_id(menu)%>">
+            <td class="edit"><%%= check_box_tag 'menus[]', menu.id %></td>
+            <td class="title"><%%= link_to menu.title, [:admin, menu] %>
+              <%% unless menu.show_in_menu %> <span style="color:red;">[Hidden]</span> <%% end %>
+            </td>
+            <td class="children">
+              <%%= menu.children.count %>
+            </td>
+            <td class="class"><%%= menu.resource.class unless menu.resource.class == NilClass %></td>
+            <td class="actions"><%%= link_to "Show", [:admin,menu], :class => "button small" %> <%%= link_to 'Edit', edit_admin_menu_path(menu), :class=>"button small" %> <%%= link_to 'Destroy', [:admin, menu], :confirm => 'Are you sure?', :method => :delete, :class=>"button small" %></td>
+          </tr>
+        <%% end %>
+      </tbody>
+    </table>
+    <%%= f.inputs :name => "Bulk Operations" do %>
+      <%%= f.commit_button "Delete Selected" %>
+      <%%= f.input :parent_id, :as => :select, :collection => nested_set_options(Menu) {|i| "#{'-' * i.level} #{i.title}" unless i.level > 1 }.to_a.reject{|i| i[0].nil?} %>
+      <%%= f.commit_button "Move Selected" %>
+    <%% end %>
+  <%% end %>
+<%% end %>

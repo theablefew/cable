@@ -1,8 +1,16 @@
+<%% if @<%= singular_table_name %>.ancestors.empty? %>
+  <div><%%= link_to "Site Root", [:admin, :menus] %> &gt;</div>
+<%% else %>
+  <div><%%= link_to "Site Root", [:admin, :menus] %> &gt;
+    <%% for parent in @<%= singular_table_name %>.ancestors %>  
+      <%%= link_to h(parent.title), [:admin, parent] %> &gt;
+    <%% end %>
+    <%%= @<%= singular_table_name %>.title %>  
+  </div>
+<%% end %>
 
-<label>Menu ID:</label> <%%= @<%= singular_table_name %>.id %><br />
-<label>Title:</label>   <%%= @<%= singular_table_name %>.title %><br />
-<label>Title:</label>   <%%= @<%= singular_table_name %>.cable_menuable_id  %><br />
-<label>Title:</label>   <%%= @<%= singular_table_name %>.cable_menuable_type %><br />
-<label>Title:</label>   <%%= @<%= singular_table_name %>.parent_id %><br />
-<label>Title:</label>   <%%= @<%= singular_table_name %>.menu_identifier %><br />
-<%%= link_to 'Destroy', [:admin, @<%= singular_table_name %>], :confirm => 'Are you sure?', :method => :delete %>
+<h3><%%= @<%= singular_table_name %>.title %></h3>
+
+<%%= render :partial => 'menu_vitals', :locals => {:menu => @<%= singular_table_name %> } %>
+<%%= render :partial => 'menu_children_table' %>
+

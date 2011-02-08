@@ -40,9 +40,25 @@ module Cable
   mattr_accessor :template_path
   @@template_path = "main/templates"
   
+  mattr_accessor :resources
+  @@resources = []
+  
   def self.setup
      yield self
      get_templates
+  end
+  
+  def self.available_resources
+     Cable.resources.select do |r| 
+       r.classify.constantize.all if Cable.class_exists?( r )
+     end.flatten
+  end
+  
+  def self.class_exists?(class_name)
+    klass = Module.const_get(class_name)
+    return klass.is_a?(Class)
+  rescue NameError
+    return false
   end
   
   protected

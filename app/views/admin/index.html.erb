@@ -1,2 +1,10 @@
 <h1>Welcome to Cable</h1>
-<h3>TODO: Insert readme</h3>
+<script>
+$(function(){
+  $("#main").removeClass("span-20");
+  $("#main").addClass("span-24 last");
+});
+</script>
+<div id="portal">
+  <%= render_navigation(:level => 1, :context => :admin, :expand_all => :true) %>
+</div>

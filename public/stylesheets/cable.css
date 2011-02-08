@@ -744,3 +744,114 @@ html>body .innerbox
 	margin: 0;
 	display: inherit;
 }
+
+
+/* From jarden */
+/* @override http://jardensportslicensing.local:3000/stylesheets/admin.css */
+
+thead th{border-bottom:2px solid #333;}
+.products td{vertical-align:top;}
+.products .name   {text-align:left;}
+.products .type   {text-align:left;}
+.products .style  {width:80px;text-align:center;}
+.products .upc    {width:130px;text-align:center;}
+.products .image  {width:80px;text-align:center;}
+.products .actions{width:200px;text-align:right;}
+.pagination{
+	margin: -1px;
+	text-align: right;
+	float: right;
+	padding-top: 0;
+	padding-left: 0;
+	padding-right: 0;
+	padding: 0;
+}
+.pagination em,.pagination a,.previous_page{
+	padding: 5px;
+	background: #eee;
+}
+
+.pagination em{
+	background: #333;
+	font-weight: bold;
+	color: white;
+	font-style: normal;
+}
+
+
+.pagination .disabled{
+	display: none;	
+}
+.inline-search form.formtastic.search fieldset.inputs {
+float: left;
+padding: 0;	
+margin: 0;
+border-bottom: none;
+}
+
+#search_term {
+	font-size: 1em;
+}
+
+#search_term_input {
+	margin: 0 1em 0 0;
+	width: 200px;
+}
+
+#search_term_input label {
+	float: left;
+	display: block;
+	width: 70px;
+}
+
+.inline-search #search_submit {
+	font-size: .75em !important;
+}
+
+.inline-search form.formtastic.search fieldset.inputs ol {
+	border-bottom: none;
+}
+
+.inline-search form.formtastic.search fieldset.buttons {
+	margin: 0;
+	padding: 0;
+	border-bottom: none;
+}
+
+.inline-search form.formtastic.search fieldset.buttons ol li.commit {
+	margin: 0;
+	padding: 0;
+}
+
+.inline-search {
+	float: left;
+	width: 260px;
+}
+.top.table-control{
+	margin-top: 0;
+	border-bottom: solid 1px #eee;	
+}
+.bottom.table-control{
+	margin-bottom: 0;
+	border-top: solid 1px #eee;	
+}
+.table-control{
+	height: 30px;
+	padding: 1em 0;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+td.feature_thumb img{
+	max-width:70px;
+}
+#portal li{
+  display:block;
+  margin:0 1em 1em 0;
+  padding:.5em;
+  float:left;
+  width:200px;
+  border:1px solid #eee;
+  font-weight:bold;
+  font-size:1.25em;
+}

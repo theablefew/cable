@@ -46,6 +46,26 @@ class Cable::Menu::Base < ActiveRecord::Base
     def type
       cable_menuable_type
     end
+    
+    def reorder_children(ordered_ids)
+      ordered_ids = ordered_ids.map(&:to_i)
+      current_ids = children.map(&:id)
+      unless current_ids - ordered_ids == [] && ordered_ids - current_ids == []
+        raise ArgumentError, "Not ordering the same ids that I have as children. My children: #{current_ids.join(", ")}. Your list: #{ordered_ids.join(", ")}. Difference: #{(current_ids - ordered_ids).join(', ')} / #{(ordered_ids - current_ids).join(', ')}" 
+      end
+      j = 0
+      transaction do
+        for new_id in ordered_ids
+          old_id = current_ids[j]
+          if new_id == old_id
+            j += 1
+          else
+            Menu.where(:id => new_id).first.move_to_left_of(old_id)
+            current_ids.delete(new_id)
+          end
+        end
+      end
+    end
   
     def generate_marketable_url
       # puts "EXTERNAL LINK " if self.external_link?

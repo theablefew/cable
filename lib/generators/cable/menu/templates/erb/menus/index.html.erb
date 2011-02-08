@@ -1,1 +1,28 @@
-<p>Drag and drop the menu to the desired order. When you drop the menu item in it's new location, it will be saved. Exercise caution as these changes are immediate.</p>
+<%% content_for :scripts do %>
+  <script>
+    $(document).ready(function(){
+      $(".sortable").sortable({
+        cursor:     'move',
+        axis:       'y',
+        update: function(e, ui) {
+          sorted = $(this).sortable("serialize");
+          $.ajax({
+            type:   'POST',
+            url:    "/admin/menus/sort",
+            data:   sorted
+          });
+        }
+      });
+      $(".check-all").click(function(){
+        $("input").each(function(){
+          $(this).attr('checked', !$(this).attr('checked'));
+        });
+      });
+    });
+  </script>
+<%% end %>
+
+<%% @<%= singular_table_name %>s.each do |menu| %>
+  <h3><%%= link_to menu.title, [:admin, menu] %></h3>
+  <%%= render :partial => 'menu_vitals', :locals => {:menu => menu} %>
+<%% end %>
