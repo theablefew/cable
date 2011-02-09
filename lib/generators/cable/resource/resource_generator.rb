@@ -14,18 +14,18 @@ module Cable
         
         argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
         
-        class_option :admin,      :type => :boolean, :default => true, :desc => "Include Admin."
+        class_option :views,      :type => :boolean, :default => true, :desc => "Include Admin."
         class_option :migration,  :type => :boolean, :default => true
         class_option :model,      :type => :boolean, :default => true
         class_option :routes,     :type => :boolean, :default => true
         class_option :orm,        :type => :string,  :default => "active_record"
  
         def create_migration_file
-           migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.model?
+           migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration?
         end       
         
         def create_model_file
-           template 'model.rb' , "app/models/#{model_name}.rb" if options.migration?
+           template 'model.rb' , "app/models/#{model_name}.rb" if options.model?
         end
         
         def create_controller_file
@@ -35,7 +35,7 @@ module Cable
         end
         
         def create_scaffold
-          if options.admin?
+          if options.views?
             template 'erb/scaffold/_form.html.erb', "app/views/admin/#{plural_table_name}/_#{singular_table_name}.html.erb"
             template 'erb/scaffold/index.html.erb', "app/views/admin/#{plural_table_name}/index.html.erb"
             template 'erb/scaffold/edit.html.erb', "app/views/admin/#{plural_table_name}/edit.html.erb"

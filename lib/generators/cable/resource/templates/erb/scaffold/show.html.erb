@@ -1,12 +1,12 @@
 <p id="notice"><%%= notice %></p>
 
-<% for attribute in attributes -%>
+<% for attribute in attributes %>
 <p>
   <b><%= attribute.human_name %>:</b>
   <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
 </p>
 
-<% end -%>
+<% end %>
 
 <%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> |
 <%%= link_to 'Back', admin_<%= index_helper %>_path %>

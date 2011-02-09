@@ -10,19 +10,21 @@
           </ul>
         </div>
     <%% end %>
-    <%%= f.inputs :name => "<%= singular_table_name %>" do %>
+    <%%= f.inputs do %>
         <% for attribute in attributes -%>
-            <% unless attribute.type == :text -%>
-                <%%= f.input :<%= attribute.name %>, :label => '<%= attribute.name %>' %>
+            <% unless attribute.type == :text %>
+        <%%= f.input :<%= attribute.name %>, :label => '<%= attribute.name %>' %>
             <% else %>
-                <%%= f.input :<%= attribute.name %>, :label => '<%= attribute.name %>', :input_html => {:class => 'wymeditor'} %>
+        <%%= f.input :<%= attribute.name %>, :label => '<%= attribute.name %>', :input_html => {:class => 'wymeditor'} %>
             <% end -%>
-        <% end -%>
+        <% end %>
     <%% end %>
   
   <hr />
   <div class="submit">
-    <%%= f.commit_button 'Submit',  :button_html => {:class => 'wymupdate'} %>
+    <%%= f.buttons do %>
+        <%%= f.commit_button 'Submit',  :button_html => {:class => 'wymupdate'} %>
+    <%% end %>
   </div>
 
 <%% end %>
