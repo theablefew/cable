@@ -6,6 +6,9 @@ Cable.setup do |config|
   # Special actions 
   # config.special_actions = []
   
+  # Resources that show up in Reource menu
+  # config.resources = []
+  
   # Template path default is main/templates
   # config.template_path = ""
   

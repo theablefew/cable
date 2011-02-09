@@ -49,9 +49,10 @@ module Cable
   end
   
   def self.available_resources
-     Cable.resources.select do |r| 
+     rsrc = Cable.resources.collect do |r| 
        r.classify.constantize.all if Cable.class_exists?( r )
-     end.flatten
+     end
+     rsrc.flatten
   end
   
   def self.class_exists?(class_name)

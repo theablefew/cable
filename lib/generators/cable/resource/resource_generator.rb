@@ -5,12 +5,12 @@ require 'rails/generators/resource_helpers'
 # require 'rails/generators/controller_generator'
 module Cable
     module Generators
-      class PageGenerator < Rails::Generators::NamedBase
+      class ResourceGenerator < Rails::Generators::NamedBase
         include Rails::Generators::Migration
         include Rails::Generators::ResourceHelpers
         
         source_root File.expand_path("../templates", __FILE__)
-        desc "Generates a Cable Page with the given NAME (if one does not exist) with a migration file"
+        desc "Generates a Cable Resource with the given NAME (if one does not exist) with a migration file"
         
         argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
         

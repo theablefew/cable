@@ -11,7 +11,7 @@ class Cable::Menu::Base < ActiveRecord::Base
     # acts_as_cable_menu
     # before_save :generate_marketable_url
     scope :top_nav, :conditions => {:title => "Top Navigation"}
-    scope :footer_nav, :conditions => {:title => "Footer Navigation"}  
+    scope :footer_nav, :conditions => {:title => "Footer Navigation"}
   
     validates_presence_of :title
   
