@@ -30,6 +30,7 @@ class Create<%= table_name.camelize %> < ActiveRecord::Migration
     # add_index :<%= table_name %>, :rgt
     # add_index :<%= table_name %>, :parent_id
     add_index :<%= table_name %>, :url
+    # add_index :<%= table_name %>, :cable_menuable_id
 
   end
 

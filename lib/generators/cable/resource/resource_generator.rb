@@ -18,6 +18,7 @@ module Cable
         class_option :migration,  :type => :boolean, :default => true
         class_option :model,      :type => :boolean, :default => true
         class_option :routes,     :type => :boolean, :default => true
+        class_option :controller, :type => :boolean, :default => true
         class_option :orm,        :type => :string,  :default => "active_record"
  
         def create_migration_file
@@ -29,7 +30,7 @@ module Cable
         end
         
         def create_controller_file
-          if options.admin?
+          if options.controller?
             template 'controller.rb' , "app/controllers/admin/#{file_name.pluralize}_controller.rb" 
           end
         end
