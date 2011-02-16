@@ -11,6 +11,7 @@ module Cable
         class_option :blocks, :type => :boolean, :default => true
         class_option :settings, :type => :boolean, :default => true
         class_option :simple_nav, :type => :boolean, :default => true
+        class_option :admin, :type => :boolean, :default => true
         # invoke "migration", %(create_cable_settings site_title:string keywords:text analytics:string closure:text description:text contact_email:string footer_block_1:text footer_block_2:text copyright:string legal:text)
         class_option :orm, :type => :string, :default => "active_record"
 
@@ -39,6 +40,10 @@ module Cable
         
         def install_initializer
           copy_file "lib/generators/templates/initializer.rb", "config/initializers/cable.rb"
+        end
+        
+        def install_admin
+          copy_file "app/views/layouts/admin.html.erb", 'app/views/layouts/admin.html.erb'
         end
         
         def install_routes
