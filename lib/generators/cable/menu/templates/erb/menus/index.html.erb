@@ -8,7 +8,7 @@
           sorted = $(this).sortable("serialize");
           $.ajax({
             type:   'POST',
-            url:    "/admin/menus/sort",
+            url:    "/admin/<%= plural_table_name %>/sort",
             data:   sorted
           });
         }
@@ -22,7 +22,7 @@
   </script>
 <%% end %>
 
-<%% @<%= singular_table_name %>s.each do |menu| %>
+<%% @<%= plural_table_name %>.each do |menu| %>
   <h3><%%= link_to menu.title, [:admin, menu] %></h3>
   <%%= render :partial => 'menu_vitals', :locals => {:menu => menu} %>
 <%% end %>

@@ -25,7 +25,7 @@ $(document).ready(function(){
           <ul id="menu-tree-list">
             <li>Site Root <%%= image_tag "/images/arrow-head.png" %>
               <ul>
-                <%% @<%= singular_table_name %>s.each do |m| -%>
+                <%% @<%= plural_table_name %>.each do |m| -%>
                   <li id="<%%= dom_id(m) %>" title="<%%= m.title %>"><%%= m.title %><%% if m.descendants %><%%= raw display_tree_plain(m.children, m.id) %><%% end %></li> 
                 <%% end %>
               </ul>
