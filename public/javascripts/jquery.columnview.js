@@ -22,7 +22,7 @@
       <style type="text/css" media="screen">\
         .containerobj {\
           border: 1px solid #ccc;\
-          height:5em;\
+          height:15em;\
           overflow-x:auto;\
           overflow-y:hidden;\
           white-space:nowrap;\

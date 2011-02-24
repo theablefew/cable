@@ -1,5 +1,6 @@
 /* @override http://localhost:3000/stylesheets/cable.css */
 
+/* @override http://localhost:3000/stylesheets/cable.css */
 body{
   padding-bottom: 5em;
 }
@@ -855,3 +856,7 @@ td.feature_thumb img{
   font-weight:bold;
   font-size:1.25em;
 }
+.containerobj .feature a { display:none; }
+/*.containerobj div { width:25%; }
+.containerobj div a { white-space:normal; position:relative; }
+.containerobj a canvas {  position:absolute; top:0;}
