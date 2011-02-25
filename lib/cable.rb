@@ -84,3 +84,4 @@ module Cable
 end
 
 require 'cable/rails/routes'
+require 'cable/orm/active_record'

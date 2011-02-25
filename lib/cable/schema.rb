@@ -31,12 +31,12 @@ module Cable
       apply_cable_schema :rgt, Integer
       apply_cable_schema :url, String
       apply_cable_schema :menu_identifier, String
-      apply_cable_schema :show_in_menu, Boolean, :default => true
+      apply_cable_schema :show_in_menu, :boolean, :default => true
       apply_cable_schema :meta_description, String
       apply_cable_schema :meta_keywords, String
       apply_cable_schema :special_action, String
       apply_cable_schema :marketable_url, String
-      apply_cable_schema :show_on_landing_page, Boolean
+      apply_cable_schema :show_on_landing_page, :boolean
       apply_cable_schema :template, String
       apply_cable_schema :tree_id, Integer
     end
@@ -45,5 +45,5 @@ module Cable
       raise NotImplementedError
     end
   end
-  
 end
+
