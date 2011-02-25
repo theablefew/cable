@@ -1,5 +1,4 @@
 require 'orm_adapter/adapters/active_record'
-
 module Cable
   module Orm
     # This module contains some helpers and handle schema (migrations):
