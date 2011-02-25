@@ -56,7 +56,7 @@ module Cable
           puts ""
           puts "To begin using Cable Menu and Pages use:"
           puts "rails generate cable:menu MENU_NAME"
-          puts "rails generate cable:page PAGE_NAME field:type field:type ..."
+          puts "rails generate cable:resource PAGE_NAME field:type field:type ..."
           puts ""
         end
         

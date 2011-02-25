@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2011-02-16}
+  s.date = %q{2011-02-25}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
@@ -49,9 +49,11 @@ Gem::Specification.new do |s|
     "lib/cable/menu/base.rb",
     "lib/cable/menu/simple_navigation_methods.rb",
     "lib/cable/menu/url_helper.rb",
+    "lib/cable/orm/active_record.rb",
     "lib/cable/page.rb",
     "lib/cable/rails/routes.rb",
     "lib/cable/railtie.rb",
+    "lib/cable/schema.rb",
     "lib/cable/setting.rb",
     "lib/cable/special_action.rb",
     "lib/generators/cable/install_generator.rb",
@@ -450,16 +452,25 @@ Gem::Specification.new do |s|
     "public/stylesheets/ui/uniform/uniform.default.css"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.0}
+  s.rubygems_version = %q{1.5.2}
   s.summary = %q{Cable Admin Engine for Rails 3}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rails>, ["~> 3.0.0"])
+      s.add_runtime_dependency(%q<orm_adapter>, [">= 0"])
+      s.add_runtime_dependency(%q<awesome_nested_set>, [">= 0"])
     else
+      s.add_dependency(%q<rails>, ["~> 3.0.0"])
+      s.add_dependency(%q<orm_adapter>, [">= 0"])
+      s.add_dependency(%q<awesome_nested_set>, [">= 0"])
     end
   else
+    s.add_dependency(%q<rails>, ["~> 3.0.0"])
+    s.add_dependency(%q<orm_adapter>, [">= 0"])
+    s.add_dependency(%q<awesome_nested_set>, [">= 0"])
   end
 end
 

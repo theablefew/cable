@@ -1,3 +1,6 @@
+require 'rails'
+require 'orm_adapter'
+
 module Cable
   
   require 'cable/engine' if defined?(Rails) && Rails::VERSION::MAJOR == 3
@@ -11,6 +14,7 @@ module Cable
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
   autoload :Block, 'cable/block'
   autoload :SpecialAction, 'cable/special_action'
+  autoload :Schema, 'cable/schema'
   
   module Errors
     autoload :ResourceAssociationError, "cable/errors/resource_association_error"
