@@ -12,73 +12,82 @@
  */
 
 (function($){
-  function probe_tree(tree){
-    
-    $(tree).children().each(function(index){
 
-      if($(this).is("ul")){
-        o1 = $('.columnview').offset();
-        o2 = $(this).parent().offset();
-        dy = o1.top - o2.top;
-        $(this).css({"top":dy});
-        $(this).addClass("level");
-        $(this).sortable({
-          connectWith : ".level"
-        })
-      }
-      
-      if($(this).is("li")){
-        $(this).addClass("level_wrapper");
-      }      
-    });
+  function deselect() {
+    var $ul = $(this).removeClass('selected').data('child');
+    if ($ul) {
+      $ul.find('li.selected').removeClass('selected').each(deselect);
+    }
   }
-  function make_active(item){
-    $(item).parentsUntil(".columview").addClass("active");
+  
+  function select_item(){
   }
   
   $.fn.columnview = function(options){
     var settings = $.extend({}, $.fn.columnview.defaults, options);
-
-    probe_tree(this, 0);
+    $("#outer li").each(function() {      
+      
+      var $this = $(this)
+      var $ul = $this.children('ul');
+      
+      $this.data('child', $ul);
+      
+      // hide it
+      $ul.hide();
+      
+      // Append it to the outer div
+      $ul.appendTo('#outer');
+      
+      // set it's parent attribute
+      $ul.attr("parent", $this.attr("id"));
+      
+    }).click(function() {
+      
+      var $this = $(this);
+      
+      // Make it selected
+      $this.addClass('selected');
+      
+      
+      // left
+      var this_left = $this.parent().offset().left;
+      var panel_left = $this.parent().parent().offset().left;
+      var panel_scroll_left = $this.parent().parent().scrollLeft();
+      var left = (this_left-panel_left)+panel_scroll_left
+      var width = $this.parent().width();
+      
+      $this.data('child').css({
+        left: left + width,
+        top: 0
+      });
+      
+      $this.data('child').show();
+      $this.siblings('.selected').each(deselect);
+      
+    });
     
-    var key_event = $.browser.mozilla ? 'keypress' : 'keydown';
-    
-    $(this).bind("click " + key_event, function(event){
-
-      if ($(event.target).is("a,span")) {
-        if ($(event.target).is("span")){
-          var self = $(event.target).parent();
-        }else {
-          var self = event.target;          
-        }
-        
-        
-        self.focus();
-        
-        var container = $(self).parents('.containerobj');
-        
-        // Handle clicks
-        if (event.type == "click"){
-          probe_tree($(self).parent());
-          $(".active").removeClass("active");
-          $(".targeted").removeClass("targeted");
-          $(self).addClass("targeted");
-          make_active(self);
-          
+    // attach sortable out here so that it hits all the ULs
+    var sortOpts = {
+      connectWith: '#outer ul',
+      containment: '#outer',
+      appendTo: '#outer',
+      helper: 'clone',
+      stop: function(event, ui){
+        var id = $(ui.item[0]).attr("id");
+        var $this = $(this);
+        $this.siblings('.selected').each(deselect);
+      },
+      receive: function(event, ui) { 
+        var id = $(ui.item[0]).attr("id");
+        var child_id = $(event.target).attr("parent");        
+        if (id == child_id) { 
+          $(ui.sender).sortable('cancel'); 
         }
       }
-    });
+    };
+    
+    $("#outer ul").sortable(sortOpts);
+    
   };
-  
-
-
-  $.fn.columnview.defaults = {
-    multi: false,     // Allow multiple selections
-    preview: false,   // Handler for preview pane
-    fixedwidth: false,// Use fixed width columns
-    onchange: false   // Handler for selection change
-  };
-
-
 
 })(jQuery);

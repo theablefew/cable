@@ -1,61 +1,47 @@
-
-
-
-
-
-/*Main Menu*/
-ul.columnview  {
-  margin:0px;
-  padding:0px; 
-  background-color:#666;
-
+#outer {
+  position: relative;
+  height: 220px;  
+  background:#fff;
+  overflow:auto;
 }
-ul.columnview li a{
+
+#outer ul {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin:0;
+  padding:0;
+  width:180px;
+  padding:2px 0 2px 0;
+}
+
+#outer li {
+  list-style: none;
+  width:165px;
+  margin:2px 0;
+  display:block;
+}
+
+#outer li.selected {
+  background: #3b60f1;
+}
+
+#outer li.selected a{
+  color:white;
+}
+
+#outer a{
   display:block;  
   white-space: nowrap;
-  padding:3px;
+  padding:1px 5px;
   overflow: hidden;
-  border:1px solid black;
   text-overflow: ellipsis;
-}
-ul.columnview .active a{
-  background:#333;
-}
-ul.columnview a.targeted{
-  background:blue;
-}
-ul.columnview  li {
-  width:200px;
-  height:25px; 
-  list-style:none; 
-  cursor:pointer; 
+  width:140px;
 }
 
-ul.columnview li a {color:#FFF;}
-
-ul.columnview li.active { position:relative;}
-
-/*Sub Menu*/
-ul.columnview  ul {
-  display:none; 
-  position:absolute; 
-  left:200px; 
-  top:0px; 
-}
-ul.columnview li.active > ul {display:block;}
-
-ul.columnview ul li { 
-  float:left; 
-  display:inline; 
-}
- 
-.columnview li.active ul li ul {
-  display:none;
-}
-
-ul.columnview  ul li ul {
-  left:200px;
-}
-ul.columnview  ul li.active > ul {
-  display:block;
+#unfolded ul {
+  padding-left: 2em;
 }
