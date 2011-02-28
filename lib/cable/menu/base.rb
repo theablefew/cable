@@ -16,8 +16,7 @@ class Cable::Menu::Base < ActiveRecord::Base
     validates_presence_of :title
   
     include Cable::Menu::SimpleNavigationMethods
-    include Cable::Menu::UrlHelper
-    
+    include Cable::Menu::UrlHelper  
     # Interface for nested_set
     def left=(v)
       lft = v
