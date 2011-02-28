@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2011-02-25}
+  s.date = %q{2011-02-28}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
@@ -417,6 +417,7 @@ Gem::Specification.new do |s|
     "public/stylesheets/cable/blueprint/src/print.css",
     "public/stylesheets/cable/blueprint/src/reset.css",
     "public/stylesheets/cable/blueprint/src/typography.css",
+    "public/stylesheets/columnview.css",
     "public/stylesheets/formtastic.css",
     "public/stylesheets/formtastic_changes.css",
     "public/stylesheets/iphone_checkboxes.css",
