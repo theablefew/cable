@@ -13,58 +13,49 @@
 
 (function($){
   
-  function position_menu(item){
-    console.log("Position Menu");
-    
-    var $this = item;
-    
-    var this_left = $this.parent().offset().left;
-    var panel_left = $this.parent().parent().offset().left;
-    var panel_scroll_left = $this.parent().parent().scrollLeft();
-    var left = (this_left-panel_left)+panel_scroll_left
-    var width = $this.parent().width();
-    
-    $this.data('child').css({
-      left: left + width,
-      top: 0
-    });
+  function hide_all_child_menus(){
+    $(".child_menu").hide();
   }
   
+  function show_child(item){
+    var child_menu = $("[parent="+item.attr("id")+"]");
+    child_menu.show();
+  }
+  
+  function show_parents(item){
+    var parent_menu = $(item).parent();
+
+    parent_menu.show();
+    if(parent_menu.attr("parent")){
+      show_parents(parent_menu);
+    }
+    
+  }
   
   function select_item(item){
-    console.log("Select Item");
-    console.log("Remove all selected");
     
     $(".selected").removeClass("selected");
-    $(".child_menu").hide();
-    
-    // Make it selected
     item.addClass("selected");
-    item.parent().show();
+    hide_all_child_menus();
+    show_child(item);
+    show_parents(item);
     
-    console.log("Find the child menu "+item.attr("child")+" and show it");
-    $("#"+item.attr("child")).show();
-    
-    position_menu(item);
   }
   
   $.fn.columnview = function(options){
     var settings = $.extend({}, $.fn.columnview.defaults, options);  
     $("#outer li").each(function() {
-      
+
       var $this = $(this);
+      var parent_id = $(this).attr("id")
       var $ul = $(this).children('ul');
       
       $(this).data('child', $ul);
       
       $ul.hide();
       $ul.appendTo('#outer');
-      
-      $ul.attr("id", "child_of_"+$(this).attr("id"));
-      $ul.addClass("child_menu");      
-
-      $(this).attr("child", $ul.attr("id"));
-
+      $ul.attr("parent", parent_id);
+      $ul.addClass("child_menu");
       
     }).click(function() {
       select_item($(this));
@@ -74,14 +65,15 @@
     var sortOpts = {
       
       connectWith: '#outer ul',
-      containment: '#outer',
       appendTo: '#outer',
       helper: 'clone',
       stop: function(event, ui){
       },
       receive: function(event, ui) { 
+        
         var this_id = $(ui.item[0]).attr("id");
         var child_id = $(event.target).attr("parent");
+        
         if (this_id == child_id) { 
           $(ui.sender).sortable('cancel'); 
         }

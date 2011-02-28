@@ -1,45 +1,36 @@
 #outer {
   position: relative;
-  height: 220px;  
+  height: 300px;  
   background:#fff;
   overflow:auto;
+  border:1px solid black;
 }
 
 #outer ul {
-  position: absolute;
-  left: 0;
-  top: 0;
   height: 200px;
+  float: left;
   overflow-x: hidden;
   overflow-y: scroll;
   margin:0;
   padding:0;
   width:180px;
-  padding:2px 0 2px 0;
+  padding:0px 0 2px 0;
 }
 
 #outer li {
   list-style: none;
-  width:165px;
-  margin:2px 0;
+  white-space: nowrap;  
+  width:155px;
+  margin:0;
+  padding:0px 5px;  
   display:block;
+  overflow: hidden;
+  text-overflow: ellipsis;  
 }
 
 #outer li.selected {
   background: #3b60f1;
-}
-
-#outer li.selected a{
-  color:white;
-}
-
-#outer a{
-  display:block;  
-  white-space: nowrap;
-  padding:1px 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width:140px;
+  color:white;  
 }
 
 #unfolded ul {
