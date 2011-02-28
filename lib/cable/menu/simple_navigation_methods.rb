@@ -1,7 +1,8 @@
 module Cable
   module Menu
     module SimpleNavigationMethods
-
+      attr_accessor :options
+      
       def items
         self.children.where(:show_in_menu => true)
       end
@@ -13,6 +14,8 @@ module Cable
       def name
         self.title
       end
+
+      
     end
   end
 end

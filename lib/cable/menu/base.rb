@@ -18,11 +18,12 @@ class Cable::Menu::Base < ActiveRecord::Base
     include Cable::Menu::SimpleNavigationMethods
     include Cable::Menu::UrlHelper
     
-    
+    # Interface for nested_set
     def left=(v)
       lft = v
     end
-  
+    
+    # Interface for nested_set
     def right=(v)
       rgt = v
     end
@@ -37,12 +38,13 @@ class Cable::Menu::Base < ActiveRecord::Base
     def show_cb
       Menu.before_save_callback_chain
     end
-
+    # @return [String]  The internally generated friendly URL or a custom url defined for this menu.
     def url
       return self[:url] if self.external_link? || self.direct_link?
       return "/#{self.marketable_url}"
     end
-  
+    
+    # @return [String] The class of the associated resource as defined through cable_menuable polymorphic interface.
     def type
       cable_menuable_type
     end
