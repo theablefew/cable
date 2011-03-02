@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "0.8.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Spencer Markowski", "The Able Few"]
+  s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
   s.date = %q{2011-03-02}
   s.files = [
     "app/controllers/admin/cable_settings_controller.rb",
