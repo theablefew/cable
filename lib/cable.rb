@@ -5,7 +5,7 @@ module Cable
   
   require 'cable/engine' if defined?(Rails) && Rails::VERSION::MAJOR == 3
   require 'cable/railtie'
-  
+
   autoload :Base, 'cable/base'
   autoload :ActsAsCable, 'cable/acts_as_cable'
   autoload :Menu, 'cable/menu'
@@ -44,7 +44,6 @@ module Cable
   
   mattr_accessor :template_path
   @@template_path = "main/templates"
-  
 
   mattr_accessor :resources
   # Used to store a list of resources that you wish to be associated with menus.
