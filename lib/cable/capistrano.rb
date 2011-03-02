@@ -5,7 +5,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   namespace :cable do 
     desc "links the most recent bundled cable gem to shared path."
     task :symlink do
-      run "cd #{release_path} && ln -nfs `bundle list cable` /home/deploy/jardenlicensedproducts.com/shared/cable"
+      run "cd #{release_path} && ln -nfs `bundle list cable` #{shared_path}/cable"
     end
   end
   
