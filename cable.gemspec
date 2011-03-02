@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
   s.date = %q{2011-03-02}
   s.files = [
+    "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
     "app/controllers/attachable_assets_controller.rb",
