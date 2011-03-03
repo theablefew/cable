@@ -1,38 +1,46 @@
+/* @override http://localhost:3000/stylesheets/columnview.css */
+
 #outer {
-  position: relative;
-  height: 300px;  
-  background:#fff;
-  overflow:auto;
-  border:1px solid black;
+    position: relative;
+    height: 400px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border:1px solid #eee;
+    margin-bottom: 1em;
 }
 
 #outer ul {
-  height: 200px;
-  float: left;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  margin:0;
-  padding:0;
-  width:180px;
-  padding:0px 0 2px 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 385px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0;
+    margin: 0;
+    width: 155px;
 }
-
 #outer li {
-  list-style: none;
-  white-space: nowrap;  
-  width:155px;
-  margin:0;
-  padding:0px 5px;  
-  display:block;
-  overflow: hidden;
-  text-overflow: ellipsis;  
+    width: 115px;
+    padding: 4px 20px 4px 4px;
+    white-space: nowrap;
+    list-style: none;
+    display:block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #outer li.selected {
-  background: #3b60f1;
-  color:white;  
+    background:#6799cb;
+    color:white;
 }
 
 #unfolded ul {
-  padding-left: 2em;
+    padding-left: 2em;
+}
+.has-children{
+ background: url(/images/cable/children.png) no-repeat right center;
+}
+#outer li.selected.has-children{
+	background: #6799cb url(/images/cable/children.png) no-repeat right center;
 }
