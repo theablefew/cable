@@ -1,5 +1,5 @@
-require 'cable'
 require 'rails'
+require 'cable'
 
 module Cable
   class Engine < Rails::Engine

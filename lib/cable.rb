@@ -5,7 +5,7 @@ module Cable
   
   require 'cable/engine' if defined?(Rails) && Rails::VERSION::MAJOR == 3
   require 'cable/railtie'
-  
+
   autoload :Base, 'cable/base'
   autoload :ActsAsCable, 'cable/acts_as_cable'
   autoload :Menu, 'cable/menu'
@@ -36,6 +36,7 @@ module Cable
   @@regions = []
   
   mattr_accessor :templates
+  # Used to store template files you wish to be available for rendering. All ERB templates are automatically loaded from {Cable::@@template_path}.
   @@templates = ["default"]
   
   mattr_accessor :special_actions
@@ -43,8 +44,9 @@ module Cable
   
   mattr_accessor :template_path
   @@template_path = "main/templates"
-  
+
   mattr_accessor :resources
+  # Used to store a list of resources that you wish to be associated with menus.
   @@resources = []
   
   def self.setup
@@ -52,6 +54,7 @@ module Cable
      get_templates
   end
   
+  # Checks {Cable::@@resources} and returns only the resources that are actually defined.
   def self.available_resources
      rsrc = Cable.resources.collect do |r| 
        r.classify.constantize.all if Cable.class_exists?( r )
@@ -69,7 +72,7 @@ module Cable
   protected
   
   def self.get_templates
-    @@templates = Dir.glob(Rails.root + "app/views/#{@@template_path}/_*").collect{|f| f.split("/").last.split(/_([\w\d-]+)[\.]/).second }
+    @@templates = Dir.glob(Rails.root + "app/views/#{@@template_path}/_*.erb").collect{|f| f.split("/").last.split(/_([\w\d-]+)[\.]/).second }
   end
   # puts "Initializing Cable #{Cable::Base.version}"
   # 

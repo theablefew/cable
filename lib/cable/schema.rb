@@ -1,7 +1,9 @@
 module Cable
-  #Influenced by devise's schema module. 
+  #Influenced by devise's schema module. Methods defined here will be available within migartion files to apply a schema concept.
+  
   module Schema
     
+    # Provides a common set of address fields such as, street_address_1, street_address_2, city, state, zip_code and country as String fields.
     def addressable
       apply_cable_schema :street_address_1, String
       apply_cable_schema :street_address_2, String
@@ -22,6 +24,7 @@ module Cable
       apply_cable_schema :phone_number, String
     end
     
+    # Provides a convenience method for all the needed fields used in Cable menus.
     def menuable
       apply_cable_schema :title, String
       apply_cable_schema :cable_menuable_id , Integer
@@ -40,7 +43,7 @@ module Cable
       apply_cable_schema :template, String
       apply_cable_schema :tree_id, Integer
     end
-   # Overwrite with specific modification to create your own schema.
+   # @note Overwrite with specific modification to create your own schema.
     def apply_cable_schema(name, type, options={})
       raise NotImplementedError
     end

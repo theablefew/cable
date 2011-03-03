@@ -5,12 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.8.2"
+  s.version = "0.8.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2011-02-25}
+  s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
+  s.date = %q{2011-03-02}
   s.files = [
+    "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
     "app/controllers/admin_controller.rb",
     "app/controllers/attachable_assets_controller.rb",
@@ -39,6 +40,7 @@ Gem::Specification.new do |s|
     "lib/cable/acts_as_cable.rb",
     "lib/cable/base.rb",
     "lib/cable/block.rb",
+    "lib/cable/capistrano.rb",
     "lib/cable/controllers/cable_controller_helpers.rb",
     "lib/cable/engine.rb",
     "lib/cable/errors/resource_association_error.rb",
@@ -417,6 +419,7 @@ Gem::Specification.new do |s|
     "public/stylesheets/cable/blueprint/src/print.css",
     "public/stylesheets/cable/blueprint/src/reset.css",
     "public/stylesheets/cable/blueprint/src/typography.css",
+    "public/stylesheets/columnview.css",
     "public/stylesheets/formtastic.css",
     "public/stylesheets/formtastic_changes.css",
     "public/stylesheets/iphone_checkboxes.css",
