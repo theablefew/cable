@@ -13,25 +13,75 @@
 
 (function($){    
   
+  
+  $.fn.serializelist = function(options) {
+    // Extend the configuration options with user-provided
+    var defaults = {
+      attributes: ['id', 'class'], // which html attributes should be sent?
+      allow_nest: true, // allow nested elements to be included
+      prepend: 'ul', // which query string param name should be used?
+      att_regex: false, // replacement regex to run on attr values
+      is_child: false // determine if we're serializing a child list
+    };
+    
+    var opts = $.extend(defaults, options);
+    var serialStr     = '';
+    if(!opts.is_child){ 
+      opts.prepend = '&'+opts.prepend;
+    }
+    // Begin the core plugin
+    this.each(function() {
+      var li_count = 0;
+      $(this).children().each(function(){
+        if(opts.allow_nest || opts.attributes.length > 1){
+          for(att in opts.attributes){
+            val = att_rep(opts.attributes[att], $(this).attr(opts.attributes[att]));
+            serialStr += opts.prepend+'['+li_count+']['+opts.attributes[att]+']='+val;
+          }
+        } else {
+          val = att_rep(opts.attributes[0], $(this).attr(opts.attributes[0]));
+          serialStr += opts.prepend+'['+li_count+']='+val;
+        }
+        
+        // append any children elements
+        if(opts.allow_nest){
+          var child_base = opts.prepend+'['+li_count+'][children]';
+          $(this).children().each(function(){
+            if(this.tagName == 'UL' || this.tagName == 'OL'){
+              serialStr += $(this).serializelist({'prepend': child_base, 'is_child': true});
+            }
+          });
+        }
+        li_count++;
+      });
+      function att_rep (att, val){
+        if(opts.att_regex){
+          for(x in opts.att_regex){
+            if(opts.att_regex[x].att == att){
+              return val.replace(opts.att_regex[x].regex, '');
+            }
+          }
+        } else {
+          return val;
+        }
+      }
+    });
+    return(serialStr);
+  };
+  
+  
+  
+  
   function unfold(){
-
-    $("#outer ul").sortable('destroy').show();
+    // $("#outer ul").sortable('destroy').show();
     $("#outer li").each(function() {
       var $ul = $(this).data('childUl');
       if ($ul) $ul.appendTo(this);
     });
     $("#outer > ul").appendTo("#unfolded");
 
-    function walkIds($ul) {
-      var obj = {};
-      var children = $ul.children('li');
-      children.each(function() {
-        obj[this.id] = walkIds($(this).children('ul'));
-      });
-      
-      return obj;
-    }
-    var idMap = walkIds($('#unfolded > ul'));
+    var mylist = $('#unfolded > ul').serializelist();
+    $.post("/admin/menus/sort", mylist);
   }
 
   function select_item(item){
@@ -73,7 +123,6 @@
 
     var sortable_options = {
       connectWith: '#outer ul',
-      containment: '#outer',
       appendTo: '#outer',
       helper: 'clone',
       stop: function(event, ui){
