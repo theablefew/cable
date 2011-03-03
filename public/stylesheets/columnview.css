@@ -1,61 +1,47 @@
+/* @override http://localhost:3000/stylesheets/columnview.css */
 
-
-
-
-
-/*Main Menu*/
-ul.columnview  {
-  margin:0px;
-  padding:0px; 
-  background-color:#666;
-
-}
-ul.columnview li a{
-  display:block;  
-  white-space: nowrap;
-  padding:3px;
-  overflow: hidden;
-  border:1px solid black;
-  text-overflow: ellipsis;
-}
-ul.columnview .active a{
-  background:#333;
-}
-ul.columnview a.targeted{
-  background:blue;
-}
-ul.columnview  li {
-  width:200px;
-  height:25px; 
-  list-style:none; 
-  cursor:pointer; 
+#outer {
+    position: relative;
+    height: 400px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border:1px solid #eee;
+    margin-bottom: 1em;
 }
 
-ul.columnview li a {color:#FFF;}
-
-ul.columnview li.active { position:relative;}
-
-/*Sub Menu*/
-ul.columnview  ul {
-  display:none; 
-  position:absolute; 
-  left:200px; 
-  top:0px; 
+#outer ul {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 385px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0;
+    margin: 0;
+    width: 175px;
 }
-ul.columnview li.active > ul {display:block;}
+#outer li {
+    width: 135px;
+    padding: 4px 20px 4px 4px;
+    white-space: nowrap;
+    list-style: none;
+    display:block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+}
 
-ul.columnview ul li { 
-  float:left; 
-  display:inline; 
-}
- 
-.columnview li.active ul li ul {
-  display:none;
+#outer li.selected {
+    background:#6799cb;
+    color:white;
 }
 
-ul.columnview  ul li ul {
-  left:200px;
+#unfolded ul {
+    padding-left: 2em;
 }
-ul.columnview  ul li.active > ul {
-  display:block;
+.has-children{
+ background: url(/images/cable/children.png) no-repeat right center;
+}
+#outer li.selected.has-children{
+	background: #6799cb url(/images/cable/children.png) no-repeat right center;
 }
