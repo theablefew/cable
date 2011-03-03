@@ -16,25 +16,22 @@
   function unfold(){
 
     $("#outer ul").sortable('destroy').show();
-
     $("#outer li").each(function() {
       var $ul = $(this).data('childUl');
       if ($ul) $ul.appendTo(this);
     });
-
-    // jsut for display purpose lets get it out of the style area:
     $("#outer > ul").appendTo("#unfolded");
 
     function walkIds($ul) {
-      var obj = {}, children = $ul.children('li');
+      var obj = {};
+      var children = $ul.children('li');
       children.each(function() {
         obj[this.id] = walkIds($(this).children('ul'));
       });
+      
       return obj;
     }
     var idMap = walkIds($('#unfolded > ul'));
-    console.log(idMap);
-    $("<div>").text(JSON.stringify(idMap)).appendTo('body');
   }
 
   function select_item(item){
@@ -63,7 +60,7 @@
     var idCounter = 0;
     $("#outer li").each(function() {
       var $this = $(this), $ul = $this.children('ul');
-      $this.attr('id', 'li'+(idCounter++));
+      // $this.attr('id', 'li'+(idCounter++));
       $this.data('childUl', $ul);
       if($ul.children().size()>0){
         $this.addClass("has-children");
@@ -80,16 +77,19 @@
       appendTo: '#outer',
       helper: 'clone',
       stop: function(event, ui){
-        console.log(ui.item[0]);
         select_item(ui.item[0]);
       },
       receive: function(event, ui) { 
         var this_id = $(ui.item[0]).attr("id");
         var child_id = $(event.target).attr("parent");
-        if (this_id == child_id) { 
-          $(ui.sender).sortable('cancel'); 
-          alert("Can't drag parent into itself.");          
-        }
+        $("#outer .selected").each(function(){
+          if($(this).attr("id") == this_id)
+          $(ui.sender).sortable('cancel');
+        });
+        // if (this_id == child_id) {
+        //   $(ui.sender).sortable('cancel'); 
+        //   alert("Can't drag parent into itself.");          
+        // }
       }
     };
     $("#outer").after("<div id='unfold'>Unfold</div>");

@@ -18,16 +18,17 @@
     overflow-y: scroll;
     padding: 0;
     margin: 0;
-    width: 155px;
+    width: 175px;
 }
 #outer li {
-    width: 115px;
+    width: 135px;
     padding: 4px 20px 4px 4px;
     white-space: nowrap;
     list-style: none;
     display:block;
     overflow: hidden;
     text-overflow: ellipsis;
+    background-color: white;
 }
 
 #outer li.selected {
