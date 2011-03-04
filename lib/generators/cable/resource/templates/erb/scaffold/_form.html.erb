@@ -1,30 +1,23 @@
 <%%= semantic_form_for([:admin,@<%= singular_table_name %>], :html => {:multipart => true}) do |f| %>
-    <%% if @<%= singular_table_name %>.errors.any? %>
-        <div id="error_explanation">
-          <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <div id="error_explanation">
+      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
 
-          <ul>
-          <%%= @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
-            <li><%%= msg %></li>
-          <%% end %>
-          </ul>
-        </div>
-    <%% end %>
-    <%%= f.inputs do %>
-        <% for attribute in attributes -%>
-            <% unless attribute.type == :text %>
+      <ul>
+        <%%= @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+          <li><%%= msg %></li>
+        <%% end %>
+      </ul>
+    </div>
+  <%% end %>
+  <%%= f.inputs do %>
+    <% for attribute in attributes -%>
+      <% unless attribute.type == :text %>
         <%%= f.input :<%= attribute.name %>, :label => '<%= attribute.name %>' %>
-            <% else %>
+      <% else %>
         <%%= f.input :<%= attribute.name %>, :label => '<%= attribute.name %>', :input_html => {:class => 'html_editor'} %>
-            <% end -%>
-        <% end %>
-    <%% end %>
-  
-  <hr />
-  <div class="submit">
-    <%%= f.buttons do %>
-        <%%= f.commit_button 'Submit',  :button_html => {:class => 'submit_button'} %>
-    <%% end %>
-  </div>
-
+      <% end -%>
+    <% end %>
+  <%% end %>
+  <%%= f.buttons %>
 <%% end %>

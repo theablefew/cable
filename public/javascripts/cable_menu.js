@@ -1,11 +1,10 @@
 (function($){    
+  
   function save_tree(){
     $(".cable_menu li").each(function() {
       var $ul = $(this).data('childUl');
       if ($ul) $ul.appendTo(this);
     });
-    
-    // $(".cable_menu_wrapper > ul").appendTo("#unfolded");
     var mylist = $('.cable_menu_wrapper > ul').serialize_list();
     $.post("/admin/menus/sort", mylist);
   }
@@ -17,14 +16,14 @@
       top: 0
     }).show();
     $this.siblings('.selected').each(deselect);
-    var the_text = ""
-    $(".cable_menu .selected").removeClass("last");
-    $(".cable_menu .selected").each(function(){
-      the_text += $(this).text();
-      the_text += " &raquo; "
+    var items = new Array();
+    $("..cable_menu_wrapper .selected").removeClass("last");
+    $("..cable_menu_wrapper .selected").each(function(){
+      items.push($(this).text());
     });
-    $("#thecurrent").html("Current Selection &raquo;"+the_text);
-    $(".cable_menu .selected").last().addClass("last");
+    
+    $(".current_selection").html("<strong>Current Selection:</strong>"+items.join(" &raquo; "));
+    $(".cable_menu_wrapper .selected").last().addClass("last");
   }
   
   function deselect() {
@@ -116,13 +115,29 @@
       receive: function(event, ui) { 
         var this_id = $(ui.item[0]).attr("id");
         var child_id = $(event.target).attr("parent");
-        $(".cable_menu .selected").each(function(){
-          if($(this).attr("id") == this_id)
-          $(ui.sender).sortable('cancel');
+        
+        var size = $(".cable_menu .selected").size()-1;
+        
+        console.log("Child ID:"+child_id);
+        console.log("This ID:"+this_id);
+        
+        $(".cable_menu .selected").each(function(index){
+          console.log(this_id + " - " + $(this).attr("id"));
+          if(size > index ){
+            if($(this).attr("id") == this_id){
+              $(ui.sender).sortable('cancel');
+            }
+          }else{
+            console.log("It's the last one. Do something slightly different.");
+            if(child_id == this_id){
+              $(ui.sender).sortable('cancel');
+            }
+          }
         });
       }
     };
     $(".cable_menu_wrapper").after("<div id='unfold'>Unfold</div>");
+    $(".cable_menu_wrapper").before("<div class='current_selection'><strong>Current Selection:</strong></div>")
     $(".cable_menu_wrapper").after("<div id='unfolded'></div>");
     $(".cable_menu_wrapper ul").sortable(sortable_options);
     $("#unfold").click(save_tree);

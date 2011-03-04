@@ -1,10 +1,17 @@
 /* @override http://localhost:3000/stylesheets/cable/tables.css */
-
+table{
+	border-bottom: 2px solid #ccc;
+}
 thead th{
 	background: #eee;
 	border-bottom: 2px solid #ccc;	
 }
 
+table td{
+	border-bottom: 1px dashed #ccc;
+	border-left: 1px dashed #ccc;	
+	border-right: 1px dashed #ccc;		
+}
 
 tbody tr:nth-child(even) td, 
 tbody tr.even td {
@@ -14,4 +21,9 @@ tbody tr.even td {
 th.actions,
 td.actions{
 	text-align: right;
+}
+tbody tr td:last-child,
+tbody tr td:first-child{
+	border-left: none;
+	border-right: none;
 }

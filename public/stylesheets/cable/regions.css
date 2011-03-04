@@ -3,7 +3,7 @@
 
 /* @group Headers */
 
-#header{ background: #000407 url(/images/cable/header-background.jpg) no-repeat center bottom; }
+#header{ background: #222 no-repeat center bottom; }
 #header .container{
 	position: relative;
 	height: 120px;

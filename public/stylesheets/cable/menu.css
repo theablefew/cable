@@ -37,7 +37,8 @@ ul.cable_menu ul {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	background-color: white;
-	-webkit-border-radius: 3px;		
+	-webkit-border-radius: 3px;
+	margin-bottom: 3px;
 }
 .cable_menu_wrapper li.selected.last,
 .cable_menu_wrapper li.selected.last.has-children{
@@ -46,7 +47,13 @@ ul.cable_menu ul {
 }
 .cable_menu_wrapper .selected {
 	background: #ccc;
+}
 
+.current_selection {
+	padding: 1em;	
+	-webkit-border-radius: 4px;
+	background: #ccc;
+	margin-bottom: 1em;
 }
 
 .cable_menu_wrapper .has-children {
