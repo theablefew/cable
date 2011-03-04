@@ -1,12 +1,12 @@
 <% flash.each do |key, message| %>
-  <div id="messages" class="box">
+  <div class="messages box flash">
     <div class="flash-<%= key %>">
       <%= message %>
     </div>
   </div>
 <% end %>
 <% unless @content_for_form_errors.blank? %>
-  <div id="messages" class="box error">
+  <div class="messages box error">
       <%= yield :form_errors %>
   </div>
 <% end %>
