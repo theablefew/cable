@@ -1,51 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title><%= @page_title || Cable::Setting.last.site_title %> |  Administration Portal </title>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%= @page_title || Cable::Setting.last.site_title %> |  Administration Portal </title>
 
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag 'cable/blueprint/screen' %>
     <%= formtastic_stylesheet_link_tag %>
-    <%= stylesheet_link_tag 'cable', 'columnview' %>
-    <%= stylesheet_link_tag 'iphone_checkboxes.css' %>
-    
-    <%= javascript_include_tag 'jquery' , 'jquery-ui', 'rails' %>
-    <%= javascript_include_tag 'tinymce/jquery.tinymce.js' %>
-    <%= javascript_include_tag 'jquery.tablesorter.min.js' %>
-    <%= javascript_include_tag 'admin.js' %>
-    
+    <%= stylesheet_link_tag 'cable' %>    
+    <%= javascript_include_tag 'jquery' , 'jquery-ui', 'rails','tinymce/jquery.tinymce.js', 'jquery.tablesorter.min.js', 'admin.js' %>
     <%= yield :scripts %>
   </head>
-  <body class="<%= @current_controller %>-controller <%= @current_action %>-action">
-    <div class="header-wrapper">
+  <body>
+    <div id="header">
       <div class="container">
-        <div id="header">
-          <div class="span-12"><h1><%= Cable::Setting.last.site_title %></h1></div>
-          <div class="span-12 last"><%= yield(:admin_login , admin_user_login) %></div>
-        </div>
+        <div class="span-16"><h1><%= Cable::Setting.last.site_title %></h1></div>
+        <div class="span-8 last"><%= yield(:admin_login , admin_user_login) %></div>
         <div id="main-navigation" class="span-24"><%= render_navigation(:level => 1, :context => :admin) %></div>        
       </div>
     </div>
-    <div id="content-wrapper">
+    <div id="main-wrapper">
       <div class="container">
         <div id="right-col" class="span-4">
-          <div id="secondary-navigation"><%= render_navigation(:level => 2..5, :context => :admin) %></div>
+          <div id="secondary-navigation" class="box shadow"><%= render_navigation(:level => 2..5, :context => :admin) %></div>
           <%= yield :sidebar %>
         </div>
         <div id="main" class="span-20 last">
-          <div id="main-box" class="box">
-            <h2><%= @page_title %></h2>
-            <div id="breadcrumb"><%= render_navigation :renderer => :breadcrumbs, :join_with => " &raquo; " %></div>
+          <div class="box shadow">
+            <h2 id="title"><%= @page_title %></h2>
+            <div id="help"><%= yield :help %><a class="button">Help</a></div>
+            <%= render :partial => 'layouts/breadcrumb' %>
             <%= yield :page_menu %>
-            <div id="messages_container"><%= render :partial => 'layouts/messages' %></div>
+            <%= render :partial => 'layouts/messages' %>
             <%= yield %>
-          </div>        
+          </div>
         </div>
       </div>
     </div>
-    <div class="footer-wrapper">
+    <div class="footer">
       <div class="container">
         <div id="powered-by-cable">Powered by: Cable | V.<%= Cable::Base.version %></div>
       </div>

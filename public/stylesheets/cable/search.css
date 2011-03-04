@@ -1,0 +1,45 @@
+.inline-search form.formtastic.search fieldset.inputs {
+  float: left;
+  padding: 0;	
+  margin: 0;
+  border-bottom: none;
+}
+
+#search_term {
+	font-size: 1em;
+}
+
+#search_term_input {
+	margin: 0 1em 0 0;
+	width: 200px;
+}
+
+#search_term_input label {
+	float: left;
+	display: block;
+	width: 70px;
+}
+
+.inline-search #search_submit {
+	font-size: .75em !important;
+}
+
+.inline-search form.formtastic.search fieldset.inputs ol {
+	border-bottom: none;
+}
+
+.inline-search form.formtastic.search fieldset.buttons {
+	margin: 0;
+	padding: 0;
+	border-bottom: none;
+}
+
+.inline-search form.formtastic.search fieldset.buttons ol li.commit {
+	margin: 0;
+	padding: 0;
+}
+
+.inline-search {
+	float: left;
+	width: 260px;
+}

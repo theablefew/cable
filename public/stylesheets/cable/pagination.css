@@ -1,0 +1,23 @@
+/* @override http://localhost:3000/stylesheets/cable/pagination.css */
+
+.pagination{
+  text-align: right;
+  padding: 1em 0;
+}
+.pagination em,
+.pagination a,
+.previous_page{
+  padding: 4px 8px;
+  background: #eee;
+  display: inline-block;
+}
+
+.pagination em{
+  font-weight: bold;
+  color: white;
+  font-style: normal;
+}
+
+.pagination .disabled{
+  display: none;	
+}

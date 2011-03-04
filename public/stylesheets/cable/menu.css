@@ -1,0 +1,84 @@
+/* @override http://localhost:3000/stylesheets/cable/menu.css */
+
+.cable_menu_wrapper {
+	position: relative;
+	height: 360px;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	margin-bottom: 1em;
+}
+
+ul.cable_menu,
+ul.cable_menu ul {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 335px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding: 0;
+	margin: 0;
+	width: 174px;
+}
+.cable_menu_wrapper ul li.has-children {
+	width: 135px;
+	padding: 4px 20px 4px 4px;
+}
+.cable_menu_wrapper ul li:hover{
+	background-color: #f4f4f4;
+	cursor: pointer;
+}
+.cable_menu_wrapper ul li {
+	width: 155px;
+	padding: 4px 4px 4px 4px;
+	white-space: nowrap;
+	list-style: none;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background-color: white;
+	-webkit-border-radius: 3px;		
+}
+.cable_menu_wrapper li.selected.last,
+.cable_menu_wrapper li.selected.last.has-children{
+	background-color: #2494fc;
+	color: white;
+}
+.cable_menu_wrapper .selected {
+	background: #ccc;
+
+}
+
+.cable_menu_wrapper .has-children {
+	background: url(/images/cable/children.png) no-repeat right center;
+}
+
+.cable_menu_wrapper li.selected.has-children {
+	background: #ccc url(/images/cable/children.png) no-repeat right center;
+}
+
+::-webkit-scrollbar {
+	height: 8px;
+	width: 8px;
+}
+
+::-webkit-scrollbar-track-piece {
+	margin-bottom: 10px;
+	border-bottom-left-radius: 4px 4px;
+	border-bottom-right-radius: 4px 4px;
+	border-top-left-radius: 4px 4px;
+	border-top-right-radius: 4px 4px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+	height: 25px;
+	background-color: #ccc;
+	-webkit-border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(255,255,255,1);
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	width: 25px;
+	background-color: #ccc;
+	-webkit-border-radius: 4px;
+}
