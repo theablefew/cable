@@ -6,6 +6,7 @@
 	overflow-x: scroll;
 	overflow-y: hidden;
 	margin-bottom: 1em;
+	width:100%;
 }
 
 ul.cable_menu,
@@ -13,15 +14,17 @@ ul.cable_menu ul {
 	position: absolute;
 	left: 0;
 	top: 0;
-	height: 335px;
+	height: 340px;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	padding: 0;
+	padding: 2px 0px 2px 2px;
 	margin: 0;
-	width: 174px;
+	width: 170px;
+	background:#fff;	
+	border-left:1px solid #eee;
 }
 .cable_menu_wrapper ul li.has-children {
-	width: 135px;
+	width: 129px;
 	padding: 4px 20px 4px 4px;
 }
 .cable_menu_wrapper ul li:hover{
@@ -29,7 +32,7 @@ ul.cable_menu ul {
 	cursor: pointer;
 }
 .cable_menu_wrapper ul li {
-	width: 155px;
+	width: 145px;
 	padding: 4px 4px 4px 4px;
 	white-space: nowrap;
 	list-style: none;
@@ -55,15 +58,32 @@ ul.cable_menu ul {
 	background: #ccc;
 	margin-bottom: 1em;
 }
-
+.cable_menu_wrapper .ui-state-highlight{
+  display:block;
+  border: 2px solid #ffd47f;
+  background: #ffbf3f;
+  height: 10px;
+	width: 141px;
+}
 .cable_menu_wrapper .has-children {
-	background: url(/images/cable/children.png) no-repeat right center;
+	background: #fff url(/images/cable/children.png) no-repeat right center;
 }
 
 .cable_menu_wrapper li.selected.has-children {
 	background: #ccc url(/images/cable/children.png) no-repeat right center;
 }
 
+#add-menu{
+  background-color:#eee;
+  background-image:url(/images/cable/add.png);
+  background-repeat:no-repeat;
+  background-position:left center;
+  padding-left:35px;
+	width: 110px; 
+}
+#add-menu:hover{
+  background-color:#ddd;
+}
 ::-webkit-scrollbar {
 	height: 8px;
 	width: 8px;

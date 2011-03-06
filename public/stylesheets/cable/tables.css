@@ -5,11 +5,12 @@ table{
 thead th{
 	background: #eee;
 	border-bottom: 2px solid #ccc;	
+	font-weight:normal;
+	font-size:1.25em;
 }
 
 table td{
 	border-bottom: 1px dashed #ccc;
-	border-left: 1px dashed #ccc;	
 	border-right: 1px dashed #ccc;		
 }
 
@@ -22,8 +23,12 @@ th.actions,
 td.actions{
 	text-align: right;
 }
-tbody tr td:last-child,
+td.actions{
+  padding-right:0px;
+}
 tbody tr td:first-child{
-	border-left: none;
+  border-left: none;
+}
+tbody tr td:last-child{
 	border-right: none;
 }

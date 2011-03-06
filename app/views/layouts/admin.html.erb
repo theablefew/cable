@@ -7,8 +7,10 @@
 
     <%= csrf_meta_tag %>
     <%= stylesheet_link_tag 'cable/blueprint/screen' %>
-    <%= formtastic_stylesheet_link_tag %>
-    <%= stylesheet_link_tag 'cable' %>    
+    <%= stylesheet_link_tag 'cable' %>
+    <%= stylesheet_link_tag 'cable/formtastic' %>
+    <%= stylesheet_link_tag 'cable/formtastic_changes' %>
+    <%= stylesheet_link_tag 'jquery/ui/jquery-ui-1.8.7.custom.css' %>
     <%= javascript_include_tag 'jquery' , 'jquery-ui', 'rails','tinymce/jquery.tinymce.js', 'jquery.tablesorter.min.js', 'admin.js' %>
     <%= yield :scripts %>
   </head>
