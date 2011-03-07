@@ -416,11 +416,10 @@ Gem::Specification.new do |s|
     "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.5.2}
   s.summary = %q{Cable Admin Engine for Rails 3}
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
