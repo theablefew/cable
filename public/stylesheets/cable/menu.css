@@ -4,17 +4,17 @@
 	position: relative;
 	height: 360px;
 	overflow-x: scroll;
-	overflow-y: hidden;
+  overflow-y: hidden;
 	margin-bottom: 1em;
 	width:100%;
 }
 
 ul.cable_menu,
 ul.cable_menu ul {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 340px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 340px;  
 	overflow-x: hidden;
 	overflow-y: scroll;
 	padding: 2px 0px 2px 2px;
@@ -23,15 +23,15 @@ ul.cable_menu ul {
 	background:#fff;	
 	border-left:1px solid #eee;
 }
-.cable_menu_wrapper ul li.has-children {
+.cable_menu_wrapper li.has-children {
 	width: 129px;
 	padding: 4px 20px 4px 4px;
 }
-.cable_menu_wrapper ul li:hover{
+.cable_menu_wrapper li:hover{
 	background-color: #f4f4f4;
 	cursor: pointer;
 }
-.cable_menu_wrapper ul li {
+.cable_menu_wrapper li {
 	width: 145px;
 	padding: 4px 4px 4px 4px;
 	white-space: nowrap;
@@ -79,7 +79,7 @@ ul.cable_menu ul {
   background-repeat:no-repeat;
   background-position:left center;
   padding-left:35px;
-	width: 110px; 
+	width: 114px; 
 }
 #add-menu:hover{
   background-color:#ddd;
@@ -108,4 +108,13 @@ ul.cable_menu ul {
 	width: 25px;
 	background-color: #ccc;
 	-webkit-border-radius: 4px;
+}
+ul.cable_menu.empty{
+  background:url(/images/cable/empty-menu.png);
+}
+#add-menu-form{
+  margin-top:1em;
+}
+#save-tree{
+  margin-bottom:1em;
 }

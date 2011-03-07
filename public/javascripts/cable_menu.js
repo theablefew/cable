@@ -1,45 +1,132 @@
-(function($){    
+(function($){
+  
+  var xhr;
+  
+  var sortable_options = {
+    items: "li:not(#add-menu)",
+    connectWith: '.cable_menu_wrapper ul',
+    appendTo: '.cable_menu_wrapper',
+    helper: 'clone',
+    placeholder: "ui-state-highlight",
+    delay: 100,
+    stop: function(event, ui){
+      $tree = $(".cable_menu_wrapper > ul");
+      update_tree($tree);
+      select_item(ui.item[0]);
+    },
+    update: function(event, ui) {
+      
+    },
+    receive: function(event, ui) {
+      $target = $(event.target);
+      $item = $(ui.item[0]);
+      $children_of_item = $item.data("children");  
+      $id_of_item = $item.attr("menu");
+      $id_of_target = $target.attr("menu");               
+      var $test_for_children = $children_of_item.indexOf(parseInt($id_of_target));
+      if($test_for_children < 0){
+
+      }else{
+        $(ui.sender).sortable('cancel');                          
+      }
+      if($id_of_item == $id_of_target){
+        $(ui.sender).sortable('cancel');          
+      }  
+    }
+  };
   
   function save_tree(){
     $(".cable_menu_wrapper li").each(function() {
-      console.log($(this).data()); 
-      console.log("----");
+      $li = $(this);      
+      $ul = $("ul[menu="+$li.attr("menu")+"]");
+      $ul.removeAttr("id");
+      $li.append($ul);
+      $li.attr("id", "menu_"+$li.attr("menu"));
     });
-    var mylist = $('.cable_menu_wrapper > ul').serialize_list();
-    console.log(mylist);
-    // $.post("/admin/menus/sort", mylist);
+    $(".cable_menu_wrapper").find("ul").unbind("mouseenter");
+    $(".cable_menu_wrapper").find("ul").unbind("mouseleave");
+    $('.cable_menu_wrapper > ul').removeAttr("id");
+    
+    var the_menu = $('.cable_menu_wrapper > ul').serialize_list();
+    $(".cable_menu_wrapper").removeClass();
+        
+    $.post("/admin/menus/sort", the_menu);
   }
   
   function show_add_menu(item){
     $("#add-menu").remove();
-    var $add = $("<li id='add-menu'>Add Menu &#8230;</li>").appendTo($(item));
+    
+    var $add = $("<li id='add-menu'>Add Menu Item</li>").appendTo($(item));
+    // $add.css({"position":"absolute","bottom":"-40px"});
+    // $item.css({"padding-bottom":"40px","height":"300px"});
+    
     $add.click(function(){
-      $("#dialog").remove();
-
-      var id = $(item).attr("parent");      
-      $add_dialog = $(("<div id='dialog'></div>")).load("/admin/menus/new?parent_id="+id).appendTo("body");
-      
-      $add_dialog.dialog({
-        title: 'Add Menu Item',
-  			height: 300,
-  			width: 350,
-  			modal: true,
-  			buttons: {
-  			  Cancel: function() {
-  					$( this ).dialog( "close" );
-  				},
-  				Create: function() {
-  				}
-  			},
-  			close: function() {
-  			}
-  		});
-  		$add_dialog.dialog( "option", "title", 'Dialog Title' );
+      var id = $(item).attr("menu");
+      $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
+      $("#add-menu-form").load("/admin/menus/new?parent_id="+id, function(){
+        $("#save-tree").hide();
+        $("#menu-details").hide();
+        $("<li class='commit'><input class='cancel' id='menu_cancel' name='cancel' type='button' value='Cancel' /></li>").insertBefore("ol li.commit").click(function(){
+          $("#add-menu-form").html("");
+          $("#save-tree").show();
+        });
+        
+      });
     })
   }
   
   function hide_add_menu(item){
+    // $item = $(item);
+    // $item.css({"padding-bottom":"0px","height":"340px"});
     $("#add-menu").remove();
+  }
+  
+  function update_parents(item){
+    var $li = $(item);
+    var $id = $li.attr("menu");
+    var $pli = $("li[menu="+$id+"]");
+    
+    var $parents = [];
+    
+    var $pid = $pli.parent().attr("menu");
+    $parents.push(parseInt($pid));
+    if($pid != 0){
+      var $arr = update_parents($pli.parent())
+      var len= $arr.length;
+      for(var i=0; i<len; i++) {
+        $parents.push(parseInt($arr[i]));
+      }
+    }
+    $li.data("parents",$parents);
+    return $parents;
+  }
+  
+  function update_children(item){
+    var $li = $(item);
+    var $id = $li.attr("menu");
+    var $ul = $("ul[menu="+$id+"]");
+    
+    if($ul.children().size() == 0){
+      $li.removeClass("has-children").addClass("empty");
+    }else{
+      $li.addClass("has-children");      
+    }
+    
+    var $children = [];
+    $ul.children().each(function(){
+      $cid = $(this).attr("menu");
+      $cul = $("ul[menu="+$cid+"]");
+      $children.push(parseInt($cid));
+      var $arr = update_children(this);
+      var len= $arr.length;
+      for(var i=0; i<len; i++) {
+        $children.push(parseInt($arr[i]));
+      }
+    })
+
+    $li.data("children",$children);
+    
+    return $children;    
   }
   
   function update_breadcrumb(){
@@ -50,70 +137,103 @@
     });
     
     $("#selection p").html(items.join(" &raquo; "));
-    $(".cable_menu_wrapper .selected").last().addClass("last");    
+    $(".cable_menu_wrapper .selected").last().addClass("last");
   }
   
   function select_item(item,wrapper){
     $item = $(item);
-    id = $(item).attr("id");
+    $id = $(item).attr("menu");
+    $wrapper = $(wrapper);
+    $child = $("ul[menu="+$id+"]");
 
-    $child = $("[parent="+id+"]")
-    
-    if($child){
-      $child.css({
-        left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(),
-        top: 0
-      }).show();      
+    if($child.children().size() > 0){
+      $child.css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).show();      
+    }else{
+      $("<ul class='cable_menu empty' menu="+$id+"/>").css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).sortable(sortable_options).appendTo($wrapper).mouseenter(function() {
+        show_add_menu(this);
+       }).mouseleave(function(){
+        hide_add_menu(this);       
+       });;
     }
     
     $item.addClass("selected");
+    
     $item.siblings('.selected').each(function(){
       deselect(this);
     });
+    
     $child.children().each(function(){
       deselect(this);
     });
+        
+    $wrapper.append($item.parent());
+    last_width = $wrapper.attr("scrollWidth");
+    $wrapper.stop();
+    $wrapper.animate({ 'scrollLeft': $wrapper.attr("scrollWidth") }, 2000);
+    $("#add-menu-form").html("");
+    $("#save-tree").show();
+    $("#menu-details").html("<img src='/images/cable/loader.gif' />").show();
     
-    $(wrapper).append($item.parent());
+    if(xhr != undefined) {
+      xhr.abort(); 
+    } 
+    xhr = $.ajax({
+      url: "/admin/menus/"+$item.attr("menu"),
+      success: function(data) {
+        $("#menu-details").html(data);
+      }
+    });
     update_breadcrumb();
   }
   
   function deselect(item) {
     var $item = $(item);
     $item.removeClass('selected');
-    id = $item.attr("id");
-
-    $child = $("[parent="+id+"]");
-
+    $id = $item.attr("menu");
+    $child = $("ul[menu="+$id+"]");
     $child.hide().find("li").each(function(){
       deselect(this);
     });
     
   }
   
-  function explode(item, wrap){
-    $wrap = $(wrap)
-    $li = $(item);
-    $ul = $li.children('ul');     
-    console.log($li);
-    if($ul.children().size() > 0){
-      $cul = $("<ul/>").attr("parent", $li.attr("id")).addClass("cable_menu").appendTo($wrap);        
-      $ul.children().each(function(){
-        var $cli = $(this).clone();
-        if($cli.children().size() > 0){
-          $cli.addClass("has-children");
-        }
-        $cli.appendTo($cul);
-        $cli.data("ChildUL",$ul);
-        $cli.find("ul").remove();
-      });
-      $cul.hide();
-    }
-    
+  function update_tree(tree){
+    $tree = $(tree);
+    $tree.find("li").each(function(){
+     update_children(this); 
+     update_parents(this);
+    });
   }
+  
+  function build_menu(ul, wrapper, id){
+    var $wrapper = $(wrapper);
+    var $ul = $(ul);
+    var $id = id;
+    var $new_menu = $("<ul class='cable_menu' menu="+$id+"/>").appendTo($wrapper);
+    if($id >= 1){
+      $new_menu.hide();
+    }    
+    $ul.children().each(function(){
+      var $li = $(this);
+      var $cloned_li = $(this).clone();
+      if($cloned_li.children().size() > 0){ 
+        $cloned_li.addClass("has-children");
+        $cloned_li.children().each(function(){
+          var $id = $cloned_li.attr("id").replace("menu_","");
+          build_menu(this,$wrapper,$id);
+        });
+      }
+      $cloned_li.appendTo($new_menu);
+      $cloned_li.attr("menu",$cloned_li.attr("id").replace("menu_",""));      
+      $cloned_li.removeAttr("id");
+
+      $cloned_li.find("ul").remove();
+    });
+  }
+
   $.fn.serialize_list = function(options) {
     var defaults = {
-      attributes: ['id', 'class'],
+      attributes: ['id'],
       allow_nesting: true, 
       prepend: 'ul', 
       att_regex: false, 
@@ -167,65 +287,30 @@
   
   $.fn.cable_menu = function(options){
     var $tree = $(this);
-    var $wrap = $("<div class='cable_menu_wrapper'></div>").insertAfter($tree);
+    var $wrapper = $("<div class='cable_menu_wrapper'></div>").insertAfter($tree);
     
-    $tree.find("li").each(function() {
-      explode(this,$wrap);
-    });
-    // $tree.children("li").each(function(){
-    //   explode(this,$wrap);
-    // })
+    build_menu($tree, $wrapper, 0);
     
-    
-    $(".cable_menu li").click(function(){
-      select_item(this, $wrap);
+    $wrapper.find("li").click(function(){
+      select_item(this, $wrapper);
     });
     
-    $tree.hide();
+    update_tree($wrapper);
+    $tree.remove();    
     
-    
-    var sortable_options = {
-      items: "li:not(#add-menu)",
-      connectWith: '.cable_menu_wrapper ul',
-      appendTo: '.cable_menu_wrapper',
-      helper: 'clone',
-      placeholder: "ui-state-highlight",
-      stop: function(event, ui){
-        select_item(ui.item[0]);
-      },
-      update: function(event, ui) {
-        
-      },
-      receive: function(event, ui) { 
-        var this_id = $(ui.item[0]).attr("id");
-        var child_id = $(event.target).attr("parent");
-        var size = $(".cable_menu .selected").size()-1;
-        
-        $(".cable_menu .selected").each(function(index){
-          if(size > index ){
-            if($(this).attr("id") == this_id){
-              $(ui.sender).sortable('cancel');
-            }
-          }else{
-            if(child_id == this_id){
-              $(ui.sender).sortable('cancel');
-            }
-          }
-        });
-      }
-    };
-    
-    $wrap.find("ul").sortable(sortable_options);
-    $wrap.find("ul").mouseenter(function() {
+    $wrapper.find("ul").sortable(sortable_options);
+    $wrapper.find("ul").mouseenter(function() {
       show_add_menu(this);
      }).mouseleave(function(){
       hide_add_menu(this);       
      });
-    $wrap.before("<div id='selection'><strong>Current Selection:</strong><p>&nbsp;</p></div>");
-    $wrap.after("<div id='save_tree'><a class='button'>Save Tree</a></div>");
-    $("#save_tree").click(function(){
-      save_tree();
-    });
+    var $current_selection = $("<div id='selection'><strong>Current Selection:</strong><p>&nbsp;</p></div>").insertBefore($wrapper);
+    var $save = $("<div id='save-tree' class='actions'><a>Save Tree</a></div>").insertAfter($wrapper);
+    var $form = $("<div id='add-menu-form' />").insertAfter($save);
+    var $menu_details = $("<div id='menu-details' />").insertAfter($save);
+    $save.click(function(){save_tree();});    
+    $("<hr />").insertAfter($wrapper);
+
   }
 
 })(jQuery);
