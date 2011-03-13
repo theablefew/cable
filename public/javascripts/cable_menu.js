@@ -48,18 +48,13 @@
     $('.cable_menu_wrapper > ul').removeAttr("id");
     
     var the_menu = $('.cable_menu_wrapper > ul').serialize_list();
-    $(".cable_menu_wrapper").removeClass();
-        
     $.post("/admin/menus/sort", the_menu);
   }
   
   function show_add_menu(item){
     $("#add-menu").remove();
     
-    var $add = $("<li id='add-menu'>Add Menu Item</li>").appendTo($(item));
-    // $add.css({"position":"absolute","bottom":"-40px"});
-    // $item.css({"padding-bottom":"40px","height":"300px"});
-    
+    var $add = $("<li id='add-menu'>Add Menu Item</li>").appendTo($(item));    
     $add.click(function(){
       var id = $(item).attr("menu");
       $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
