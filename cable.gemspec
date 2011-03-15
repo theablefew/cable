@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.2"
+  s.version = "0.9.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
@@ -409,26 +409,31 @@ Gem::Specification.new do |s|
     "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.5.2}
   s.summary = %q{Cable Admin Engine for Rails 3}
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_runtime_dependency(%q<orm_adapter>, [">= 0"])
       s.add_runtime_dependency(%q<awesome_nested_set>, [">= 0"])
+      s.add_runtime_dependency(%q<formtastic>, [">= 0"])
+      s.add_runtime_dependency(%q<simple-navigation>, [">= 0"])
     else
       s.add_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_dependency(%q<orm_adapter>, [">= 0"])
       s.add_dependency(%q<awesome_nested_set>, [">= 0"])
+      s.add_dependency(%q<formtastic>, [">= 0"])
+      s.add_dependency(%q<simple-navigation>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 3.0.0"])
     s.add_dependency(%q<orm_adapter>, [">= 0"])
     s.add_dependency(%q<awesome_nested_set>, [">= 0"])
+    s.add_dependency(%q<formtastic>, [">= 0"])
+    s.add_dependency(%q<simple-navigation>, [">= 0"])
   end
 end
 
