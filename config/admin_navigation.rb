@@ -3,9 +3,6 @@ SimpleNavigation::Configuration.run do |navigation|
     admin.item :admin, "Home", '/admin'
     admin.item :admin, "Menu", "/admin/menus" do |menus|
       if Cable.class_exists? "Menu"
-        Menu.roots.each do |tree|
-          menus.item :edit, tree.title, "/admin/menus/show/#{tree.id}"
-        end
         menus.item :new, "New Menu Item", new_admin_menu_path
       end
     end

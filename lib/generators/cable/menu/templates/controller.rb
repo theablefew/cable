@@ -21,7 +21,6 @@ class Admin::<%= class_name %>sController < AdminController
       format.html # show.html.erb
       format.xml  { render :xml => @<%= singular_table_name %> }
       format.js { render :partial => "admin/menus/parents" } 
-
     end
   end
 

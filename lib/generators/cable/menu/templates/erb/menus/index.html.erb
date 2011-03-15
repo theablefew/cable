@@ -9,7 +9,7 @@
 
 <ul id="menu">
   <%% @<%= plural_table_name %>.each do |m| -%>
-    <li title="<%= m.title %>" id="<%= dom_id(m) %>">
+    <li title="<%%= m.title %>" id="<%%= dom_id(m) %>">
       <%%= m.title %>
       <%% if m.descendants %><%%= raw display_tree_plain(m.children, m.id) %><%% end %>
     </li> 

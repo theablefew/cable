@@ -48,11 +48,7 @@ module Cable
           route_string = <<EOF
 cable_to :#{plural_table_name} do |menu|
   collection do
-    get :rebuild
-    get :table
     post :sort
-    post :move
-    post :remove_resource
   end
 end
 EOF
