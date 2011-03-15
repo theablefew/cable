@@ -1,5 +1,7 @@
 <div class="user-session">
-  <% if admin_user_signed_in? %>  
-    Signed in as: <%= current_admin_user.email %> <%= link_to "Sign out", destroy_admin_user_session_path, :class => 'button'%>
+  <% if  respond_to?( :admin_user_signed_in?) %>
+      <% if admin_user_signed_in? %>  
+        Signed in as: <%= current_admin_user.email %> <%= link_to "Sign out", destroy_admin_user_session_path, :class => 'button'%>
+      <% end %>
   <% end %>
 </div>
