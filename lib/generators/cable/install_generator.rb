@@ -17,17 +17,24 @@ module Cable
 
         def create_settings
           if options.settings?
-           migration_template 'lib/generators/templates/create_cable_settings.rb', "db/migrate/create_cable_settings.rb"
-           route( 'cable_to :cable_settings' )
+            begin
+             migration_template 'lib/generators/templates/create_cable_settings.rb', "db/migrate/create_cable_settings.rb"
+             route( 'cable_to :cable_settings' )
+            rescue
+
+            end
          end
         end
         
         def create_blocks
           if options.blocks?
-            migration_template 'lib/generators/templates/create_blocks.rb', 'db/migrate/create_blocks.rb'
-            copy_file 'lib/generators/templates/block.rb', 'app/models/block.rb'
-            copy_file 'lib/generators/templates/partials/_block.html.erb', 'app/views/admin/partials/_block.html.erb'
-            copy_file 'lib/generators/templates/partials/_block_form.html.erb', 'app/views/admin/partials/_block_form.html.erb'
+            begin
+              migration_template 'lib/generators/templates/create_blocks.rb', 'db/migrate/create_blocks.rb'
+            rescue
+              copy_file 'lib/generators/templates/block.rb', 'app/models/block.rb'
+              copy_file 'lib/generators/templates/partials/_block.html.erb', 'app/views/admin/partials/_block.html.erb'
+              copy_file 'lib/generators/templates/partials/_block_form.html.erb', 'app/views/admin/partials/_block_form.html.erb'
+            end
           end
         end
         
