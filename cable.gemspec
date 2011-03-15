@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.1"
+  s.version = "0.9.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-03-14}
+  s.date = %q{2011-03-15}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -66,18 +66,10 @@ Gem::Specification.new do |s|
     "lib/generators/cable/menu/menu_generator.rb",
     "lib/generators/cable/menu/templates/controller.rb",
     "lib/generators/cable/menu/templates/erb/menus/_menu.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/_menu_children_table.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/_menu_tree.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/_menu_vitals.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/_resource.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/_resource_fields.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/_tree.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/edit.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/index.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/move.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/new.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/show.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/table.html.erb",
     "lib/generators/cable/menu/templates/erb/partials/_menu_fields.html.erb",
     "lib/generators/cable/menu/templates/migration.rb",
     "lib/generators/cable/menu/templates/model.rb",
@@ -110,8 +102,9 @@ Gem::Specification.new do |s|
     "public/images/cable/loader.gif",
     "public/images/cable/new-window.png",
     "public/images/cable/nil-icon.png",
-    "public/images/cable/page-icon.png",
+    "public/images/cable/page.png",
     "public/images/cable/product-icon.jpg",
+    "public/images/cable/search.png",
     "public/images/cable/story-icon.jpg",
     "public/javascripts/admin.js",
     "public/javascripts/cable_menu.js",
@@ -416,10 +409,11 @@ Gem::Specification.new do |s|
     "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Cable Admin Engine for Rails 3}
 
   if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
