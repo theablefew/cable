@@ -1,9 +1,0 @@
-<table>
-  <%% @<%= singular_table_name %>s.each do |m|%>
-    <tr>
-      <td><%%= m.menu_identifier %></td>
-      <td><%%= link_to m.name, [:admin, m] %></td>
-      <td><%%= m.url %></td>
-    </tr>
-  <%% end %>
-</table>

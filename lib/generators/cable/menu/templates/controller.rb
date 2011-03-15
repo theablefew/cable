@@ -1,8 +1,10 @@
 class Admin::<%= class_name %>sController < AdminController
+  respond_to :html, :xml, :json  
   # GET /pages
   # GET /pages.xml
   def index
     @<%= plural_table_name %> = <%= class_name %>.roots
+    Menu.rebuild!
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @<%= plural_table_name %> }
@@ -28,6 +30,10 @@ class Admin::<%= class_name %>sController < AdminController
   def new
     @resources = Cable.available_resources
     @<%= singular_table_name %> = <%= class_name %>.new
+    if params[:parent_id] && params[:parent_id] != "0"
+      @parent = Menu.find(params[:parent_id])
+      @<%= singular_table_name %>.parent_id = @parent.id
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @<%= singular_table_name %> }
@@ -38,11 +44,6 @@ class Admin::<%= class_name %>sController < AdminController
   def edit
     @<%= singular_table_name %> = <%= class_name %>.includes(:cable_menuable).where( :id => params[:id]).first
     @resources = Cable.available_resources
-  end
-  
-  def move
-    @<%= singular_table_name %> = <%= class_name %>.where(:id => params[:id]).first
-    @<%= plural_table_name %> = <%= class_name %>.roots
   end
   
   # POST /pages
@@ -94,17 +95,35 @@ class Admin::<%= class_name %>sController < AdminController
     end
   end
   
-
-  def table
-    @<%= plural_table_name %> = <%= class_name %>.all
+  def sort
+    new_list = params[:ul]
+    previous = nil
+    new_list.each_with_index do |array, index|
+      moved_item_id = array[1][:id].split(/menu_/)
+      @current_menu = Menu.find_by_id(moved_item_id)
+      unless previous.nil?
+        @previous_item = Menu.find_by_id(previous)
+        @current_menu.move_to_right_of(@previous_item)
+      else
+        @current_menu.move_to_root
+      end
+      unless array[1][:children].blank?
+        parse_children(array[1], @current_menu)
+      end
+      previous = moved_item_id
+    end
+    Menu.rebuild!
+    render :nothing => true
   end
   
-  def sort
-    @first = <%= class_name %>.find(params[:menu].first)
-    @<%= singular_table_name %>  = <%= class_name %>.find(@first.parent.id)
-    @<%= singular_table_name %>.reorder_children(params[:menu])
-    render :update do |page|
-      page << "$('#status').html();"
+  def parse_children(mynode, menu)
+    for child in mynode[:children]
+      child_id = child[1][:id].split(/menu_/)
+      child_menu = Menu.find_by_id(child_id)
+      child_menu.move_to_child_of(menu)
+      unless child[1][:children].blank?
+        parse_children(child[1], child_menu)
+      end
     end
   end
   

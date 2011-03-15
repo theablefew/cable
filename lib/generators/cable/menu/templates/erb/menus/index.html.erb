@@ -1,28 +1,17 @@
 <%% content_for :scripts do %>
-  <script>
-    $(document).ready(function(){
-      $(".sortable").sortable({
-        cursor:     'move',
-        axis:       'y',
-        update: function(e, ui) {
-          sorted = $(this).sortable("serialize");
-          $.ajax({
-            type:   'POST',
-            url:    "/admin/<%= plural_table_name %>/sort",
-            data:   sorted
-          });
-        }
-      });
-      $(".check-all").click(function(){
-        $("input").each(function(){
-          $(this).attr('checked', !$(this).attr('checked'));
-        });
-      });
+  <%%= javascript_include_tag 'cable_menu.js' %>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){  
+      $('#menu').cable_menu();
     });
   </script>
 <%% end %>
 
-<%% @<%= plural_table_name %>.each do |menu| %>
-  <h3><%%= link_to menu.title, [:admin, menu] %></h3>
-  <%%= render :partial => 'menu_vitals', :locals => {:menu => menu} %>
-<%% end %>
+<ul id="menu">
+  <%% @<%= plural_table_name %>.each do |m| -%>
+    <li title="<%= m.title %>" id="<%= dom_id(m) %>">
+      <%%= m.title %>
+      <%% if m.descendants %><%%= raw display_tree_plain(m.children, m.id) %><%% end %>
+    </li> 
+  <%% end %>
+</ul>

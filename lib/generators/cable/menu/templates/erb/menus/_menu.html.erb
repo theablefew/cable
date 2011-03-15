@@ -1,7 +1,7 @@
 <%%= semantic_form_for [:admin, @<%= singular_table_name %>] do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
     <div id="error_explanation">
-      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this menu from being saved:</h2>
+      <h3><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this menu from being saved:</h3>
       <ul>
         <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
           <li><%%= msg %></li>
@@ -9,13 +9,14 @@
       </ul>
     </div>
   <%% end %>
-  <%%= f.inputs do %> 
+  <%%= f.inputs "Menu Properties" do %> 
     <%%= f.input :title, :label => "Menu Title", :hint => "This will be used in the menu itself" %>
     <%%= f.input :meta_description, :label => "Meta Description", :hint => "Meta Description rendered in the head of the document" %>
     <%%= f.input :meta_keywords, :label => "Meta Keywords", :hint => "Enter Keywords with a comma separating each key" %>    
     <%%= f.input :url, :label => "URL", :as => :string, :hint => "URL for this menu item, Example: /categories/canopies" %>
-    <%%= f.input :parent_id, :as => :select, :collection => nested_set_options(<%= singular_table_name.classify %>) {|i| "#{'-' * i.level} #{i.title}" unless i.level > 1 }.to_a.reject{|i| i[0].nil?}, :hint => "You can move this later" %>            
     <%%= f.input :show_in_menu, :as => :boolean, :wrapper_html => { :class => "yes_no" }, :hint => "You can hide the menu item by unchecking this box." %>
+  <%% end %>
+  <%%= f.inputs "Template and Resource" do %>
     <%% unless Cable.special_actions.empty? %>
         <%%= f.input :special_action, :label => "Special Action", :as => :select, :collection => Cable.special_actions, :hint => "(Optional)" %>
     <%% end %>
@@ -25,7 +26,7 @@
     <%% unless @resources.nil? %>
         <%%= f.input :cable_menuable_id, :label => "Resource", :as => :select, :include_blank => true, :collection => @resources %>
     <%% end %>
-
-<%% end %>
+  <%% end %>
+  
   <%%= f.buttons %>
 <%% end %>
