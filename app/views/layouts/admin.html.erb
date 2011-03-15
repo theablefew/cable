@@ -25,6 +25,19 @@
     <div id="main-wrapper">
       <div class="container">
         
+        
+        <% if @admin_layout == "single" %>
+          <div id="main" class="span-24">
+            <div class="box shadow">
+              <h2 id="title"><%= @page_title %></h2>
+              <div id="help"><%= yield :help %><a class="button">Help</a></div>
+              <%= render :partial => 'layouts/breadcrumb' %>
+              <%= yield :page_menu %>
+              <%= render :partial => 'layouts/messages' %>
+              <%= yield %>
+            </div>
+          </div>        
+        <% else %>
         <div id="right-col" class="span-4">
           <div id="secondary-navigation" class="box shadow"><%= render_navigation(:level => 2..5, :context => :admin) %></div>
           <%= yield :sidebar %>
@@ -40,7 +53,7 @@
             <%= yield %>
           </div>
         </div>
-        
+        <% end %>
       </div>
     </div>
     <div class="footer">
