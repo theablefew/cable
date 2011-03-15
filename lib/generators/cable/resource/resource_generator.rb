@@ -22,31 +22,33 @@ module Cable
         class_option :orm,        :type => :string,  :default => "active_record"
  
         def create_migration_file
-           migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration?
+           migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration? and yes?("Would you like to generate a migration?")
         end       
         
         def create_model_file
-           template 'model.rb' , "app/models/#{model_name}.rb" if options.model?
+           template 'model.rb' , "app/models/#{model_name}.rb" if options.model? and yes?("Would you like to generate a model?")
         end
         
         def create_controller_file
           if options.controller?
-            template 'controller.rb' , "app/controllers/admin/#{file_name.pluralize}_controller.rb" 
+            template 'controller.rb' , "app/controllers/admin/#{file_name.pluralize}_controller.rb" if yes?("Would you like to generate a controller?")
           end
         end
         
         def create_scaffold
           if options.views?
-            template 'erb/scaffold/_form.html.erb', "app/views/admin/#{plural_table_name}/_#{singular_table_name}.html.erb"
-            template 'erb/scaffold/index.html.erb', "app/views/admin/#{plural_table_name}/index.html.erb"
-            template 'erb/scaffold/edit.html.erb', "app/views/admin/#{plural_table_name}/edit.html.erb"
-            template 'erb/scaffold/new.html.erb', "app/views/admin/#{plural_table_name}/new.html.erb"
-            template 'erb/scaffold/show.html.erb', "app/views/admin/#{plural_table_name}/show.html.erb"
+            if yes?("Would you like Cable to generate views for #{model_name.capitalize}?")
+              template 'erb/scaffold/_form.html.erb', "app/views/admin/#{plural_table_name}/_#{singular_table_name}.html.erb"
+              template 'erb/scaffold/index.html.erb', "app/views/admin/#{plural_table_name}/index.html.erb"
+              template 'erb/scaffold/edit.html.erb', "app/views/admin/#{plural_table_name}/edit.html.erb"
+              template 'erb/scaffold/new.html.erb', "app/views/admin/#{plural_table_name}/new.html.erb"
+              template 'erb/scaffold/show.html.erb', "app/views/admin/#{plural_table_name}/show.html.erb"
+            end
           end
         end
         
         def install_route
-          route("cable_to :#{plural_table_name}") if options.routes?
+          route("cable_to :#{plural_table_name}") if options.routes? and yes?("Would you like to generate routes for #{model_name.capitalize}?")
         end
         
         def self.next_migration_number(dirname)

@@ -18,7 +18,7 @@ module Cable
         def create_settings
           if options.settings?
            migration_template 'lib/generators/templates/create_cable_settings.rb', "db/migrate/create_cable_settings.rb"
-           route( 'cable_to :cable_settings' ) if options.settings?
+           route( 'cable_to :cable_settings' )
          end
         end
         
@@ -33,8 +33,17 @@ module Cable
         
         def copy_simple_nav
           if options.simple_nav?
-            copy_file 'config/admin_navigation.rb', 'config/admin_navigation.rb'
-            copy_file 'config/navigation.rb', 'config/navigation.rb'
+            if yes?("Would you like to install simple navigation?") 
+              generate("navigation_config")
+              copy_file 'config/admin_navigation.rb', 'config/admin_navigation.rb'
+                # copy_file 'config/navigation.rb', 'config/navigation.rb'
+            end
+          end
+        end
+        
+        def install_jquery
+          if yes?("Would you like to install jquery?")
+            generate("jquery:install --ui")
           end
         end
         

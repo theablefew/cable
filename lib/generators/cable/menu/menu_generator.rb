@@ -18,28 +18,30 @@ module Cable
         
         def create_migration_file
           if options.migration?
-           migration_template 'migration.rb', "db/migrate/create_#{model_name.pluralize}.rb"
+           migration_template 'migration.rb', "db/migrate/create_#{model_name.pluralize}.rb" if yes?("Would you like to generate a migration?")
          end
         end
         
         def create_model_file
           if options.model?
-           template 'model.rb' , "app/models/#{model_name}.rb"
+           template 'model.rb' , "app/models/#{model_name}.rb" if yes?("Would you like to generate a model?")
          end
         end
         
         def create_controller_file
           if options.controller?
-            template 'controller.rb', "app/controllers/admin/#{model_name.pluralize}_controller.rb"
+            template 'controller.rb', "app/controllers/admin/#{model_name.pluralize}_controller.rb" if yes?("Would you like to generate a controller?")
           end
         end
         
         def create_views
           if options.views?
-            Dir.glob(File.expand_path("../templates", __FILE__) + '/erb/menus/*.erb') do |rb_file|
-              template rb_file, "app/views/admin/#{plural_table_name}/#{File.basename(rb_file)}"
+            if yes?( "Would you like Cable to generate menu views?")
+              Dir.glob(File.expand_path("../templates", __FILE__) + '/erb/menus/*.erb') do |rb_file|
+                template rb_file, "app/views/admin/#{plural_table_name}/#{File.basename(rb_file)}"
+              end
+              copy_file 'erb/partials/_menu_fields.html.erb', 'app/views/admin/partials/_menu_fields.html.erb'
             end
-            copy_file 'erb/partials/_menu_fields.html.erb', 'app/views/admin/partials/_menu_fields.html.erb'
           end
         end
         
@@ -52,7 +54,7 @@ cable_to :#{plural_table_name} do |menu|
   end
 end
 EOF
-          route( route_string )
+          route( route_string ) if yes?("Would you like to generate routes?")
         
         end
         
