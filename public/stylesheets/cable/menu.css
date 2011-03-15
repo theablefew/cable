@@ -21,7 +21,6 @@ ul.cable_menu ul {
 	margin: 0;
 	width: 170px;
 	background:#fff;	
-	border-left:1px solid #eee;
 }
 .cable_menu_wrapper li.has-children {
 	width: 129px;
@@ -38,14 +37,32 @@ ul.cable_menu ul {
 	list-style: none;
 	display: block;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	background-color: white;
 	-webkit-border-radius: 3px;
 	margin-bottom: 3px;
 }
+.cable_menu_wrapper li span.menu-zoom{
+  display:inline-block;
+  width:12px;
+  height:12px;
+  margin-top:2px;
+	background: url(/images/cable/search.png) no-repeat right center;
+	visibility:hidden;
+	padding-right:6px;
+}
+.cable_menu_wrapper li:hover span.menu-zoom{
+  visibility:visible;
+}
+.cable_menu_wrapper li span.menu-title{
+  text-overflow: ellipsis;
+  width:110px;
+  overflow:hidden;
+  display:inline-block;
+}
+
 .cable_menu_wrapper li.selected.last,
 .cable_menu_wrapper li.selected.last.has-children{
-	background-color: #2494fc;
+  background-color: #2494fc;
 	color: white;
 }
 .cable_menu_wrapper .selected {
@@ -111,9 +128,6 @@ ul.cable_menu ul {
 }
 ul.cable_menu.empty{
   background:url(/images/cable/empty-menu.png);
-}
-#add-menu-form{
-  margin-top:1em;
 }
 #save-tree{
   margin-bottom:1em;

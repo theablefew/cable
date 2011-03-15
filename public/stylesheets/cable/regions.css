@@ -1,6 +1,5 @@
 /* @override http://localhost:3000/stylesheets/cable/regions.css */
 
-
 /* @group Headers */
 
 #header{ 
@@ -126,10 +125,15 @@
 	min-height: 400px;
 	-webkit-border-radius: 4px;	
 }
-#main h2{
+h2{
 	font-size: 1.5em;
 	display: block;
 	float: left;
+}
+h3{
+	font-size: 1.25em;
+	display: block;
+	
 }
 #help{
 	float: right;

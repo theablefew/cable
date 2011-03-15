@@ -24,10 +24,12 @@
     </div>
     <div id="main-wrapper">
       <div class="container">
+        
         <div id="right-col" class="span-4">
           <div id="secondary-navigation" class="box shadow"><%= render_navigation(:level => 2..5, :context => :admin) %></div>
           <%= yield :sidebar %>
         </div>
+        
         <div id="main" class="span-20 last">
           <div class="box shadow">
             <h2 id="title"><%= @page_title %></h2>
@@ -38,6 +40,7 @@
             <%= yield %>
           </div>
         </div>
+        
       </div>
     </div>
     <div class="footer">

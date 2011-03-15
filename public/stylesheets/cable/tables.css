@@ -1,30 +1,39 @@
 /* @override http://localhost:3000/stylesheets/cable/tables.css */
 table{
 	border-bottom: 2px solid #ccc;
+	margin-bottom: 1em;
 }
 thead th{
 	background: #eee;
 	border-bottom: 2px solid #ccc;	
-	font-weight:normal;
-	font-size:1.25em;
+	font-weight:bold;
+	font-size:1em;
+}
+tbody th{
+	background: #eee;
+	border-right: 2px solid #ccc;	
+	font-weight:bold;
+	font-size:1em;
 }
 
+
 table td{
-	border-bottom: 1px dashed #ccc;
 	border-right: 1px dashed #ccc;		
 }
 
 tbody tr:nth-child(even) td, 
 tbody tr.even td {
-	background:#eee;
+	background: #eee;
 }
-
+tbody tr:last td{
+	border-bottom:none;
+}
 th.actions,
 td.actions{
 	text-align: right;
 }
 td.actions{
-  padding-right:0px;
+	padding: 5px;
 }
 tbody tr td:first-child{
   border-left: none;
