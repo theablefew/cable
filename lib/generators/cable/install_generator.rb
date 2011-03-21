@@ -1,4 +1,6 @@
 require 'rails/generators/migration'
+require 'active_record'
+require 'rainbow'
 
 module Cable
   module Generators
@@ -40,7 +42,7 @@ module Cable
         
         def copy_simple_nav
           if options.simple_nav?
-            if yes?("Would you like to install simple navigation?") 
+            if yes?("Would you like to install simple navigation?".color(:yellow) ) 
               generate("navigation_config")
               copy_file 'config/admin_navigation.rb', 'config/admin_navigation.rb'
                 # copy_file 'config/navigation.rb', 'config/navigation.rb'
@@ -49,7 +51,7 @@ module Cable
         end
         
         def install_jquery
-          if yes?("Would you like to install jquery?")
+          if yes?("Would you like to install jquery?".color(:yellow))
             generate("jquery:install --ui")
           end
         end
@@ -68,7 +70,7 @@ module Cable
         
         def print_setup_instructions
           puts ""
-          puts "Run rake db:migrate to complete setup."
+          puts "Run rake db:migrate to complete setup.".color(:yellow)
           puts ""
           puts "To begin using Cable Menu and Pages use:"
           puts "rails generate cable:menu MENU_NAME"

@@ -6,3 +6,4 @@ gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set
 gem 'formtastic'
 gem 'simple-navigation'
 gem 'jquery-rails'
+gem 'rainbow'

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-03-15}
+  s.date = %q{2011-03-21}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -422,6 +422,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<formtastic>, [">= 0"])
       s.add_runtime_dependency(%q<simple-navigation>, [">= 0"])
       s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
+      s.add_runtime_dependency(%q<rainbow>, [">= 0"])
     else
       s.add_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_dependency(%q<orm_adapter>, [">= 0"])
@@ -429,6 +430,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<formtastic>, [">= 0"])
       s.add_dependency(%q<simple-navigation>, [">= 0"])
       s.add_dependency(%q<jquery-rails>, [">= 0"])
+      s.add_dependency(%q<rainbow>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 3.0.0"])
@@ -437,6 +439,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<formtastic>, [">= 0"])
     s.add_dependency(%q<simple-navigation>, [">= 0"])
     s.add_dependency(%q<jquery-rails>, [">= 0"])
+    s.add_dependency(%q<rainbow>, [">= 0"])
   end
 end
 

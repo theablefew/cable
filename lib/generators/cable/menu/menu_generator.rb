@@ -1,6 +1,9 @@
 require 'rails/generators'
 require 'rails/generators/migration'     
 require 'rails/generators/active_model'
+require 'active_record'
+require 'rainbow'
+
 module Cable
     module Generators
       class MenuGenerator < Rails::Generators::NamedBase
@@ -18,25 +21,25 @@ module Cable
         
         def create_migration_file
           if options.migration?
-           migration_template 'migration.rb', "db/migrate/create_#{model_name.pluralize}.rb" if yes?("Would you like to generate a migration?")
+           migration_template 'migration.rb', "db/migrate/create_#{model_name.pluralize}.rb" if yes?("Would you like to generate a migration?".color(:yellow))
          end
         end
         
         def create_model_file
           if options.model?
-           template 'model.rb' , "app/models/#{model_name}.rb" if yes?("Would you like to generate a model?")
+           template 'model.rb' , "app/models/#{model_name}.rb" if yes?("Would you like to generate a model?".color(:yellow))
          end
         end
         
         def create_controller_file
           if options.controller?
-            template 'controller.rb', "app/controllers/admin/#{model_name.pluralize}_controller.rb" if yes?("Would you like to generate a controller?")
+            template 'controller.rb', "app/controllers/admin/#{model_name.pluralize}_controller.rb" if yes?("Would you like to generate a controller?".color(:yellow))
           end
         end
         
         def create_views
           if options.views?
-            if yes?( "Would you like Cable to generate menu views?")
+            if yes?( "Would you like Cable to generate menu views?".color(:yellow))
               Dir.glob(File.expand_path("../templates", __FILE__) + '/erb/menus/*.erb') do |rb_file|
                 template rb_file, "app/views/admin/#{plural_table_name}/#{File.basename(rb_file)}"
               end
@@ -54,7 +57,7 @@ cable_to :#{plural_table_name} do |menu|
   end
 end
 EOF
-          route( route_string ) if yes?("Would you like to generate routes?")
+          route( route_string ) if yes?("Would you like to generate routes?".color(:yellow))
         
         end
         

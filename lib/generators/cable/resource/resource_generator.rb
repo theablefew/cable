@@ -1,7 +1,8 @@
 require 'rails/generators'
 require 'rails/generators/migration'
 require 'rails/generators/resource_helpers'
-
+require 'active_record'
+require 'rainbow'
 # require 'rails/generators/controller_generator'
 module Cable
     module Generators
@@ -22,22 +23,22 @@ module Cable
         class_option :orm,        :type => :string,  :default => "active_record"
  
         def create_migration_file
-           migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration? and yes?("Would you like to generate a migration?")
+           migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration? and yes?("Would you like to generate a migration?".color(:yellow))
         end       
         
         def create_model_file
-           template 'model.rb' , "app/models/#{model_name}.rb" if options.model? and yes?("Would you like to generate a model?")
+           template 'model.rb' , "app/models/#{model_name}.rb" if options.model? and yes?("Would you like to generate a model?".color(:yellow))
         end
         
         def create_controller_file
           if options.controller?
-            template 'controller.rb' , "app/controllers/admin/#{file_name.pluralize}_controller.rb" if yes?("Would you like to generate a controller?")
+            template 'controller.rb' , "app/controllers/admin/#{file_name.pluralize}_controller.rb" if yes?("Would you like to generate a controller?".color(:yellow))
           end
         end
         
         def create_scaffold
           if options.views?
-            if yes?("Would you like Cable to generate views for #{model_name.capitalize}?")
+            if yes?("Would you like Cable to generate views for #{model_name.capitalize}?".color(:yellow))
               template 'erb/scaffold/_form.html.erb', "app/views/admin/#{plural_table_name}/_#{singular_table_name}.html.erb"
               template 'erb/scaffold/index.html.erb', "app/views/admin/#{plural_table_name}/index.html.erb"
               template 'erb/scaffold/edit.html.erb', "app/views/admin/#{plural_table_name}/edit.html.erb"
@@ -48,7 +49,7 @@ module Cable
         end
         
         def install_route
-          route("cable_to :#{plural_table_name}") if options.routes? and yes?("Would you like to generate routes for #{model_name.capitalize}?")
+          route("cable_to :#{plural_table_name}") if options.routes? and yes?("Would you like to generate routes for #{model_name.capitalize}?".color(:yellow))
         end
         
         def self.next_migration_number(dirname)
