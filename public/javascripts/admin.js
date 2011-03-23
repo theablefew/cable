@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $('.sortable-table').tablesorter();
   $().ready(function() {
-    $('textarea.tinymce').tinymce({
+    $('textarea.richEditor').tinymce({
       script_url : '/javascripts/tinymce/tiny_mce.js',
       theme : "advanced",
       height : "400px",
