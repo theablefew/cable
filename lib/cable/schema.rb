@@ -15,6 +15,7 @@ module Cable
     
     def nameable
       apply_cable_schema :first_name, String
+      apply_cable_schema :middle_name, String
       apply_cable_schema :last_name, String
     end
     
