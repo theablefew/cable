@@ -22,6 +22,7 @@ form.formtastic fieldset.buttons li {
 	padding-right:0.5em;
 
 }
+form.formtastic fieldset > ol > li fieldset ol { float:left; width:74%; margin:0; padding: .25em 10px .25em 100px; }
 form.formtastic fieldset > ol > li label { 
   display:block; 
   width: 90px; 
@@ -60,4 +61,6 @@ form.formtastic fieldset > ol > li.url input{
 }
 form.formtastic fieldset > ol > li { margin-bottom: .5em; 	border-bottom: 1px dotted #00; }
 form.formtastic input, form.formtastic textarea, form.formtastic select { font-size:100%;
-max-width: 300px;}
+max-width: 60%;}
+form.formtastic textarea{ font-size:100%;
+max-width: 60%; padding:.5em;}

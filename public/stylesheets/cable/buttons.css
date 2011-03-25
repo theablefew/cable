@@ -6,8 +6,7 @@
 .formtastic input[type=button],
 .formtastic input[type=submit],
 .actions a,
-.user-session a,
-form.formtastic input, form.formtastic textarea, form.formtastic select {
+.user-session a{
   display:inline-block;
   font-size: 14px;
   color: #ffffff;
