@@ -1,13 +1,13 @@
+<%%= paginate  @<%= plural_table_name %>, :window => 1 %>
 <table>
   <thead>
     <tr>
-      <th>Page</th>
+      <th><%= singular_table_name.capitalize %></th>
       <th>Template</th>
       <th class="actions">Actions</th>
     </tr>
   </thead>
   <tbody>
-    
     <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
           <tr>
             <td><strong><%%= link_to <%= singular_table_name %>.title, [:admin, <%= singular_table_name %>], :target => "_blank" %></strong></td>
@@ -55,3 +55,4 @@
     <%% end %>
   </tbody>
 </table>
+<%%= paginate  @<%= plural_table_name %>, :window => 1 %>
