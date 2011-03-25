@@ -2,7 +2,6 @@
   <thead>
     <tr>
       <th>Page</th>
-      <th>Template</th>
       <th class="actions">Actions</th>
     </tr>
   </thead>
@@ -12,46 +11,7 @@
           <tr>
             <td><strong><%%= link_to <%= singular_table_name %>.title, [:admin, <%= singular_table_name %>], :target => "_blank" %></strong></td>
             <td style="text-align:right;"><%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(<%= singular_table_name %>) %> <%%= link_to 'Destroy', [:admin, <%= singular_table_name %>], :confirm => 'Are you sure?', :method => :delete %></td>
-          </tr>
-          <%% unless <%= singular_table_name %>.menu.blank? %>
-          <tr>
-            <td><strong>Template:</strong>
-            <td><%%= <%= singular_table_name %>.menu.template.titleize unless <%= singular_table_name %>.menu.blank? %></td>
-          </tr>
-        <%% end %>
-    
-        <%% if <%= singular_table_name %>.respond_to?(:blocks) %>
-          <tr>
-            <td colspan=1>
-              <strong>Blocks:</strong>
-            </td>      
-            <td>
-              <%% unless <%= singular_table_name %>.blocks.empty? %>
-                <%%= <%= singular_table_name %>.blocks.each do |block| %>
-                  <strong><%%= link_to block.title, [:admin, block] %></strong> => <%%= block.region.titleize %><br />
-                  <%% end %>
-              <%% end %>
-            </td>
-          </tr>
-        <%% end %>
-    
-        <%% if <%= singular_table_name %>.respond_to?(:teaser) %>
-          <tr>
-            <td><strong>Teaser:</strong></td>
-            <td><%%= <%= singular_table_name %>.teaser unless <%= singular_table_name %>.teaser.blank? %></td>
-          </tr>
-        <%% end %>
-    
-        <%% unless <%= singular_table_name %>.menu.blank? %>
-          <tr>
-            <td style="border-bottom:2px solid #333;">
-              <strong>URL:</strong>
-            </td>
-            <td style="border-bottom:2px solid #333;">
-              <%%= <%= singular_table_name %>.menu.url unless <%= singular_table_name %>.menu.blank? %></td>
-            </td>
-          </tr>
-        <%% end %>
+          </tr>    
     <%% end %>
   </tbody>
 </table>
