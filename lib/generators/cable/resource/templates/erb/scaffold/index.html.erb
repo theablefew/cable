@@ -9,15 +9,7 @@
   </thead>
   <tbody>
     <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-          <tr id="<%%= dom_id(<%= singular_table_name %>) %>">
-            <!-- TODO This should loop through the attributes instead of depending on title. id, updated_at and created_at could be skipped. -->
-            <th><%%= link_to <%= singular_table_name %>.title, [:admin, <%= singular_table_name %>], :target => "_blank" %></th>
-            <td class="updated_at"><%%= <%= singular_table_name %>.updated_at %></td>
-            <td class="actions">
-              <%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(<%= singular_table_name %>) %>
-              <%%= link_to 'Destroy', [:admin, <%= singular_table_name %>], :confirm => 'Are you sure?', :method => :delete %>
-            </td>
-          </tr>    
+      <%%= render :partial => '<%= singular_table_name %>_row', :locals => {:<%= singular_table_name %> => <%= singular_table_name %>} %>
     <%% end %>
   </tbody>
 </table>

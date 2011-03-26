@@ -39,11 +39,12 @@ module Cable
         def create_scaffold
           if options.views?
             if yes?("Would you like Cable to generate views for #{model_name.capitalize}?".color(:yellow))
-              template 'erb/scaffold/_form.html.erb', "app/views/admin/#{plural_table_name}/_#{singular_table_name}.html.erb"
-              template 'erb/scaffold/index.html.erb', "app/views/admin/#{plural_table_name}/index.html.erb"
-              template 'erb/scaffold/edit.html.erb', "app/views/admin/#{plural_table_name}/edit.html.erb"
-              template 'erb/scaffold/new.html.erb', "app/views/admin/#{plural_table_name}/new.html.erb"
-              template 'erb/scaffold/show.html.erb', "app/views/admin/#{plural_table_name}/show.html.erb"
+              template 'erb/scaffold/_form.html.erb',       "app/views/admin/#{plural_table_name}/_#{singular_table_name}.html.erb"
+              template 'erb/scaffold/index.html.erb',       "app/views/admin/#{plural_table_name}/index.html.erb"
+              template 'erb/scaffold/edit.html.erb',        "app/views/admin/#{plural_table_name}/edit.html.erb"
+              template 'erb/scaffold/new.html.erb',         "app/views/admin/#{plural_table_name}/new.html.erb"
+              template 'erb/scaffold/show.html.erb',        "app/views/admin/#{plural_table_name}/show.html.erb"
+              template 'erb/scaffold/_model_row.html.erb',  "app/views/admin/#{plural_table_name}/_#{singular_table_name}_row.html.erb"
             end
           end
         end
