@@ -17,7 +17,7 @@ class Admin::<%= class_name.pluralize %>Controller < AdminController
   # GET <%= route_url %>/new.xml
   def new
     @<%= singular_table_name %> = <%= orm_class.build(class_name) %>
-    respond_with( :admin , @<%= singular_table_name %> )
+    respond_with(:admin , @<%= singular_table_name %>)
   end
 
   # GET <%= route_url %>/1/edit
