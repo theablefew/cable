@@ -9,10 +9,11 @@
   <tbody>
     <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
           <tr>
+            <!-- TODO This should loop through the attributes instead of depending on title. id, updated_at and created_at could be skipped. -->
             <td><strong><%%= link_to <%= singular_table_name %>.title, [:admin, <%= singular_table_name %>], :target => "_blank" %></strong></td>
             <td style="text-align:right;"><%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(<%= singular_table_name %>) %> <%%= link_to 'Destroy', [:admin, <%= singular_table_name %>], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>    
     <%% end %>
   </tbody>
 </table>
-<%%= paginate  @<%= plural_table_name %>, :window => 1 %>
+<%%= paginate @<%= plural_table_name %>, :window => 1 %>
