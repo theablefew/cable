@@ -1,6 +1,6 @@
 /* @override http://localhost:3000/stylesheets/cable/formtastic_changes.css */
 
-form.formtastic legend { 
+/*form.formtastic legend { 
   white-space:normal;
   color:#333; 
   font-weight: normal;
@@ -14,12 +14,12 @@ margin-bottom: 1em;
 padding: 1em;
 }
 form.formtastic fieldset.buttons{
-	padding-left: 100px;
-	margin-bottom: 0;
+  padding-left: 100px;
+  margin-bottom: 0;
 }
 form.formtastic fieldset.buttons li { 
-	float:left; 
-	padding-right:0.5em;
+  float:left; 
+  padding-right:0.5em;
 
 }
 form.formtastic fieldset > ol > li fieldset ol { float:left; width:74%; margin:0; padding: .25em 10px .25em 100px; }
@@ -30,20 +30,20 @@ form.formtastic fieldset > ol > li label {
   padding-top:.2em; 
   font-weight: bold;
   color: #222;
-	margin-right: 10px;
+  margin-right: 10px;
 }
 form.formtastic fieldset > ol > li.boolean label { 
-	padding-left:100px; 
-	width:auto; 
+  padding-left:100px; 
+  width:auto; 
 }
 form.formtastic fieldset > ol > li p.inline-hints { 
-	color:#000; 
-	margin: 0.5em 0 0 100px;
-	border-radius:          4px;
+  color:#000; 
+  margin: 0.5em 0 0 100px;
+  border-radius:          4px;
     -moz-border-radius:     4px;
     -webkit-border-radius:  4px;
     clear: both;
-	padding: .25em 10px .25em 0;
+  padding: .25em 10px .25em 0;
 }
 
 
@@ -52,15 +52,15 @@ form.formtastic fieldset > ol > li.string input,
 form.formtastic fieldset > ol > li.password input,
 form.formtastic fieldset > ol > li.numeric input,
 form.formtastic fieldset > ol > li.url input{
-	padding: .5em;
-	font-size: 14px;
-	min-width: 60%;
-	 -moz-box-shadow: 0px 0px 4px #ccc inset;
+  padding: .5em;
+  font-size: 14px;
+  min-width: 60%;
+   -moz-box-shadow: 0px 0px 4px #ccc inset;
   -webkit-box-shadow: 0px 0px 4px #ccc inset;
           box-shadow: 0px 0px 4px #ccc inset;
 }
-form.formtastic fieldset > ol > li { margin-bottom: .5em; 	border-bottom: 1px dotted #00; }
+form.formtastic fieldset > ol > li { margin-bottom: .5em;   border-bottom: 1px dotted #00; }
 form.formtastic input, form.formtastic textarea, form.formtastic select { font-size:100%;
 max-width: 60%;}
 form.formtastic textarea{ font-size:100%;
-max-width: 60%; padding:.5em;}
+max-width: 60%; padding:.5em;}*/

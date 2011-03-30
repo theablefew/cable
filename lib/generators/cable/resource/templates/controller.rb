@@ -3,7 +3,7 @@ class Admin::<%= class_name.pluralize %>Controller < AdminController
   respond_to :html, :xml, :json
   
   def index
-    respond_with(:admin, @<%= plural_table_name %> = <%= class_name %>.page( params[:page]) )
+    respond_with(:admin, @<%= plural_table_name %> = <%= class_name %>.order("updated_at DESC").page(params[:page]))
   end
 
   # GET <%= route_url %>/1
@@ -17,7 +17,7 @@ class Admin::<%= class_name.pluralize %>Controller < AdminController
   # GET <%= route_url %>/new.xml
   def new
     @<%= singular_table_name %> = <%= orm_class.build(class_name) %>
-    respond_with( :admin , @<%= singular_table_name %> )
+    respond_with(:admin , @<%= singular_table_name %>)
   end
 
   # GET <%= route_url %>/1/edit
