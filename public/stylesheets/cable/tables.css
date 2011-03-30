@@ -14,6 +14,7 @@ tbody th{
 	border-right: 2px solid #ccc;	
 	font-weight:bold;
 	font-size:1em;
+	width:150px;
 }
 
 
@@ -31,6 +32,7 @@ tbody tr:last td{
 th.actions,
 td.actions{
 	text-align: right;
+	width:110px;
 }
 td.actions{
 	padding: 5px;
