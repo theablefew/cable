@@ -408,10 +408,11 @@ Gem::Specification.new do |s|
     "public/stylesheets/jquery/ui/images/slider_handles.png",
     "public/stylesheets/jquery/ui/images/ui-icons_222222_256x240.png",
     "public/stylesheets/jquery/ui/images/ui-icons_454545_256x240.png",
-    "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css"
+    "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css",
+    "public/stylesheets/tinymce/custom_rich_editor.css"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.rubygems_version = %q{1.5.2}
   s.summary = %q{Cable Admin Engine for Rails 3}
 
   if s.respond_to? :specification_version then
