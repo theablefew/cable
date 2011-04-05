@@ -62,6 +62,7 @@ module Cable
         
         def install_admin
           copy_file "app/views/layouts/admin.html.erb", 'app/views/layouts/admin.html.erb'
+          directory "public/stylesheets/tinymce", "public/stylesheets/tinymce"
         end
         
         def install_routes

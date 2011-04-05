@@ -14,7 +14,7 @@ $(document).ready(function(){
     theme_advanced_resize_horizontal : false,
     pdw_toggle_on : 1,
     pdw_toggle_toolbars : "2,3",
-    content_css : "/stylesheets/admin/custom_rich_editor.css"
+    content_css : "/stylesheets/tinymce/custom_rich_editor.css"
   });
 
   $('.disabled-button').button({disabled: true});
