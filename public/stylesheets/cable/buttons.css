@@ -1,3 +1,5 @@
+/* @override http://localhost:3000/stylesheets/cable/buttons.css */
+
 .pagination .current,
 .pagination em,
 .pagination a,
@@ -6,6 +8,8 @@
 .formtastic input[type=button],
 .formtastic input[type=submit],
 .actions a,
+a.add_fields,
+a.remove_fields,
 .user-session a{
   display:inline-block;
   font-size: 14px;
@@ -22,6 +26,7 @@
   text-shadow: 0px -1px 0px rgba(000,000,000,0.4), 0px 1px 0px rgba(255,255,255,0.3);
 	padding: 4px 6px;
 }
+
 .formtastic input[type=file]{
 	background: white;
 	color: black;
@@ -38,11 +43,14 @@
 .pagination a:hover,
 .previous_page:hover,
 .actions a:hover,
+a.remove_fields:hover,
+a.add_fields:hover,
 .user-session a:hover{
   background:#333;
   text-decoration:none;
   cursor:pointer;
 }
+
 .formtastic input[type=button]:hover,
 .formtastic input[type=submit]:hover{
   background:#333;
