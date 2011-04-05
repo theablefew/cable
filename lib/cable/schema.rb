@@ -43,7 +43,7 @@ module Cable
       apply_cable_schema :show_on_landing_page, :boolean
       apply_cable_schema :template, String
       apply_cable_schema :tree_id, Integer
-      apply_cable_schema :options, Text
+      apply_cable_schema :options, :text
     end
    # @note Overwrite with specific modification to create your own schema.
     def apply_cable_schema(name, type, options={})
