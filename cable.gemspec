@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.6"
+  s.version = "0.9.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-03-25}
+  s.date = %q{2011-04-04}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -78,8 +78,10 @@ Gem::Specification.new do |s|
     "lib/generators/cable/resource/resource_generator.rb",
     "lib/generators/cable/resource/templates/controller.rb",
     "lib/generators/cable/resource/templates/erb/scaffold/_form.html.erb",
+    "lib/generators/cable/resource/templates/erb/scaffold/_model_row.html.erb",
     "lib/generators/cable/resource/templates/erb/scaffold/edit.html.erb",
     "lib/generators/cable/resource/templates/erb/scaffold/index.html.erb",
+    "lib/generators/cable/resource/templates/erb/scaffold/index.js.erb",
     "lib/generators/cable/resource/templates/erb/scaffold/new.html.erb",
     "lib/generators/cable/resource/templates/erb/scaffold/show.html.erb",
     "lib/generators/cable/resource/templates/migration.rb",
@@ -409,7 +411,7 @@ Gem::Specification.new do |s|
     "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{Cable Admin Engine for Rails 3}
 
   if s.respond_to? :specification_version then
