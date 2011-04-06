@@ -10,8 +10,8 @@ thead th{
 	font-size:1em;
 }
 tbody th{
-	background: #eee;
-	border-right: 2px solid #ccc;	
+	background: #ccc;
+    border-right: 1px solid #BBB;
 	font-weight:bold;
 	font-size:1em;
 	width:150px;
