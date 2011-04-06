@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.6"
+  s.version = "0.9.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-03-25}
+  s.date = %q{2011-04-05}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -78,8 +78,10 @@ Gem::Specification.new do |s|
     "lib/generators/cable/resource/resource_generator.rb",
     "lib/generators/cable/resource/templates/controller.rb",
     "lib/generators/cable/resource/templates/erb/scaffold/_form.html.erb",
+    "lib/generators/cable/resource/templates/erb/scaffold/_model_row.html.erb",
     "lib/generators/cable/resource/templates/erb/scaffold/edit.html.erb",
     "lib/generators/cable/resource/templates/erb/scaffold/index.html.erb",
+    "lib/generators/cable/resource/templates/erb/scaffold/index.js.erb",
     "lib/generators/cable/resource/templates/erb/scaffold/new.html.erb",
     "lib/generators/cable/resource/templates/erb/scaffold/show.html.erb",
     "lib/generators/cable/resource/templates/migration.rb",
@@ -406,7 +408,8 @@ Gem::Specification.new do |s|
     "public/stylesheets/jquery/ui/images/slider_handles.png",
     "public/stylesheets/jquery/ui/images/ui-icons_222222_256x240.png",
     "public/stylesheets/jquery/ui/images/ui-icons_454545_256x240.png",
-    "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css"
+    "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css",
+    "public/stylesheets/tinymce/custom_rich_editor.css"
   ]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.5.2}
@@ -424,6 +427,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
       s.add_runtime_dependency(%q<rainbow>, [">= 0"])
       s.add_runtime_dependency(%q<kaminari>, [">= 0"])
+      s.add_runtime_dependency(%q<cocoon>, [">= 0"])
     else
       s.add_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_dependency(%q<orm_adapter>, [">= 0"])
@@ -433,6 +437,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jquery-rails>, [">= 0"])
       s.add_dependency(%q<rainbow>, [">= 0"])
       s.add_dependency(%q<kaminari>, [">= 0"])
+      s.add_dependency(%q<cocoon>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 3.0.0"])
@@ -443,6 +448,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jquery-rails>, [">= 0"])
     s.add_dependency(%q<rainbow>, [">= 0"])
     s.add_dependency(%q<kaminari>, [">= 0"])
+    s.add_dependency(%q<cocoon>, [">= 0"])
   end
 end
 

@@ -62,6 +62,13 @@ module Cable
      rsrc.flatten
   end
   
+  def self.resource_types
+    rsrc = Cable.resources.collect do |r|
+      r.classify.constantize if Cable.class_exists?( r )
+    end
+    rsrc.flatten
+  end
+  
   def self.class_exists?(class_name)
     klass = Module.const_get(class_name)
     return klass.is_a?(Class)

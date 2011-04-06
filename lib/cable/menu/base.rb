@@ -14,6 +14,8 @@ class Cable::Menu::Base < ActiveRecord::Base
     scope :footer_nav, :conditions => {:title => "Footer Navigation"}
   
     validates_presence_of :title
+    
+    serialize :options
   
     include Cable::Menu::SimpleNavigationMethods
     include Cable::Menu::UrlHelper  

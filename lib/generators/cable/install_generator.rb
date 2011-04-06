@@ -51,7 +51,7 @@ module Cable
         end
         
         def install_jquery
-          if yes?("Would you like to install jquery?".color(:yellow))
+          if yes?("Dost thou require jquery?".color(:yellow))
             generate("jquery:install --ui")
           end
         end
@@ -62,6 +62,12 @@ module Cable
         
         def install_admin
           copy_file "app/views/layouts/admin.html.erb", 'app/views/layouts/admin.html.erb'
+          directory "public/stylesheets/tinymce", "public/stylesheets/tinymce"
+        end
+        
+        def install_cocoon
+            generate('cocoon:install')
+            insert_into_file 'app/views/layouts/admin.html.erb', '<%= javascript_include_tag :cocoon %>\n', :before => '<%= yield :scripts %>'
         end
         
         def install_routes
