@@ -9,6 +9,10 @@
 	background:#ffffff; width:100%;-webkit-box-shadow:none;text-shadow:none; color:#000;
 }
 
+#search_submit{
+display: none;
+float: left;
+}
 .inline-search #search_submit {
 	font-size: .75em !important;
 }

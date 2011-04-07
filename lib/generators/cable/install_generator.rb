@@ -67,7 +67,7 @@ module Cable
         
         def install_cocoon
             generate('cocoon:install')
-            insert_into_file 'app/views/layouts/admin.html.erb', '<%= javascript_include_tag :cocoon %>\n', :before => '<%= yield :scripts %>'
+            insert_into_file 'app/views/layouts/admin.html.erb', "<%= javascript_include_tag :cocoon %>\n", :before => '<%= yield :scripts %>'
         end
         
         def install_routes
