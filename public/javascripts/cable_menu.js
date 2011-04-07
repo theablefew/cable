@@ -36,6 +36,7 @@
   };
   
   function save_tree(){
+    
     $(".cable_menu_wrapper li").each(function() {
       $li = $(this);      
       $ul = $("ul[menu="+$li.attr("menu")+"]");
@@ -48,7 +49,10 @@
     $('.cable_menu_wrapper > ul').removeAttr("id");
     
     var the_menu = $('.cable_menu_wrapper > ul').serialize_list();
-    $.post("/admin/menus/sort", the_menu);
+    $('.cable_menu_wrapper').html("Saving ...");
+    $.post("/admin/menus/sort", the_menu, function(){
+      location.reload(true);
+    });
   }
   
   function show_add_menu(item){

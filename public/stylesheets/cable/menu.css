@@ -1,5 +1,7 @@
 /* @override http://localhost:3000/stylesheets/cable/menu.css */
 
+/* @override http://localhost:3000/stylesheets/cable/menu.css */
+
 .cable_menu_wrapper {
 	position: relative;
 	height: 360px;
@@ -26,12 +28,17 @@ ul.cable_menu ul {
 	width: 129px;
 	padding: 4px 20px 4px 4px;
 }
+#types li:hover,
 .cable_menu_wrapper li:hover{
 	background-color: #f4f4f4;
 	cursor: pointer;
 }
-.cable_menu_wrapper li {
+.cable_menu_wrapper li{
 	width: 145px;
+}
+
+#types li,
+.cable_menu_wrapper li {
 	padding: 4px 4px 4px 4px;
 	white-space: nowrap;
 	list-style: none;
@@ -61,7 +68,8 @@ ul.cable_menu ul {
 }
 
 .cable_menu_wrapper li.selected.last,
-.cable_menu_wrapper li.selected.last.has-children{
+.cable_menu_wrapper li.selected.last.has-children, 
+#types li.selected{
   background-color: #2494fc;
 	color: white;
 }
@@ -106,6 +114,7 @@ ul.cable_menu ul {
 	width: 8px;
 }
 
+
 ::-webkit-scrollbar-track-piece {
 	margin-bottom: 10px;
 	border-bottom-left-radius: 4px 4px;
@@ -132,3 +141,32 @@ ul.cable_menu.empty{
 #save-tree{
   margin-bottom:1em;
 }
+
+
+
+
+
+
+
+
+
+
+
+/*#types {
+	vertical-align: top;
+	width: 200px;
+	padding: 0;
+}*/
+#types li{
+	display: block;
+	font-size: 1.25em;
+	padding: .25em;
+	border: 1px solid white;
+}
+
+#resources-table tbody {
+	height:300px;
+	display: block;
+    overflow:auto;
+}
+
