@@ -39,6 +39,11 @@ module Cable
         def create_scaffold
           if options.views?
             if yes?("Would you like Cable to generate views for #{model_name.capitalize}?".color(:yellow))
+              if attributes.empty? and yes?("\tWould you like to use existing attributes?".color(:green))
+                self.attributes = model_name.classify.constantize.columns_hash.delete_if{|x| ["id", "created_at", "updated_at"].include? x }.collect{|c| [c.first,c.second.type]}.collect do |attri|
+                  Rails::Generators::GeneratedAttribute.new( attri.first, attri.second )
+                end
+              end
               template 'erb/scaffold/_form.html.erb',       "app/views/admin/#{plural_table_name}/_#{singular_table_name}.html.erb"
               template 'erb/scaffold/index.html.erb',       "app/views/admin/#{plural_table_name}/index.html.erb"
               template 'erb/scaffold/edit.html.erb',        "app/views/admin/#{plural_table_name}/edit.html.erb"

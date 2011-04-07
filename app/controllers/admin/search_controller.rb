@@ -7,7 +7,7 @@ class Admin::SearchController < AdminController
     @results =  ThinkingSphinx.search params[:term], :match_mode => :extended, :star => true
     respond_to do |format|
       format.json { render request.format.to_sym => to_json_for_autocomplete( @results) }
-      format.html
+      format.html { redirect_to url_for([:admin, @results.first]) if @results.length == 1 }
     end
   end
   
