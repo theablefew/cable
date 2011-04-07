@@ -18,6 +18,8 @@ module Cable
   
   module Errors
     autoload :ResourceAssociationError, "cable/errors/resource_association_error"
+    autoload :SearchError, 'cable/errors/search_error'
+    autoload :MissingInterfaceMethod, 'cable/errors/search_error'
   end
   
   module Menu

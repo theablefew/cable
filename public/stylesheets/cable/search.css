@@ -6,19 +6,7 @@
 }
 
 #search_term {
-	font-size: 1em;
 	background:#ffffff; width:100%;-webkit-box-shadow:none;text-shadow:none; color:#000;
-}
-
-#search_term_input {
-	margin: 0 1em 0 0;
-	width: 200px;
-}
-
-#search_term_input label {
-	float: left;
-	display: block;
-	width: 70px;
 }
 
 .inline-search #search_submit {
@@ -44,3 +32,8 @@
 	float: left;
 	width: 260px;
 }
+.formtastic.search li { list-style-type:none;}
+
+input#global_search{ font-size: 1.3em; color:#888; width:250px; height:20px; padding:2px; margin-top:5px; margin-bottom:5px;}
+div.search label {font-weight:bold}
+.search_type {display:block; float:right; color:#888; font-size:x-small;} 

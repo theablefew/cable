@@ -27,11 +27,13 @@
         
         
         <% if @admin_layout == "single" %>
+          
+         <%= render :partial => "layouts/search" %>
+        
           <div id="main" class="span-24">
             <div class="box shadow">
               <h2 id="title"><%= @page_title %></h2>
               <div id="help"><%= yield :help %><a class="button">Help</a></div>
-              <%= render :partial => 'layouts/breadcrumb' %>
               <%= yield :page_menu %>
               <%= render :partial => 'layouts/messages' %>
               <%= yield %>
@@ -43,8 +45,12 @@
           <%= yield :sidebar %>
         </div>
         
+        <div class='span-11'><%= render :partial => 'layouts/breadcrumb' %></div>
+        <%= render :partial => "layouts/search" %>
+
         <div id="main" class="span-20 last">
           <div class="box shadow">
+            
             <h2 id="title"><%= @page_title %></h2>
             <div id="help"><%= yield :help %><a class="button">Help</a></div>
             <%= render :partial => 'layouts/breadcrumb' %>
