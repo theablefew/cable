@@ -5,7 +5,7 @@ module AdminHelper
   end
   
   def single_column?
-    !content_for?(:sidebar) and render_navigation(:level => 2..5, :context => :admin).nil?
+    !content_for?(:sidebar) and !content_for?(:admin_sub_navigation)
   end
   
 end
