@@ -28,38 +28,10 @@
               <%= render_navigation(:level => 2..5, :context => :admin) %>
           <% end %>
         
-        <% if @admin_layout == "single" %>
-          <div class="prepend-15">
-             <%= render :partial => "layouts/search" %>
-            </div>
-          <div id="main" class="span-24">
-            <div class="box shadow">
-              <h2 id="title"><%= @page_title %></h2>
-              <div id="help"><%= yield :help %><a class="button">Help</a></div>
-              <%= yield :page_menu %>
-              <%= render :partial => 'layouts/messages' %>
-              <%= yield %>
-            </div>
-          </div>        
+        <% if single_column? %>
+          <%= render :partial => "layouts/admin/single_column_layout" %>
         <% else %>
-        <div id="right-col" class="span-4">
-          <div id="secondary-navigation" class="box shadow"><%= yield :admin_sub_navigation %></div>
-          <%= yield :sidebar %>
-        </div>
-        
-        <div class='span-11'><%= render :partial => 'layouts/breadcrumb' %></div>
-        <%= render :partial => "layouts/search" %>
-
-        <div id="main" class="span-20 last">
-          <div class="box shadow">
-            
-            <h2 id="title"><%= @page_title %></h2>
-            <div id="help"><%= yield :help %><a class="button">Help</a></div>
-            <%= yield :page_menu %>
-            <%= render :partial => 'layouts/messages' %>
-            <%= yield %>
-          </div>
-        </div>
+            <%= render :partial => "layouts/admin/dual_column_layout" %>
         <% end %>
       </div>
     </div>
