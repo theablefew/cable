@@ -1,0 +1,14 @@
+<% @page_title = "Search Results"%>
+<table>
+    <thead>
+        <tr>
+            <th>Result</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @results.each do |result| %>
+            <%= render :partial => "/admin/#{result.class.name.tableize}/search", :locals => {:result => result}%>
+        <% end %>
+    </tbody>
+</table>

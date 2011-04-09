@@ -11,7 +11,7 @@
     <%= stylesheet_link_tag 'cable/formtastic' %>
     <%= stylesheet_link_tag 'cable/formtastic_changes' %>
     <%= stylesheet_link_tag 'jquery/ui/jquery-ui-1.8.7.custom.css' %>
-    <%= javascript_include_tag 'jquery' , 'jquery-ui', 'rails','tinymce/jquery.tinymce.js', 'jquery.tablesorter.min.js', 'admin.js' %>
+    <%= javascript_include_tag 'jquery' , 'jquery-ui', 'rails','tinymce/jquery.tinymce.js', 'jquery.tablesorter.min.js',  'jquery.ui.autocomplete.html.js', 'admin.js' %>
     <%= yield :scripts %>
   </head>
   <body>
@@ -27,11 +27,13 @@
         
         
         <% if @admin_layout == "single" %>
+          <div class="prepend-15">
+             <%= render :partial => "layouts/search" %>
+            </div>
           <div id="main" class="span-24">
             <div class="box shadow">
               <h2 id="title"><%= @page_title %></h2>
               <div id="help"><%= yield :help %><a class="button">Help</a></div>
-              <%= render :partial => 'layouts/breadcrumb' %>
               <%= yield :page_menu %>
               <%= render :partial => 'layouts/messages' %>
               <%= yield %>
@@ -43,11 +45,14 @@
           <%= yield :sidebar %>
         </div>
         
+        <div class='span-11'><%= render :partial => 'layouts/breadcrumb' %></div>
+        <%= render :partial => "layouts/search" %>
+
         <div id="main" class="span-20 last">
           <div class="box shadow">
+            
             <h2 id="title"><%= @page_title %></h2>
             <div id="help"><%= yield :help %><a class="button">Help</a></div>
-            <%= render :partial => 'layouts/breadcrumb' %>
             <%= yield :page_menu %>
             <%= render :partial => 'layouts/messages' %>
             <%= yield %>

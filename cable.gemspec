@@ -5,20 +5,22 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.8"
+  s.version = "0.9.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-04-05}
+  s.date = %q{2011-04-07}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
+    "app/controllers/admin/search_controller.rb",
     "app/controllers/admin_controller.rb",
     "app/controllers/attachable_assets_controller.rb",
     "app/controllers/attachable_documents_controller.rb",
     "app/controllers/attachable_images_controller.rb",
     "app/controllers/cable/cable_admin_controller.rb",
     "app/helpers/admin/menus_helper.rb",
+    "app/helpers/admin/search_controller_helper.rb",
     "app/helpers/admin_helper.rb",
     "app/models/attachable_asset.rb",
     "app/models/attachable_document.rb",
@@ -28,11 +30,14 @@ Gem::Specification.new do |s|
     "app/views/admin/cable_settings/edit.html.erb",
     "app/views/admin/cable_settings/index.html.erb",
     "app/views/admin/index.html.erb",
+    "app/views/admin/search/index.html.erb",
+    "app/views/admin/search/index.json.erb",
     "app/views/attachable_assets/index.html.erb",
     "app/views/attachable_assets/new.html.erb",
     "app/views/attachable_assets/show.html.erb",
     "app/views/layouts/_breadcrumb.html.erb",
     "app/views/layouts/_messages.html.erb",
+    "app/views/layouts/_search.html.erb",
     "app/views/layouts/admin.html.erb",
     "config/admin_navigation.rb",
     "config/navigation.rb",
@@ -45,6 +50,7 @@ Gem::Specification.new do |s|
     "lib/cable/controllers/cable_controller_helpers.rb",
     "lib/cable/engine.rb",
     "lib/cable/errors/resource_association_error.rb",
+    "lib/cable/errors/search_error.rb",
     "lib/cable/media/acts_as_attachable.rb",
     "lib/cable/media/asset.rb",
     "lib/cable/menu.rb",
@@ -112,6 +118,7 @@ Gem::Specification.new do |s|
     "public/javascripts/cable_menu.js",
     "public/javascripts/jquery.tablesorter.min.js",
     "public/javascripts/jquery.tagsinput.js",
+    "public/javascripts/jquery.ui.autocomplete.html.js",
     "public/javascripts/tinymce/jquery.tinymce.js",
     "public/javascripts/tinymce/langs/en.js",
     "public/javascripts/tinymce/license.txt",

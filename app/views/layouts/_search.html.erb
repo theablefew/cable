@@ -1,0 +1,30 @@
+ <script>
+     $(document).ready(function() {
+         $("input#global_search").autocomplete({
+             minLength: 3,
+             delay: 600,
+             html: true,
+             source: function(request, response) {
+                     $.ajax({
+                         url: '<%= admin_search_index_path %>',
+                         dataType: "json",
+                         data: {term: request.term},
+                         success: function( data ) {
+                             response( data );
+                         }
+                     });
+                 }
+         });
+     })
+ </script>
+
+<div class="span-9 last search">
+    <div class="box shadow">
+        <div>
+          <%= semantic_form_for 'search', :url => admin_search_index_path, :html => {:method => :get} do |f| %>
+              <%= f.input :term, :input_html => {:id => "global_search", :name => "term"} , :label => "Search: ", :required => false %>
+              <%= f.commit_button "search" %>
+          <% end %>
+        </div>
+    </div>
+</div>

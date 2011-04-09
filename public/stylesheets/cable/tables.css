@@ -4,14 +4,13 @@ table{
 	margin-bottom: 1em;
 }
 thead th{
-	background: #eee;
-	border-bottom: 2px solid #ccc;	
+	background: #ccc;
+	border-bottom: 1px solid #bbb;	
 	font-weight:bold;
 	font-size:1em;
 }
 tbody th{
-	background: #eee;
-	border-right: 2px solid #ccc;	
+    background: #eee !important; border-right: 1px solid #BBB; border-bottom:1px solid #ddd;	
 	font-weight:bold;
 	font-size:1em;
 	width:150px;
