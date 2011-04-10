@@ -62,6 +62,7 @@ module Cable
         
         def install_admin
           copy_file "app/views/layouts/admin.html.erb", 'app/views/layouts/admin.html.erb'
+          directory 'app/views/layouts/admin', 'app/views/layouts/admin'
           directory "public/stylesheets/tinymce", "public/stylesheets/tinymce"
         end
         
@@ -78,9 +79,9 @@ module Cable
           puts ""
           puts "Run rake db:migrate to complete setup.".color(:yellow)
           puts ""
-          puts "To begin using Cable Menu and Pages use:"
+          puts "To begin using Cable Menu and Resources use:".color(:green)
           puts "rails generate cable:menu MENU_NAME"
-          puts "rails generate cable:resource PAGE_NAME field:type field:type ..."
+          puts "rails generate cable:resource RESOURCE_NAME field:type field:type ..."
           puts ""
         end
         
