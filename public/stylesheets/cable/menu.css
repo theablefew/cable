@@ -134,8 +134,8 @@ ul.cable_menu.empty{
 }
 
 #selected-resource {
-	margin-left: 190px;
-	font-size: 1.5em;
+	font-size: 1.25em;
+	font-weight: bold;
 }
 #types {
 	vertical-align: top;
@@ -147,10 +147,6 @@ ul.cable_menu.empty{
 	width: 300px;
 }
 
-#resources {
-	margin-left: 190px;
-	width: 566px;
-}
 #types li{
 	display: block;
 	font-size: 1.25em;

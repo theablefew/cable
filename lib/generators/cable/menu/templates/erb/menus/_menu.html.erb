@@ -1,32 +1,32 @@
-<%% content_for :scripts do %>
-  <%%= javascript_include_tag 'jquery.quicksearch.js' %>
-  <script>
-    $(document).ready(function(){
-      $("#types li").click(function(){
-        $("#types .selected").removeClass();
-        resource_type = $(this).attr("id").replace("type_", "");
-        $(this).addClass("selected");
-        update_resources(resource_type);
-      });
+<%%= javascript_include_tag 'jquery.quicksearch.js' %>
+<script>
+  $(document).ready(function(){
+    $(".tabs").tabs();
+    $("#types li").click(function(){
+      $("#types .selected").removeClass();
+      resource_type = $(this).attr("id").replace("type_", "");
+      $(this).addClass("selected");
+      update_resources(resource_type);
     });
-    function update_fields(id,type){
-      $("#<%= singular_table_name %>_cable_menuable_type").val(type);
-      $("#<%= singular_table_name %>_cable_menuable_id").val(id);
-    }
-    function update_resources(resource_type){
-      $.ajax({
-        type: 'POST',
-        url: "/admin/<%= singular_table_name %>s/resources",
-        data: {resource : resource_type},
-        success: function(){
-          console.log("Done");
-        }
-      });    
-    }
-  </script>
-<%% end %>
+  });
+  function update_fields(id,type){
+    $("#<%= singular_table_name %>_cable_menuable_type").val(type);
+    $("#<%= singular_table_name %>_cable_menuable_id").val(id);
+  }
+  function update_resources(resource_type){
+    $.ajax({
+      type: 'POST',
+      url: "/admin/<%= singular_table_name %>s/resources",
+      data: {resource : resource_type},
+      success: function(){
+        console.log("Done");
+      }
+    });    
+  }
+</script>
 
 <%%= semantic_form_for [:admin, @<%= singular_table_name %>] do |f| %>
+  
   <%% if @<%= singular_table_name %>.errors.any? %>
     <div id="error_explanation">
       <h3><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h3>
@@ -37,53 +37,67 @@
       </ul>
     </div>
   <%% end %>
-  <%%= f.inputs "Menu Properties" do %> 
-    <%%= f.input :title, :label => "Menu Title", :hint => "This will be used in the <%= singular_table_name %> itself" %>
-    <%%= f.input :meta_description, :label => "Meta Description", :hint => "Meta Description rendered in the head of the document" %>
-    <%%= f.input :meta_keywords, :label => "Meta Keywords", :hint => "Enter Keywords with a comma separating each key" %>    
-    <%%= f.input :url, :label => "URL", :as => :string, :hint => "URL for this <%= singular_table_name %> item, Example: /categories/canopies" %>
-    <%%= f.input :show_in_<%= singular_table_name %>, :as => :boolean, :wrapper_html => { :class => "yes_no" }, :hint => "You can hide the <%= singular_table_name %> item by unchecking this box." %>
-  <%% end %>
-  <%%= f.inputs "Template and Resource" do %>
-
-    <%% unless Cable.special_actions.empty? %>
-      <%%= f.input :special_action, :label => "Special Action", :as => :select, :collection => Cable.special_actions, :hint => "(Optional)" %>
-    <%% end %>
-
-    <%% unless Cable.templates.empty? %>
-      <%%= f.input :template, :as => :select, :collection => Cable.templates, :selected => f.object.template || "default", :hint => "Which page template should be used?"%>
-    <%% end %>
-
-    <%%= f.input :cable_menuable_type, :as => :hidden %>
-    <%%= f.input :cable_menuable_id, :as => :hidden %>    
-    <li><div id="selected-resource"><%%= @<%= singular_table_name %>.cable_menuable_type %> &raquo; <%%= @<%= singular_table_name %>.resource.title unless @<%= singular_table_name %>.resource.nil? %></div></li>
-    <table id="resources">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Resources <input type="text" name="search" value="" id="search_resources" placeholder="Search" /> </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td id="types">
-            <ul>
-              <%% @resource_types.each do |type| %> 
-                <li id="type_<%%= type[0] %>"><%%= type[1] %></li>
-              <%% end %>
-            </ul>
-          </td>
-          <td id="resources-data">
-            <div>
-              <%%= render(:partial => "admin/<%= singular_table_name %>s/resources", :locals => {:resources => @resources})%>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    
-  <%% end %>
   
+  <div class="tabs">
+    <ul>
+      <li><a href="#tabs-1">Menu Properties</a></li>
+      <li><a href="#tabs-2">Template and Special Actions</a></li>
+      <li><a href="#tabs-3">Resource</a></li>
+  	</ul>
+  	<div id="tabs-1">
+      <%%= f.inputs do %> 
+        <%%= f.input :title, :label => "Menu Title", :hint => "This will be used in the <%= singular_table_name %> itself" %>
+        <%%= f.input :meta_description, :label => "Meta Description", :hint => "Meta Description rendered in the head of the document" %>
+        <%%= f.input :meta_keywords, :label => "Meta Keywords", :hint => "Enter Keywords with a comma separating each key" %>    
+        <%%= f.input :url, :label => "URL", :as => :string, :hint => "URL for this <%= singular_table_name %> item, Example: /categories/canopies" %>
+        <%%= f.input :show_in_<%= singular_table_name %>, :as => :boolean, :wrapper_html => { :class => "yes_no" }, :hint => "You can hide the <%= singular_table_name %> item by unchecking this box." %>
+      <%% end %>
+    </div>
+    <div id="tabs-2">
+      <%%= f.inputs do %>
+        <%% unless Cable.special_actions.empty? %>
+          <%%= f.input :special_action, :label => "Special Action", :as => :select, :collection => Cable.special_actions, :hint => "(Optional)" %>
+        <%% end %>
+        <%% unless Cable.templates.empty? %>
+          <%%= f.input :template, :as => :select, :collection => Cable.templates, :selected => f.object.template || "default", :hint => "Which page template should be used?"%>
+        <%% end %>
+      <%% end %>
+    </div>
+    <div id="tabs-3">
+      <%%= f.inputs do %>
+        <%%= f.input :cable_menuable_type, :as => :hidden %>
+        <%%= f.input :cable_menuable_id, :as => :hidden %>    
+        <li><div id="selected-resource"><%%= @<%= singular_table_name %>.cable_menuable_type %> &raquo; <%%= @<%= singular_table_name %>.resource.title unless @<%= singular_table_name %>.resource.nil? %></div></li>
+        <li>
+          <table id="resources">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Resources <input type="text" name="search" value="" id="search_resources" placeholder="Search" /> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="types">
+                  <ul>
+                    <%% @resource_types.each do |type| %> 
+                      <li id="type_<%%= type[0] %>"><%%= type[1] %></li>
+                    <%% end %>
+                  </ul>
+                </td>
+                <td id="resources-data">
+                  <div>
+                    <%%= render(:partial => "admin/<%= singular_table_name %>s/resources", :locals => {:resources => @resources})%>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      <%% end %>
+    </div>
+  </div>
+
   <%%= f.buttons %>
+  
 <%% end %>
