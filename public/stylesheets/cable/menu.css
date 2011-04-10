@@ -1,7 +1,5 @@
 /* @override http://localhost:3000/stylesheets/cable/menu.css */
 
-/* @override http://localhost:3000/stylesheets/cable/menu.css */
-
 .cable_menu_wrapper {
 	position: relative;
 	height: 360px;
@@ -28,6 +26,7 @@ ul.cable_menu ul {
 	width: 129px;
 	padding: 4px 20px 4px 4px;
 }
+#resources-table tr:hover,
 #types li:hover,
 .cable_menu_wrapper li:hover{
 	background-color: #f4f4f4;
@@ -67,6 +66,7 @@ ul.cable_menu ul {
   display:inline-block;
 }
 
+#resources-table tr.selected td,
 .cable_menu_wrapper li.selected.last,
 .cable_menu_wrapper li.selected.last.has-children, 
 #types li.selected{
@@ -109,32 +109,6 @@ ul.cable_menu ul {
 #add-menu:hover{
   background-color:#ddd;
 }
-::-webkit-scrollbar {
-	height: 8px;
-	width: 8px;
-}
-
-
-::-webkit-scrollbar-track-piece {
-	margin-bottom: 10px;
-	border-bottom-left-radius: 4px 4px;
-	border-bottom-right-radius: 4px 4px;
-	border-top-left-radius: 4px 4px;
-	border-top-right-radius: 4px 4px;
-}
-
-::-webkit-scrollbar-thumb:vertical {
-	height: 25px;
-	background-color: #ccc;
-	-webkit-border-radius: 4px;
-	-webkit-box-shadow: 0 1px 1px rgba(255,255,255,1);
-}
-
-::-webkit-scrollbar-thumb:horizontal {
-	width: 25px;
-	background-color: #ccc;
-	-webkit-border-radius: 4px;
-}
 ul.cable_menu.empty{
   background:url(/images/cable/empty-menu.png);
 }
@@ -142,6 +116,9 @@ ul.cable_menu.empty{
   margin-bottom:1em;
 }
 
+#resources-data {
+	padding: 0;
+}
 
 
 
@@ -150,13 +127,30 @@ ul.cable_menu.empty{
 
 
 
+#search_resources{
+	float: right;
+	display: block;
+	font-weight: normal;
+}
 
-
-/*#types {
+#selected-resource {
+	margin-left: 190px;
+	font-size: 1.5em;
+}
+#types {
 	vertical-align: top;
 	width: 200px;
 	padding: 0;
-}*/
+}
+
+#resources-table tbody .resource{
+	width: 300px;
+}
+
+#resources {
+	margin-left: 190px;
+	width: 566px;
+}
 #types li{
 	display: block;
 	font-size: 1.25em;
@@ -169,4 +163,3 @@ ul.cable_menu.empty{
 	display: block;
     overflow:auto;
 }
-

@@ -14,3 +14,8 @@ form.formtastic fieldset > ol > li.search input {
 
 
 form.formtastic fieldset.buttons { padding-top:1em; }
+
+.inline-hints {
+	display: block;	
+	clear: both;
+}
