@@ -1,0 +1,21 @@
+<table id="resources-table">
+  <tbody>
+  <%% @resources.each do |resource| %>
+    <tr>
+      <td menu_id="<%%= resource.id %>" resource_type="<%%= resource.class.name %>" class="resource"><%%= resource.title %></td>
+      <td><%%= link_to image_tag("cable/search.png"), [:admin, resource], :target => "_blank" %></td>
+    </tr>
+  <%% end %>
+  </tbody>
+</table>
+<script> 
+  $('input#search_resources').quicksearch('#resources-data tr');
+  $("#resources-data td.resource").click(function(){
+    $("#resources-data .selected").removeClass();
+    $("#selected-resource").html($(this).attr("resource_type")+" &raquo; "+$(this).text());
+    $(this).parent().addClass("selected");
+    menu_id = $(this).attr("menu_id");
+    resource_type = $(this).attr("resource_type");
+    update_fields(menu_id, resource_type);
+  });
+</script>

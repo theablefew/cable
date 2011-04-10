@@ -1,7 +1,35 @@
+<%% content_for :scripts do %>
+  <%%= javascript_include_tag 'jquery.quicksearch.js' %>
+  <script>
+    $(document).ready(function(){
+      $("#types li").click(function(){
+        $("#types .selected").removeClass();
+        resource_type = $(this).attr("id").replace("type_", "");
+        $(this).addClass("selected");
+        update_resources(resource_type);
+      });
+    });
+    function update_fields(id,type){
+      $("#<%= singular_table_name %>_cable_menuable_type").val(type);
+      $("#<%= singular_table_name %>_cable_menuable_id").val(id);
+    }
+    function update_resources(resource_type){
+      $.ajax({
+        type: 'POST',
+        url: "/admin/<%= singular_table_name %>s/resources",
+        data: {resource : resource_type},
+        success: function(){
+          console.log("Done");
+        }
+      });    
+    }
+  </script>
+<%% end %>
+
 <%%= semantic_form_for [:admin, @<%= singular_table_name %>] do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
     <div id="error_explanation">
-      <h3><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this menu from being saved:</h3>
+      <h3><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h3>
       <ul>
         <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
           <li><%%= msg %></li>
@@ -10,22 +38,51 @@
     </div>
   <%% end %>
   <%%= f.inputs "Menu Properties" do %> 
-    <%%= f.input :title, :label => "Menu Title", :hint => "This will be used in the menu itself" %>
+    <%%= f.input :title, :label => "Menu Title", :hint => "This will be used in the <%= singular_table_name %> itself" %>
     <%%= f.input :meta_description, :label => "Meta Description", :hint => "Meta Description rendered in the head of the document" %>
     <%%= f.input :meta_keywords, :label => "Meta Keywords", :hint => "Enter Keywords with a comma separating each key" %>    
-    <%%= f.input :url, :label => "URL", :as => :string, :hint => "URL for this menu item, Example: /categories/canopies" %>
-    <%%= f.input :show_in_menu, :as => :boolean, :wrapper_html => { :class => "yes_no" }, :hint => "You can hide the menu item by unchecking this box." %>
+    <%%= f.input :url, :label => "URL", :as => :string, :hint => "URL for this <%= singular_table_name %> item, Example: /categories/canopies" %>
+    <%%= f.input :show_in_<%= singular_table_name %>, :as => :boolean, :wrapper_html => { :class => "yes_no" }, :hint => "You can hide the <%= singular_table_name %> item by unchecking this box." %>
   <%% end %>
   <%%= f.inputs "Template and Resource" do %>
+
     <%% unless Cable.special_actions.empty? %>
-        <%%= f.input :special_action, :label => "Special Action", :as => :select, :collection => Cable.special_actions, :hint => "(Optional)" %>
+      <%%= f.input :special_action, :label => "Special Action", :as => :select, :collection => Cable.special_actions, :hint => "(Optional)" %>
     <%% end %>
+
     <%% unless Cable.templates.empty? %>
-        <%%= f.input :template, :as => :select, :collection => Cable.templates, :selected => f.object.template || "default", :hint => "Which page template should be used?"%>
+      <%%= f.input :template, :as => :select, :collection => Cable.templates, :selected => f.object.template || "default", :hint => "Which page template should be used?"%>
     <%% end %>
-    <%% unless @resources.nil? %>
-        <%%= f.input :cable_menuable_id, :label => "Resource", :as => :select, :include_blank => true, :collection => @resources %>
-    <%% end %>
+
+    <%%= f.input :cable_menuable_type, :as => :hidden %>
+    <%%= f.input :cable_menuable_id, :as => :hidden %>    
+    <li><div id="selected-resource"><%%= @<%= singular_table_name %>.cable_menuable_type %> &raquo; <%%= @<%= singular_table_name %>.resource.title unless @<%= singular_table_name %>.resource.nil? %></div></li>
+    <table id="resources">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Resources <input type="text" name="search" value="" id="search_resources" placeholder="Search" /> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="types">
+            <ul>
+              <%% @resource_types.each do |type| %> 
+                <li id="type_<%%= type[0] %>"><%%= type[1] %></li>
+              <%% end %>
+            </ul>
+          </td>
+          <td id="resources-data">
+            <div>
+              <%%= render(:partial => "admin/<%= singular_table_name %>s/resources", :locals => {:resources => @resources})%>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    
   <%% end %>
   
   <%%= f.buttons %>
