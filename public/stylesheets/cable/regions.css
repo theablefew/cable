@@ -126,7 +126,7 @@
 h2{
 	font-size: 1.5em;
 	display: block;
-	float: left;
+/*  float: left;*/
 }
 h3{
 	font-size: 1.25em;
