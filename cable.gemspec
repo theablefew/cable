@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.10"
+  s.version = "0.9.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-04-07}
+  s.date = %q{2011-04-10}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -39,6 +39,8 @@ Gem::Specification.new do |s|
     "app/views/layouts/_messages.html.erb",
     "app/views/layouts/_search.html.erb",
     "app/views/layouts/admin.html.erb",
+    "app/views/layouts/admin/_dual_column_layout.html.erb",
+    "app/views/layouts/admin/_single_column_layout.html.erb",
     "config/admin_navigation.rb",
     "config/navigation.rb",
     "config/routes.rb",
@@ -72,10 +74,13 @@ Gem::Specification.new do |s|
     "lib/generators/cable/menu/menu_generator.rb",
     "lib/generators/cable/menu/templates/controller.rb",
     "lib/generators/cable/menu/templates/erb/menus/_menu.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/_resources.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/edit.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/index.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/new.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/resources.js.erb",
     "lib/generators/cable/menu/templates/erb/menus/show.html.erb",
+    "lib/generators/cable/menu/templates/erb/menus/sort.js.erb",
     "lib/generators/cable/menu/templates/erb/partials/_menu_fields.html.erb",
     "lib/generators/cable/menu/templates/migration.rb",
     "lib/generators/cable/menu/templates/model.rb",
@@ -116,6 +121,7 @@ Gem::Specification.new do |s|
     "public/images/cable/story-icon.jpg",
     "public/javascripts/admin.js",
     "public/javascripts/cable_menu.js",
+    "public/javascripts/jquery.quicksearch.js",
     "public/javascripts/jquery.tablesorter.min.js",
     "public/javascripts/jquery.tagsinput.js",
     "public/javascripts/jquery.ui.autocomplete.html.js",
