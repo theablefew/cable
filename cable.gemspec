@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.11"
+  s.version = "0.9.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
@@ -63,6 +63,7 @@ Gem::Specification.new do |s|
     "lib/cable/page.rb",
     "lib/cable/rails/routes.rb",
     "lib/cable/railtie.rb",
+    "lib/cable/schema/faceable.rb",
     "lib/cable/setting.rb",
     "lib/cable/special_action.rb",
     "lib/generators/cable/install_generator.rb",
