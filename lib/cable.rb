@@ -1,5 +1,6 @@
 require 'rails'
 require 'orm_adapter'
+require 'schemata'
 
 module Cable
   
@@ -14,7 +15,10 @@ module Cable
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
   autoload :Block, 'cable/block'
   autoload :SpecialAction, 'cable/special_action'
-  autoload :Schema, 'cable/schema'
+
+  # module Schema
+  #   require 'cable/schema/faceable'
+  # end
   
   module Errors
     autoload :ResourceAssociationError, "cable/errors/resource_association_error"
@@ -96,4 +100,4 @@ module Cable
 end
 
 require 'cable/rails/routes'
-require 'cable/orm/active_record'
+# require 'cable/orm/active_record'
