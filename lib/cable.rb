@@ -16,9 +16,9 @@ module Cable
   autoload :Block, 'cable/block'
   autoload :SpecialAction, 'cable/special_action'
 
-  # module Schema
-  #   require 'cable/schema/faceable'
-  # end
+  module Schema
+    require 'cable/schema/menuable'
+  end
   
   module Errors
     autoload :ResourceAssociationError, "cable/errors/resource_association_error"
