@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.12"
+  s.version = "0.9.13"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-04-13}
+  s.date = %q{2011-04-15}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
     "app/views/admin/cable_settings/edit.html.erb",
     "app/views/admin/cable_settings/index.html.erb",
     "app/views/admin/index.html.erb",
+    "app/views/admin/search/_search.html.erb",
     "app/views/admin/search/index.html.erb",
     "app/views/admin/search/index.json.erb",
     "app/views/attachable_assets/index.html.erb",
@@ -63,7 +64,7 @@ Gem::Specification.new do |s|
     "lib/cable/page.rb",
     "lib/cable/rails/routes.rb",
     "lib/cable/railtie.rb",
-    "lib/cable/schema/faceable.rb",
+    "lib/cable/schema/menuable.rb",
     "lib/cable/setting.rb",
     "lib/cable/special_action.rb",
     "lib/generators/cable/install_generator.rb",
@@ -440,7 +441,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rainbow>, [">= 0"])
       s.add_runtime_dependency(%q<kaminari>, [">= 0"])
       s.add_runtime_dependency(%q<cocoon>, [">= 0"])
-      s.add_runtime_dependency(%q<schemata>, [">= 0"])
+      s.add_runtime_dependency(%q<schemata>, [">= 0.1.0"])
     else
       s.add_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_dependency(%q<orm_adapter>, [">= 0"])
@@ -451,7 +452,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rainbow>, [">= 0"])
       s.add_dependency(%q<kaminari>, [">= 0"])
       s.add_dependency(%q<cocoon>, [">= 0"])
-      s.add_dependency(%q<schemata>, [">= 0"])
+      s.add_dependency(%q<schemata>, [">= 0.1.0"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 3.0.0"])
@@ -463,7 +464,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rainbow>, [">= 0"])
     s.add_dependency(%q<kaminari>, [">= 0"])
     s.add_dependency(%q<cocoon>, [">= 0"])
-    s.add_dependency(%q<schemata>, [">= 0"])
+    s.add_dependency(%q<schemata>, [">= 0.1.0"])
   end
 end
 

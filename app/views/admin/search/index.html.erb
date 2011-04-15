@@ -8,7 +8,11 @@
     </thead>
     <tbody>
         <% @results.each do |result| %>
-            <%= render :partial => "/admin/#{result.class.name.tableize}/search", :locals => {:result => result}%>
+        <% begin %>
+            <%= render :partial => "/admin/#{result.class.name.tableize}/search", :locals => {:result => result} %>
+        <% rescue ActionView::MissingTemplate %>
+            <%= render :partial => "admin/search/generic_search_result", :locals => {:result => result} %>
+        <% end %>
         <% end %>
     </tbody>
 </table>
