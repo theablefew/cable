@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.13"
+  s.version = "0.9.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
     "app/views/admin/cable_settings/edit.html.erb",
     "app/views/admin/cable_settings/index.html.erb",
     "app/views/admin/index.html.erb",
+    "app/views/admin/search/_generic_search_result.html.erb",
     "app/views/admin/search/_search.html.erb",
     "app/views/admin/search/index.html.erb",
     "app/views/admin/search/index.json.erb",
