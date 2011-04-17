@@ -45,7 +45,7 @@ module Cable
             if yes?("Would you like to install simple navigation?".color(:yellow) ) 
               generate("navigation_config")
               copy_file 'config/admin_navigation.rb', 'config/admin_navigation.rb'
-                # copy_file 'config/navigation.rb', 'config/navigation.rb'
+              copy_file 'config/navigation.rb', 'config/navigation.rb'
             end
           end
         end

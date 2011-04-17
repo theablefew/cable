@@ -31,7 +31,7 @@ $.extend( proto, {
 
 	_renderItem: function( ul, item) {
 	    console.log( "autocomplete running")
-		return $( "<li></li>" )
+		return $( "<li></li>" ).addClass(item.type)
 			.data( "item.autocomplete", item )
 			.append( $( "<a></a>" )[ this.options.html ? "html" : "text" ]( item.label + "<span class='search_type'>" + item.type +"</span>") )
 			.appendTo( ul );
