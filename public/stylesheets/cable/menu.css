@@ -1,5 +1,20 @@
 /* @override http://localhost:3000/stylesheets/cable/menu.css */
 
+#selection {
+  margin-top:10px;
+}
+
+#add-menu-tree1 {
+  float:left;
+  margin-right:10px;
+}
+ 
+
+#add-menu-tree {
+  float:left; 
+  margin-right:10px;
+}
+
 .cable_menu_wrapper {
 	position: relative;
 	height: 360px;

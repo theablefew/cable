@@ -1,7 +1,8 @@
 (function($){
   
   var xhr;
-  
+  var parent_id;
+
   var sortable_options = {
     items: "li:not(#add-menu)",
     connectWith: '.cable_menu_wrapper ul',
@@ -73,7 +74,6 @@
         });
       });
     });
-    
   }
   
   function hide_add_menu(item){
@@ -144,16 +144,14 @@
   function select_item(item,wrapper){
     $item = $(item);
     $id = $(item).attr("menu");
+	parent_id = $id;
     $wrapper = $(wrapper);
     $child = $("ul[menu="+$id+"]");
 
     if($child.children().size() > 0){
       $child.css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).show();      
     }else{
-      $("<ul class='cable_menu empty' menu="+$id+"/>").css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).sortable(sortable_options).appendTo($wrapper).mouseenter(function() {
-        show_add_menu(this);
-       }).mouseleave(function(){
-        hide_add_menu(this);       
+      $("<ul class='cable_menu empty' menu="+$id+"/>").css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).sortable(sortable_options).appendTo($wrapper).mouseenter(function() {   
        });;
     }
     
@@ -305,7 +303,7 @@
   $.fn.cable_menu = function(options){
     var $tree = $(this);
     var $wrapper = $("<div class='cable_menu_wrapper'></div>").insertAfter($tree);
-    
+
     build_menu($tree, $wrapper, 0);
     
     $wrapper.find("li span.menu-title").click(function(){
@@ -320,16 +318,55 @@
     $tree.remove();    
     
     $wrapper.find("ul").sortable(sortable_options);
-    $wrapper.find("ul").mouseenter(function() {
-      show_add_menu(this);
-     }).mouseleave(function(){
-      hide_add_menu(this);       
-     });
+    
     var $current_selection = $("<div id='selection'><strong>Current Selection:</strong><p>&nbsp;</p></div>").insertBefore($wrapper);
+    var $add1 = $("<div id='add-menu-tree1' class='actions'><a>Add Menu</a></div>").insertBefore($current_selection);
+    var $save1 = $("<div id='save-tree1' class='actions'><a>Save Tree</a></div>").insertBefore($current_selection);
+
     var $save = $("<div id='save-tree' class='actions'><a>Save Tree</a></div>").insertAfter($wrapper);
+    var $add = $("<div id='add-menu-tree' class='actions'><a>Add Menu</a></div>").insertAfter($wrapper);
+
     var $form = $("<div id='add-menu-form' />").insertAfter($save);
     var $menu_details = $("<div id='menu-details' />").insertAfter($save);
-    $save.click(function(){save_tree();});    
+
+    $save.click(function(){save_tree();}); 
+    $save1.click(function(){save_tree();}); 
+
+    $add.click(function(){
+      $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
+      $("#add-menu-form").load("/admin/menus/new?parent_id="+parent_id, function(){
+        $(this).dialog({
+          modal: true,
+          width: 600,
+      resizable: false,
+          title: "New Menu",
+      draggable: false
+        });
+      });
+    }); 
+
+	$add1.click(function(){
+      $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
+      
+      var get_string;
+      
+      if (parent_id > 0){
+        get_string = "?parent_id="+parent_id;
+      } else {
+        get_string = "?parent_id=0";
+      }
+      
+      $("#add-menu-form").load("/admin/menus/new"+get_string, function(){
+        $(this).dialog({
+          modal: true,
+          width: 600,
+      resizable: false,
+          title: "New Menu",
+      draggable: false
+        });
+      });
+    });
+   
     $("<hr />").insertAfter($wrapper);
 
   }
