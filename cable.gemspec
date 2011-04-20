@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.14"
+  s.version = "0.9.15"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-04-15}
+  s.date = %q{2011-04-20}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
