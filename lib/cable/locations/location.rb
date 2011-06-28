@@ -1,6 +1,8 @@
 class Cable::Locations::Location < ActiveRecord::Base
   self.abstract_class = true
   
+  acts_as_nested_set
+  
   validates_presence_of :title
   
   serialize :options

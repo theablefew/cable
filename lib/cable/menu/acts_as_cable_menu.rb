@@ -12,9 +12,10 @@ module Cable
   
         def acts_as_cable_menu( reflection_options = {} )
           send :include, InstanceMethods
-          belongs_to :cable_menuable, reflection_options.merge( :polymorphic => true )
-          accepts_nested_attributes_for :cable_menuable
-          acts_as_nested_set 
+          belongs_to :location
+          # belongs_to :cable_menuable, reflection_options.merge( :polymorphic => true )
+          # accepts_nested_attributes_for :cable_menuable
+          # acts_as_nested_set 
           # :scope => :tree_id
           
           yields self if block_given?
