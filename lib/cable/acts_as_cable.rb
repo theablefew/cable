@@ -18,9 +18,9 @@ module Cable
           with_modules << reflection_options.delete(:with) if reflection_options.has_key?(:with)
           with_modules.flatten!
           
-          has_one :menu, reflection_options.merge( :as => :cable_menuable )
+          has_one :location, reflection_options.merge( :as => :locatable )
           has_many :blocks, :as => :resource if with_modules.include? :blocks
-          accepts_nested_attributes_for :menu
+          accepts_nested_attributes_for :location
           
           self.cattr_accessor :default_template
           self.default_template = "default"

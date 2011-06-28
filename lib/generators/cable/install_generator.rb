@@ -12,6 +12,7 @@ module Cable
         
         class_option :blocks, :type => :boolean, :default => true
         class_option :settings, :type => :boolean, :default => true
+        class_option :locations, :type => :boolean, :default => true
         class_option :simple_nav, :type => :boolean, :default => true
         class_option :admin, :type => :boolean, :default => true
         # invoke "migration", %(create_cable_settings site_title:string keywords:text analytics:string closure:text description:text contact_email:string footer_block_1:text footer_block_2:text copyright:string legal:text)
@@ -22,6 +23,16 @@ module Cable
             begin
              migration_template 'lib/generators/templates/create_cable_settings.rb', "db/migrate/create_cable_settings.rb"
              route( 'cable_to :cable_settings' )
+            rescue
+
+            end
+         end
+        end
+        
+        def create_locations
+          if options.locations?
+            begin
+             migration_template 'lib/generators/templates/create_locations.rb', "db/migrate/create_locations.rb"
             rescue
 
             end

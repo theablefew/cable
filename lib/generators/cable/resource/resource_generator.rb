@@ -24,7 +24,7 @@ module Cable
  
         def create_migration_file
            migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration? and yes?("Would you like to generate a migration?".color(:yellow))
-        end       
+        end
         
         def create_model_file
            template 'model.rb' , "app/models/#{model_name}.rb" if options.model? and yes?("Would you like to generate a model?".color(:yellow))
