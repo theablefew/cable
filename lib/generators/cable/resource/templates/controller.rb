@@ -17,16 +17,20 @@ class Admin::<%= class_name.pluralize %>Controller < AdminController
   # GET <%= route_url %>/new.xml
   def new
     @<%= singular_table_name %> = <%= orm_class.build(class_name) %>
+    <% if options.locatable? %>
     @parent_location = Location.find( params[:location_id] || Location.root )
-    @location = @page.build_location(:parent_id => @parent_location.id )
+    @location = @page.build_location(:parent_id => @parent_location.id, :tree_id => @parent_location.tree_id )
     @location.menus.build
+    <% end %>
     respond_with(:admin , @<%= singular_table_name %>)
   end
 
   # GET <%= route_url %>/1/edit
   def edit
     @<%= singular_table_name %> = <%= orm_class.find(class_name, "params[:id]") %>
+    <% if options.locatable? %>
     @<%= singular_table_name %>.location.menus.build if @<%= singular_table_name %>.location.menus.empty?
+    <% end %>
 
   end
 

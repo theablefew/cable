@@ -20,7 +20,6 @@
       
     },
     receive: function(event, ui) {
-        console.log( "receive event");
       $target = $(event.target);
       $item = $(ui.item[0]);
       $children_of_item = $item.data("children");  
@@ -158,11 +157,12 @@
 	parent_id = $id;
     $wrapper = $(wrapper);
     $child = $("ul[menu="+$id+"]");
-
+    
+    
     if($child.children().size() > 0){
       $child.css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).show();      
     }else{
-      $("<ul class='cable_menu empty' menu="+$id+"/>").css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).sortable(sortable_options).appendTo($wrapper).mouseenter(function() {   
+      $("<ul class='cable_menu empty' menu="+$id+"/>").hover( add_resource_button_to_column , remove_resource_button_from_column ).css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).sortable(sortable_options).appendTo($wrapper).mouseenter(function() {   
        });;
     }
     
@@ -176,6 +176,7 @@
       deselect(this);
     });
         
+
     $wrapper.append($item.parent());
     last_width = $wrapper.attr("scrollWidth");
     $wrapper.stop();
@@ -226,6 +227,34 @@
     $tree.find("li").each(function(){
      update_children(this); 
      update_parents(this);
+    });
+  }
+  
+  function add_resource_button_to_column( e ) {
+      id = $(e.currentTarget).attr("menu")
+      if(id != 0) {
+          $(e.currentTarget).append( "<li id='add-menu' class='add-resource'><a id=''>Add Resource</a></li>")
+          $('li.add-resource a').click( create_new_resource );
+      }
+  }
+  
+  function remove_resource_button_from_column( e ) {
+      $(e.currentTarget).find('li.add-resource').unbind('click').remove();
+  }
+  
+  function create_new_resource( e ){
+    
+    parent_id = $('li.add-resource').parent("ul").attr('menu')
+    
+    $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
+    $("#add-menu-form").load("/admin/menus/new?parent_id="+parent_id, function(){
+      $(this).dialog({
+        modal: true,
+        width: 600,
+    resizable: false,
+        title: "New Resource",
+    draggable: false
+      });
     });
   }
   
@@ -334,8 +363,8 @@
     // var $add1 = $("<div id='add-menu-tree1' class='actions'><a>Add Menu</a></div>").insertBefore($current_selection);
     // var $save1 = $("<div id='save-tree1' class='actions'><a>Save Tree</a></div>").insertBefore($current_selection);
 
-    var $save = $("<div id='save-tree' class='actions'><a>Save Tree</a></div>").insertAfter($wrapper);
-    var $add = $("<div id='add-menu-tree' class='actions'><a>Add Menu</a></div>").insertAfter($wrapper);
+    var $save = $("<div id='save-tree' class='actions'><a>Save Menu</a></div>").insertAfter($wrapper);
+    // var $add = $("<div id='add-menu-tree' class='actions'><a>Add Resource</a></div>").insertAfter($wrapper);
 
     var $form = $("<div id='add-menu-form' />").insertAfter($save);
     var $menu_details = $("<div id='menu-details' />").insertAfter($save);
@@ -343,21 +372,13 @@
     $save.click(function(){save_tree();}); 
     // $save1.click(function(){save_tree();}); 
 
-    $add.click(function(){
-      $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
-      $("#add-menu-form").load("/admin/menus/new?parent_id="+parent_id, function(){
-        $(this).dialog({
-          modal: true,
-          width: 600,
-      resizable: false,
-          title: "New Resource",
-      draggable: false
-        });
-      });
-    }); 
+    // $add.click( create_new_resource ); 
     // hash = unescape( window.location.hash).replace("#","")
     // selectable_item = $wrapper.find('li[title="'+hash+'"]');
     select_item( $wrapper.find('ul[menu="0"] li') )
+    
+    $('.ui-sortable').hover( add_resource_button_to_column , remove_resource_button_from_column );
+    
     // if(selectable_item.length > 0) {
         // select_item( selectable_item, $wrapper )
     // }

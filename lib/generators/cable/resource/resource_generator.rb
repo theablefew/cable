@@ -2,7 +2,6 @@ require 'rails/generators'
 require 'rails/generators/migration'
 require 'rails/generators/resource_helpers'
 require 'active_record'
-require 'rainbow'
 # require 'rails/generators/controller_generator'
 module Cable
     module Generators
@@ -21,25 +20,26 @@ module Cable
         class_option :routes,     :type => :boolean, :default => true
         class_option :controller, :type => :boolean, :default => true
         class_option :orm,        :type => :string,  :default => "active_record"
- 
-        def create_migration_file
-           migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration? and yes?("Would you like to generate a migration?".color(:yellow))
+        class_option :locatable,  :type => :boolean, :default => true, :banner => "Setting this to false will create a non-locatable resource."
+        
+        def create_migration_file          
+           migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration? and yes?("Would you like to generate a migration?", :yellow)
         end
         
         def create_model_file
-           template 'model.rb' , "app/models/#{model_name}.rb" if options.model? and yes?("Would you like to generate a model?".color(:yellow))
+           template 'model.rb' , "app/models/#{model_name}.rb" if options.model? and yes?("Would you like to generate a model?", :yellow)
         end
         
         def create_controller_file
           if options.controller?
-            template 'controller.rb' , "app/controllers/admin/#{file_name.pluralize}_controller.rb" if yes?("Would you like to generate a controller?".color(:yellow))
+            template 'controller.rb' , "app/controllers/admin/#{file_name.pluralize}_controller.rb" if yes?("Would you like to generate a controller?", :yellow)
           end
         end
         
         def create_scaffold
           if options.views?
-            if yes?("Would you like Cable to generate views for #{model_name.capitalize}?".color(:yellow))
-              if attributes.empty? and yes?("\tWould you like to use existing attributes?".color(:green))
+            if yes?("Would you like Cable to generate views for #{model_name.capitalize}?", :yellow)
+              if attributes.empty? and yes?("\tWould you like to use existing attributes?", :green)
                 self.attributes = model_name.classify.constantize.columns_hash.delete_if{|x| ["id", "created_at", "updated_at"].include? x }.collect{|c| [c.first,c.second.type]}.collect do |attri|
                   Rails::Generators::GeneratedAttribute.new( attri.first, attri.second )
                 end
@@ -55,7 +55,7 @@ module Cable
         end
         
         def install_route
-          route("cable_to :#{plural_table_name}") if options.routes? and yes?("Would you like to generate routes for #{model_name.capitalize}?".color(:yellow))
+          route("cable_to :#{plural_table_name}") if options.routes? and yes?("Would you like to generate routes for #{model_name.capitalize}?",:yellow)
         end
         
         def self.next_migration_number(dirname)

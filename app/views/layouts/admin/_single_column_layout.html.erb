@@ -4,7 +4,9 @@
 <div id="main" class="span-24">
     <div class="box shadow">
       <h2 id="title"><%= @page_title %></h2>
-      <div id="help"><%= yield :help %><a class="button">Help</a></div>
+      <%= content_for :help do %>
+         <div id="help"><%= yield :help %><a class="button">Help</a></div>
+      <% end %>
       <%= yield :page_menu %>
       <%= render :partial => 'layouts/messages' %>
       <%= yield %>

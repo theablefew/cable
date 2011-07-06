@@ -1,3 +1,5 @@
 <%%= render '<%= singular_table_name %>' %>
 
-<%%= link_to 'Show', [:admin, @<%= singular_table_name %> ]%> | <%%= link_to 'Back', admin_<%= index_helper %>_path %>
+<div class="text-actions">
+    <%%= link_to 'Show', [:admin, @<%= singular_table_name %> ]%> | <%%= link_to 'Cancel', admin_<%= index_helper %>_path %>
+</div>

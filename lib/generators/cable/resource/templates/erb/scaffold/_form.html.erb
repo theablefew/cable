@@ -18,8 +18,10 @@
 
     <ul>
         <li><a href="#properties"><%%= @<%= singular_table_name %>.class %> Properties</a></li>
-        <li><a href="#location">Location and URL</a></li>
+        <% if options.locatable? %>
+        <li><a href="#location">URL</a></li>
         <li><a href="#menu">Menu</a></li>
+        <% end %>
     </ul>
   <%% if @<%= singular_table_name %>.errors.any? %>
     <div id="error_explanation">
@@ -43,10 +45,11 @@
             <% end %>
         <%% end %>
     </div>
+    <% if options.locatable? %>
     <div id="location">
         <%%= f.inputs do %>
             <%%= f.inputs :for => :location do |location_fields| %>
-                <li><p class="inline-hints notice">This <%%= @<%= singular_table_name %>.class.to_s.downcase %> is viewable at: <span id="location-url-hint"><%%= @<%= singular_table_name %>.location.url %></span></p></li>
+                <li><p class="inline-hints notice">This <%%= @<%= singular_table_name %>.class.to_s.downcase %> is viewable at: <span id="location-url-hint"><%%= link_to @<%= singular_table_name %>.location.url,@<%= singular_table_name %>.location.url %></span></p></li>
                 <%%= location_fields.input :url, :label => "Custom URL", :hint => "Used to override the default URL", :input_html => {:id => "location_url" } %>
                 <%%= location_fields.input :parent_id, :as => :hidden %>
             <%% end %>
@@ -57,11 +60,12 @@
             <%%= f.inputs :for => :location do |location_fields| %>
                 <%%= location_fields.inputs :for => :menus do |menu_fields| %>
                     <%%= menu_fields.input :creatable, :as => :boolean, :label => "Show in Menu", :input_html => {:checked => !menu_fields.object.new_record? } %>
-                    <%%= menu_fields.input :title , :hint => "If different than page title."%>
+                    <%%= menu_fields.input :title , :label => "Menu Title", :hint => "If different than page title."%>
                 <%% end %>
             <%% end %>
         <%% end %>
     </div>
+  <% end %>
   <%%= f.buttons %>
 </div>
 <%% end %>

@@ -12,7 +12,6 @@ module Cable
         
         def acts_as_cable( reflection_options = {} )
           has_one :location, reflection_options.merge( :as => :locatable , :class_name => "Location", :dependent => :destroy )
-          accepts_nested_attributes_for :location
           
           
           with_modules = []
@@ -27,6 +26,8 @@ module Cable
           
           self.cattr_accessor :default_template
           self.default_template = "default"
+          
+          accepts_nested_attributes_for :location
           
           yield self if block_given?
         end
