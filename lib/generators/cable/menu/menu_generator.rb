@@ -43,9 +43,14 @@ module Cable
               Dir.glob(File.expand_path("../templates", __FILE__) + '/erb/menus/*.erb') do |rb_file|
                 template rb_file, "app/views/admin/#{plural_table_name}/#{File.basename(rb_file)}"
               end
-              copy_file 'erb/partials/_menu_fields.html.erb', 'app/views/admin/partials/_menu_fields.html.erb'
             end
           end
+        end
+        
+        def create_root_node
+          empty_directory 'db/seeds'
+          template 'menus.rb', 'db/seeds/menus.rb'
+          # run('rake db:seed:menus') if yes?("Would you like to create a root location for menus?".color(:yellow))
         end
         
         def create_routes

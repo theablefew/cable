@@ -1,14 +1,11 @@
 class Admin::<%= class_name %>sController < AdminController
   respond_to :html, :xml, :json  
-  # GET /pages
-  # GET /pages.xml
+
   def index
-    @<%= singular_table_name %>s = <%= class_name %>.roots
-    @admin_layout = "single"    
-    <%= class_name %>.rebuild!
+    @<%= plural_table_name %> = <%= class_name %>.roots
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @<%= singular_table_name %>s }
+      format.xml  { render :xml => @<%= plural_table_name %> }
     end
   end
 
@@ -16,12 +13,12 @@ class Admin::<%= class_name %>sController < AdminController
   # GET /pages/1.xml
   def show
     @<%= singular_table_name %> = <%= class_name %>.where( :id => params[:id]).first
-    @<%= singular_table_name %>s = <%= class_name %>.roots
+    @<%= plural_table_name %> = <%= class_name %>.all
     
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @<%= singular_table_name %> }
-      format.js { render :partial => "admin/<%= singular_table_name %>s/parents" } 
+      format.js { render :partial => "admin/<%= plural_table_name %>/parents" } 
     end
   end
 
@@ -29,24 +26,17 @@ class Admin::<%= class_name %>sController < AdminController
   # GET /pages/new.xml
   def new
     @resource_types = Cable.resource_types.collect{|resource| ["#{resource.name}","#{resource.name.pluralize}"]}
-    @resources = @resource_types.first[0].classify.constantize.find(:all).sort{|x,y| x.title <=> y.title}
+    @<%= singular_table_name %> = <%= class_name %>.find( params[:parent_id] )
     
-    @<%= singular_table_name %> = <%= class_name %>.new
-    if params[:parent_id] && params[:parent_id] != "0"
-      @parent = <%= class_name %>.find(params[:parent_id])
-      @<%= singular_table_name %>.parent_id = @parent.id
-    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @<%= singular_table_name %> }
     end
   end
 
-  # GET /pages/1/edit
+  #Most likely not needed by v1 menu system
   def edit
-    @<%= singular_table_name %> = <%= class_name %>.includes(:cable_<%= singular_table_name %>able).where( :id => params[:id]).first
-    @resource_types = Cable.resource_types.collect{|resource| ["#{resource.name}","#{resource.name.pluralize}"]}
-    @resources = @<%= singular_table_name %>.cable_<%= singular_table_name %>able_type.classify.constantize.find(:all).sort{|x,y| x.title <=> y.title}
+
   end
   
   # POST /pages
@@ -105,17 +95,17 @@ class Admin::<%= class_name %>sController < AdminController
       moved_item_id = array[1][:id].split(/<%= singular_table_name %>_/)
       @current_<%= singular_table_name %> = <%= class_name %>.find_by_id(moved_item_id)
       unless previous.nil?
-        @previous_item = <%= class_name %>.find_by_id(previous)
-        @current_<%= singular_table_name %>.move_to_right_of(@previous_item)
+        @previous_item = <%= class_name %>.find_by_id(previous).location
+        @current_<%= singular_table_name %>.location.move_to_right_of(@previous_item)
       else
-        @current_<%= singular_table_name %>.move_to_root
+        @current_<%= singular_table_name %>.location.move_to_root
       end
       unless array[1][:children].blank?
         parse_children(array[1], @current_<%= singular_table_name %>)
       end
       previous = moved_item_id
     end
-    <%= class_name %>.rebuild!
+    Location.rebuild!
     render :nothing => true
   end
   
@@ -123,7 +113,7 @@ class Admin::<%= class_name %>sController < AdminController
     for child in mynode[:children]
       child_id = child[1][:id].split(/<%= singular_table_name %>_/)
       child_<%= singular_table_name %> = <%= class_name %>.find_by_id(child_id)
-      child_<%= singular_table_name %>.move_to_child_of(<%= singular_table_name %>)
+      child_<%= singular_table_name %>.location.move_to_child_of(<%= singular_table_name %>.location)
       unless child[1][:children].blank?
         parse_children(child[1], child_<%= singular_table_name %>)
       end

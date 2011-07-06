@@ -1,5 +1,5 @@
 <p id="notice"><%%= notice %></p>
-
+<p>This <%%= @<%= singular_table_name %>.class.to_s.downcase %> is viewable at: <span id="location-url-hint"><%%= link_to @<%= singular_table_name %>.location.url, @<%= singular_table_name %>.location.url %></span></p>
 <% for attribute in attributes %>
 <p>
   <b><%= attribute.human_name %>:</b>

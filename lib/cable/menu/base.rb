@@ -1,3 +1,4 @@
+require 'rainbow'
 class Cable::Menu::Base < ActiveRecord::Base
     self.abstract_class = true
     class << self
@@ -10,30 +11,30 @@ class Cable::Menu::Base < ActiveRecord::Base
     #all before destroy filters will not run after this line
     # acts_as_cable_menu
     # before_save :generate_marketable_url
+    
     scope :top_nav, :conditions => {:title => "Top Navigation"}
     scope :footer_nav, :conditions => {:title => "Footer Navigation"}
   
-    validates_presence_of :title
+    # validates_presence_of :title
     
     serialize :options
   
     include Cable::Menu::SimpleNavigationMethods
-    include Cable::Menu::UrlHelper  
+    include Cable::Helpers::UrlHelper  
     # Interface for nested_set
 
 
+
+    
     def show_cb
       Menu.before_save_callback_chain
     end
     # @return [String]  The internally generated friendly URL or a custom url defined for this menu.
-
     
     # @return [String] The class of the associated resource as defined through cable_menuable polymorphic interface.
     def type
       # cable_menuable_type
     end
-
-  
   
     def title_or_url
       # if self[:url].blank?
@@ -41,6 +42,10 @@ class Cable::Menu::Base < ActiveRecord::Base
       # else
         # self[:url]
       # end
+    end
+    
+    def resource
+      self.location.resource
     end
     
 

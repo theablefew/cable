@@ -1,0 +1,10 @@
+
+<% if @location.special_action.blank? %>
+  <% unless @location.template.blank? %>
+    <%= render :partial => "main/templates/#{@location.template}" %>
+  <% else %>
+    <%= render :partial => "main/templates/default" %>
+  <% end %>
+<% else %>
+  <%= render :partial => "main/templates/#{@location.special_action}" %>
+<% end %>

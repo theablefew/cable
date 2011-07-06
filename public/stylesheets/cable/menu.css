@@ -9,7 +9,7 @@
   margin-right:10px;
 }
  
-
+div.tabs ul {list-style-type:none; padding-left:0}
 #add-menu-tree {
   float:left; 
   margin-right:10px;

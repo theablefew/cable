@@ -9,6 +9,10 @@ class CreateLocations < ActiveRecord::Migration
       t.integer :rgt
       t.string :url
       t.string :marketable_url
+      t.string :meta_description
+      t.string :meta_keywords
+      t.string :template
+      t.string :special_action
       t.timestamps
     end
     

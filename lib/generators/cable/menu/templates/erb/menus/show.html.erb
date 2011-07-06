@@ -11,12 +11,12 @@
     <%% unless @<%= singular_table_name %>.resource.nil? %>
       <tr>
         <th class="label">Links to:</th>
-        <td><%%= @<%= singular_table_name %>.cable_<%= singular_table_name %>able_type %> | <%%= link_to @<%= singular_table_name %>.resource.first_displayable_attribute, [:admin, @<%= singular_table_name %>.resource] %></td>
+        <td><%%= @<%= singular_table_name %>.location.locatable_type %> | <%%= link_to @<%= singular_table_name %>.resource.first_displayable_attribute, [:admin, @<%= singular_table_name %>.resource] %></td>
       </tr>
     <%% end %>
   </tbody>
 </table>
 <div class="actions">
-  <%%= link_to "Edit", edit_admin_menu_path(@<%= singular_table_name %>) %>
+  <%%= link_to "Edit", edit_polymorphic_url([:admin,@<%= singular_table_name %>.resource]) %>
   <%%= link_to "Destroy", [:admin, @<%= singular_table_name %>], :confirm => 'Are you sure? This could be a really bad idea!', :method => :delete %>
 </div>

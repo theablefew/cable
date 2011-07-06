@@ -1,0 +1,19 @@
+<div id="sidebar" class="span-5 first">
+  <div class="box">
+    <ul class="navigation">
+      <% if @location.children.empty? %>
+        <%= render_navigation :level => 1, :items => @location.self_and_siblings, :expand_all => false %>
+      <% else %>
+        <%= render_navigation :level => 1, :items => @location.children, :expand_all => false %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="span-19 last about">
+  <div class="box">
+    <% unless @resource.nil? %>
+      <h1><%= @resource.title %></h1>
+      <%= raw @resource.body %>
+    <% end %>
+  </div>
+</div>

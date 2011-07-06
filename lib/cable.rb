@@ -15,9 +15,14 @@ module Cable
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
   autoload :Block, 'cable/block'
   autoload :SpecialAction, 'cable/special_action'
+  
+  module Locations
+    autoload :Location, 'cable/locations/location'
+  end
 
   module Schema
     require 'cable/schema/menuable'
+    require 'cable/schema/resourceable'
   end
   
   module Errors
@@ -29,13 +34,18 @@ module Cable
   module Menu
     autoload :ActsAsCableMenu, "cable/menu/acts_as_cable_menu"
     autoload :SimpleNavigationMethods, "cable/menu/simple_navigation_methods"
-    autoload :UrlHelper, 'cable/menu/url_helper'
     autoload :Base, "cable/menu/base"
   end
   
   module Media
     autoload :ActsAsAttachable, "cable/media/acts_as_attachable"
     autoload :Asset, "cable/media/asset"
+  end
+  
+  module Helpers
+    autoload :UrlHelper, 'cable/helpers/url_helper'
+    autoload :NestedSetHelper, 'cable/helpers/nested_set_helper'
+    autoload :CableControllerHelpers, 'cable/helpers/cable_controller_helpers'
   end
   
   mattr_accessor :regions

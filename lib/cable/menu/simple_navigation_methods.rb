@@ -4,7 +4,8 @@ module Cable
       
       
       def items
-        self.children.where(:show_in_menu => true)
+        # self.children.where(:show_in_menu => true)
+        self.children
       end
 
       def key

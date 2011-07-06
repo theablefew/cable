@@ -14,11 +14,13 @@
       $tree = $(".cable_menu_wrapper > ul");
       update_tree($tree);
       select_item(ui.item[0]);
+      $('ul.empty').removeClass('.empty');
     },
     update: function(event, ui) {
       
     },
     receive: function(event, ui) {
+        console.log( "receive event");
       $target = $(event.target);
       $item = $(ui.item[0]);
       $children_of_item = $item.data("children");  
@@ -57,6 +59,7 @@
   }
   
   function show_add_menu(item){
+
     $("#add-menu").remove();
     
     var $add = $("<li id='add-menu'>Add Menu Item</li>").appendTo($(item));
@@ -108,9 +111,11 @@
     var $ul = $("ul[menu="+$id+"]");
     
     if($ul.children().size() == 0){
+        console.log( $li.attr('title') + " has no children");
       $li.removeClass("has-children").addClass("empty");
     }else{
-      $li.addClass("has-children");      
+        console.log( $li.attr('title') + " has children");
+      $li.removeClass('empty').addClass("has-children");
     }
     
     var $children = [];
@@ -134,15 +139,21 @@
     var items = new Array();
     $(".cable_menu_wrapper .selected").removeClass("last");
     $(".cable_menu_wrapper .selected").each(function(){
-      items.push($(this).text());
+      items.push([$(this).text(), $(this).attr("menu")]);
     });
-    
-    $("#selection p").html(items.join(" &raquo; "));
+    items.sort(function(a,b) {return a[1] == b[1] ? 0 : (a[1] < b[1] ? -1 : 1)})
+    sorted_items = []
+    $.each( items , function(index, value) {
+        sorted_items.push( value[0]);
+    } );
+    $("#selection p").html(sorted_items.join(" &raquo; "));
     $(".cable_menu_wrapper .selected").last().addClass("last");
   }
   
   function select_item(item,wrapper){
     $item = $(item);
+
+    // window.location.hash = $item.attr("title");
     $id = $(item).attr("menu");
 	parent_id = $id;
     $wrapper = $(wrapper);
@@ -320,8 +331,8 @@
     $wrapper.find("ul").sortable(sortable_options);
     
     var $current_selection = $("<div id='selection'><strong>Current Selection:</strong><p>&nbsp;</p></div>").insertBefore($wrapper);
-    var $add1 = $("<div id='add-menu-tree1' class='actions'><a>Add Menu</a></div>").insertBefore($current_selection);
-    var $save1 = $("<div id='save-tree1' class='actions'><a>Save Tree</a></div>").insertBefore($current_selection);
+    // var $add1 = $("<div id='add-menu-tree1' class='actions'><a>Add Menu</a></div>").insertBefore($current_selection);
+    // var $save1 = $("<div id='save-tree1' class='actions'><a>Save Tree</a></div>").insertBefore($current_selection);
 
     var $save = $("<div id='save-tree' class='actions'><a>Save Tree</a></div>").insertAfter($wrapper);
     var $add = $("<div id='add-menu-tree' class='actions'><a>Add Menu</a></div>").insertAfter($wrapper);
@@ -330,7 +341,7 @@
     var $menu_details = $("<div id='menu-details' />").insertAfter($save);
 
     $save.click(function(){save_tree();}); 
-    $save1.click(function(){save_tree();}); 
+    // $save1.click(function(){save_tree();}); 
 
     $add.click(function(){
       $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
@@ -339,34 +350,40 @@
           modal: true,
           width: 600,
       resizable: false,
-          title: "New Menu",
+          title: "New Resource",
       draggable: false
         });
       });
     }); 
+    // hash = unescape( window.location.hash).replace("#","")
+    // selectable_item = $wrapper.find('li[title="'+hash+'"]');
+    select_item( $wrapper.find('ul[menu="0"] li') )
+    // if(selectable_item.length > 0) {
+        // select_item( selectable_item, $wrapper )
+    // }
 
-	$add1.click(function(){
-      $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
-      
-      var get_string;
-      
-      if (parent_id > 0){
-        get_string = "?parent_id="+parent_id;
-      } else {
-        get_string = "?parent_id=0";
-      }
-      
-      $("#add-menu-form").load("/admin/menus/new"+get_string, function(){
-        $(this).dialog({
-          modal: true,
-          width: 600,
-      resizable: false,
-          title: "New Menu",
-      draggable: false
-        });
-      });
-    });
-   
+    // $add1.click(function(){
+    //       $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
+    //       
+    //       var get_string;
+    //       
+    //       if (parent_id > 0){
+    //         get_string = "?parent_id="+parent_id;
+    //       } else {
+    //         get_string = "?parent_id=0";
+    //       }
+    //       
+    //       $("#add-menu-form").load("/admin/menus/new"+get_string, function(){
+    //         $(this).dialog({
+    //           modal: true,
+    //           width: 600,
+    //       resizable: false,
+    //           title: "New Resource",
+    //       draggable: false
+    //         });
+    //       });
+    //     });
+    //    
     $("<hr />").insertAfter($wrapper);
 
   }

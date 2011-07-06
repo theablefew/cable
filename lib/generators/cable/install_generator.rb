@@ -33,6 +33,7 @@ module Cable
           if options.locations?
             begin
              migration_template 'lib/generators/templates/create_locations.rb', "db/migrate/create_locations.rb"
+             copy_file 'lib/generators/templates/location_model.rb', 'app/models/location.rb'
             rescue
 
             end
@@ -71,11 +72,16 @@ module Cable
           copy_file "lib/generators/templates/initializer.rb", "config/initializers/cable.rb"
         end
         
+        def create_main_controller 
+          copy_file 'lib/generators/templates/main_controller.rb', 'app/controllers/main_controller.rb'
+        end
+        
         def install_admin
           copy_file "app/controllers/admin_controller.rb", "app/controllers/admin_controller.rb"
           copy_file "app/views/layouts/admin.html.erb", 'app/views/layouts/admin.html.erb'
           directory 'app/views/layouts/admin', 'app/views/layouts/admin'
           directory "public/stylesheets/tinymce", "public/stylesheets/tinymce"
+          copy_file 'app/views/admin/index.html.erb', 'app/views/admin/index.html.erb'
         end
         
         def install_cocoon
@@ -97,11 +103,12 @@ module Cable
           puts ""
         end
         
+        
         def self.next_migration_number(dirname)
          if ActiveRecord::Base.timestamped_migrations
-           Time.now.utc.strftime("%Y%m%d%H%M%S") + (rand(6) + rand(5)).to_s
+           Time.now.utc.strftime("%Y%m%d%H%M%S") + (rand(9) + rand(9)).to_s
          else
-           "%.3d" % (current_migration_number(dirname) + 1)
+           "%.3d" % (current_migration_number(dirname) + rand(90))
          end
         end
 
