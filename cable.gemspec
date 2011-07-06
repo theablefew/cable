@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.16"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-05-11}
+  s.date = %q{2011-07-05}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     "app/helpers/admin/menus_helper.rb",
     "app/helpers/admin/search_controller_helper.rb",
     "app/helpers/admin_helper.rb",
+    "app/helpers/main_helper.rb",
     "app/models/attachable_asset.rb",
     "app/models/attachable_document.rb",
     "app/models/attachable_image.rb",
@@ -43,6 +44,8 @@ Gem::Specification.new do |s|
     "app/views/layouts/admin.html.erb",
     "app/views/layouts/admin/_dual_column_layout.html.erb",
     "app/views/layouts/admin/_single_column_layout.html.erb",
+    "app/views/main/show.html.erb",
+    "app/views/main/templates/_default.html.erb",
     "config/admin_navigation.rb",
     "config/navigation.rb",
     "config/routes.rb",
@@ -51,21 +54,24 @@ Gem::Specification.new do |s|
     "lib/cable/base.rb",
     "lib/cable/block.rb",
     "lib/cable/capistrano.rb",
-    "lib/cable/controllers/cable_controller_helpers.rb",
     "lib/cable/engine.rb",
     "lib/cable/errors/resource_association_error.rb",
     "lib/cable/errors/search_error.rb",
+    "lib/cable/helpers/cable_controller_helpers.rb",
+    "lib/cable/helpers/nested_set_helper.rb",
+    "lib/cable/helpers/url_helper.rb",
+    "lib/cable/locations/location.rb",
     "lib/cable/media/acts_as_attachable.rb",
     "lib/cable/media/asset.rb",
     "lib/cable/menu.rb",
     "lib/cable/menu/acts_as_cable_menu.rb",
     "lib/cable/menu/base.rb",
     "lib/cable/menu/simple_navigation_methods.rb",
-    "lib/cable/menu/url_helper.rb",
     "lib/cable/page.rb",
     "lib/cable/rails/routes.rb",
     "lib/cable/railtie.rb",
     "lib/cable/schema/menuable.rb",
+    "lib/cable/schema/resourceable.rb",
     "lib/cable/setting.rb",
     "lib/cable/special_action.rb",
     "lib/generators/cable/install_generator.rb",
@@ -83,6 +89,7 @@ Gem::Specification.new do |s|
     "lib/generators/cable/menu/templates/erb/menus/show.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/sort.js.erb",
     "lib/generators/cable/menu/templates/erb/partials/_menu_fields.html.erb",
+    "lib/generators/cable/menu/templates/menus.rb",
     "lib/generators/cable/menu/templates/migration.rb",
     "lib/generators/cable/menu/templates/model.rb",
     "lib/generators/cable/orm_helpers.rb",
@@ -101,7 +108,10 @@ Gem::Specification.new do |s|
     "lib/generators/templates/block.rb",
     "lib/generators/templates/create_blocks.rb",
     "lib/generators/templates/create_cable_settings.rb",
+    "lib/generators/templates/create_locations.rb",
     "lib/generators/templates/initializer.rb",
+    "lib/generators/templates/location_model.rb",
+    "lib/generators/templates/main_controller.rb",
     "lib/generators/templates/partials/_block.html.erb",
     "lib/generators/templates/partials/_block_form.html.erb",
     "lib/railties/tasks.rake",
