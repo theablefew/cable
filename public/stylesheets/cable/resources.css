@@ -4,7 +4,7 @@
 form.formtastic li p.inline-hints.notice{ font-size:12px; padding:5px 0 5px 8px; width:72%}
 form.formtastic .ui-tabs .ui-tabs-nav li.ui-tabs-selected{ border-color:#ccc}
 form.formtastic .ui-tabs label {font-weight:bold; color:#999; font-size:16px;   }
-form.formtastic .ui-tabs .inline-hints { font-style:italic; font-size:10px; color:#999}
+form.formtastic .ui-tabs .inline-hints { font-style:italic; font-size:10px; color:#555}
 .text-actions {padding-left:26%}
 
 form.formtastic .ui-tabs fieldset.buttons{ padding-left:26%;}
