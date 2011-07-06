@@ -405,7 +405,7 @@
     //       });
     //     });
     //    
-    $("<hr />").insertAfter($wrapper);
+    $("<div class='clear' ></div>").insertAfter($wrapper);
 
   }
 

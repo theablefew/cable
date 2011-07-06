@@ -2,6 +2,9 @@
 
 #selection {
   margin-top:10px;
+  background:#eee;
+  padding:10px;
+  border:1px solid #ccc;
 }
 
 #add-menu-tree1 {

@@ -2,7 +2,7 @@ class MainController < ApplicationController
   
   ## Cable::Helpers::CableControllerHelpers defines find_by_url method. Overwrite to make customized changes.
   # def find_by_url
-  #   @location = Location.find_by_marketable_url( params[:url] ) || Location.find_by_url( "/#{params[:url]}" )
+  #   @location = Location.find_by_marketable_url( params[:url] ) || Location.find_by_url( request.path )
   #   unless @location.nil?
   #     @resource = @location.resource
   #     @page_title =  (@location.title.nil?) ? "" : @location.title
@@ -10,6 +10,7 @@ class MainController < ApplicationController
   #     render :action => :show
   #   else
   #     redirect_to "/"
+  #     logger.info "[Cable] No location found. Redirecting".color(:yellow)
   #   end
   # end
   
