@@ -1,7 +1,5 @@
 require 'rails/generators/migration'
 require 'active_record'
-require 'rainbow'
-
 module Cable
   module Generators
       class InstallGenerator < Rails::Generators::Base
@@ -54,7 +52,7 @@ module Cable
         
         def copy_simple_nav
           if options.simple_nav?
-            if yes?("Would you like to install simple navigation?".color(:yellow) ) 
+            if yes?("Would you like to install simple navigation?",:yellow)  
               generate("navigation_config")
               copy_file 'config/admin_navigation.rb', 'config/admin_navigation.rb'
               copy_file 'config/navigation.rb', 'config/navigation.rb'
@@ -63,7 +61,7 @@ module Cable
         end
         
         def install_jquery
-          if yes?("Dost thou require jquery?".color(:yellow))
+          if yes?("Dost thou require jquery?",:yellow)
             generate("jquery:install --ui")
           end
         end
@@ -96,16 +94,20 @@ module Cable
         
         def install_routes
         end
+        
+        def install_masks
+          generate('cable:masks') if yes?("Would you like URL Masks module to be included?", :yellow)
+        end
         # hook_for :orm, :as => :migration
         
         def print_setup_instructions
-          puts ""
-          puts "Run rake db:migrate to complete setup.".color(:yellow)
-          puts ""
-          puts "To begin using Cable Menu and Resources use:".color(:green)
-          puts "rails generate cable:menu MENU_NAME"
-          puts "rails generate cable:resource RESOURCE_NAME field:type field:type ..."
-          puts ""
+          say ""
+          say "Run rake db:migrate to complete setup.", :yellow
+          say ""
+          say "To begin using Cable Menu and Resources use:", :green
+          say "rails generate cable:menu MENU_NAME"
+          say "rails generate cable:resource RESOURCE_NAME field:type field:type ..."
+          say ""
         end
         
         

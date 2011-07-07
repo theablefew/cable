@@ -58,6 +58,10 @@ module Cable
           route("cable_to :#{plural_table_name}") if options.routes? and yes?("Would you like to generate routes for #{model_name.capitalize}?",:yellow)
         end
         
+        def add_resource_to_cable_initializer
+         insert_into_file "config/initializers/cable.rb" ,"\tconfig.resources << '#{model_name.camelize}'\n\n", :before => 'end' if yes?("Do you want to register this resource with Cable?", :green)
+        end
+        
         def self.next_migration_number(dirname)
          if ActiveRecord::Base.timestamped_migrations
            Time.now.utc.strftime("%Y%m%d%H%M%S")

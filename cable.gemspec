@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-07-05}
+  s.date = %q{2011-07-07}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -70,11 +70,18 @@ Gem::Specification.new do |s|
     "lib/cable/page.rb",
     "lib/cable/rails/routes.rb",
     "lib/cable/railtie.rb",
+    "lib/cable/schema/maskable.rb",
     "lib/cable/schema/menuable.rb",
     "lib/cable/schema/resourceable.rb",
     "lib/cable/setting.rb",
     "lib/cable/special_action.rb",
+    "lib/cable/url_mask.rb",
     "lib/generators/cable/install_generator.rb",
+    "lib/generators/cable/mask/mask_generator.rb",
+    "lib/generators/cable/mask/templates/erb/_mask.html.erb",
+    "lib/generators/cable/mask/templates/erb/_mask_fields.html.erb",
+    "lib/generators/cable/mask/templates/migration.rb",
+    "lib/generators/cable/mask/templates/model.rb",
     "lib/generators/cable/media/media_generator.rb",
     "lib/generators/cable/media/templates/migration.rb",
     "lib/generators/cable/media/templates/model.rb",
@@ -93,7 +100,6 @@ Gem::Specification.new do |s|
     "lib/generators/cable/menu/templates/migration.rb",
     "lib/generators/cable/menu/templates/model.rb",
     "lib/generators/cable/orm_helpers.rb",
-    "lib/generators/cable/override_generator.rb",
     "lib/generators/cable/resource/resource_generator.rb",
     "lib/generators/cable/resource/templates/controller.rb",
     "lib/generators/cable/resource/templates/erb/scaffold/_form.html.erb",
@@ -425,6 +431,7 @@ Gem::Specification.new do |s|
     "public/stylesheets/cable/menu.css",
     "public/stylesheets/cable/pagination.css",
     "public/stylesheets/cable/regions.css",
+    "public/stylesheets/cable/resources.css",
     "public/stylesheets/cable/search.css",
     "public/stylesheets/cable/tables.css",
     "public/stylesheets/cable/tags.css",

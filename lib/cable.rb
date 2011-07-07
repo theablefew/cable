@@ -10,7 +10,7 @@ module Cable
   autoload :Base, 'cable/base'
   autoload :ActsAsCable, 'cable/acts_as_cable'
   autoload :Menu, 'cable/menu'
-  autoload :Page, 'cable/page'
+  autoload :Resource, 'cable/resource'
   autoload :Setting, 'cable/setting'
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
   autoload :Block, 'cable/block'

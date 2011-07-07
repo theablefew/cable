@@ -6,12 +6,13 @@ require 'rails/generators'
 require 'rails/generators/migration'
 module Cable
     module Generators
-      class MaskGenerator < Rails::Generators::NamedBase
+      class MasksGenerator < Rails::Generators::NamedBase
         include Rails::Generators::Migration
         # include Rails::Generators::ActiveModel
         source_root File.expand_path("../templates", __FILE__)
         desc "Generates a Cable UrlMask with the given NAME (if one does not exist) plus a migration file"
         # argument :model_name, :type => :string, :default => "url_mask"
+        argument :name, :type => :string, :default => "url_mask"
         class_option :controller, :type => :boolean, :default => true
         class_option :model, :type => :boolean, :default => true
         class_option :migration, :type => :boolean, :default => true
@@ -28,14 +29,8 @@ module Cable
          end
         end
         
-        def create_controller_file
-          if options.controller?
-            template 'controller.rb', "app/controllers/admin/#{model_name.pluralize}_controller.rb"
-          end
-        end
-        
         def copy_url_mask_fields
-          directory 'lib/generators/url_masks/templates/erb', 'app/views/admin/url_masks'
+          directory 'erb', 'app/views/admin/url_masks'
         end
         
         
