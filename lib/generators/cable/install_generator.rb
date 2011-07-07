@@ -89,6 +89,11 @@ module Cable
             insert_into_file 'app/views/layouts/admin.html.erb', "<%= javascript_include_tag :cocoon %>\n", :before => '<%= yield :scripts %>'
         end
         
+        def create_seed_bed_directory
+          empty_directory 'db/seeds'
+          # run('rake db:seed:menus') if yes?("Would you like to create a root location for menus?".color(:yellow))
+        end
+        
         def install_routes
         end
         # hook_for :orm, :as => :migration

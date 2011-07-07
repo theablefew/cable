@@ -15,6 +15,7 @@ module Cable
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
   autoload :Block, 'cable/block'
   autoload :SpecialAction, 'cable/special_action'
+  autoload :UrlMask, 'cable/url_mask'
   
   module Locations
     autoload :Location, 'cable/locations/location'
@@ -23,7 +24,9 @@ module Cable
   module Schema
     require 'cable/schema/menuable'
     require 'cable/schema/resourceable'
+    require 'cable/schema/maskable'
   end
+  
   
   module Errors
     autoload :ResourceAssociationError, "cable/errors/resource_association_error"
