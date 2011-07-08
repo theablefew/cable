@@ -23,12 +23,12 @@ module Admin::MenusHelper
   end
   
   def display_tree_plain(tree, parent_id)
-    logger.info "TREE: #{tree.inspect}"
+    # logger.info "TREE: #{tree.inspect}"
     unless tree.count <= 0
       ret = "<ul>"
       tree.each do |node|
         if node.location.parent_id == parent_id
-          logger.info "Node: #{node.inspect}"
+          # logger.info "Node: #{node.inspect}"
           ret += "<li title='#{node.title}' id='#{dom_id(node)}'>"
           ret += "#{node.title}"
           unless node.children.count <= 0

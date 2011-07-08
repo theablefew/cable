@@ -24,11 +24,11 @@ module Cable
         end
         
         def locations
-          self.all.collect(&:location)
+          self.all.includes(:location).collect(&:location)
         end
         
         def roots
-          Location.roots.collect{|loc| loc.menus.first unless loc.menus.blank? }.flatten
+          Location.roots.includes(:menus).collect{|loc| loc.menus.first unless loc.menus.blank? }.flatten
         end
       end
   

@@ -11,11 +11,11 @@ module Cable
       module ClassMethods
         
         def acts_as_maskable( reflection_options = {} )
-          has_many :masks, :as => :maskable, :dependent => :destroy
+          has_many :url_masks, :as => :maskable, :dependent => :destroy
           send :include, InstanceMethods
           send :include, ActionView::Helpers::TextHelper
           
-          accepts_nested_attributes_for :masks, :allow_destroy => true
+          accepts_nested_attributes_for :url_masks, :allow_destroy => true
           
           yield self if block_given?
         end

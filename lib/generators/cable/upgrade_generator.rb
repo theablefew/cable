@@ -20,6 +20,21 @@ module Cable
         CABLE_RESOURCE = "Cable::Resource"
         CABLE_MENU_LEGACY = "Cable::Menu::Base"
         CABLE_MENU = "Cable::Menus::Menu"
+        ACTS_AS_CABLE = "acts_as_cable"
+        
+        def upgrade_cable_views
+          say "Checking for legacy view files...", :yellow
+          
+          lines = grep_for( ACTS_AS_CABLE , "app/models/*")
+          files = extract_filenames_from_grep( lines )
+          models = files.collect{|d| d.scan(/\/(\w+).rb$/)}.flatten.collect(&:tableize)
+          models.each do |model|
+            say "Views for #{model.classify}"
+            say_files_found( Dir["app/views/admin/#{model}/*.html.erb"] )
+            say ""
+          end
+          Array(models).each{|f| backup_legacy_cable( "app/views/admin/#{f}" ) } if yes?("Would you like to backup these files before running cable:install?", :yellow )
+        end
         
         def check_for_cable_page
           
@@ -49,6 +64,8 @@ module Cable
             say( "None found.\n", :green)
           end
         end
+        
+
 
 
       protected
@@ -70,7 +87,9 @@ module Cable
            say("")
            say("Found the following files:", :red)
            say("")
-           Array(files).each do |f|
+           
+           arr_of_files = files.kind_of?(Array) ? files : Array(files)
+           arr_of_files.each do |f|
               say "\t- #{f}", :red
            end
            say("")
@@ -125,6 +144,30 @@ module Cable
           end.compact.uniq
         end
         
+        
+        def backup_legacy_cable( dir )
+
+          files = Dir["#{dir}/*.html.erb"]
+          
+
+          puts
+          files.each do |f|
+            if File.exist?(f)
+              say "backing up #{f} to #{f}.cable_old", :cyan
+              FileUtils.cp(f, "#{f}.cable_old")
+            end
+          end
+
+          puts
+          puts "This is a list of the files analyzed and backed up (if they existed);\nyou will probably not want the generator to replace them since\nyou probably modified them (but now they're safe if you accidentally do!)."
+          puts
+
+          files.each do |f|
+            say "-#{f}", :cyan
+          end
+          puts
+
+        end
         
       end
   end

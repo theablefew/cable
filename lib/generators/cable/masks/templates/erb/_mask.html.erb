@@ -1,9 +1,9 @@
 <li class="url optional" id="footer_logo_link_url_input">
   <label for="footer_logo_link_url">Masks</label>
-  <%= link_to_add_association 'Add Mask', f, :masks , {'data-association-insertion-node' => '#masks'}, "/admin/partials/"%>
+  <%= link_to_add_association 'Add Mask', f, :url_masks , {'data-association-insertion-node' => '#masks'}, "/admin/url_masks/"%>
   <div id='masks'>
-    <%= f.semantic_fields_for :masks do |mask| %>
-      <%= render :partial => '/admin/partials/mask_fields', :locals => {:f => mask} %>
+    <%= f.semantic_fields_for :url_masks do |mask| %>
+      <%= render :partial => '/admin/url_masks/mask_fields', :locals => {:f => mask} %>
     <% end %>
   </div>
 </li>
