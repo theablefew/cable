@@ -67,7 +67,7 @@
       <%%= f.inputs do %>
         <%%= f.input :cable_menuable_type, :as => :hidden %>
         <%%= f.input :cable_menuable_id, :as => :hidden %>    
-        <li><div id="selected-resource"><%%= @<%= singular_table_name %>.cable_menuable_type %> &raquo; <%%= @<%= singular_table_name %>.resource.title unless @<%= singular_table_name %>.resource.nil? %></div></li>
+        <li><div id="selected-resource"><%%= @<%= singular_table_name %>.cable_menuable_type %> &raquo; <%%= @<%= singular_table_name %>.resource.first_displayable_attribute unless @<%= singular_table_name %>.resource.nil? %></div></li>
         <li>
           <table id="resources">
             <thead>

@@ -11,7 +11,7 @@
     <%% unless @<%= singular_table_name %>.resource.nil? %>
       <tr>
         <th class="label">Links to:</th>
-        <td><%%= @<%= singular_table_name %>.cable_<%= singular_table_name %>able_type %> | <%%= link_to @<%= singular_table_name %>.resource.title, [:admin, @<%= singular_table_name %>.resource] %></td>
+        <td><%%= @<%= singular_table_name %>.cable_<%= singular_table_name %>able_type %> | <%%= link_to @<%= singular_table_name %>.resource.first_displayable_attribute, [:admin, @<%= singular_table_name %>.resource] %></td>
       </tr>
     <%% end %>
   </tbody>

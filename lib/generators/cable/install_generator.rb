@@ -61,6 +61,7 @@ module Cable
         end
         
         def install_admin
+          copy_file "app/controllers/admin_controller.rb", "app/controllers/admin_controller.rb"
           copy_file "app/views/layouts/admin.html.erb", 'app/views/layouts/admin.html.erb'
           directory 'app/views/layouts/admin', 'app/views/layouts/admin'
           directory "public/stylesheets/tinymce", "public/stylesheets/tinymce"
