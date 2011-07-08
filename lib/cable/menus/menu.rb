@@ -1,5 +1,5 @@
 require 'rainbow'
-class Cable::Menu::Base < ActiveRecord::Base
+class Cable::Menus::Menu < ActiveRecord::Base
     self.abstract_class = true
     class << self
       attr_accessor :non_deletable
@@ -19,7 +19,7 @@ class Cable::Menu::Base < ActiveRecord::Base
     
     serialize :options
   
-    include Cable::Menu::SimpleNavigationMethods
+    include Cable::Menus::SimpleNavigationMethods
     include Cable::Helpers::UrlHelper  
     # Interface for nested_set
 

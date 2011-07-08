@@ -1,5 +1,5 @@
 module Cable
-  module Menu
+  module Menus
     module SimpleNavigationMethods
       
       

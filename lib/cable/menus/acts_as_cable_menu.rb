@@ -3,7 +3,7 @@ require 'awesome_nested_set'
 require 'rainbow'
 
 module Cable
-  module Menu
+  module Menus
     module ActsAsCableMenu
       def self.included( base )
         base.send :extend, ClassMethods

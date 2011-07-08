@@ -7,7 +7,7 @@ class Cable::Locations::Location < ActiveRecord::Base
   # accepts_nested_attributes_for :menus
   serialize :options
 
-  include Cable::Menu::SimpleNavigationMethods
+  include Cable::Menus::SimpleNavigationMethods
   include Cable::Helpers::UrlHelper
   include Cable::Helpers::NestedSetHelper
   

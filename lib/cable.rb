@@ -9,7 +9,7 @@ module Cable
 
   autoload :Base, 'cable/base'
   autoload :ActsAsCable, 'cable/acts_as_cable'
-  autoload :Menu, 'cable/menu'
+  autoload :ActsAsMaskable, 'cable/acts_as_maskable'
   autoload :Resource, 'cable/resource'
   autoload :Setting, 'cable/setting'
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
@@ -34,10 +34,10 @@ module Cable
     autoload :MissingInterfaceMethod, 'cable/errors/search_error'
   end
   
-  module Menu
-    autoload :ActsAsCableMenu, "cable/menu/acts_as_cable_menu"
-    autoload :SimpleNavigationMethods, "cable/menu/simple_navigation_methods"
-    autoload :Base, "cable/menu/base"
+  module Menus
+    autoload :ActsAsCableMenu, "cable/menus/acts_as_cable_menu"
+    autoload :SimpleNavigationMethods, "cable/menus/simple_navigation_methods"
+    autoload :Menu, "cable/menus/menu"
   end
   
   module Media
