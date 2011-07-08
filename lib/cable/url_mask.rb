@@ -2,8 +2,20 @@ class Cable::UrlMask < ActiveRecord::Base
   
   belongs_to :maskable, :polymorphic => true
   
-  def find_resource_by_url( url )
+  def self.find_resource_by_url( request )
+    parts = request.split('/')
+    order = parts.to_enum(:each_with_index).collect{|part,index| parts.dup.slice(0..index).join("/") + "/*" }.flatten[1..-2]
     
+    order.each do |part|
+      maskable = UrlMask.find_all_by_url_mask( part )
+      return maskable unless maskable.empty?
+    end
+    
+    return nil
+  end
+  
+  def resource
+    self.maskable
   end
   
 end

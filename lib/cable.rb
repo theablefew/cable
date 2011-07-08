@@ -49,6 +49,8 @@ module Cable
     autoload :UrlHelper, 'cable/helpers/url_helper'
     autoload :NestedSetHelper, 'cable/helpers/nested_set_helper'
     autoload :CableControllerHelpers, 'cable/helpers/cable_controller_helpers'
+    autoload :KaminariHelper, 'cable/helpers/kaminari_helper'
+    autoload :UrlMaskHelper, 'cable/helpers/url_mask_helper'
   end
   
   mattr_accessor :regions

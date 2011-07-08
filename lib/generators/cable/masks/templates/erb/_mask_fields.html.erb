@@ -1,6 +1,6 @@
 <div class='nested-fields'>
   <%= f.inputs do %>
-    <%= f.input :url_mask, :label => false %>
+    <%= f.input :url_mask, :label => false, :wrapper_html => {:class => :mask_input } %>
     <%= link_to_remove_association "Remove Mask", f %>
   <% end %>
 </div>

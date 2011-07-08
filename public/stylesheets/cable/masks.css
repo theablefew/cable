@@ -1,0 +1,6 @@
+div#masks { margin-bottom: 1em; margin-top: -0.5em; padding: 0.5em 0px; }
+div#masks div.mask-ui { margin-left:25%; }
+div#masks li a.remove_fields{ float:left;}
+div#masks li.mask_input{ float:left; width:350px; }
+.formtastic div.masks li.mask_input input { border:1px #ccc solid; width:90%; }
+div#add-mask{ margin-bottom:20px; }

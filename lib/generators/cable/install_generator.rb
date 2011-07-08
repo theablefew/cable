@@ -82,6 +82,10 @@ module Cable
           copy_file 'app/views/admin/index.html.erb', 'app/views/admin/index.html.erb'
         end
         
+        def install_default_resource_template
+          directory 'app/views/main', 'app/views/main'
+        end
+        
         def install_cocoon
             generate('cocoon:install')
             insert_into_file 'app/views/layouts/admin.html.erb', "<%= javascript_include_tag :cocoon %>\n", :before => '<%= yield :scripts %>'
