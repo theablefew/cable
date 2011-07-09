@@ -4,9 +4,7 @@
       <div id='add-mask'>
         <%= link_to_add_association 'Add New Mask', f, :url_masks , {'data-association-insertion-node' => '#masks-items'}, "/admin/url_masks/"%>
       </div>
-      <div>
-        <div id='masks-items'>
-        </div>
+      <div id='masks-items'>
         <%= f.semantic_fields_for :url_masks do |mask| %>
           <%= render :partial => '/admin/url_masks/url_mask_fields', :locals => {:f => mask} %>
         <% end %>

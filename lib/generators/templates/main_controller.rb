@@ -21,8 +21,7 @@ class MainController < ApplicationController
   # def find_by_url_mask
   # 
   #   masked_resources = UrlMask.find_resource_by_url( request.path )
-  #   logger.info "#{masked_resources}".color(:yellow)
-  #   prepare_variables_for_masked_resources( masked_resources ) unless masked_resources.nil?
+  #   prepare_variables_for_masked_resources( masked_resources ) unless masked_resources.empty?
   # 
   # end
 

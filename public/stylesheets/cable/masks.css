@@ -1,6 +1,42 @@
 div#masks { margin-bottom: 1em; margin-top: -0.5em; padding: 0.5em 0px; }
 div#masks div.mask-ui { margin-left:25%; }
-div#masks li a.remove_fields{ float:left;}
-div#masks li.mask_input{ float:left; width:350px; }
-.formtastic div.masks li.mask_input input { border:1px #ccc solid; width:90%; }
+div#masks label{ float:left; margin-left:15px;}
+.nested-fields { background:#eee;border:1px solid #ccc;margin-bottom:10px; padding:10px 0 0 10px;}
+div#masks a.add_fields {
+    background:transparent url('/images/cable/add.png') 0px -2px no-repeat; 
+    color:#333; 
+    border:none; 
+    box-shadow:none;
+    border-radius:   none;
+    font-size:12px;
+    -moz-border-radius:     none;
+    -webkit-border-radius:  none;
+    border:                 none;
+    -moz-box-shadow:    none;
+    -webkit-box-shadow: none;
+    text-shadow: none;
+    padding-left:28px;
+    height:auto;
+    font-weight:bold; 
+}
+div#masks a.remove_fields{ 
+    float:left; 
+    background:transparent url('/images/cable/delete.png') 0px 4px no-repeat; 
+    color:#333; 
+    border:none; 
+    box-shadow:none;
+    border-radius:   none;
+    font-size:12px;
+    -moz-border-radius:     none;
+    -webkit-border-radius:  none;
+    border:                 none;
+    -moz-box-shadow:    none;
+    -webkit-box-shadow: none;
+    text-shadow: none;
+    padding-left:20px;
+    height:auto;
+}
+div#masks li.mask_input{ float:left; width:550px; }
+.formtastic div#masks li.mask_input input { border:1px #ccc solid; width:94%; }
 div#add-mask{ margin-bottom:20px; }
+div#masks li.mask_input p.inline-hints { margin-left:0px;}

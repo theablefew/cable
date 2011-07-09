@@ -263,26 +263,31 @@
     var $ul = $(ul);
     var $id = id;
     var $new_menu = $("<ul class='cable_menu' menu="+$id+"/>").appendTo($wrapper);
+    var $who_sets_id_twice = id;
     if($id >= 1){
       $new_menu.hide();
-    }    
+    }
     $ul.children().each(function(){
       var $li = $(this);
       var $cloned_li = $(this).clone();
       if($cloned_li.children().size() > 0){ 
         $cloned_li.addClass("has-children");
-        var $id = $cloned_li.attr("id").replace("menu_","");        
+        //This $id variable is going to conflict with the $id variable set in the above scope.
+        var $id = $cloned_li.attr("id").replace("menu_","");
         $cloned_li.children().each(function(){
           build_menu(this,$wrapper,$id);
         });
       }
       $cloned_li.find("ul").remove();
-      $cloned_li.html("<span class='menu-zoom'></span> <span class='menu-title'>"+$cloned_li.text()+"</span>");
+      if( $who_sets_id_twice == 0 ) {
+          $cloned_li.html("<span class='menu-zoom root'></span> <span class='menu-title'>"+$cloned_li.text()+"</span>");
+      }else{
+         $cloned_li.html("<span class='menu-zoom'></span> <span class='menu-title'>"+$cloned_li.text()+"</span>");
+      }
       $cloned_li.appendTo($new_menu);
       $cloned_li.attr("menu",$cloned_li.attr("id").replace("menu_",""));      
       $cloned_li.removeAttr("id");
-
-
+      
     });
   }
 
