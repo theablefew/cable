@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-07-08}
+  s.date = %q{2011-07-14}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
     "app/controllers/attachable_documents_controller.rb",
     "app/controllers/attachable_images_controller.rb",
     "app/controllers/cable/cable_admin_controller.rb",
-    "app/helpers/admin/menus_helper.rb",
     "app/helpers/admin/search_controller_helper.rb",
     "app/helpers/admin_helper.rb",
     "app/helpers/main_helper.rb",
@@ -31,6 +30,8 @@ Gem::Specification.new do |s|
     "app/views/admin/cable_settings/edit.html.erb",
     "app/views/admin/cable_settings/index.html.erb",
     "app/views/admin/index.html.erb",
+    "app/views/admin/partials/_location_for_resource.html.erb",
+    "app/views/admin/partials/_menus_for_location.html.erb",
     "app/views/admin/search/_generic_search_result.html.erb",
     "app/views/admin/search/_search.html.erb",
     "app/views/admin/search/index.html.erb",
@@ -49,6 +50,7 @@ Gem::Specification.new do |s|
     "config/admin_navigation.rb",
     "config/navigation.rb",
     "config/routes.rb",
+    "config/tiny_mce.yml",
     "lib/cable.rb",
     "lib/cable/acts_as_cable.rb",
     "lib/cable/acts_as_maskable.rb",
@@ -59,8 +61,10 @@ Gem::Specification.new do |s|
     "lib/cable/errors/resource_association_error.rb",
     "lib/cable/errors/search_error.rb",
     "lib/cable/helpers/cable_controller_helpers.rb",
+    "lib/cable/helpers/kaminari_helper.rb",
     "lib/cable/helpers/nested_set_helper.rb",
     "lib/cable/helpers/url_helper.rb",
+    "lib/cable/helpers/url_mask_helper.rb",
     "lib/cable/locations/location.rb",
     "lib/cable/media/acts_as_attachable.rb",
     "lib/cable/media/asset.rb",
@@ -111,7 +115,9 @@ Gem::Specification.new do |s|
     "lib/generators/cable/resource/templates/erb/scaffold/show.html.erb",
     "lib/generators/cable/resource/templates/migration.rb",
     "lib/generators/cable/resource/templates/model.rb",
-    "lib/generators/cable/upgrade_generator.rb",
+    "lib/generators/cable/upgrade/templates/add_location_id_to_menus.rb",
+    "lib/generators/cable/upgrade/templates/migrate_from_legacy_menu.rb",
+    "lib/generators/cable/upgrade/upgrade_generator.rb",
     "lib/generators/templates/block.rb",
     "lib/generators/templates/create_blocks.rb",
     "lib/generators/templates/create_cable_settings.rb",
@@ -177,6 +183,7 @@ Gem::Specification.new do |s|
     "public/stylesheets/cable/buttons.css",
     "public/stylesheets/cable/formtastic.css",
     "public/stylesheets/cable/formtastic_changes.css",
+    "public/stylesheets/cable/masks.css",
     "public/stylesheets/cable/menu.css",
     "public/stylesheets/cable/pagination.css",
     "public/stylesheets/cable/regions.css",

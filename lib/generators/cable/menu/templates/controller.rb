@@ -1,4 +1,4 @@
-class Admin::<%= class_name %>sController < AdminController
+class Admin::<%= plural_table_name.classify.pluralize %>Controller < AdminController
   respond_to :html, :xml, :json  
 
   def index

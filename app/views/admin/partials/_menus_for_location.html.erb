@@ -1,0 +1,8 @@
+<%= f.inputs do %>
+    <%= f.inputs :for => :location do |location_fields| %>
+        <%= location_fields.inputs :for => :menus do |menu_fields| %>
+            <%= menu_fields.input :creatable, :as => :boolean, :label => "Show in Menu", :input_html => {:checked => !menu_fields.object.new_record? } %>
+            <%= menu_fields.input :title , :label => "Menu Title", :hint => "If different than resource title."%>
+        <% end %>
+    <% end %>
+<% end %>

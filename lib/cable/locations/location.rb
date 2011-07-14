@@ -11,6 +11,24 @@ class Cable::Locations::Location < ActiveRecord::Base
   include Cable::Helpers::UrlHelper
   include Cable::Helpers::NestedSetHelper
   
+  scope :use_index, lambda {|index| 
+    {:from => "#{quoted_table_name} USE INDEX(#{index})"}
+  }
+  
+  def arranged
+    arranged = ActiveSupport::OrderedHash.new
+    insertion_points = [arranged]
+    depth = 0
+    self.class.where( :menus => {:show_in_menu => true}).includes(:menus).order('lft').each_with_level do |node, level|
+      next if level > depth && insertion_points.last.keys.last && node.parent_id != insertion_points.last.keys.last.id
+      insertion_points.push insertion_points.last.values.last if level > depth
+      (depth - level).times { insertion_points.pop } if level < depth
+      insertion_points.last.merge! node => ActiveSupport::OrderedHash.new
+      depth = level
+    end
+    logger.info "FREEKING ARRANGE #{arranged}".color(:yellow)
+    arranged
+  end
   #marketable_url is automatic. self.url is only set if user overrides it. 
   def url
     return self[:url] if self.external_link? || self.direct_link?
@@ -58,21 +76,21 @@ class Cable::Locations::Location < ActiveRecord::Base
   end
   
   def title_or_url
-    if self[:url].blank?
-      return "/" if self.root? 
-      unless self.menus.empty?
-        self.menus.first.title
-      else
-        self.resource.title
-      end
+    
+    return "/" if self.root? 
+    unless self.menus.empty?
+      return self.menus.first.title
     else
-      self[:url]
+      return self.resource.title
     end
+    
+    return self[:url] unless self[:url].blank?
+
   end
 
 
-  def self.menus
-    Location.roots.collect(&:menus).flatten
-  end
+  # def self.menus
+  #   Location.roots.collect(&:menus).flatten
+  # end
   
 end

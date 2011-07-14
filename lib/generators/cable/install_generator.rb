@@ -32,10 +32,15 @@ module Cable
             begin
              migration_template 'lib/generators/templates/create_locations.rb', "db/migrate/create_locations.rb"
              copy_file 'lib/generators/templates/location_model.rb', 'app/models/location.rb'
+             directory 'lib/generators/templates/partials', 'app/views/admin/partials'
             rescue
 
             end
          end
+        end
+        
+        def copy_tiny_mce_config
+          copy_file 'config/tiny_mce.yml', 'confit/tiny_mce.yml'
         end
         
         def create_blocks
@@ -44,8 +49,8 @@ module Cable
               migration_template 'lib/generators/templates/create_blocks.rb', 'db/migrate/create_blocks.rb'
             rescue
               copy_file 'lib/generators/templates/block.rb', 'app/models/block.rb'
-              copy_file 'lib/generators/templates/partials/_block.html.erb', 'app/views/admin/partials/_block.html.erb'
-              copy_file 'lib/generators/templates/partials/_block_form.html.erb', 'app/views/admin/partials/_block_form.html.erb'
+              # copy_file 'lib/generators/templates/partials/_block.html.erb', 'app/views/admin/partials/_block.html.erb'
+              # copy_file 'lib/generators/templates/partials/_block_form.html.erb', 'app/views/admin/partials/_block_form.html.erb'
             end
           end
         end
@@ -86,14 +91,13 @@ module Cable
           directory 'app/views/main', 'app/views/main'
         end
         
-        def install_cocoon
-            generate('cocoon:install')
-            insert_into_file 'app/views/layouts/admin.html.erb', "<%= javascript_include_tag :cocoon %>\n", :before => '<%= yield :scripts %>'
-        end
+        # def install_cocoon
+        #     generate('cocoon:install')
+        #     insert_into_file 'app/views/layouts/admin.html.erb', "<%= javascript_include_tag :cocoon %>\n", :before => '<%= yield :scripts %>'
+        # end
         
         def create_seed_bed_directory
           empty_directory 'db/seeds'
-          # run('rake db:seed:menus') if yes?("Would you like to create a root location for menus?".color(:yellow))
         end
         
         def install_routes
@@ -113,6 +117,7 @@ module Cable
           say "rails generate cable:resource RESOURCE_NAME field:type field:type ..."
           say ""
         end
+        
         
         
         def self.next_migration_number(dirname)

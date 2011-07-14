@@ -15,7 +15,7 @@
     <%= javascript_include_tag 'jquery' , 'jquery-ui', 'rails', 'jquery.tablesorter.min.js',  'jquery.ui.autocomplete.html.js', 'admin.js' %>
     <%# javascript_include_tag 'tinymce/jquery.tinymce.js'%>
     <%= include_tiny_mce_if_needed %>
-
+    <%= javascript_include_tag :cocoon %>
     <%= yield :scripts %>
     <%= yield :styles %>
   </head>

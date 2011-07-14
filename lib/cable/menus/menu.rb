@@ -18,13 +18,13 @@ class Cable::Menus::Menu < ActiveRecord::Base
     # validates_presence_of :title
     
     serialize :options
-  
-    include Cable::Menus::SimpleNavigationMethods
+    
+    scope :use_index, lambda {|index| 
+      {:from => "#{quoted_table_name} USE INDEX(#{index})"}
+    }
+    
     include Cable::Helpers::UrlHelper  
     # Interface for nested_set
-
-
-
     
     def show_cb
       Menu.before_save_callback_chain

@@ -21,6 +21,19 @@ module Cable
         self[:options]
       end
       
+      def items_hash
+        
+        # items = []
+        #         parents = Location.roots[1].descendants.includes(:menus).reorder("parent_id ASC ").group_by{|o| o.parent_id}
+        #         parent.to_a
+        #         Location.each_with_level(Location.where(:id => 10).first.self_and_descendants.includes(:menus)) do |loc, level| 
+        #           puts 
+        #           # {:key => loc.menu.key, :name => loc.menu.name, :url => loc.url, :options => loc.menu.options, :items => [
+        #           #           
+        #           #         ]
+        #         end
+      end
+
       
     end
   end

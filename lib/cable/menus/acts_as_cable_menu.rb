@@ -1,7 +1,7 @@
 require 'rails'
 require 'awesome_nested_set'
 require 'rainbow'
-
+require 'benchmark'
 module Cable
   module Menus
     module ActsAsCableMenu
@@ -16,12 +16,51 @@ module Cable
           attr_accessor :creatable
 
           send :include, InstanceMethods
+          send :include, Cable::Menus::SimpleNavigationMethods
 
           # before_create :check_for_permission
           
           yields self if block_given?
           
         end
+        
+        def nested_set_hash(set) 
+         Menu.benchmark("Creating nested Set hash".color(:yellow)) do
+          stack = [] 
+          result = []
+          set.each do |node|
+            if stack.empty?
+              stack.push({:key => node.key, :url => node.url, :name => node.title, :node => node.location, :items => []})
+              result << stack.last
+              next
+            end
+            if stack.last[:node].lft < node.location.lft && node.location.lft < stack.last[:node].rgt
+              child = {:key => node.key, :url => node.url, :name => node.title, :options => node.options, :node => node.location, :items => []}
+              stack.last[:items] << child
+              if node.location.rgt + 1 == stack.last[:node].rgt
+                stack.pop 
+              end
+              unless node.location.leaf?
+                stack.push(child)
+              end
+            else
+              stack.pop
+              stack.push({:key => node.key, :url => node.url, :name => node.title, :node => node.location, :items => []})
+              result << stack.last 
+              next
+            end
+          end
+          result
+        end
+        end
+        
+        def to_simple_nav( menu_item )
+
+             Menu.benchmark("Creating and calling sql nested Set hash".color(:yellow)) do
+               nested_set_hash( self.where(:locations => {:tree_id => menu_item}, :show_in_menu => true).includes(:location).order('locations.lft')[1..-1] )
+             end
+        end
+        
         
         def locations
           self.all.includes(:location).collect(&:location)
@@ -50,10 +89,22 @@ module Cable
           self.location.self_and_siblings
         end
         
-        def children
-          self.location.children.reject{|loc| loc.menus.blank? }.flatten.collect{|men| men.menus.first}
+        def children(options = nil)
+            # locations = Location.includes(:menus).where(:tree_id => self.location.tree_id , :parent_id => self.location.id ).order('lft').use_index('nested_set')
+            #             #locations = Location.includes(:menus).where(:tree_id => 2, :parent_id => 10 ).order('lft').order('lft').use_index('nested_set')
+            #             menus = locations.collect(&:menus).flatten.compact#self.class.includes(:location).where(:show_in_menu => true).order('location_id').use_index('location_of_menus')
+            #                        
+            #             ids = menus.collect(&:location_id) & locations.collect(&:id)
+            #             menus.select{|m| ids.include?( m.id)}
+                        
+            # menus.merge( locations )
+            self.location.children.includes(:menus)
+            # self.location.children.includes(:menus).where(:tree_id => self.location.tree_id, :menus => {:show_in_menu => true}).collect{|loc| loc.menus.first}
+            ## self.location.children.includes(:menus).collect{|loc| loc.menus.first}
+            
         end
-    
+        
+        
         def route
           (self.ancestors.collect{|an| an.url } << self.url).join
         end
