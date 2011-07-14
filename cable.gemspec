@@ -10,6 +10,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
   s.date = %q{2011-07-14}
+  s.description = %q{Cable is a CMS for developers.}
+  s.email = %q{spencer@theablefew.com}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -200,9 +202,10 @@ Gem::Specification.new do |s|
     "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css",
     "public/stylesheets/tinymce/custom_rich_editor.css"
   ]
+  s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.5.2}
-  s.summary = %q{Cable Admin Engine for Rails 3}
+  s.summary = %q{Cable CMS Engine for Rails 3}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -210,7 +213,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_runtime_dependency(%q<orm_adapter>, [">= 0"])
-      s.add_runtime_dependency(%q<awesome_nested_set>, [">= 0"])
+      s.add_runtime_dependency(%q<nested_set>, [">= 0"])
       s.add_runtime_dependency(%q<formtastic>, [">= 0"])
       s.add_runtime_dependency(%q<simple-navigation>, [">= 0"])
       s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
@@ -218,10 +221,15 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<kaminari>, [">= 0"])
       s.add_runtime_dependency(%q<cocoon>, [">= 0"])
       s.add_runtime_dependency(%q<schemata>, [">= 0.1.0"])
+      s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<jeweler>, ["= 1.6.4"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<rake>, ["= 0.8.7"])
     else
       s.add_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_dependency(%q<orm_adapter>, [">= 0"])
-      s.add_dependency(%q<awesome_nested_set>, [">= 0"])
+      s.add_dependency(%q<nested_set>, [">= 0"])
       s.add_dependency(%q<formtastic>, [">= 0"])
       s.add_dependency(%q<simple-navigation>, [">= 0"])
       s.add_dependency(%q<jquery-rails>, [">= 0"])
@@ -229,11 +237,16 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<kaminari>, [">= 0"])
       s.add_dependency(%q<cocoon>, [">= 0"])
       s.add_dependency(%q<schemata>, [">= 0.1.0"])
+      s.add_dependency(%q<shoulda>, [">= 0"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<jeweler>, ["= 1.6.4"])
+      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<rake>, ["= 0.8.7"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 3.0.0"])
     s.add_dependency(%q<orm_adapter>, [">= 0"])
-    s.add_dependency(%q<awesome_nested_set>, [">= 0"])
+    s.add_dependency(%q<nested_set>, [">= 0"])
     s.add_dependency(%q<formtastic>, [">= 0"])
     s.add_dependency(%q<simple-navigation>, [">= 0"])
     s.add_dependency(%q<jquery-rails>, [">= 0"])
@@ -241,6 +254,11 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<kaminari>, [">= 0"])
     s.add_dependency(%q<cocoon>, [">= 0"])
     s.add_dependency(%q<schemata>, [">= 0.1.0"])
+    s.add_dependency(%q<shoulda>, [">= 0"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<jeweler>, ["= 1.6.4"])
+    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<rake>, ["= 0.8.7"])
   end
 end
 
