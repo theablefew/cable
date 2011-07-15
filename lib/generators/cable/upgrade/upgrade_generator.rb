@@ -204,11 +204,12 @@ module Cable
         
         
         def self.next_migration_number(dirname)
-         if ActiveRecord::Base.timestamped_migrations
-           Time.now.utc.strftime("%Y%m%d%H%M%S") + (rand(9) + rand(9)).to_s
-         else
-           "%.3d" % (current_migration_number(dirname) + rand(90))
-         end
+          next_migration_number = current_migration_number(dirname) + 1
+          if ActiveRecord::Base.timestamped_migrations
+            [Time.now.utc.strftime("%Y%m%d%H%M%S"), "%.14d" % next_migration_number].max
+          else
+            "%.3d" % next_migration_number
+          end
         end
 
       protected
