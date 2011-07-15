@@ -1,4 +1,4 @@
-require 'rails'
+# require 'rails'
 require 'active_record'
 require 'action_view'
 module Cable

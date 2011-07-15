@@ -1,7 +1,6 @@
-require 'rails'
-require 'awesome_nested_set'
+# require 'rails'
+require 'nested_set'
 require 'rainbow'
-require 'benchmark'
 module Cable
   module Menus
     module ActsAsCableMenu

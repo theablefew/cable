@@ -1,4 +1,4 @@
-require 'rails'
+# require 'rails'
 module Cable
   module Media
     module ActsAsAttachable
