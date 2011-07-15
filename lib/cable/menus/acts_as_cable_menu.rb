@@ -24,7 +24,6 @@ module Cable
         end
         
         def nested_set_hash(set) 
-         Menu.benchmark("Creating nested Set hash".color(:yellow)) do
           stack = [] 
           result = []
           set.each do |node|
@@ -51,13 +50,9 @@ module Cable
           end
           result
         end
-        end
         
         def to_simple_nav( menu_item )
-
-             Menu.benchmark("Creating and calling sql nested Set hash".color(:yellow)) do
-               nested_set_hash( self.where(:locations => {:tree_id => menu_item}, :show_in_menu => true).includes(:location).order('locations.lft')[1..-1] )
-             end
+           nested_set_hash( self.where(:locations => {:tree_id => menu_item}, :show_in_menu => true).includes(:location).order('locations.lft')[1..-1] )
         end
         
         
