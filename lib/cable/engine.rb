@@ -10,6 +10,7 @@ require 'jquery-rails'
 require 'rainbow'
 require 'thinking_sphinx'
 require 'simple-navigation'
+require 'wirble'
 
 module Cable
   class Engine < Rails::Engine
