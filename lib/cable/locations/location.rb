@@ -1,4 +1,3 @@
-require 'rainbow'
 class Cable::Locations::Location < ActiveRecord::Base
   self.abstract_class = true
   
@@ -26,7 +25,6 @@ class Cable::Locations::Location < ActiveRecord::Base
       insertion_points.last.merge! node => ActiveSupport::OrderedHash.new
       depth = level
     end
-    logger.info "FREEKING ARRANGE #{arranged}".color(:yellow)
     arranged
   end
   #marketable_url is automatic. self.url is only set if user overrides it. 

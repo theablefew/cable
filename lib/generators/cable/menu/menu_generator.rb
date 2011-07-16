@@ -2,7 +2,6 @@ require 'rails/generators'
 require 'rails/generators/migration'     
 require 'rails/generators/active_model'
 require 'active_record'
-require 'rainbow'
 
 module Cable
     module Generators

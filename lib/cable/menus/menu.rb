@@ -1,4 +1,3 @@
-require 'rainbow'
 class Cable::Menus::Menu < ActiveRecord::Base
     self.abstract_class = true
     class << self

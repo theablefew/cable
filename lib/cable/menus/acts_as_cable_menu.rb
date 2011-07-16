@@ -1,6 +1,3 @@
-# require 'rails'
-require 'nested_set'
-require 'rainbow'
 module Cable
   module Menus
     module ActsAsCableMenu
