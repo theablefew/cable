@@ -11,6 +11,7 @@ require 'rainbow'
 require 'thinking_sphinx'
 require 'simple-navigation'
 require 'wirble'
+require 'annotate'
 
 module Cable
   class Engine < Rails::Engine

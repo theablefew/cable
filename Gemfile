@@ -17,6 +17,8 @@ gem 'nested_set'
 gem 'thinking-sphinx', '>=2.0.1', :require => 'thinking_sphinx'
 gem 'schemata', '>=0.1.0'
 gem 'wirble'
+gem 'annotate'
+gem 'kaminari'
 
 group :development do
   gem "shoulda", ">= 0"
