@@ -11,6 +11,8 @@ module Cable
       ActiveRecord::Base.send(:include, Cable::ActsAsCable)
       ActiveRecord::ConnectionAdapters::Table.send :include, Schemata::Orm::ActiveRecord::Schema
       ActiveRecord::ConnectionAdapters::TableDefinition.send :include, Schemata::Orm::ActiveRecord::Schema
+      MainController.send(:include, Cable::Helpers::CableControllerHelpers)
+      MainController.send(:include, Cable::Helpers::UrlMaskHelper)
     end
   end
 end

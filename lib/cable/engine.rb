@@ -1,5 +1,15 @@
 require 'rails'
 require 'cable'
+require 'cocoon'
+require 'nested_set'
+require 'kaminari'
+require 'formtastic'
+require 'seedbed'
+require 'tiny_mce'
+require 'jquery-rails'
+require 'rainbow'
+require 'thinking_sphinx'
+require 'simple-navigation'
 
 module Cable
   class Engine < Rails::Engine

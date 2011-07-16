@@ -1,8 +1,5 @@
 class MainController < ApplicationController
   
-  include Cable::Helpers::CableControllerHelpers
-  include Cable::Helpers::UrlMaskHelper
-  
   ## Cable::Helpers::CableControllerHelpers defines find_by_url method. Overwrite to make customized changes.
   # def find_by_url
   #   @location = Location.find_by_marketable_url( params[:url] ) || Location.find_by_url( request.path )

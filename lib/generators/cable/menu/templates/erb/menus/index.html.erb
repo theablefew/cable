@@ -9,7 +9,7 @@
 
 <div class="cable_menu_wrapper" id="menu">
     <%% @menu_id = []; @child_c = []  %>
-    <%%= render_tree(  Location.cached_locations, :class => "cable_menu", :menu => "0" ) do |node, child| %>
+    <%%= render_tree(  Location.root.arranged, :class => "cable_menu", :menu => "0" ) do |node, child| %>
         <li title="<%%= node.menus.first.title %>" menu="<%%= node.menus.first.id %>"><%%= node.menus.first.title %></li>
         <%% @menu_id << node.parent_id %>
         <%% next if child.nil? %>
@@ -17,7 +17,7 @@
             <%%= child %>
         <%% end %>
     <%% end %>
-    <%% @menu_id.compact!.reverse!.uniq!.reverse! %>
-    <%%= yield(:children).gsub(/<ul>/){ "<ul class='cable_menu' menu='#{@menu_id.shift}'>"} %>
+    <%% @menu_id.compact!.reverse!.uniq!.reverse! unless @menu.compact.empty? %>
+    <%%= yield(:children).gsub(/<ul>/){ "<ul class='cable_menu' menu='#{@menu_id.shift || 0 }'>"} %>
    </div>
 <br />
