@@ -245,7 +245,6 @@
   function create_new_resource( e ){
     
     parent_id = $('li.add-resource').parent("ul").attr('menu')
-    
     $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
     $("#add-menu-form").load("/admin/menus/new?parent_id="+parent_id, function(){
       $(this).dialog({
@@ -359,6 +358,7 @@
 
     $save.click(function(){save_tree();}); 
 
+    var $form = $("<div id='add-menu-form' />").insertAfter($save);
     //select_item( $wrapper.find('ul.cable_menu[menu=0] li:first') )
     
     $('.ui-sortable').hover( add_resource_button_to_column , remove_resource_button_from_column );
