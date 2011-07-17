@@ -16,6 +16,10 @@ module Cable
         # invoke "migration", %(create_cable_settings site_title:string keywords:text analytics:string closure:text description:text contact_email:string footer_block_1:text footer_block_2:text copyright:string legal:text)
         class_option :orm, :type => :string, :default => "active_record"
 
+        def display_banner
+          puts Cable::Helpers::TerminalHelper.version
+        end
+
         def create_settings
           if options.settings?
             begin

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-07-16}
+  s.date = %q{2011-07-17}
   s.description = %q{Cable is a CMS for developers.}
   s.email = %q{spencer@theablefew.com}
   s.files = [
@@ -65,6 +65,7 @@ Gem::Specification.new do |s|
     "lib/cable/helpers/cable_controller_helpers.rb",
     "lib/cable/helpers/kaminari_helper.rb",
     "lib/cable/helpers/nested_set_helper.rb",
+    "lib/cable/helpers/terminal_helper.rb",
     "lib/cable/helpers/url_helper.rb",
     "lib/cable/helpers/url_mask_helper.rb",
     "lib/cable/locations/location.rb",

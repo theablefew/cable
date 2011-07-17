@@ -18,6 +18,10 @@ module Cable
         class_option :views, :type => :boolean, :default => true
         class_option :routes, :type => :boolean, :default => true
         
+        def display_banner
+          puts Cable::Helpers::TerminalHelper.version
+        end
+        
         def create_migration_file
           if options.migration?
            migration_template 'migration.rb', "db/migrate/create_#{model_name.pluralize}.rb" if yes?("Would you like to generate a migration?".color(:yellow))

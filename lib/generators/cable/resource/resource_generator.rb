@@ -22,6 +22,10 @@ module Cable
         class_option :orm,        :type => :string,  :default => "active_record"
         class_option :locatable,  :type => :boolean, :default => true, :banner => "Setting this to false will create a non-locatable resource."
         
+        def display_banner
+          puts Cable::Helpers::TerminalHelper.version
+        end
+        
         def create_migration_file          
            migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration? and yes?("Would you like to generate a migration?", :yellow)
         end

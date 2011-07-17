@@ -51,6 +51,7 @@ module Cable
     autoload :CableControllerHelpers, 'cable/helpers/cable_controller_helpers'
     autoload :KaminariHelper, 'cable/helpers/kaminari_helper'
     autoload :UrlMaskHelper, 'cable/helpers/url_mask_helper'
+    autoload :TerminalHelper, 'cable/helpers/terminal_helper'
   end
   
   mattr_accessor :regions

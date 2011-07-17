@@ -23,6 +23,10 @@ module Cable
         ACTS_AS_CABLE = "acts_as_cable"
         PREVENT_DELETION = "prevent_deletion"
         
+        def display_banner
+          puts Cable::Helpers::TerminalHelper.version
+        end
+        
         def upgrade_cable_views
           say "\nChecking for legacy view files...", :white
           
