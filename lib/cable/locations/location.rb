@@ -74,16 +74,15 @@ class Cable::Locations::Location < ActiveRecord::Base
   end
   
   def title_or_url
-    
+    nme = ""
     return "/" if self.root? 
     unless self.menus.empty?
-      return self.menus.first.title
+      nme = self.menus.first.title
     else
-      return self.resource.title
+      nme = self.resource.title unless self.resource.nil?
     end
-    
-    return self[:url] unless self[:url].blank?
-
+    nme = self[:url] unless self[:url].blank?
+    return nme
   end
 
 
