@@ -134,7 +134,7 @@ module Cable
         end
     
         def copy_tiny_mce_config
-          copy_file 'config/tiny_mce.yml', 'confit/tiny_mce.yml' if yes?( "Would you like to copy Cable's default tiny_mce.yml configuratio?", :yellow )
+          copy_file 'config/tiny_mce.yml', 'config/tiny_mce.yml' if yes?( "Would you like to copy Cable's default tiny_mce.yml configuration?", :yellow )
         end
         
         def install_default_resource_template
@@ -204,8 +204,10 @@ module Cable
           end
         end
         
-        
-        
+        def show_exit
+          say "\nCable v1.0.0 Upgrade complete!".color( :green ).bright
+          say "\n\nYou will need to regenerate your Cable::Resource views to receive location and menu views in resource admin.\n\n"
+        end
         
         def self.next_migration_number(dirname)
           next_migration_number = current_migration_number(dirname) + 1
