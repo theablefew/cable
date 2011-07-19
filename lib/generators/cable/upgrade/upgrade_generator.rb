@@ -128,7 +128,7 @@ module Cable
             directory 'app/views/layouts/admin', 'app/views/layouts/admin'
             directory "public/stylesheets/tinymce", "public/stylesheets/tinymce"
             copy_file 'app/views/admin/index.html.erb', 'app/views/admin/index.html.erb'
-            copy_file 'app/helpers/admin/menus_helper.rb','app/helpers/admin/menus_helper.rb'
+            # copy_file 'app/helpers/admin/menus_helper.rb','app/helpers/admin/menus_helper.rb'
             copy_file 'public/javascripts/admin.js', 'public/javascripts/admin.js'
           end
         end
