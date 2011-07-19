@@ -23,17 +23,12 @@
         <li><a href="#menu">Menu</a></li>
         <% end %>
     </ul>
-  <%% if @<%= singular_table_name %>.errors.any? %>
-    <div id="error_explanation">
-      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this page from being saved:</h2>
-
-      <ul>
-        <%%= @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
-          <li><%%= msg %></li>
-        <%% end %>
-      </ul>
-    </div>
-  <%% end %>
+    <%% unless f.object.errors.empty? %>
+        <div class="error errors">
+            <p>The following errors prevented this <%%= f.object.class %> from being saved.</p>
+            <%%= f.semantic_errors *f.object.errors.keys  %>
+        </div>
+    <%% end %>
     <div id="properties">
         <%%= f.inputs do %>
             <% for attribute in attributes -%>
