@@ -116,7 +116,7 @@ module Cable
            
             backup_file( "app/controllers/admin_controller.rb" )
             backup_file( "app/views/layouts/admin.html.erb" )
-            backup_file( "public/stylesheets/tinymce")
+            backup_file( "public/stylesheets/tinymce/custom_rich_editor.css")
             backup_file( "app/views/admin/index.html.erb")
             backup_file( "app/views/layouts/admin/_dual_column_layout.html.erb")
             backup_file( "app/views/layouts/admin/_single_column_layout.html.erb")
