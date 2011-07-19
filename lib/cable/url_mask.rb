@@ -1,6 +1,8 @@
 class Cable::UrlMask < ActiveRecord::Base
   
   belongs_to :maskable, :polymorphic => true
+  validates_presence_of :url_mask
+  validates_presence_of :region
   
   def self.find_resource_by_url( request )
     parts = request.split('/')
