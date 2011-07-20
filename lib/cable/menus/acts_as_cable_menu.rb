@@ -48,8 +48,12 @@ module Cable
           result
         end
         
-        def to_simple_nav( menu_item )
-           nested_set_hash( self.where(:locations => {:tree_id => menu_item}, :show_in_menu => true).includes(:location).order('locations.lft')[1..-1] )
+        def to_simple_nav( *menu_item )
+           nested_set_hash( visible_menus( menu_item )  )
+        end
+        
+        def visible_menus( *menu_item )
+          self.includes(:location).where(:locations => {:tree_id => menu_item}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft')
         end
         
         
@@ -81,20 +85,8 @@ module Cable
         end
         
         def children(options = nil)
-            # locations = Location.includes(:menus).where(:tree_id => self.location.tree_id , :parent_id => self.location.id ).order('lft').use_index('nested_set')
-            #             #locations = Location.includes(:menus).where(:tree_id => 2, :parent_id => 10 ).order('lft').order('lft').use_index('nested_set')
-            #             menus = locations.collect(&:menus).flatten.compact#self.class.includes(:location).where(:show_in_menu => true).order('location_id').use_index('location_of_menus')
-            #                        
-            #             ids = menus.collect(&:location_id) & locations.collect(&:id)
-            #             menus.select{|m| ids.include?( m.id)}
-                        
-            # menus.merge( locations )
-            self.location.children.includes(:menus)
-            # self.location.children.includes(:menus).where(:tree_id => self.location.tree_id, :menus => {:show_in_menu => true}).collect{|loc| loc.menus.first}
-            ## self.location.children.includes(:menus).collect{|loc| loc.menus.first}
-            
+          self.location.children.includes(:menus).collect{|m| m.menus.where(:show_in_menu => true)}.flatten
         end
-        
         
         def route
           (self.ancestors.collect{|an| an.url } << self.url).join

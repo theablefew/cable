@@ -21,7 +21,7 @@ class Cable::Locations::Location < ActiveRecord::Base
     self.class.where( :menus => {:show_in_menu => true}).includes(:menus).order('lft').each_with_level do |node, level|
       next if level > depth && insertion_points.last.keys.last && node.parent_id != insertion_points.last.keys.last.id
       insertion_points.push insertion_points.last.values.last if level > depth
-      (depth - level).times { insertion_points.pop } if level < depth
+      (depth - level).times { insertion_points.pop } if level < depth 
       insertion_points.last.merge! node => ActiveSupport::OrderedHash.new
       depth = level
     end
