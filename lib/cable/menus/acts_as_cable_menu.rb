@@ -56,7 +56,6 @@ module Cable
           self.includes(:location).where(:locations => {:tree_id => menu_item}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft')
         end
         
-        
         def locations
           self.all.includes(:location).collect(&:location)
         end
