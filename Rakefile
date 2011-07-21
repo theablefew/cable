@@ -1,5 +1,10 @@
 require 'rubygems'
+require 'yaml'
+require 'psych'
+YAML::ENGINE.yamler = 'syck'
+
 require 'bundler'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e

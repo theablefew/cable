@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem "rails", "~> 3.0.9"
+gem "rails", "3.0.6"
 gem 'orm_adapter'
 
 gem 'rainbow'
@@ -16,10 +16,10 @@ gem 'schemata', '>=0.1.0'
 gem 'wirble'
 gem 'annotate'
 gem 'kaminari'
-gem 'rake'
+gem 'rake', '0.8.7'
 
 group :development do
-  gem "shoulda", ">= 0"
+  # gem "shoulda", ">= 0"
   gem "bundler", "~> 1.0.0"
   gem "jeweler", '1.6.4'
   gem "rcov", ">= 0"
