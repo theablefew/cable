@@ -97,7 +97,9 @@ module Cable
         
         def title
           if self[:title].blank?
-            self.resource.title unless self.new_record?
+            return "" if self.new_record?
+            return self.resource.title unless self.resource.nil?
+            return self.url
           else
             self[:title]
           end

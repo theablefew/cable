@@ -10,11 +10,11 @@ module Cable
         | (_| (_| | |_) | |  __/
          \___\__,_|_.__/|_|\___|
         HERE
-        banner_text.color(:cyan)
+        banner_text.color('399DDB')
       end
       
       def self.able_stamp
-        "The Able Few".color(:cyan).bright + " | theablefew.com"
+        "The Able Few".color('399DDB').bright + " | theablefew.com"
       end
       
       def self.version
