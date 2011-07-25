@@ -22,7 +22,8 @@ module Cable
 
      def content_for_region(region)
        if content_for_region?(region)
-         self.send("content_for_#{region.to_s}", @_content_for_region[region] ) if self.respond_to?("content_for_#{region.to_s}".to_sym)
+          return self.send("content_for_#{region.to_s}", @_content_for_region[region] ) if self.respond_to?("content_for_#{region.to_s}".to_sym)
+          return @_content_for_region[region].collect{|r| r.resource }.compact
        end
      end
      

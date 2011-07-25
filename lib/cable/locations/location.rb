@@ -35,7 +35,8 @@ class Cable::Locations::Location < ActiveRecord::Base
   def url
     return self[:url] if self.external_link? || self.direct_link?
     return "/#{self.marketable_url}"
-  end
+  end 
+    
   
   def resource
     self.locatable

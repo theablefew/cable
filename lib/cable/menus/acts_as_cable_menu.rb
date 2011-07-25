@@ -55,6 +55,11 @@ module Cable
         def visible_menus( *menu_item )
           self.includes(:location).where(:locations => {:tree_id => menu_item}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft')
         end
+
+        def by_url( location )
+          location = location.parent
+          nested_set_hash( self.includes(:location).where(:locations => {:lft => location.lft...location.rgt}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft') )
+        end
         
         def locations
           self.all.includes(:location).collect(&:location)

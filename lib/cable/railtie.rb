@@ -12,7 +12,7 @@ module Cable
       ActiveRecord::ConnectionAdapters::Table.send :include, Schemata::Orm::ActiveRecord::Schema
       ActiveRecord::ConnectionAdapters::TableDefinition.send :include, Schemata::Orm::ActiveRecord::Schema
       MainController.send(:include, Cable::Helpers::CableControllerHelpers)
-      MainController.send(:include, Cable::Helpers::UrlMaskHelper)
+      ApplicationController.send(:include, Cable::Helpers::UrlMaskHelper)
       MainController.helper( Cable::Helpers::UrlMaskHelper )
     end
   end
