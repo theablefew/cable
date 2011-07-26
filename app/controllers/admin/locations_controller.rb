@@ -2,24 +2,11 @@ class Admin::LocationsController < AdminController
   
   respond_to :html, :xml, :json
 
-  # GET /banners/1
-  # GET /banners/1.xml
-  def show
-    @location = Location.find(params[:id])
-    respond_with(:admin, @location)
-  end
-
   # GET /banners/new
   # GET /banners/new.xml
   def new
     @location = Location.new
     respond_with(:admin , @location)
-  end
-
-  # GET /banners/1/edit
-  def edit
-    @location = Location.find(params[:id])
-    # @location.masks.build if @location.masks.empty?
   end
 
   # POST /banners

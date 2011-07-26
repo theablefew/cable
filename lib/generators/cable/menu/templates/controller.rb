@@ -12,10 +12,16 @@ class Admin::<%= plural_table_name.classify.pluralize %>Controller < AdminContro
   # GET /pages/1
   # GET /pages/1.xml
   def show
-    @<%= singular_table_name %> = Location.includes(:menus).where( :id => params[:id] ).first.menus.first
+    @location = Location.includes(:menus).where( :id => params[:id] ).first
+    @<%= singular_table_name %> = @location.menus.first
     
     respond_to do |format|
-      format.html # show.html.erb
+      respond_to do |format|
+        format.html {
+          if @location.resource.nil? 
+            render :action => "_edit_menu"
+          end
+        } # show.html.erb
       format.xml  { render :xml => @<%= singular_table_name %> }
       format.js { render :partial => "admin/<%= plural_table_name %>/parents" } 
     end
@@ -26,7 +32,9 @@ class Admin::<%= plural_table_name.classify.pluralize %>Controller < AdminContro
   def new
     @resource_types = Cable.resource_types.collect{|resource| ["#{resource.name}","#{resource.name.pluralize}"]}
     @<%= singular_table_name %> = <%= class_name %>.find( params[:parent_id] )
+    @location = Location.new(:parent_id => @<%= singular_table_name %>.location.id, :tree_id => @<%= singular_table_name %>.location.tree_id )
     
+    @location.menus.build
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @<%= singular_table_name %> }
