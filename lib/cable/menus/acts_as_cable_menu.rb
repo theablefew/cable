@@ -57,8 +57,9 @@ module Cable
         end
 
         def by_url( location )
-          location = location.parent
-          nested_set_hash( self.includes(:location).where(:locations => {:lft => location.lft...location.rgt}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft') )
+          location = location.root
+          menu_tree = self.includes(:location).where(:locations => {:lft => location.lft...location.rgt}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft') 
+          nested_set_hash( menu_tree )
         end
         
         def locations
