@@ -9,12 +9,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-07-25}
+  s.date = %q{2011-07-26}
   s.description = %q{Cable is a CMS for developers.}
   s.email = %q{spencer@theablefew.com}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
+    "app/controllers/admin/locations_controller.rb",
     "app/controllers/admin/search_controller.rb",
     "app/controllers/admin_controller.rb",
     "app/controllers/attachable_assets_controller.rb",
@@ -95,6 +96,7 @@ Gem::Specification.new do |s|
     "lib/generators/cable/media/templates/model.rb",
     "lib/generators/cable/menu/menu_generator.rb",
     "lib/generators/cable/menu/templates/controller.rb",
+    "lib/generators/cable/menu/templates/erb/menus/_edit_menus.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/_menu.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/_resources.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/edit.html.erb",
@@ -218,7 +220,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<orm_adapter>, [">= 0"])
       s.add_runtime_dependency(%q<rainbow>, [">= 0"])
       s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
-      s.add_runtime_dependency(%q<seedbed>, ["= 1.1.0"])
+      s.add_runtime_dependency(%q<seedbed>, ["= 1.1.1"])
       s.add_runtime_dependency(%q<tiny_mce>, [">= 0"])
       s.add_runtime_dependency(%q<formtastic>, [">= 0"])
       s.add_runtime_dependency(%q<cocoon>, [">= 0"])
@@ -238,7 +240,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<orm_adapter>, [">= 0"])
       s.add_dependency(%q<rainbow>, [">= 0"])
       s.add_dependency(%q<jquery-rails>, [">= 0"])
-      s.add_dependency(%q<seedbed>, ["= 1.1.0"])
+      s.add_dependency(%q<seedbed>, ["= 1.1.1"])
       s.add_dependency(%q<tiny_mce>, [">= 0"])
       s.add_dependency(%q<formtastic>, [">= 0"])
       s.add_dependency(%q<cocoon>, [">= 0"])
@@ -259,7 +261,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<orm_adapter>, [">= 0"])
     s.add_dependency(%q<rainbow>, [">= 0"])
     s.add_dependency(%q<jquery-rails>, [">= 0"])
-    s.add_dependency(%q<seedbed>, ["= 1.1.0"])
+    s.add_dependency(%q<seedbed>, ["= 1.1.1"])
     s.add_dependency(%q<tiny_mce>, [">= 0"])
     s.add_dependency(%q<formtastic>, [">= 0"])
     s.add_dependency(%q<cocoon>, [">= 0"])
