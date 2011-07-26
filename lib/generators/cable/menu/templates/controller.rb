@@ -93,12 +93,12 @@ class Admin::<%= plural_table_name.classify.pluralize %>Controller < AdminContro
     previous = nil
     new_list.each_with_index do |array, index|
       moved_item_id = array[1][:id].split(/<%= singular_table_name %>_/)
-      @current_<%= singular_table_name %> = <%= class_name %>.find_by_id(moved_item_id)
+      @current_<%= singular_table_name %> = Location.find_by_id(moved_item_id)
       unless previous.nil?
-        @previous_item = <%= class_name %>.find_by_id(previous).location
-        @current_<%= singular_table_name %>.location.move_to_right_of(@previous_item)
+        @previous_item = Location.find_by_id(previous)
+        @current_<%= singular_table_name %>.move_to_right_of(@previous_item)
       else
-        @current_<%= singular_table_name %>.location.move_to_root
+        @current_<%= singular_table_name %>.move_to_root
       end
       unless array[1][:children].blank?
         parse_children(array[1], @current_<%= singular_table_name %>)
@@ -112,8 +112,8 @@ class Admin::<%= plural_table_name.classify.pluralize %>Controller < AdminContro
   def parse_children(mynode, <%= singular_table_name %>)
     for child in mynode[:children]
       child_id = child[1][:id].split(/<%= singular_table_name %>_/)
-      child_<%= singular_table_name %> = <%= class_name %>.find_by_id(child_id)
-      child_<%= singular_table_name %>.location.move_to_child_of(<%= singular_table_name %>.location)
+      child_<%= singular_table_name %> = Location.find_by_id(child_id)
+      child_<%= singular_table_name %>.move_to_child_of(<%= singular_table_name %>)
       unless child[1][:children].blank?
         parse_children(child[1], child_<%= singular_table_name %>)
       end

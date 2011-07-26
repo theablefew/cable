@@ -1,4 +1,3 @@
 <div id="edit">
-    <%= @resource.title %>
-    <%= edit_polymorphic_url([:admin, @resource ]) %>
+    <%= link_to "Edit #{@resource.title}" , edit_polymorphic_url([:admin, @resource ]) %>
 </div>

@@ -14,6 +14,8 @@ module Cable
       MainController.send(:include, Cable::Helpers::CableControllerHelpers)
       ApplicationController.send(:include, Cable::Helpers::UrlMaskHelper)
       MainController.helper( Cable::Helpers::UrlMaskHelper )
+      ApplicationController.helper( Cable::Helpers::UrlMaskHelper )
+      AdminController.skip_filter( :find_by_url_mask )
     end
   end
 end
