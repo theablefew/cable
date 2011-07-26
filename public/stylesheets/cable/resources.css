@@ -1,6 +1,6 @@
-.ui-tabs .ui-tabs-nav{ border:none; top:-53px; position:relative }
+form.formtastic .ui-tabs .ui-tabs-nav{ border:none; top:-53px; position:relative }
 
-.ui-tabs .ui-tabs-panel{ border:none; }
+form.formtastic .ui-tabs .ui-tabs-panel{ border:none; }
 form.formtastic li p.inline-hints.notice{ font-size:12px; padding:5px 0 5px 8px; width:72%}
 form.formtastic .ui-tabs .ui-tabs-nav li.ui-tabs-selected{ border-color:#ccc}
 form.formtastic .ui-tabs label {font-weight:bold; color:#999; font-size:16px;   }

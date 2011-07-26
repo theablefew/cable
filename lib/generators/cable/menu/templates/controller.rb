@@ -12,8 +12,7 @@ class Admin::<%= plural_table_name.classify.pluralize %>Controller < AdminContro
   # GET /pages/1
   # GET /pages/1.xml
   def show
-    @<%= singular_table_name %> = <%= class_name %>.where( :id => params[:id]).first
-    @<%= plural_table_name %> = <%= class_name %>.all
+    @<%= singular_table_name %> = Location.includes(:menus).where( :id => params[:id] ).first.menus.first
     
     respond_to do |format|
       format.html # show.html.erb

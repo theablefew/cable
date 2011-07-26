@@ -5,7 +5,7 @@ gem 'orm_adapter'
 
 gem 'rainbow'
 gem 'jquery-rails'
-gem 'seedbed', '1.1.0'
+gem 'seedbed', '1.1.1'
 gem 'tiny_mce'
 gem 'formtastic'
 gem 'cocoon'

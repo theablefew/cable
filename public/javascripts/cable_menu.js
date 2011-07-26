@@ -210,7 +210,6 @@
           {
             modal: true, 
             width: 600,
-            height: 250,
             resizable: false,
             draggable: false,
             resizable: false,
@@ -233,7 +232,7 @@
   function add_resource_button_to_column( e ) {
       id = $(e.currentTarget).attr("menu")
       if(id != 0) {
-          $(e.currentTarget).append( "<li id='add-menu' class='add-resource'><a id=''>Add Resource</a></li>")
+          $(e.currentTarget).append( "<li id='add-menu' class='add-resource'><a id=''>Add Item</a></li>")
           $('li.add-resource a').click( create_new_resource );
       }
   }
@@ -251,7 +250,7 @@
         modal: true,
         width: 600,
         resizable: false,
-        title: "New Resource",
+        title: "New Item",
         draggable: false
       });
     });
