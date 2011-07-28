@@ -39,7 +39,7 @@ class Cable::Locations::Location < ActiveRecord::Base
     
   
   def resource
-    self.locatable
+    self.locatable_id.nil? ? nil : self.locatable 
   end
   
   def resource=( args )
