@@ -39,7 +39,8 @@ class Admin::LocationsController < AdminController
   def destroy
     @location = Location.find(params[:id])
     @location.destroy
-    respond_with(:admin ,@location, :notice => "Successfully destroyed banner")
+    Location.rebuild!
+    respond_with(redirect_to admin_menus_path, :notice => "Successfully destroyed banner")
   end
 
 end
