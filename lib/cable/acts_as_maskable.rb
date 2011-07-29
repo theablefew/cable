@@ -1,4 +1,4 @@
-require 'rails'
+# require 'rails'
 require 'active_record'
 require 'action_view'
 module Cable
@@ -14,6 +14,7 @@ module Cable
           has_many :url_masks, :as => :maskable, :dependent => :destroy
           send :include, InstanceMethods
           send :include, ActionView::Helpers::TextHelper
+          validates_associated :url_masks, :message => "are invalid"
           
           accepts_nested_attributes_for :url_masks, :allow_destroy => true
           

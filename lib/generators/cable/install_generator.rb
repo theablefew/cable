@@ -16,6 +16,10 @@ module Cable
         # invoke "migration", %(create_cable_settings site_title:string keywords:text analytics:string closure:text description:text contact_email:string footer_block_1:text footer_block_2:text copyright:string legal:text)
         class_option :orm, :type => :string, :default => "active_record"
 
+        def display_banner
+          puts Cable::Helpers::TerminalHelper.version
+        end
+
         def create_settings
           if options.settings?
             begin
@@ -91,10 +95,10 @@ module Cable
           directory 'app/views/main', 'app/views/main'
         end
         
-        # def install_cocoon
-        #     generate('cocoon:install')
-        #     insert_into_file 'app/views/layouts/admin.html.erb', "<%= javascript_include_tag :cocoon %>\n", :before => '<%= yield :scripts %>'
-        # end
+        def install_cocoon
+             generate('cocoon:install')
+             # insert_into_file 'app/views/layouts/admin.html.erb', "<%= javascript_include_tag :cocoon %>\n", :before => '<%= yield :scripts %>'
+         end
         
         def create_seed_bed_directory
           empty_directory 'db/seeds'
@@ -121,11 +125,12 @@ module Cable
         
         
         def self.next_migration_number(dirname)
-         if ActiveRecord::Base.timestamped_migrations
-           Time.now.utc.strftime("%Y%m%d%H%M%S") + (rand(9) + rand(9)).to_s
-         else
-           "%.3d" % (current_migration_number(dirname) + rand(90))
-         end
+          next_migration_number = current_migration_number(dirname) + 1
+          if ActiveRecord::Base.timestamped_migrations
+            [Time.now.utc.strftime("%Y%m%d%H%M%S"), "%.14d" % next_migration_number].max
+          else
+            "%.3d" % next_migration_number
+          end
         end
 
       protected

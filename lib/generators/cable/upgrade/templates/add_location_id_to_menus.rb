@@ -3,7 +3,7 @@ class AddLocationIdToMenus < ActiveRecord::Migration
     
     add_column :menus, :location_id, :integer
 
-    sql = "INSERT INTO locations (id,locatable_id,locatable_type,parent_id,tree_id,url, marketable_url,meta_description,meta_keywords,template,special_action) SELECT id,cable_menuable_id,cable_menuable_type,parent_id,tree_id,url,marketable_url,meta_description,meta_keywords,template,special_action FROM menus;"
+    sql = "INSERT INTO locations (id,locatable_id,locatable_type,parent_id,tree_id,lft,rgt,url, marketable_url,meta_description,meta_keywords,template,special_action) SELECT id,cable_menuable_id,cable_menuable_type,parent_id,tree_id,lft,rgt,url,marketable_url,meta_description,meta_keywords,template,special_action FROM menus;"
     ActiveRecord::Base.connection.execute(sql)
     ActiveRecord::Base.connection.execute("UPDATE menus set location_id = id;")
     

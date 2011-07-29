@@ -1,7 +1,3 @@
-require 'rails'
-require 'awesome_nested_set'
-require 'rainbow'
-require 'benchmark'
 module Cable
   module Menus
     module ActsAsCableMenu
@@ -25,7 +21,6 @@ module Cable
         end
         
         def nested_set_hash(set) 
-         Menu.benchmark("Creating nested Set hash".color(:yellow)) do
           stack = [] 
           result = []
           set.each do |node|
@@ -52,15 +47,20 @@ module Cable
           end
           result
         end
+        
+        def to_simple_nav( *menu_item )
+           nested_set_hash( visible_menus( menu_item )  )
         end
         
-        def to_simple_nav( menu_item )
+        def visible_menus( *menu_item )
+          self.includes(:location).where(:locations => {:tree_id => menu_item}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft')
+        end
 
-             Menu.benchmark("Creating and calling sql nested Set hash".color(:yellow)) do
-               nested_set_hash( self.where(:locations => {:tree_id => menu_item}, :show_in_menu => true).includes(:location).order('locations.lft')[1..-1] )
-             end
+        def by_url( location )
+          location = location.root
+          menu_tree = self.includes(:location).where(:locations => {:lft => location.lft...location.rgt}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft') 
+          nested_set_hash( menu_tree )
         end
-        
         
         def locations
           self.all.includes(:location).collect(&:location)
@@ -90,20 +90,8 @@ module Cable
         end
         
         def children(options = nil)
-            # locations = Location.includes(:menus).where(:tree_id => self.location.tree_id , :parent_id => self.location.id ).order('lft').use_index('nested_set')
-            #             #locations = Location.includes(:menus).where(:tree_id => 2, :parent_id => 10 ).order('lft').order('lft').use_index('nested_set')
-            #             menus = locations.collect(&:menus).flatten.compact#self.class.includes(:location).where(:show_in_menu => true).order('location_id').use_index('location_of_menus')
-            #                        
-            #             ids = menus.collect(&:location_id) & locations.collect(&:id)
-            #             menus.select{|m| ids.include?( m.id)}
-                        
-            # menus.merge( locations )
-            self.location.children.includes(:menus)
-            # self.location.children.includes(:menus).where(:tree_id => self.location.tree_id, :menus => {:show_in_menu => true}).collect{|loc| loc.menus.first}
-            ## self.location.children.includes(:menus).collect{|loc| loc.menus.first}
-            
+          self.location.children.includes(:menus).collect{|m| m.menus.where(:show_in_menu => true)}.flatten
         end
-        
         
         def route
           (self.ancestors.collect{|an| an.url } << self.url).join
@@ -115,7 +103,9 @@ module Cable
         
         def title
           if self[:title].blank?
-            self.resource.title unless self.new_record?
+            return "" if self.new_record?
+            return self.resource.title unless self.resource.nil?
+            return self.url
           else
             self[:title]
           end

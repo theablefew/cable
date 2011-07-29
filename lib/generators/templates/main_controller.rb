@@ -1,19 +1,21 @@
 class MainController < ApplicationController
   
-  include Cable::Helpers::CableControllerHelpers
-  include Cable::Helpers::UrlMaskHelper
-  
   ## Cable::Helpers::CableControllerHelpers defines find_by_url method. Overwrite to make customized changes.
   # def find_by_url
-  #   @location = Location.find_by_marketable_url( params[:url] ) || Location.find_by_url( request.path )
-  #   unless @location.nil?
-  #     @resource = @location.resource
-  #     @page_title =  (@location.title.nil?) ? "" : @location.title
-  #     send(@location.special_action) unless @location.special_action.blank?
-  #     render :action => :show
+  #   unless request_is_missing_static_resource?
+  #     @location = Location.includes(:menus).find_by_marketable_url( params[:url] ) || Location.includes(:menus).find_by_url( request.path )
+  #     unless @location.nil?
+  #       @resource = @location.resource
+  #       @page_title =  (@location.title.nil?) ? "" : @location.title
+  #       send(@location.special_action) unless @location.special_action.blank?
+  #       @continue_execution = send(@location.special_action) unless @location.special_action.blank?
+  #       render :action => :show, :layout => "internal" if @continue_execution || @continue_execution.nil?
+  #     else
+  #       logger.warn "[Cable::MissingLocation] No location found for /#{params[:url]}. Redirecting to root.".color(:red)
+  #       redirect_to "/" and return false
+  #     end
   #   else
-  #     redirect_to "/"
-  #     logger.info "[Cable] No location found. Redirecting".color(:yellow)
+  #     render :nothing => true, :status => 403
   #   end
   # end
   

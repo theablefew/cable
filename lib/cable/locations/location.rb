@@ -1,4 +1,3 @@
-require 'rainbow'
 class Cable::Locations::Location < ActiveRecord::Base
   self.abstract_class = true
   
@@ -15,28 +14,32 @@ class Cable::Locations::Location < ActiveRecord::Base
     {:from => "#{quoted_table_name} USE INDEX(#{index})"}
   }
   
-  def arranged
+  def self.arranged
     arranged = ActiveSupport::OrderedHash.new
     insertion_points = [arranged]
     depth = 0
-    self.class.where( :menus => {:show_in_menu => true}).includes(:menus).order('lft').each_with_level do |node, level|
+    # self.find_by_sql("SELECT * FROM locations loc WHERE NOT EXISTS (SELECT * FROM menus WHERE menus.location_id = loc.id AND menus.show_in_menu = 1) ORDER BY locations.lft")
+    # self.includes(:menus).order('locations.lft')
+    # loc_menu = self.find_by_sql("SELECT * FROM locations loc LEFT OUTER JOIN `menus` ON `menus`.`location_id` = `loc`.`id` WHERE EXISTS (SELECT * FROM menus WHERE menus.location_id = loc.id AND menus.show_in_menu = 1) ORDER BY loc.lft;")
+    # loc_menu = self.find_by_sql("select * from locations loc inner join menus men on men.location_id = loc.id where men.show_in_menu = 1").preload(:menus)
+    self.includes(:menus).eager_load(:menus).where(:menus => {:show_in_menu => true} ).order('lft').each_with_level do |node, level|
       next if level > depth && insertion_points.last.keys.last && node.parent_id != insertion_points.last.keys.last.id
       insertion_points.push insertion_points.last.values.last if level > depth
       (depth - level).times { insertion_points.pop } if level < depth
       insertion_points.last.merge! node => ActiveSupport::OrderedHash.new
       depth = level
     end
-    logger.info "FREEKING ARRANGE #{arranged}".color(:yellow)
     arranged
   end
   #marketable_url is automatic. self.url is only set if user overrides it. 
   def url
     return self[:url] if self.external_link? || self.direct_link?
     return "/#{self.marketable_url}"
-  end
+  end 
+    
   
   def resource
-    self.locatable
+    self.locatable_id.nil? ? nil : self.locatable 
   end
   
   def resource=( args )
@@ -50,7 +53,6 @@ class Cable::Locations::Location < ActiveRecord::Base
   def check_menu_permission( attributed )
     attributed['creatable'] == "0"
   end
-  
   
   def route
     (self.ancestors.collect{|an| an.url } << self.url).join
@@ -76,16 +78,15 @@ class Cable::Locations::Location < ActiveRecord::Base
   end
   
   def title_or_url
-    
+    nme = ""
     return "/" if self.root? 
     unless self.menus.empty?
-      return self.menus.first.title
+      nme = self.menus.first.title
     else
-      return self.resource.title
+      nme = self.resource.title unless self.resource.nil?
     end
-    
-    return self[:url] unless self[:url].blank?
-
+    nme = self[:url] unless self[:url].blank?
+    return nme
   end
 
 

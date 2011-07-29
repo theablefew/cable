@@ -22,6 +22,10 @@ module Cable
         class_option :orm,        :type => :string,  :default => "active_record"
         class_option :locatable,  :type => :boolean, :default => true, :banner => "Setting this to false will create a non-locatable resource."
         
+        def display_banner
+          puts Cable::Helpers::TerminalHelper.version
+        end
+        
         def create_migration_file          
            migration_template 'migration.rb', "db/migrate/create_#{table_name}.rb" if options.migration? and yes?("Would you like to generate a migration?", :yellow)
         end
@@ -63,11 +67,12 @@ module Cable
         end
         
         def self.next_migration_number(dirname)
-         if ActiveRecord::Base.timestamped_migrations
-           Time.now.utc.strftime("%Y%m%d%H%M%S")
-         else
-           "%.3d" % (current_migration_number(dirname) + 1)
-         end
+          next_migration_number = current_migration_number(dirname) + 1
+          if ActiveRecord::Base.timestamped_migrations
+            [Time.now.utc.strftime("%Y%m%d%H%M%S"), "%.14d" % next_migration_number].max
+          else
+            "%.3d" % next_migration_number
+          end
         end
         
         private

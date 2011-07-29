@@ -1,4 +1,3 @@
-require 'rainbow'
 module Cable
   module Helpers
     module CableControllerHelpers
@@ -18,7 +17,7 @@ module Cable
         
         def find_by_url
           unless request_is_missing_static_resource?
-            @location = Location.find_by_marketable_url( params[:url] ) || Location.find_by_url( request.path )
+            @location = Location.includes(:menus).find_by_marketable_url( params[:url] ) || Location.includes(:menus).find_by_url( request.path )
             unless @location.nil?
               @resource = @location.resource
               @page_title =  (@location.title.nil?) ? "" : @location.title
@@ -26,14 +25,17 @@ module Cable
               @continue_execution = send(@location.special_action) unless @location.special_action.blank?
               render :action => :show, :layout => "internal" if @continue_execution || @continue_execution.nil?
             else
-              logger.info "[Cable] No location found. Redirecting to root.".color(:yellow)
-              redirect_to "/"
+              logger.warn "[Cable::MissingLocation] No location found for /#{params[:url]}. Redirecting to root.".color(:red)
+              redirect_to "/" and return false
             end
           else
             render :nothing => true, :status => 403
           end
         end
+        
+        
       end
+
    end 
   end
 end

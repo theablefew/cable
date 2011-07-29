@@ -121,12 +121,11 @@ ul.cable_menu ul {
 
 #add-menu{
   background-color:#eee;
-  background-image:url(/images/cable/add.png);
-  background-repeat:no-repeat;
-  background-position:left center;
-  padding-left:35px;
+
+  padding-left:0px;
   width: 114px; 
 }
+#add-menu a{ display:block; padding-left:30px; background:url(/images/cable/add.png) no-repeat left center; }
 #add-menu:hover{
   background-color:#ddd;
 }
@@ -140,13 +139,6 @@ ul.cable_menu.empty{
 #resources-data {
 	padding: 0;
 }
-
-
-
-
-
-
-
 
 #search_resources{
 	float: right;

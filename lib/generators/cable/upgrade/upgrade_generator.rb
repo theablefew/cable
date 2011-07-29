@@ -23,6 +23,10 @@ module Cable
         ACTS_AS_CABLE = "acts_as_cable"
         PREVENT_DELETION = "prevent_deletion"
         
+        def display_banner
+          puts Cable::Helpers::TerminalHelper.version
+        end
+        
         def upgrade_cable_views
           say "\nChecking for legacy view files...", :white
           
@@ -112,7 +116,7 @@ module Cable
            
             backup_file( "app/controllers/admin_controller.rb" )
             backup_file( "app/views/layouts/admin.html.erb" )
-            backup_file( "public/stylesheets/tinymce")
+            backup_file( "public/stylesheets/tinymce/custom_rich_editor.css")
             backup_file( "app/views/admin/index.html.erb")
             backup_file( "app/views/layouts/admin/_dual_column_layout.html.erb")
             backup_file( "app/views/layouts/admin/_single_column_layout.html.erb")
@@ -124,13 +128,13 @@ module Cable
             directory 'app/views/layouts/admin', 'app/views/layouts/admin'
             directory "public/stylesheets/tinymce", "public/stylesheets/tinymce"
             copy_file 'app/views/admin/index.html.erb', 'app/views/admin/index.html.erb'
-            copy_file 'app/helpers/admin/menus_helper.rb','app/helpers/admin/menus_helper.rb'
+            # copy_file 'app/helpers/admin/menus_helper.rb','app/helpers/admin/menus_helper.rb'
             copy_file 'public/javascripts/admin.js', 'public/javascripts/admin.js'
           end
         end
     
         def copy_tiny_mce_config
-          copy_file 'config/tiny_mce.yml', 'confit/tiny_mce.yml' if yes?( "Would you like to copy Cable's default tiny_mce.yml configuratio?", :yellow )
+          copy_file 'config/tiny_mce.yml', 'config/tiny_mce.yml' if yes?( "Would you like to copy Cable's default tiny_mce.yml configuration?", :yellow )
         end
         
         def install_default_resource_template
@@ -200,15 +204,18 @@ module Cable
           end
         end
         
-        
-        
+        def show_exit
+          say "\nCable v1.0.0 Upgrade complete!".color( :green ).bright
+          say "\n\nYou will need to regenerate your Cable::Resource views to receive location and menu views in resource admin.\n\n"
+        end
         
         def self.next_migration_number(dirname)
-         if ActiveRecord::Base.timestamped_migrations
-           Time.now.utc.strftime("%Y%m%d%H%M%S") + (rand(9) + rand(9)).to_s
-         else
-           "%.3d" % (current_migration_number(dirname) + rand(90))
-         end
+          next_migration_number = current_migration_number(dirname) + 1
+          if ActiveRecord::Base.timestamped_migrations
+            [Time.now.utc.strftime("%Y%m%d%H%M%S"), "%.14d" % next_migration_number].max
+          else
+            "%.3d" % next_migration_number
+          end
         end
 
       protected

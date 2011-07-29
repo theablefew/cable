@@ -1,4 +1,4 @@
-require 'rails'
+# require 'rails'
 require 'active_record'
 require 'action_view'
 module Cable
@@ -41,7 +41,8 @@ module Cable
       module InstanceMethods
         
         def update_marketable_url
-          self.location.generate_marketable_url
+          self.location.generate_marketable_url if self.location.url_changed?
+          self.location.save
         end
         
         def to_json_for_autocomplete
