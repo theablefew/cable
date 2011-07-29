@@ -5,31 +5,37 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "0.9.17"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-07-08}
+  s.date = %q{2011-07-29}
+  s.description = %q{Cable is a CMS for developers.}
+  s.email = %q{spencer@theablefew.com}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
+    "app/controllers/admin/locations_controller.rb",
     "app/controllers/admin/search_controller.rb",
     "app/controllers/admin_controller.rb",
     "app/controllers/attachable_assets_controller.rb",
     "app/controllers/attachable_documents_controller.rb",
     "app/controllers/attachable_images_controller.rb",
     "app/controllers/cable/cable_admin_controller.rb",
-    "app/helpers/admin/menus_helper.rb",
     "app/helpers/admin/search_controller_helper.rb",
     "app/helpers/admin_helper.rb",
+    "app/helpers/main_helper.rb",
     "app/models/attachable_asset.rb",
     "app/models/attachable_document.rb",
     "app/models/attachable_image.rb",
     "app/views/admin/_admin_user_login.html.erb",
+    "app/views/admin/_edit_bar.html.erb",
     "app/views/admin/cable_settings/_cable_setting.html.erb",
     "app/views/admin/cable_settings/edit.html.erb",
     "app/views/admin/cable_settings/index.html.erb",
     "app/views/admin/index.html.erb",
+    "app/views/admin/partials/_location_for_resource.html.erb",
+    "app/views/admin/partials/_menus_for_location.html.erb",
     "app/views/admin/search/_generic_search_result.html.erb",
     "app/views/admin/search/_search.html.erb",
     "app/views/admin/search/index.html.erb",
@@ -43,37 +49,54 @@ Gem::Specification.new do |s|
     "app/views/layouts/admin.html.erb",
     "app/views/layouts/admin/_dual_column_layout.html.erb",
     "app/views/layouts/admin/_single_column_layout.html.erb",
+    "app/views/main/show.html.erb",
+    "app/views/main/templates/_default.html.erb",
     "config/admin_navigation.rb",
     "config/navigation.rb",
     "config/routes.rb",
+    "config/tiny_mce.yml",
     "lib/cable.rb",
     "lib/cable/acts_as_cable.rb",
+    "lib/cable/acts_as_maskable.rb",
     "lib/cable/base.rb",
     "lib/cable/block.rb",
     "lib/cable/capistrano.rb",
-    "lib/cable/controllers/cable_controller_helpers.rb",
     "lib/cable/engine.rb",
     "lib/cable/errors/resource_association_error.rb",
     "lib/cable/errors/search_error.rb",
+    "lib/cable/helpers/cable_controller_helpers.rb",
+    "lib/cable/helpers/kaminari_helper.rb",
+    "lib/cable/helpers/nested_set_helper.rb",
+    "lib/cable/helpers/terminal_helper.rb",
+    "lib/cable/helpers/url_helper.rb",
+    "lib/cable/helpers/url_mask_helper.rb",
+    "lib/cable/locations/location.rb",
     "lib/cable/media/acts_as_attachable.rb",
     "lib/cable/media/asset.rb",
-    "lib/cable/menu.rb",
-    "lib/cable/menu/acts_as_cable_menu.rb",
-    "lib/cable/menu/base.rb",
-    "lib/cable/menu/simple_navigation_methods.rb",
-    "lib/cable/menu/url_helper.rb",
-    "lib/cable/page.rb",
+    "lib/cable/menus/acts_as_cable_menu.rb",
+    "lib/cable/menus/menu.rb",
+    "lib/cable/menus/simple_navigation_methods.rb",
     "lib/cable/rails/routes.rb",
     "lib/cable/railtie.rb",
+    "lib/cable/resource.rb",
+    "lib/cable/schema/maskable.rb",
     "lib/cable/schema/menuable.rb",
+    "lib/cable/schema/resourceable.rb",
     "lib/cable/setting.rb",
     "lib/cable/special_action.rb",
+    "lib/cable/url_mask.rb",
     "lib/generators/cable/install_generator.rb",
+    "lib/generators/cable/masks/masks_generator.rb",
+    "lib/generators/cable/masks/templates/erb/_mask.html.erb",
+    "lib/generators/cable/masks/templates/erb/_mask_fields.html.erb",
+    "lib/generators/cable/masks/templates/migration.rb",
+    "lib/generators/cable/masks/templates/model.rb",
     "lib/generators/cable/media/media_generator.rb",
     "lib/generators/cable/media/templates/migration.rb",
     "lib/generators/cable/media/templates/model.rb",
     "lib/generators/cable/menu/menu_generator.rb",
     "lib/generators/cable/menu/templates/controller.rb",
+    "lib/generators/cable/menu/templates/erb/menus/_edit_menus.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/_menu.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/_resources.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/edit.html.erb",
@@ -83,10 +106,10 @@ Gem::Specification.new do |s|
     "lib/generators/cable/menu/templates/erb/menus/show.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/sort.js.erb",
     "lib/generators/cable/menu/templates/erb/partials/_menu_fields.html.erb",
+    "lib/generators/cable/menu/templates/menus.rb",
     "lib/generators/cable/menu/templates/migration.rb",
     "lib/generators/cable/menu/templates/model.rb",
     "lib/generators/cable/orm_helpers.rb",
-    "lib/generators/cable/override_generator.rb",
     "lib/generators/cable/resource/resource_generator.rb",
     "lib/generators/cable/resource/templates/controller.rb",
     "lib/generators/cable/resource/templates/erb/scaffold/_form.html.erb",
@@ -98,10 +121,16 @@ Gem::Specification.new do |s|
     "lib/generators/cable/resource/templates/erb/scaffold/show.html.erb",
     "lib/generators/cable/resource/templates/migration.rb",
     "lib/generators/cable/resource/templates/model.rb",
+    "lib/generators/cable/upgrade/templates/add_location_id_to_menus.rb",
+    "lib/generators/cable/upgrade/templates/migrate_from_legacy_menu.rb",
+    "lib/generators/cable/upgrade/upgrade_generator.rb",
     "lib/generators/templates/block.rb",
     "lib/generators/templates/create_blocks.rb",
     "lib/generators/templates/create_cable_settings.rb",
+    "lib/generators/templates/create_locations.rb",
     "lib/generators/templates/initializer.rb",
+    "lib/generators/templates/location_model.rb",
+    "lib/generators/templates/main_controller.rb",
     "lib/generators/templates/partials/_block.html.erb",
     "lib/generators/templates/partials/_block_form.html.erb",
     "lib/railties/tasks.rake",
@@ -160,10 +189,13 @@ Gem::Specification.new do |s|
     "public/stylesheets/cable/buttons.css",
     "public/stylesheets/cable/formtastic.css",
     "public/stylesheets/cable/formtastic_changes.css",
+    "public/stylesheets/cable/masks.css",
     "public/stylesheets/cable/menu.css",
     "public/stylesheets/cable/pagination.css",
     "public/stylesheets/cable/regions.css",
+    "public/stylesheets/cable/resources.css",
     "public/stylesheets/cable/search.css",
+    "public/stylesheets/cable/site_edit.css",
     "public/stylesheets/cable/tables.css",
     "public/stylesheets/cable/tags.css",
     "public/stylesheets/jquery/ui/images/bg_fallback.png",
@@ -175,47 +207,75 @@ Gem::Specification.new do |s|
     "public/stylesheets/jquery/ui/jquery-ui-1.8.7.custom.css",
     "public/stylesheets/tinymce/custom_rich_editor.css"
   ]
+  s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
-  s.summary = %q{Cable Admin Engine for Rails 3}
+  s.rubygems_version = %q{1.6.2}
+  s.summary = %q{Cable CMS Engine for Rails 3}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["~> 3.0.0"])
+      s.add_runtime_dependency(%q<rails>, ["= 3.0.6"])
       s.add_runtime_dependency(%q<orm_adapter>, [">= 0"])
-      s.add_runtime_dependency(%q<awesome_nested_set>, [">= 0"])
-      s.add_runtime_dependency(%q<formtastic>, [">= 0"])
-      s.add_runtime_dependency(%q<simple-navigation>, [">= 0"])
-      s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
       s.add_runtime_dependency(%q<rainbow>, [">= 0"])
-      s.add_runtime_dependency(%q<kaminari>, [">= 0"])
+      s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
+      s.add_runtime_dependency(%q<seedbed>, ["= 1.1.1"])
+      s.add_runtime_dependency(%q<tiny_mce>, [">= 0"])
+      s.add_runtime_dependency(%q<formtastic>, [">= 0"])
       s.add_runtime_dependency(%q<cocoon>, [">= 0"])
+      s.add_runtime_dependency(%q<simple-navigation>, [">= 0"])
+      s.add_runtime_dependency(%q<nested_set>, [">= 0"])
+      s.add_runtime_dependency(%q<thinking-sphinx>, [">= 2.0.1"])
       s.add_runtime_dependency(%q<schemata>, [">= 0.1.0"])
+      s.add_runtime_dependency(%q<wirble>, [">= 0"])
+      s.add_runtime_dependency(%q<annotate>, [">= 0"])
+      s.add_runtime_dependency(%q<kaminari>, [">= 0"])
+      s.add_runtime_dependency(%q<rake>, ["= 0.8.7"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<jeweler>, ["= 1.6.4"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
     else
-      s.add_dependency(%q<rails>, ["~> 3.0.0"])
+      s.add_dependency(%q<rails>, ["= 3.0.6"])
       s.add_dependency(%q<orm_adapter>, [">= 0"])
-      s.add_dependency(%q<awesome_nested_set>, [">= 0"])
-      s.add_dependency(%q<formtastic>, [">= 0"])
-      s.add_dependency(%q<simple-navigation>, [">= 0"])
-      s.add_dependency(%q<jquery-rails>, [">= 0"])
       s.add_dependency(%q<rainbow>, [">= 0"])
-      s.add_dependency(%q<kaminari>, [">= 0"])
+      s.add_dependency(%q<jquery-rails>, [">= 0"])
+      s.add_dependency(%q<seedbed>, ["= 1.1.1"])
+      s.add_dependency(%q<tiny_mce>, [">= 0"])
+      s.add_dependency(%q<formtastic>, [">= 0"])
       s.add_dependency(%q<cocoon>, [">= 0"])
+      s.add_dependency(%q<simple-navigation>, [">= 0"])
+      s.add_dependency(%q<nested_set>, [">= 0"])
+      s.add_dependency(%q<thinking-sphinx>, [">= 2.0.1"])
       s.add_dependency(%q<schemata>, [">= 0.1.0"])
+      s.add_dependency(%q<wirble>, [">= 0"])
+      s.add_dependency(%q<annotate>, [">= 0"])
+      s.add_dependency(%q<kaminari>, [">= 0"])
+      s.add_dependency(%q<rake>, ["= 0.8.7"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<jeweler>, ["= 1.6.4"])
+      s.add_dependency(%q<rcov>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rails>, ["~> 3.0.0"])
+    s.add_dependency(%q<rails>, ["= 3.0.6"])
     s.add_dependency(%q<orm_adapter>, [">= 0"])
-    s.add_dependency(%q<awesome_nested_set>, [">= 0"])
-    s.add_dependency(%q<formtastic>, [">= 0"])
-    s.add_dependency(%q<simple-navigation>, [">= 0"])
-    s.add_dependency(%q<jquery-rails>, [">= 0"])
     s.add_dependency(%q<rainbow>, [">= 0"])
-    s.add_dependency(%q<kaminari>, [">= 0"])
+    s.add_dependency(%q<jquery-rails>, [">= 0"])
+    s.add_dependency(%q<seedbed>, ["= 1.1.1"])
+    s.add_dependency(%q<tiny_mce>, [">= 0"])
+    s.add_dependency(%q<formtastic>, [">= 0"])
     s.add_dependency(%q<cocoon>, [">= 0"])
+    s.add_dependency(%q<simple-navigation>, [">= 0"])
+    s.add_dependency(%q<nested_set>, [">= 0"])
+    s.add_dependency(%q<thinking-sphinx>, [">= 2.0.1"])
     s.add_dependency(%q<schemata>, [">= 0.1.0"])
+    s.add_dependency(%q<wirble>, [">= 0"])
+    s.add_dependency(%q<annotate>, [">= 0"])
+    s.add_dependency(%q<kaminari>, [">= 0"])
+    s.add_dependency(%q<rake>, ["= 0.8.7"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<jeweler>, ["= 1.6.4"])
+    s.add_dependency(%q<rcov>, [">= 0"])
   end
 end
 

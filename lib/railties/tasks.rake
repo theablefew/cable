@@ -3,9 +3,6 @@ require 'cable'
 desc "Shows Cable Version"
 namespace :cable do
   task :version do
-    puts ""
-    puts "Cable v.#{Cable::Base.version}"
-    puts "The Able Few | theablefew.com"
-    puts ""
+    puts Cable::Helpers::TerminalHelper.version
   end
 end

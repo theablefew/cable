@@ -1,4 +1,4 @@
-require 'rails'
+# require 'rails'
 require 'active_record'
 require 'action_view'
 module Cable
@@ -11,19 +11,23 @@ module Cable
       module ClassMethods
         
         def acts_as_cable( reflection_options = {} )
-          send :include, InstanceMethods
-          send :include, ActionView::Helpers::TextHelper
+          has_one :location, reflection_options.merge( :as => :locatable , :class_name => "Location", :dependent => :destroy )
+          
           
           with_modules = []
           with_modules << reflection_options.delete(:with) if reflection_options.has_key?(:with)
           with_modules.flatten!
-          
-          has_one :menu, reflection_options.merge( :as => :cable_menuable )
           has_many :blocks, :as => :resource if with_modules.include? :blocks
-          accepts_nested_attributes_for :menu
+          
+          send :include, InstanceMethods
+          send :include, ActionView::Helpers::TextHelper
+
+          after_save :update_marketable_url
           
           self.cattr_accessor :default_template
           self.default_template = "default"
+          
+          accepts_nested_attributes_for :location
           
           yield self if block_given?
         end
@@ -35,6 +39,11 @@ module Cable
       end
       
       module InstanceMethods
+        
+        def update_marketable_url
+          self.location.generate_marketable_url if self.location.url_changed?
+          self.location.save
+        end
         
         def to_json_for_autocomplete
           displayable_string = first_displayable_attribute

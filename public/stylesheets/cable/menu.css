@@ -2,6 +2,9 @@
 
 #selection {
   margin-top:10px;
+  background:#eee;
+  padding:10px;
+  border:1px solid #ccc;
 }
 
 #add-menu-tree1 {
@@ -9,7 +12,7 @@
   margin-right:10px;
 }
  
-
+div.tabs ul {list-style-type:none; padding-left:0}
 #add-menu-tree {
   float:left; 
   margin-right:10px;
@@ -74,6 +77,9 @@ ul.cable_menu ul {
 .cable_menu_wrapper li:hover span.menu-zoom{
   visibility:visible;
 }
+.cable_menu_wrapper li:hover span.menu-zoom.root{
+  visibility:hidden;
+}
 .cable_menu_wrapper li span.menu-title{
   text-overflow: ellipsis;
   width:110px;
@@ -115,12 +121,11 @@ ul.cable_menu ul {
 
 #add-menu{
   background-color:#eee;
-  background-image:url(/images/cable/add.png);
-  background-repeat:no-repeat;
-  background-position:left center;
-  padding-left:35px;
-	width: 114px; 
+
+  padding-left:0px;
+  width: 114px; 
 }
+#add-menu a{ display:block; padding-left:30px; background:url(/images/cable/add.png) no-repeat left center; }
 #add-menu:hover{
   background-color:#ddd;
 }
@@ -134,13 +139,6 @@ ul.cable_menu.empty{
 #resources-data {
 	padding: 0;
 }
-
-
-
-
-
-
-
 
 #search_resources{
 	float: right;

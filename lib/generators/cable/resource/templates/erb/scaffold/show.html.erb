@@ -1,5 +1,7 @@
 <p id="notice"><%%= notice %></p>
-
+<% if options.locatable? %>
+<p>This <%%= @<%= singular_table_name %>.class.to_s.downcase %> is viewable at: <span id="location-url-hint"><%%= link_to @<%= singular_table_name %>.location.url, @<%= singular_table_name %>.location.url %></span></p>
+<% end %>
 <% for attribute in attributes %>
 <p>
   <b><%= attribute.human_name %>:</b>
@@ -8,4 +10,4 @@
 
 <% end %>
 
-<%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> | <%%= link_to 'Back', :back %>
+<%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> | <%%= link_to 'Back', admin_<%= index_helper %>_path %>

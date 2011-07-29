@@ -14,6 +14,7 @@
       $tree = $(".cable_menu_wrapper > ul");
       update_tree($tree);
       select_item(ui.item[0]);
+      $('ul.empty').removeClass('.empty');
     },
     update: function(event, ui) {
       
@@ -57,6 +58,7 @@
   }
   
   function show_add_menu(item){
+
     $("#add-menu").remove();
     
     var $add = $("<li id='add-menu'>Add Menu Item</li>").appendTo($(item));
@@ -110,7 +112,7 @@
     if($ul.children().size() == 0){
       $li.removeClass("has-children").addClass("empty");
     }else{
-      $li.addClass("has-children");      
+      $li.removeClass('empty').addClass("has-children");
     }
     
     var $children = [];
@@ -134,24 +136,31 @@
     var items = new Array();
     $(".cable_menu_wrapper .selected").removeClass("last");
     $(".cable_menu_wrapper .selected").each(function(){
-      items.push($(this).text());
+      items.push([$(this).text(), $(this).attr("menu")]);
     });
-    
-    $("#selection p").html(items.join(" &raquo; "));
+    items.sort(function(a,b) {return a[1] == b[1] ? 0 : (a[1] < b[1] ? -1 : 1)})
+    sorted_items = []
+    $.each( items , function(index, value) {
+        sorted_items.push( value[0]);
+    } );
+    $("#selection p").html(sorted_items.join(" &raquo; "));
     $(".cable_menu_wrapper .selected").last().addClass("last");
   }
   
   function select_item(item,wrapper){
     $item = $(item);
+
+    // window.location.hash = $item.attr("title");
     $id = $(item).attr("menu");
 	parent_id = $id;
     $wrapper = $(wrapper);
     $child = $("ul[menu="+$id+"]");
-
+        
+    
     if($child.children().size() > 0){
       $child.css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).show();      
     }else{
-      $("<ul class='cable_menu empty' menu="+$id+"/>").css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).sortable(sortable_options).appendTo($wrapper).mouseenter(function() {   
+      $("<ul class='cable_menu empty' menu="+$id+"/>").hover( add_resource_button_to_column , remove_resource_button_from_column ).css({ left: $item.parent().position().left + $item.parent().width()+3+$(".cable_menu_wrapper").scrollLeft(), top: 0}).sortable(sortable_options).appendTo($wrapper).mouseenter(function() {   
        });;
     }
     
@@ -160,17 +169,30 @@
     $item.siblings('.selected').each(function(){
       deselect(this);
     });
-    
-    $child.children().each(function(){
+
+    $child.children("li").each(function(){
       deselect(this);
     });
         
+
     $wrapper.append($item.parent());
     last_width = $wrapper.attr("scrollWidth");
     $wrapper.stop();
     $wrapper.animate({ 'scrollLeft': $wrapper.attr("scrollWidth") }, 2000);
     
     update_breadcrumb();
+  }
+  
+  function deselect(item) {
+    var $item = $(item);
+    
+    $item.removeClass('selected');
+    $id = $item.attr("menu");
+    $child = $("ul[menu="+$id+"]")
+    $child.hide().find("li").each(function(){
+      deselect(this);
+    });
+    
   }
   
   function zoom_item(item,wrapper){
@@ -188,7 +210,6 @@
           {
             modal: true, 
             width: 600,
-            height: 250,
             resizable: false,
             draggable: false,
             resizable: false,
@@ -199,16 +220,6 @@
     });
   }
 
-  function deselect(item) {
-    var $item = $(item);
-    $item.removeClass('selected');
-    $id = $item.attr("menu");
-    $child = $("ul[menu="+$id+"]");
-    $child.hide().find("li").each(function(){
-      deselect(this);
-    });
-    
-  }
   
   function update_tree(tree){
     $tree = $(tree);
@@ -218,32 +229,49 @@
     });
   }
   
-  function build_menu(ul, wrapper, id){
-    var $wrapper = $(wrapper);
-    var $ul = $(ul);
-    var $id = id;
-    var $new_menu = $("<ul class='cable_menu' menu="+$id+"/>").appendTo($wrapper);
-    if($id >= 1){
-      $new_menu.hide();
-    }    
-    $ul.children().each(function(){
-      var $li = $(this);
-      var $cloned_li = $(this).clone();
-      if($cloned_li.children().size() > 0){ 
-        $cloned_li.addClass("has-children");
-        var $id = $cloned_li.attr("id").replace("menu_","");        
-        $cloned_li.children().each(function(){
-          build_menu(this,$wrapper,$id);
-        });
+  function add_resource_button_to_column( e ) {
+      id = $(e.currentTarget).attr("menu")
+      if(id != 0) {
+          $(e.currentTarget).append( "<li id='add-menu' class='add-resource'><a id=''>Add Item</a></li>")
+          $('li.add-resource a').click( create_new_resource );
       }
-      $cloned_li.find("ul").remove();
-      $cloned_li.html("<span class='menu-zoom'></span> <span class='menu-title'>"+$cloned_li.text()+"</span>");
-      $cloned_li.appendTo($new_menu);
-      $cloned_li.attr("menu",$cloned_li.attr("id").replace("menu_",""));      
-      $cloned_li.removeAttr("id");
-
-
+  }
+  
+  function remove_resource_button_from_column( e ) {
+      $(e.currentTarget).find('li.add-resource').unbind('click').remove();
+  }
+  
+  function create_new_resource( e ){
+    
+    parent_id = $('li.add-resource').parent("ul").attr('menu')
+    $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
+    $("#add-menu-form").load("/admin/menus/new?parent_id="+parent_id, function(){
+      $(this).dialog({
+        modal: true,
+        width: 600,
+        resizable: false,
+        title: "New Item",
+        draggable: false
+      });
     });
+  }
+  
+  function build_menu(ul){
+
+    var $ul = $(ul);
+    var $id = $ul.attr("menu");
+    var $new_menu = $("ul.cable_menu[menu="+$id+"]")//.appendTo($wrapper);
+    
+
+    if($id != 0){
+      $new_menu.hide();
+    }
+    $ul.children().each(function(){
+      // var $li = $(this);
+      $("ul.cable_menu li[menu="+$id+"]").addClass("has-children")
+    });
+    
+
   }
 
   $.fn.serialize_list = function(options) {
@@ -302,10 +330,15 @@
   
   $.fn.cable_menu = function(options){
     var $tree = $(this);
-    var $wrapper = $("<div class='cable_menu_wrapper'></div>").insertAfter($tree);
-
-    build_menu($tree, $wrapper, 0);
+    var $wrapper = $tree;// $("div.cable_menu_wrapper")
+    $('ul.cable_menu').each(function() {
+        build_menu($(this));
+    });
     
+    $("ul.cable_menu li").not('.has-children').addClass("empty");
+    $("ul.cable_menu li").wrapInner("<span class='menu-title' />").prepend("<span class='menu-zoom'></span>");
+    $("ul.cable_menu[menu=0] li span.menu-zoom").addClass('root');
+
     $wrapper.find("li span.menu-title").click(function(){
       select_item($(this).parent(), $wrapper);
     });
@@ -314,60 +347,22 @@
         zoom_item($(this).parent(), $wrapper);
       });
     
-    update_tree($wrapper);
-    $tree.remove();    
-    
     $wrapper.find("ul").sortable(sortable_options);
     
     var $current_selection = $("<div id='selection'><strong>Current Selection:</strong><p>&nbsp;</p></div>").insertBefore($wrapper);
-    var $add1 = $("<div id='add-menu-tree1' class='actions'><a>Add Menu</a></div>").insertBefore($current_selection);
-    var $save1 = $("<div id='save-tree1' class='actions'><a>Save Tree</a></div>").insertBefore($current_selection);
 
-    var $save = $("<div id='save-tree' class='actions'><a>Save Tree</a></div>").insertAfter($wrapper);
-    var $add = $("<div id='add-menu-tree' class='actions'><a>Add Menu</a></div>").insertAfter($wrapper);
+    var $save = $("<div id='save-tree' class='actions'><a>Save Menu</a></div>").insertAfter($wrapper);
 
-    var $form = $("<div id='add-menu-form' />").insertAfter($save);
     var $menu_details = $("<div id='menu-details' />").insertAfter($save);
 
     $save.click(function(){save_tree();}); 
-    $save1.click(function(){save_tree();}); 
 
-    $add.click(function(){
-      $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
-      $("#add-menu-form").load("/admin/menus/new?parent_id="+parent_id, function(){
-        $(this).dialog({
-          modal: true,
-          width: 600,
-      resizable: false,
-          title: "New Menu",
-      draggable: false
-        });
-      });
-    }); 
+    var $form = $("<div id='add-menu-form' />").insertAfter($save);
+    //select_item( $wrapper.find('ul.cable_menu[menu=0] li:first') )
+    
+    $('.ui-sortable').hover( add_resource_button_to_column , remove_resource_button_from_column );
 
-	$add1.click(function(){
-      $("#add-menu-form").html("<img src='/images/cable/loader.gif' />");
-      
-      var get_string;
-      
-      if (parent_id > 0){
-        get_string = "?parent_id="+parent_id;
-      } else {
-        get_string = "?parent_id=0";
-      }
-      
-      $("#add-menu-form").load("/admin/menus/new"+get_string, function(){
-        $(this).dialog({
-          modal: true,
-          width: 600,
-      resizable: false,
-          title: "New Menu",
-      draggable: false
-        });
-      });
-    });
-   
-    $("<hr />").insertAfter($wrapper);
+    $("<div class='clear' ></div>").insertAfter($wrapper);
 
   }
 

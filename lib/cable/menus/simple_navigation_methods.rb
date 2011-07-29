@@ -1,10 +1,10 @@
 module Cable
-  module Menu
+  module Menus
     module SimpleNavigationMethods
       
-      
       def items
-        self.children.where(:show_in_menu => true)
+        # self.children.where(:show_in_menu => true)
+        self.children
       end
 
       def key
@@ -19,7 +19,6 @@ module Cable
         return Hash.new if self[:options].nil?
         self[:options]
       end
-      
       
     end
   end

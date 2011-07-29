@@ -1,3 +1,5 @@
-class <%= class_name %> < Cable::Page
-  acts_as_cable
+class <%= class_name %> < Cable::Resource
+  <% if options.locatable? %>
+    acts_as_cable
+  <% end %>
 end

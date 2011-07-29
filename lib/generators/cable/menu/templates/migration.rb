@@ -10,12 +10,6 @@ class Create<%= table_name.camelize %> < ActiveRecord::Migration
       t.timestamps
     end
 
-    # add_index :<%= table_name %>, :lft
-    # add_index :<%= table_name %>, :rgt
-    # add_index :<%= table_name %>, :parent_id
-    add_index :<%= table_name %>, :url
-    add_index :<%= table_name %>, :marketable_url
-    # add_index :<%= table_name %>, :cable_menuable_id
 
   end
 

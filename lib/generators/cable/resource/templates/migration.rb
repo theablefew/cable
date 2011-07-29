@@ -1,6 +1,8 @@
 class Create<%= table_name.camelize %> < ActiveRecord::Migration
   def self.up
+
     create_table :<%= table_name %> do |t|
+      t.resourceable
     <% for attribute in attributes -%>
       t.<%= attribute.type %> :<%= attribute.name %>
     <% end -%>

@@ -1,5 +1,5 @@
 module Cable
-  module Menu
+  module Helpers
     module UrlHelper
       
       def external_link?

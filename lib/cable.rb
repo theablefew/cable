@@ -9,16 +9,24 @@ module Cable
 
   autoload :Base, 'cable/base'
   autoload :ActsAsCable, 'cable/acts_as_cable'
-  autoload :Menu, 'cable/menu'
-  autoload :Page, 'cable/page'
+  autoload :ActsAsMaskable, 'cable/acts_as_maskable'
+  autoload :Resource, 'cable/resource'
   autoload :Setting, 'cable/setting'
   autoload :CableControllerHelpers, 'cable/controllers/cable_controller_helpers'
   autoload :Block, 'cable/block'
   autoload :SpecialAction, 'cable/special_action'
+  autoload :UrlMask, 'cable/url_mask'
+  
+  module Locations
+    autoload :Location, 'cable/locations/location'
+  end
 
   module Schema
     require 'cable/schema/menuable'
+    require 'cable/schema/resourceable'
+    require 'cable/schema/maskable'
   end
+  
   
   module Errors
     autoload :ResourceAssociationError, "cable/errors/resource_association_error"
@@ -26,16 +34,24 @@ module Cable
     autoload :MissingInterfaceMethod, 'cable/errors/search_error'
   end
   
-  module Menu
-    autoload :ActsAsCableMenu, "cable/menu/acts_as_cable_menu"
-    autoload :SimpleNavigationMethods, "cable/menu/simple_navigation_methods"
-    autoload :UrlHelper, 'cable/menu/url_helper'
-    autoload :Base, "cable/menu/base"
+  module Menus
+    autoload :ActsAsCableMenu, "cable/menus/acts_as_cable_menu"
+    autoload :SimpleNavigationMethods, "cable/menus/simple_navigation_methods"
+    autoload :Menu, "cable/menus/menu"
   end
   
   module Media
     autoload :ActsAsAttachable, "cable/media/acts_as_attachable"
     autoload :Asset, "cable/media/asset"
+  end
+  
+  module Helpers
+    autoload :UrlHelper, 'cable/helpers/url_helper'
+    autoload :NestedSetHelper, 'cable/helpers/nested_set_helper'
+    autoload :CableControllerHelpers, 'cable/helpers/cable_controller_helpers'
+    autoload :KaminariHelper, 'cable/helpers/kaminari_helper'
+    autoload :UrlMaskHelper, 'cable/helpers/url_mask_helper'
+    autoload :TerminalHelper, 'cable/helpers/terminal_helper'
   end
   
   mattr_accessor :regions
