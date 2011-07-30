@@ -20,46 +20,23 @@ module Cable
           
         end
         
-        def nested_set_hash(set) 
-          stack = [] 
-          result = []
-          set.each do |node|
-            if stack.empty?
-              stack.push({:key => node.key, :url => node.url, :name => node.title, :node => node.location, :items => []})
-              result << stack.last
-              next
-            end
-            if stack.last[:node].lft < node.location.lft && node.location.lft < stack.last[:node].rgt
-              child = {:key => node.key, :url => node.url, :name => node.title, :options => node.options, :node => node.location, :items => []}
-              stack.last[:items] << child
-              if node.location.rgt + 1 == stack.last[:node].rgt
-                stack.pop 
-              end
-              unless node.location.leaf?
-                stack.push(child)
-              end
-            else
-              stack.pop
-              stack.push({:key => node.key, :url => node.url, :name => node.title, :node => node.location, :items => []})
-              result << stack.last 
-              next
-            end
+        def arranged(*tree) 
+          depth = 0
+          arranged = {:items => []}
+          stack = [arranged] #insertion_points          
+          Location.includes(:menus).eager_load(:menus).where(:tree_id => tree , :menus => {:show_in_menu => true} ).order('lft').each_with_level do |node, level|
+            next if level > depth && stack.last[:items].last && node.parent_id != stack.last[:items].last[:node].id
+            stack.push(stack.last[:items].last) if level > depth
+            (depth - level).times{ stack.pop }  if level < depth
+            child = {:key => node.menus.first.key, :url => node.url, :name => node.menus.first.title, :options => node.menus.first.options, :node => node, :items => []}
+            stack.last[:items] << child
+            depth = level
           end
-          result
+          arranged[:items].first[:items]
         end
         
         def to_simple_nav( *menu_item )
-           nested_set_hash( visible_menus( menu_item )  )
-        end
-        
-        def visible_menus( *menu_item )
-          self.includes(:location).where(:locations => {:tree_id => menu_item}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL").order('locations.lft')
-        end
-
-        def by_url( location )
-          location = location.root
-          menu_tree = self.includes(:location).where(:locations => {:lft => location.lft...location.rgt}, :show_in_menu => true).where( "locations.parent_id IS NOT NULL and menus.show_in_menu = 1").order('locations.lft') 
-          nested_set_hash( menu_tree )
+          Menu.arranged( menu_item )
         end
         
         def locations
