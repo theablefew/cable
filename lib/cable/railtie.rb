@@ -11,9 +11,9 @@ module Cable
       ActiveRecord::Base.send(:include, Cable::ActsAsCable)
       ActiveRecord::ConnectionAdapters::Table.send :include, Schemata::Orm::ActiveRecord::Schema
       ActiveRecord::ConnectionAdapters::TableDefinition.send :include, Schemata::Orm::ActiveRecord::Schema
-      MainController.send(:include, Cable::Helpers::CableControllerHelpers)
+      # MainController.send(:include, Cable::Helpers::CableControllerHelpers)
       ApplicationController.send(:include, Cable::Helpers::UrlMaskHelper)
-      MainController.helper( Cable::Helpers::UrlMaskHelper )
+      # MainController.helper( Cable::Helpers::UrlMaskHelper )
       ApplicationController.helper( Cable::Helpers::UrlMaskHelper )
       AdminController.skip_filter( :find_by_url_mask )
     end
