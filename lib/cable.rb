@@ -27,7 +27,6 @@ module Cable
     require 'cable/schema/maskable'
   end
   
-  
   module Errors
     autoload :ResourceAssociationError, "cable/errors/resource_association_error"
     autoload :SearchError, 'cable/errors/search_error'

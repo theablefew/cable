@@ -1,7 +1,7 @@
 <%= f.inputs do %>
     <%= f.inputs :for => :location do |location_fields| %>
         <li><p class="inline-hints notice">This <%= f.object.class.to_s.downcase %> is viewable at: <span id="location-url-hint"><%= link_to f.object.location.url,f.object.location.url %></span></p></li>
-        <%= location_fields.input :url, :label => "Custom URL", :hint => "Used to override the default URL", :input_html => {:id => "location_url" } %>
+        <%= location_fields.input :url, :label => "Custom URL", :hint => "Used to override the default URL", :input_html => {:name => "location_url", :type => "text", :id => "location_url" } %>
         <%= location_fields.input :parent_id, :as => :hidden %>
         <%= location_fields.input :tree_id , :as => :hidden %>
         <% unless Cable.special_actions.empty? %>
