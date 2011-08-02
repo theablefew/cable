@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-07-29}
+  s.date = %q{2011-08-02}
   s.description = %q{Cable is a CMS for developers.}
   s.email = %q{spencer@theablefew.com}
   s.files = [
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     "app/models/attachable_asset.rb",
     "app/models/attachable_document.rb",
     "app/models/attachable_image.rb",
+    "app/sweepers/cable_sweeper.rb",
     "app/views/admin/_admin_user_login.html.erb",
     "app/views/admin/_edit_bar.html.erb",
     "app/views/admin/cable_settings/_cable_setting.html.erb",
