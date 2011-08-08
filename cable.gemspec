@@ -55,6 +55,7 @@ Gem::Specification.new do |s|
     "lib/cable/acts_as_maskable.rb",
     "lib/cable/base.rb",
     "lib/cable/block.rb",
+    "lib/cable/caching.rb",
     "lib/cable/caching/cache.rb",
     "lib/cable/capistrano.rb",
     "lib/cable/engine.rb",
