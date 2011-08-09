@@ -10,7 +10,7 @@
 <div class="cable_menu_wrapper" id="menu">
     <%% @menu_id = []; @child_c = []  %>
     <%%= render_tree(  Location.arranged, :class => "cable_menu", :menu => "0" ) do |location, child| %>
-        <%%= content_tag :li, location.menus.first.title, :title => location.menus.first.title, :menu => location.id %>
+        <%%= content_tag :li, location.menus.first.title, :title => location.menus.first.title, :menu => location.id,  , :class => (location.menus.first.show_in_menu?) ? "m-visible" : "m-hidden"  %>
         <%% @menu_id << location.parent_id %>
         <%% next if child.nil? %>
         <%%= content_for :children do %>

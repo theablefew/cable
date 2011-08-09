@@ -18,7 +18,8 @@ class Cable::Locations::Location < ActiveRecord::Base
     arranged = ActiveSupport::OrderedHash.new
     insertion_points = [arranged]
     depth = 0
-    self.includes(:menus).eager_load(:menus).where(:menus => {:show_in_menu => true} ).order('lft').each_with_level do |node, level|
+    # .where(:menus => {:show_in_menu => true} )
+    self.includes(:menus).order('lft').each_with_level do |node, level|
       next if level > depth && insertion_points.last.keys.last && node.parent_id != insertion_points.last.keys.last.id
       insertion_points.push insertion_points.last.values.last if level > depth
       (depth - level).times { insertion_points.pop } if level < depth
