@@ -18,8 +18,12 @@ class Admin::<%= class_name.pluralize %>Controller < AdminController
   def new
     @<%= singular_table_name %> = <%= orm_class.build(class_name) %>
     <% if options.locatable? %>
-    @parent_location = Location.find( params[:location_id] || Location.root )
-    @location = @page.build_location(:parent_id => @parent_location.id, :tree_id => @parent_location.tree_id )
+    if params[:location_id]
+      @parent_location = Location.find( params[:location_id] || Location.root )
+      @location = @page.build_location(:parent_id => @parent_location.id, :tree_id => @parent_location.tree_id )
+    else
+      @location = @page.build_location
+    end
     @location.menus.build
     <% end %>
     respond_with(:admin , @<%= singular_table_name %>)
@@ -31,7 +35,6 @@ class Admin::<%= class_name.pluralize %>Controller < AdminController
     <% if options.locatable? %>
     @<%= singular_table_name %>.location.menus.build if @<%= singular_table_name %>.location.menus.empty?
     <% end %>
-
   end
 
   # POST <%= route_url %>
