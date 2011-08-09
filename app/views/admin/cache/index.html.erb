@@ -32,9 +32,9 @@
             $('.cache_toggle :checkbox').iphoneStyle({ checkedLabel: 'Enabled', uncheckedLabel: 'Disabled' });
             $('.cache_toggle :checkbox').change(function() {
                 if($(this).is(':checked')){
-                    $.ajax({url:'<%= enable_cache_admin_cache_index_path %>'}, success: function() {
+                    $.ajax({url:'<%= enable_cache_admin_cache_index_path %>', success: function() {
                          window.location = "<%= admin_cache_index_path %>";
-                    });
+                    }});
                 }else{
                      $.ajax({url:'<%= disable_cache_admin_cache_index_path %>', success: function() {
                          window.location = "<%= admin_cache_index_path %>";
