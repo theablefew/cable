@@ -17,7 +17,7 @@ module Cable
       # MainController.helper( Cable::Helpers::UrlMaskHelper )
       ApplicationController.helper( Cable::Helpers::UrlMaskHelper )
       AdminController.skip_filter( :find_by_url_mask )      
-      
+      ActionController::Base.perform_caching = Cable::Caching::enabled?
     end
   end
 end

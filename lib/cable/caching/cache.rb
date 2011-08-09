@@ -24,16 +24,11 @@ class Cable::Caching::Cache < ActiveRecord::Base
   
   def self.enabled=( bool )
     instance.update_attributes(:enabled =>  bool)
+    ActionController::Base.perform_caching = bool
   end
     
   def self.clear_interval_in_milliseconds
     instance.clear_interval_in_milliseconds
-  end
-  
-  def self.flush
-    Location.all.each do |loc|
-      expire_page( loc.url )
-    end
   end
   
   def self.instance

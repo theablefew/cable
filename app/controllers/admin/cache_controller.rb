@@ -21,7 +21,9 @@ class Admin::CacheController < AdminController
 
   
   def flush_all
-    Cable::Caching::Cache.flush
+    Location.all.each do |loc|
+      expire_page( loc.url )
+    end
     redirect_to({ :controller => "admin/cache", :action => "index" }, :notice => "Flushed all cache ")  
   end
   
@@ -30,9 +32,15 @@ class Admin::CacheController < AdminController
   end
   
   def disable_cache
+    
+    Location.all.each do |loc|
+      expire_page( loc.url )
+    end
+    
     Cable::Caching.disable if Cable::Caching::Cache.enabled?
-    Cable::Caching::Cache.flush
+
     render :nothing => true
+
   end
   
   def enable_cache
