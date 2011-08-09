@@ -1,0 +1,14 @@
+<%= semantic_form_for([:admin,@location] , :html => {:multipart => true}) do |f| %>
+    <%= f.inputs do %>
+        <li><p class="inline-hints notice">This <%= f.object.class.to_s.downcase %> is viewable at: <span id="location-url-hint"><%= link_to f.object.url,f.object.url %></span></p></li>
+        <%= f.input :url, :label => "Custom URL", :hint => "Used to override the default URL", :input_html => {:id => "location_url" } %>
+        <%= f.input :parent_id, :as => :hidden %>
+        <%= f.input :tree_id , :as => :hidden %>
+
+        <%= f.inputs :for => :menus do |menu_fields| %>
+            <%= menu_fields.input :creatable, :as => :boolean, :label => "Show in Menu", :input_html => {:checked => !menu_fields.object.new_record? } %>
+            <%= menu_fields.input :title , :label => "Menu Title", :hint => "If different than resource title."%>
+        <% end %>
+    <% end %>
+    <%= f.buttons %>
+<% end %>
