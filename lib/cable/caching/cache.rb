@@ -25,7 +25,7 @@ class Cable::Caching::Cache < ActiveRecord::Base
   def self.enabled=( bool )
     instance.update_attributes(:enabled =>  bool)
     ActionController::Base.perform_caching = bool
-    FileUtils.touch "#{Rails.root}/tmp/restart.txt" unless Rails.env.development?
+    FileUtils.touch("#{Rails.root}/tmp/restart.txt") unless Rails.env.development?
   end
     
   def self.clear_interval_in_milliseconds
