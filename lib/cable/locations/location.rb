@@ -18,10 +18,6 @@ class Cable::Locations::Location < ActiveRecord::Base
     arranged = ActiveSupport::OrderedHash.new
     insertion_points = [arranged]
     depth = 0
-    # self.find_by_sql("SELECT * FROM locations loc WHERE NOT EXISTS (SELECT * FROM menus WHERE menus.location_id = loc.id AND menus.show_in_menu = 1) ORDER BY locations.lft")
-    # self.includes(:menus).order('locations.lft')
-    # loc_menu = self.find_by_sql("SELECT * FROM locations loc LEFT OUTER JOIN `menus` ON `menus`.`location_id` = `loc`.`id` WHERE EXISTS (SELECT * FROM menus WHERE menus.location_id = loc.id AND menus.show_in_menu = 1) ORDER BY loc.lft;")
-    # loc_menu = self.find_by_sql("select * from locations loc inner join menus men on men.location_id = loc.id where men.show_in_menu = 1").preload(:menus)
     self.includes(:menus).eager_load(:menus).where(:menus => {:show_in_menu => true} ).order('lft').each_with_level do |node, level|
       next if level > depth && insertion_points.last.keys.last && node.parent_id != insertion_points.last.keys.last.id
       insertion_points.push insertion_points.last.values.last if level > depth
@@ -36,6 +32,10 @@ class Cable::Locations::Location < ActiveRecord::Base
     return self[:url] if self.external_link? || self.direct_link?
     return "/#{self.marketable_url}"
   end 
+  
+  def self.find_by_path( path )
+    Location.includes(:menus).find_by_marketable_url( path ) || Location.includes(:menus).find_by_url( "/#{path}" )
+  end
     
   
   def resource

@@ -16,6 +16,7 @@ module Cable
   autoload :Block, 'cable/block'
   autoload :SpecialAction, 'cable/special_action'
   autoload :UrlMask, 'cable/url_mask'
+  autoload :Caching, 'cable/caching'
   
   module Locations
     autoload :Location, 'cable/locations/location'
@@ -26,7 +27,6 @@ module Cable
     require 'cable/schema/resourceable'
     require 'cable/schema/maskable'
   end
-  
   
   module Errors
     autoload :ResourceAssociationError, "cable/errors/resource_association_error"
@@ -39,12 +39,7 @@ module Cable
     autoload :SimpleNavigationMethods, "cable/menus/simple_navigation_methods"
     autoload :Menu, "cable/menus/menu"
   end
-  
-  module Media
-    autoload :ActsAsAttachable, "cable/media/acts_as_attachable"
-    autoload :Asset, "cable/media/asset"
-  end
-  
+
   module Helpers
     autoload :UrlHelper, 'cable/helpers/url_helper'
     autoload :NestedSetHelper, 'cable/helpers/nested_set_helper'
@@ -52,6 +47,11 @@ module Cable
     autoload :KaminariHelper, 'cable/helpers/kaminari_helper'
     autoload :UrlMaskHelper, 'cable/helpers/url_mask_helper'
     autoload :TerminalHelper, 'cable/helpers/terminal_helper'
+  end
+  
+  module Caching
+    autoload :Cache, 'cable/caching/cache'
+    autoload :CachedPage, 'cable/caching/cached_page'
   end
   
   mattr_accessor :regions
@@ -70,6 +70,7 @@ module Cable
   mattr_accessor :resources
   # Used to store a list of resources that you wish to be associated with menus.
   @@resources = []
+
   
   def self.setup
      yield self

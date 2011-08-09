@@ -1,2 +1,0 @@
-class AttachableDocument < AttachableAsset
-end

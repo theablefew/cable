@@ -5,34 +5,32 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "1.0.0"
+  s.version = "1.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-07-29}
+  s.date = %q{2011-08-09}
   s.description = %q{Cable is a CMS for developers.}
   s.email = %q{spencer@theablefew.com}
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
+    "app/controllers/admin/cache_controller.rb",
     "app/controllers/admin/locations_controller.rb",
     "app/controllers/admin/search_controller.rb",
     "app/controllers/admin_controller.rb",
-    "app/controllers/attachable_assets_controller.rb",
-    "app/controllers/attachable_documents_controller.rb",
-    "app/controllers/attachable_images_controller.rb",
     "app/controllers/cable/cable_admin_controller.rb",
     "app/helpers/admin/search_controller_helper.rb",
     "app/helpers/admin_helper.rb",
     "app/helpers/main_helper.rb",
-    "app/models/attachable_asset.rb",
-    "app/models/attachable_document.rb",
-    "app/models/attachable_image.rb",
+    "app/sweepers/cable_sweeper.rb",
     "app/views/admin/_admin_user_login.html.erb",
     "app/views/admin/_edit_bar.html.erb",
     "app/views/admin/cable_settings/_cable_setting.html.erb",
     "app/views/admin/cable_settings/edit.html.erb",
     "app/views/admin/cable_settings/index.html.erb",
+    "app/views/admin/cache/_cached_page.html.erb",
+    "app/views/admin/cache/index.html.erb",
     "app/views/admin/index.html.erb",
     "app/views/admin/partials/_location_for_resource.html.erb",
     "app/views/admin/partials/_menus_for_location.html.erb",
@@ -40,9 +38,6 @@ Gem::Specification.new do |s|
     "app/views/admin/search/_search.html.erb",
     "app/views/admin/search/index.html.erb",
     "app/views/admin/search/index.json.erb",
-    "app/views/attachable_assets/index.html.erb",
-    "app/views/attachable_assets/new.html.erb",
-    "app/views/attachable_assets/show.html.erb",
     "app/views/layouts/_breadcrumb.html.erb",
     "app/views/layouts/_messages.html.erb",
     "app/views/layouts/_search.html.erb",
@@ -60,6 +55,9 @@ Gem::Specification.new do |s|
     "lib/cable/acts_as_maskable.rb",
     "lib/cable/base.rb",
     "lib/cable/block.rb",
+    "lib/cable/caching.rb",
+    "lib/cable/caching/cache.rb",
+    "lib/cable/caching/cached_page.rb",
     "lib/cable/capistrano.rb",
     "lib/cable/engine.rb",
     "lib/cable/errors/resource_association_error.rb",
@@ -71,8 +69,6 @@ Gem::Specification.new do |s|
     "lib/cable/helpers/url_helper.rb",
     "lib/cable/helpers/url_mask_helper.rb",
     "lib/cable/locations/location.rb",
-    "lib/cable/media/acts_as_attachable.rb",
-    "lib/cable/media/asset.rb",
     "lib/cable/menus/acts_as_cable_menu.rb",
     "lib/cable/menus/menu.rb",
     "lib/cable/menus/simple_navigation_methods.rb",
@@ -85,6 +81,8 @@ Gem::Specification.new do |s|
     "lib/cable/setting.rb",
     "lib/cable/special_action.rb",
     "lib/cable/url_mask.rb",
+    "lib/generators/cable/cache/cache_generator.rb",
+    "lib/generators/cable/cache/templates/migration.rb",
     "lib/generators/cable/install_generator.rb",
     "lib/generators/cable/masks/masks_generator.rb",
     "lib/generators/cable/masks/templates/erb/_mask.html.erb",
@@ -149,8 +147,15 @@ Gem::Specification.new do |s|
     "public/images/cable/product-icon.jpg",
     "public/images/cable/search.png",
     "public/images/cable/story-icon.jpg",
+    "public/images/iphone-style-checkboxes/off.png",
+    "public/images/iphone-style-checkboxes/on.png",
+    "public/images/iphone-style-checkboxes/slider.png",
+    "public/images/iphone-style-checkboxes/slider_center.png",
+    "public/images/iphone-style-checkboxes/slider_left.png",
+    "public/images/iphone-style-checkboxes/slider_right.png",
     "public/javascripts/admin.js",
     "public/javascripts/cable_menu.js",
+    "public/javascripts/iphone-style-checkboxes.js",
     "public/javascripts/jquery.quicksearch.js",
     "public/javascripts/jquery.tablesorter.min.js",
     "public/javascripts/jquery.tagsinput.js",
@@ -189,6 +194,7 @@ Gem::Specification.new do |s|
     "public/stylesheets/cable/buttons.css",
     "public/stylesheets/cable/formtastic.css",
     "public/stylesheets/cable/formtastic_changes.css",
+    "public/stylesheets/cable/jquery-iphone-checkboxes.css",
     "public/stylesheets/cable/masks.css",
     "public/stylesheets/cable/menu.css",
     "public/stylesheets/cable/pagination.css",
@@ -216,7 +222,7 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["= 3.0.6"])
+      s.add_runtime_dependency(%q<rails>, ["~> 3.0.6"])
       s.add_runtime_dependency(%q<orm_adapter>, [">= 0"])
       s.add_runtime_dependency(%q<rainbow>, [">= 0"])
       s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
@@ -236,7 +242,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, ["= 1.6.4"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
     else
-      s.add_dependency(%q<rails>, ["= 3.0.6"])
+      s.add_dependency(%q<rails>, ["~> 3.0.6"])
       s.add_dependency(%q<orm_adapter>, [">= 0"])
       s.add_dependency(%q<rainbow>, [">= 0"])
       s.add_dependency(%q<jquery-rails>, [">= 0"])
@@ -257,7 +263,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rcov>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rails>, ["= 3.0.6"])
+    s.add_dependency(%q<rails>, ["~> 3.0.6"])
     s.add_dependency(%q<orm_adapter>, [">= 0"])
     s.add_dependency(%q<rainbow>, [">= 0"])
     s.add_dependency(%q<jquery-rails>, [">= 0"])
