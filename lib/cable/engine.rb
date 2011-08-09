@@ -14,8 +14,6 @@ require 'wirble'
 require 'annotate'
 require 'open-uri'
 
-# require 'wget'
-
 module Cable
   class Engine < Rails::Engine
 
