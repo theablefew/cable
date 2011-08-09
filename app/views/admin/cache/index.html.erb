@@ -1,0 +1,45 @@
+<%# paginate  @locations, :window => 1 %>
+<div class="cache_toggle left">
+
+    <%= check_box_tag 'Enable Caching', '1', Cable::Caching.enabled? %>
+
+</div>
+
+<div class="actions right">
+    <%= link_to "Flush All Cache" , flush_all_admin_cache_index_path , :class => "button refresh_cache", :method => :post %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Page</th>
+      <th class="updated_at">Cached At</th>
+      <th class="actions">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cached_pages.each do |cached_page| %>
+      <%= render :partial => 'cached_page', :locals => {:cached_page => cached_page} %>
+    <% end %>
+  </tbody>
+</table>
+<span id="progress"></span>
+<%# paginate @locations, :window => 1 %>
+<%= content_for :scripts do %>
+    <%= javascript_include_tag 'iphone-style-checkboxes' %>
+    <script>
+        $(document).ready( function() {
+            $('.cache_toggle :checkbox').iphoneStyle({ checkedLabel: 'Enabled', uncheckedLabel: 'Disabled' });
+            $('.cache_toggle :checkbox').change(function() {
+                if($(this).is(':checked')){
+                    $('#progress').load('<%= enable_cache_admin_cache_index_path %>');
+                }else{
+                    $('#progress').load('<%= disable_cache_admin_cache_index_path %>');
+                }
+            })
+            $('.refresh_cache').click(function() {
+                $(this).replaceWith("<img src='/images/cable/loader.gif' />")
+            })
+        })
+    </script>
+<% end %>

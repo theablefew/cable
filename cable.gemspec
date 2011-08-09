@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-08-08}
+  s.date = %q{2011-08-09}
   s.description = %q{Cable is a CMS for developers.}
   s.email = %q{spencer@theablefew.com}
   s.files = [
@@ -29,8 +29,8 @@ Gem::Specification.new do |s|
     "app/views/admin/cable_settings/_cable_setting.html.erb",
     "app/views/admin/cable_settings/edit.html.erb",
     "app/views/admin/cable_settings/index.html.erb",
-    "app/views/admin/caches/_cached_page.html.erb",
-    "app/views/admin/caches/index.html.erb",
+    "app/views/admin/cache/_cached_page.html.erb",
+    "app/views/admin/cache/index.html.erb",
     "app/views/admin/index.html.erb",
     "app/views/admin/partials/_location_for_resource.html.erb",
     "app/views/admin/partials/_menus_for_location.html.erb",
@@ -57,6 +57,7 @@ Gem::Specification.new do |s|
     "lib/cable/block.rb",
     "lib/cable/caching.rb",
     "lib/cable/caching/cache.rb",
+    "lib/cable/caching/cached_page.rb",
     "lib/cable/capistrano.rb",
     "lib/cable/engine.rb",
     "lib/cable/errors/resource_association_error.rb",
@@ -80,8 +81,8 @@ Gem::Specification.new do |s|
     "lib/cable/setting.rb",
     "lib/cable/special_action.rb",
     "lib/cable/url_mask.rb",
-    "lib/generators/cable/caching/cache_generator.rb",
-    "lib/generators/cable/caching/templates/migration.rb",
+    "lib/generators/cable/cache/cache_generator.rb",
+    "lib/generators/cable/cache/templates/migration.rb",
     "lib/generators/cable/install_generator.rb",
     "lib/generators/cable/masks/masks_generator.rb",
     "lib/generators/cable/masks/templates/erb/_mask.html.erb",
@@ -229,6 +230,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<annotate>, [">= 0"])
       s.add_runtime_dependency(%q<kaminari>, [">= 0"])
       s.add_runtime_dependency(%q<rake>, ["= 0.8.7"])
+      s.add_runtime_dependency(%q<mechanize>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["= 1.6.4"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
@@ -249,6 +251,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<annotate>, [">= 0"])
       s.add_dependency(%q<kaminari>, [">= 0"])
       s.add_dependency(%q<rake>, ["= 0.8.7"])
+      s.add_dependency(%q<mechanize>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["= 1.6.4"])
       s.add_dependency(%q<rcov>, [">= 0"])
@@ -270,6 +273,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<annotate>, [">= 0"])
     s.add_dependency(%q<kaminari>, [">= 0"])
     s.add_dependency(%q<rake>, ["= 0.8.7"])
+    s.add_dependency(%q<mechanize>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["= 1.6.4"])
     s.add_dependency(%q<rcov>, [">= 0"])

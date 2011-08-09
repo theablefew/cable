@@ -12,6 +12,9 @@ require 'thinking_sphinx'
 require 'simple-navigation'
 require 'wirble'
 require 'annotate'
+require 'open-uri'
+
+# require 'wget'
 
 module Cable
   class Engine < Rails::Engine

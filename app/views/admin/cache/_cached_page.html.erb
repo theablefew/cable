@@ -1,0 +1,8 @@
+<tr id="<%= dom_id(cached_page.location) %>">
+  <!-- TODO This should loop through the attributes instead of depending on title. id, updated_at and created_at could be skipped. -->
+  <th><%= link_to cached_page.location.title, [:admin, cached_page.location] %></th>
+  <td class="updated_at"><%= cached_page.timestamp.strftime('%B %d, %Y - %l:%M %p') %></td>
+  <td class="actions">
+    <%= link_to 'Refresh Cache', refresh_cached_page_admin_cache_path( cached_page.location ), :confirm => 'Are you sure?', :class => "refresh_cache" %>
+  </td>
+</tr>    

@@ -2,31 +2,18 @@ class Cable::Caching::Cache < ActiveRecord::Base
   
   set_table_name "cable_cache_settings"
   
-  
-  cattr_accessor :prevent_from_treating_as_cache
-  @@prevent_from_treating_as_cache = [
-                                     'public/404.html',
-                                     'public/500.html',
-                                     'public/422.html',
-                                     'public/favicon.ico',
-                                     'public/javascripts',
-                                     'public/stylesheets',
-                                     'public/assets', 
-                                     'public/images',
-                                     'public/robots.txt', 
-                                     'public/maintenance.html', 
-                                     'public/system',
-                                     'public/fonts'
-                                     ]
-
   def self.cached
-    Dir['public/**'] - self.prevent_from_treating_as_cache
+    self.cached_files.collect do |path|
+      cached_page = Cable::Caching::CachedPage.new( path )
+    end.select do |cached_page|
+      cached_page.valid?
+    end
   end
   
   def self.create_cache_folder
     
   end
-  
+
   def self.enabled?
     instance.enabled?
   end
@@ -36,17 +23,28 @@ class Cable::Caching::Cache < ActiveRecord::Base
   end
   
   def self.enabled=( bool )
-    instance.enabled = bool
-    instance.save
+    instance.update_attributes(:enabled =>  bool)
   end
     
   def self.clear_interval_in_milliseconds
     instance.clear_interval_in_milliseconds
   end
   
+  def self.flush
+    Location.all.each do |loc|
+      expire_page( loc.url )
+    end
+  end
+  
   def self.instance
     self.create( :enabled => false ) if self.first.nil? 
     self.first
+  end
+  
+  private
+  
+  def self.cached_files
+    FileList["#{ActionController::Base.page_cache_directory}/**/*.html"]
   end
   
 end

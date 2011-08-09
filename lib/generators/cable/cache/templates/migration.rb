@@ -1,4 +1,4 @@
-class CreateCableCache < ActiveRecord::Migration
+class CreateCableCacheSettings < ActiveRecord::Migration
   def self.up
     create_table :cable_cache_settings do |t|
       t.boolean :enabled

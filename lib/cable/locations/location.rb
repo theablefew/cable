@@ -32,6 +32,10 @@ class Cable::Locations::Location < ActiveRecord::Base
     return self[:url] if self.external_link? || self.direct_link?
     return "/#{self.marketable_url}"
   end 
+  
+  def self.find_by_path( path )
+    Location.includes(:menus).find_by_marketable_url( path ) || Location.includes(:menus).find_by_url( "/#{path}" )
+  end
     
   
   def resource

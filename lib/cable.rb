@@ -51,6 +51,7 @@ module Cable
   
   module Caching
     autoload :Cache, 'cable/caching/cache'
+    autoload :CachedPage, 'cable/caching/cached_page'
   end
   
   mattr_accessor :regions
