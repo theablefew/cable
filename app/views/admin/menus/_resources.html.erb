@@ -1,11 +1,11 @@
 <table id="resources-table">
   <tbody>
-  <%% @resources.each do |resource| %>
+  <% @resources.each do |resource| %>
     <tr>
-      <td menu_id="<%%= resource.id %>" resource_type="<%%= resource.class.name %>" class="resource"><%%= resource.first_displayable_attribute %></td>
-      <td><%%= link_to image_tag("cable/search.png"), [:admin, resource], :target => "_blank" %></td>
+      <td menu_id="<%= resource.id %>" resource_type="<%= resource.class.name %>" class="resource"><%= resource.first_displayable_attribute %></td>
+      <td><%= link_to image_tag("cable/search.png"), [:admin, resource], :target => "_blank" %></td>
     </tr>
-  <%% end %>
+  <% end %>
   </tbody>
 </table>
 <script> 

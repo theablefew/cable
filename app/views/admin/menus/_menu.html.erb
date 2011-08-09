@@ -23,7 +23,7 @@
       <li><a href="#menu">Menu</a></li>
     </ul>
   	<div id="resource">
-    	    <h3>Select the type of resource would you like to under <%%= @<%= singular_table_name %>.title %>.</h3>
+    	    <h3>Select the type of resource would you like to under <%= @menu.title %>.</h3>
   	    <ul>
         <li>
           <table id="resources">
@@ -36,9 +36,9 @@
               <tr>
                 <td id="types">
                     <ul>
-                      <%% @resource_types.each do |type| %> 
-                        <li id="type_<%%= type[0] %>"><%%= link_to type[0], new_polymorphic_url([:admin,type[0].downcase], :location_id => @<%= singular_table_name %>.location.id)  %></li>
-                      <%% end %>
+                      <% @resource_types.each do |type| %> 
+                        <li id="type_<%= type[0] %>"><%= link_to type[0], new_polymorphic_url([:admin,type[0].downcase], :location_id => @menu.location.id)  %></li>
+                      <% end %>
                     </ul>
                 </td>
               </tr>
@@ -49,6 +49,6 @@
     </div>
     <div id="menu">
         <h3>Create a menu item</h3>
-        <%%= render :partial => "edit_menus" %>
+        <%= render :partial => "edit_menus" %>
     </div>
   </div>
