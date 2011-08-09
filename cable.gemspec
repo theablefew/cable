@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "1.0.0"
+  s.version = "1.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-07-29}
+  s.date = %q{2011-08-05}
   s.description = %q{Cable is a CMS for developers.}
   s.email = %q{spencer@theablefew.com}
   s.files = [
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     "app/models/attachable_asset.rb",
     "app/models/attachable_document.rb",
     "app/models/attachable_image.rb",
+    "app/sweepers/cable_sweeper.rb",
     "app/views/admin/_admin_user_login.html.erb",
     "app/views/admin/_edit_bar.html.erb",
     "app/views/admin/cable_settings/_cable_setting.html.erb",
@@ -216,7 +217,7 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["= 3.0.6"])
+      s.add_runtime_dependency(%q<rails>, ["~> 3.0.6"])
       s.add_runtime_dependency(%q<orm_adapter>, [">= 0"])
       s.add_runtime_dependency(%q<rainbow>, [">= 0"])
       s.add_runtime_dependency(%q<jquery-rails>, [">= 0"])
@@ -236,7 +237,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, ["= 1.6.4"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
     else
-      s.add_dependency(%q<rails>, ["= 3.0.6"])
+      s.add_dependency(%q<rails>, ["~> 3.0.6"])
       s.add_dependency(%q<orm_adapter>, [">= 0"])
       s.add_dependency(%q<rainbow>, [">= 0"])
       s.add_dependency(%q<jquery-rails>, [">= 0"])
@@ -257,7 +258,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rcov>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rails>, ["= 3.0.6"])
+    s.add_dependency(%q<rails>, ["~> 3.0.6"])
     s.add_dependency(%q<orm_adapter>, [">= 0"])
     s.add_dependency(%q<rainbow>, [">= 0"])
     s.add_dependency(%q<jquery-rails>, [">= 0"])

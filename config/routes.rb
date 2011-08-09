@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
   namespace :admin do 
     resources :search, :only => [:index], :as => 'search'
+    resources :locations
   end
+  
+  
   
   match '/admin' => 'admin#index'
   match '/admin(/:action(/:id))' => 'admin'

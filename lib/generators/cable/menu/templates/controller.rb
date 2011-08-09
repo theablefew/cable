@@ -16,7 +16,6 @@ class Admin::<%= plural_table_name.classify.pluralize %>Controller < AdminContro
     @<%= singular_table_name %> = @location.menus.first
     
     respond_to do |format|
-      respond_to do |format|
         format.html {
           if @location.resource.nil? 
             render :action => "_edit_menu"
