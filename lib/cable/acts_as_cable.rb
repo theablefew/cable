@@ -13,7 +13,6 @@ module Cable
         def acts_as_cable( reflection_options = {} )
           has_one :location, reflection_options.merge( :as => :locatable , :class_name => "Location", :dependent => :destroy )
           
-          
           with_modules = []
           with_modules << reflection_options.delete(:with) if reflection_options.has_key?(:with)
           with_modules.flatten!

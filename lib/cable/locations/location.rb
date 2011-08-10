@@ -1,7 +1,7 @@
 class Cable::Locations::Location < ActiveRecord::Base
   self.abstract_class = true
   
-  belongs_to :locatable, :polymorphic => true
+  belongs_to :locatable, :polymorphic => true, :dependent => :destroy
   # after_save :generate_marketable_url
   # accepts_nested_attributes_for :menus
   serialize :options
