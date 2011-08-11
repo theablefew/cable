@@ -9,9 +9,12 @@ class Cable::Caching::Cache < ActiveRecord::Base
       cached_page.valid?
     end
   end
-  
-  def self.create_cache_folder
-    
+
+  def self.clear_cache_folder!
+    logger.info "Clearing #{ActionController::Base.page_cache_directory}!".color(:red)
+    if self.enabled? and File.exists?(ActionController::Base.page_cache_directory)
+      FileUtils.remove_dir("#{ActionController::Base.page_cache_directory}") 
+    end
   end
 
   def self.enabled?
