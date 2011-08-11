@@ -1,7 +1,7 @@
 class Admin::LocationsController < AdminController
   
   respond_to :html, :xml, :json
-  # cache_sweeper :cable_sweeper
+  cache_sweeper :cable_sweeper
   # GET /banners/new
   # GET /banners/new.xml
   def new
