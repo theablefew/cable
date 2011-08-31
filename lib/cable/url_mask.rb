@@ -9,7 +9,7 @@ class Cable::UrlMask < ActiveRecord::Base
     request = "/*" if request == "/"
     order = parts.to_enum(:each_with_index).collect{|part,index| parts.dup.slice(0..index).join("/") + "/*" }.flatten[0..-2].push( request )
     logger.info "Find Masks by: #{order}".color :yellow
-    UrlMask.find_all_by_url_mask( order )
+    UrlMask.find_all_by_url_mask( order ).where(:active => true)
   end
   
   def resource

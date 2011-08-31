@@ -1,5 +1,12 @@
 class Cable::Locations::Location < ActiveRecord::Base
-  self.abstract_class = true
+  # self.abstract_class = true
+  acts_as_nested_set
+  has_many :menus, :dependent => :destroy
+  accepts_nested_attributes_for :menus#, :reject_if => :check_menu_permission
+
+  after_save { Location.clear_cached_locations; Menu.clear_cached_menus }
+  
+  set_table_name "locations"
   
   belongs_to :locatable, :polymorphic => true, :dependent => :destroy
   # after_save :generate_marketable_url
