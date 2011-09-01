@@ -2,6 +2,21 @@ require 'rails'
 require 'orm_adapter'
 require 'schemata'
 
+
+#Cable can serve its own static assets and files, but to do this in production you must configure your webserver
+# 
+#Apache vhost might include this then:
+#
+# #If exists in rails app skip rewrite
+# RewriteCond /home/deploy/peabody.theablefew.com/current/public%{REQUEST_URI} -f [OR]
+# RewriteCond /home/deploy/peabody.theablefew.com/current/public%{REQUEST_URI} -d
+# RewriteRule (.*) - [S=2]
+# #if it doesn't server cable asset instead
+# RewriteCond /home/deploy/peabody.theablefew.com/shared/cable/public%{REQUEST_URI} -f [OR]
+# RewriteCond /home/deploy/peabody.theablefew.com/shared/cable/public%{REQUEST_URI} -d
+# RewriteRule ^ /home/deploy/peabody.theablefew.com/shared/cable/public%{REQUEST_URI} [L]
+#
+
 module Cable
   
   require 'cable/engine' if defined?(Rails) && Rails::VERSION::MAJOR == 3

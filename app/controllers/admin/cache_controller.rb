@@ -11,9 +11,9 @@ class Admin::CacheController < AdminController
   def refresh_cached_page
     location = Location.find( params[:id]).url
     expire_page( location )
-    Thread.new do 
-      open("#{request.protocol}#{request.host_with_port}#{location}")
-    end
+    # Thread.new do 
+    #   open("#{request.protocol}#{request.host_with_port}#{location}")
+    # end
     # cache_page( content, location.url )
     redirect_to( admin_cache_index_path , :notice => "Cleared cache for #{location}")
   end

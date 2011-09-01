@@ -44,7 +44,7 @@ module Cable
         end
         
         def copy_tiny_mce_config
-          copy_file 'config/tiny_mce.yml', 'confit/tiny_mce.yml'
+          copy_file 'config/tiny_mce.yml', 'config/tiny_mce.yml'
         end
         
         def create_blocks
@@ -107,6 +107,10 @@ module Cable
         def install_routes
         end
         
+        def install_cache
+          generate('cable:cache')
+        end
+        
         def install_masks
           generate('cable:masks') if yes?("Would you like URL Masks module to be included?", :yellow)
         end
@@ -121,6 +125,7 @@ module Cable
           say "rails generate cable:resource RESOURCE_NAME field:type field:type ..."
           say ""
         end
+        
         
         
         

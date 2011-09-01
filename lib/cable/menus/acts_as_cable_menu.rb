@@ -8,7 +8,7 @@ module Cable
       module ClassMethods
   
         def acts_as_cable_menu( reflection_options = {} )
-          belongs_to :location#, reflection_options.merge( )
+          belongs_to :location, reflection_options.merge( :dependent => :destroy )
           attr_accessor :creatable
 
           send :include, InstanceMethods

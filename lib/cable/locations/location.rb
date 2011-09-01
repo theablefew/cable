@@ -1,7 +1,14 @@
 class Cable::Locations::Location < ActiveRecord::Base
-  self.abstract_class = true
+  # self.abstract_class = true
+  acts_as_nested_set
+  has_many :menus, :dependent => :destroy
+  accepts_nested_attributes_for :menus#, :reject_if => :check_menu_permission
+
+  after_save { Location.clear_cached_locations; Menu.clear_cached_menus }
   
-  belongs_to :locatable, :polymorphic => true
+  set_table_name "locations"
+  
+  belongs_to :locatable, :polymorphic => true, :dependent => :destroy
   # after_save :generate_marketable_url
   # accepts_nested_attributes_for :menus
   serialize :options
@@ -18,7 +25,8 @@ class Cable::Locations::Location < ActiveRecord::Base
     arranged = ActiveSupport::OrderedHash.new
     insertion_points = [arranged]
     depth = 0
-    self.includes(:menus).eager_load(:menus).where(:menus => {:show_in_menu => true} ).order('lft').each_with_level do |node, level|
+    # .where(:menus => {:show_in_menu => true} )
+    self.includes(:menus).order('lft').each_with_level do |node, level|
       next if level > depth && insertion_points.last.keys.last && node.parent_id != insertion_points.last.keys.last.id
       insertion_points.push insertion_points.last.values.last if level > depth
       (depth - level).times { insertion_points.pop } if level < depth
