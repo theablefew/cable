@@ -1,7 +1,7 @@
 class Admin::LocationsController < AdminController
   
   respond_to :html, :xml, :json
-  # cache_sweeper :cable_sweeper
+  cache_sweeper :cable_sweeper
   # GET /banners/new
   # GET /banners/new.xml
   def new
@@ -40,7 +40,7 @@ class Admin::LocationsController < AdminController
     @location = Location.find(params[:id])
     @location.destroy
     Location.rebuild!
-    respond_with(redirect_to admin_menus_path, :notice => "Successfully destroyed banner")
+    redirect_to(admin_menus_path, :notice => "Successfully destroyed") and return
   end
 
 end
