@@ -1,5 +1,5 @@
 class CableSweeper < ActionController::Caching::Sweeper
-  observe Location
+  observe Location if defined?(Location)
   
   def after_save( record )
     puts "Expiring #{record.url}".color(:red)

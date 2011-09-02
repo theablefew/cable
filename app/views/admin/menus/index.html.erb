@@ -17,12 +17,7 @@
             <%= child %>
         <% end %>
     <% end %>
-    <% unless @menu_id.empty? %>
-      <%# This is bad and needs to be cleaned up %>
-      <% @menu_id.compact! %>
-      <% @menu_id.reverse!.uniq! %>
-      <% @menu_id.reverse! %>
-    <% end %>
+    <% @menu_id.compact!.reverse!.uniq!.reverse! unless @menu_id.compact.empty? %>
     <%= raw yield(:children).gsub(/<ul>/){ "<ul class='cable_menu' menu='#{@menu_id.shift || 0 }'>"} %>
 </div>
 <br />
