@@ -43,9 +43,10 @@ module Cable
         def create_views
           if options.views?
             if yes?( "Would you like Cable to generate menu views?".color(:yellow))
-              Dir.glob(File.expand_path("../templates", __FILE__) + '/erb/menus/*.erb') do |rb_file|
-                template rb_file, "app/views/admin/#{plural_table_name}/#{File.basename(rb_file)}"
-              end
+              directory File.expand_path("../../../../../", __FILE__) + '/app/views/admin/menus', 'app/views/admin/menus'
+              #Dir.glob(File.expand_path("../templates", __FILE__) + '/erb/menus/*.erb') do |rb_file|
+              #  template rb_file, "app/views/admin/#{plural_table_name}/#{File.basename(rb_file)}"
+              #end
             end
           end
         end
