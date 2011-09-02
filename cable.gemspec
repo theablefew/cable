@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cable}
-  s.version = "1.0.11"
+  s.version = "1.0.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-08-10}
+  s.date = %q{2011-09-02}
   s.description = %q{Cable is a CMS for developers.}
   s.email = %q{spencer@theablefew.com}
   s.files = [
@@ -32,7 +32,17 @@ Gem::Specification.new do |s|
     "app/views/admin/cache/_cached_page.html.erb",
     "app/views/admin/cache/index.html.erb",
     "app/views/admin/index.html.erb",
+    "app/views/admin/menus/_edit_menus.html.erb",
+    "app/views/admin/menus/_menu.html.erb",
+    "app/views/admin/menus/_resources.html.erb",
+    "app/views/admin/menus/edit.html.erb",
+    "app/views/admin/menus/index.html.erb",
+    "app/views/admin/menus/new.html.erb",
+    "app/views/admin/menus/resources.js.erb",
+    "app/views/admin/menus/show.html.erb",
+    "app/views/admin/menus/sort.js.erb",
     "app/views/admin/partials/_location_for_resource.html.erb",
+    "app/views/admin/partials/_menu_fields.html.erb",
     "app/views/admin/partials/_menus_for_location.html.erb",
     "app/views/admin/search/_generic_search_result.html.erb",
     "app/views/admin/search/_search.html.erb",
@@ -94,16 +104,7 @@ Gem::Specification.new do |s|
     "lib/generators/cable/media/templates/model.rb",
     "lib/generators/cable/menu/menu_generator.rb",
     "lib/generators/cable/menu/templates/controller.rb",
-    "lib/generators/cable/menu/templates/erb/menus/_edit_menus.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/_menu.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/_resources.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/edit.html.erb",
     "lib/generators/cable/menu/templates/erb/menus/index.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/new.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/resources.js.erb",
-    "lib/generators/cable/menu/templates/erb/menus/show.html.erb",
-    "lib/generators/cable/menu/templates/erb/menus/sort.js.erb",
-    "lib/generators/cable/menu/templates/erb/partials/_menu_fields.html.erb",
     "lib/generators/cable/menu/templates/menus.rb",
     "lib/generators/cable/menu/templates/migration.rb",
     "lib/generators/cable/menu/templates/model.rb",
