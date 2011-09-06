@@ -19,7 +19,7 @@ class Admin::<%= class_name.pluralize %>Controller < AdminController
     @<%= singular_table_name %> = <%= orm_class.build(class_name) %>
     <% if options.locatable? %>
     @parent_location = Location.find( params[:location_id] || Location.root )
-    @location = @page.build_location(:parent_id => @parent_location.id, :tree_id => @parent_location.tree_id )
+    @location =  @<%= singular_table_name %>.build_location(:parent_id => @parent_location.id, :tree_id => @parent_location.tree_id )
     @location.menus.build
     <% end %>
     respond_with(:admin , @<%= singular_table_name %>)
