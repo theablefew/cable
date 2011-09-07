@@ -4,7 +4,7 @@ class Cable::Locations::Location < ActiveRecord::Base
   has_many :menus, :dependent => :destroy
   accepts_nested_attributes_for :menus#, :reject_if => :check_menu_permission
 
-  after_save { Location.clear_cached_locations; Menu.clear_cached_menus }
+  #after_save { Location.clear_cached_locations; Menu.clear_cached_menus }
   
   set_table_name "locations"
   
