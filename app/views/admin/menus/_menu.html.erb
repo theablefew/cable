@@ -37,7 +37,7 @@
                 <td id="types">
                     <ul>
                       <% @resource_types.each do |type| %> 
-                        <li id="type_<%= type[0] %>"><%= link_to type[0], new_polymorphic_url([:admin,type[0].downcase], :location_id => @menu.location.id)  %></li>
+                        <li id="type_<%= type[0] %>"><%= link_to type[0], new_polymorphic_url([:admin,type[0].underscore], :location_id => @menu.location.id)  %></li>
                       <% end %>
                     </ul>
                 </td>
