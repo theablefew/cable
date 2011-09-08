@@ -47,6 +47,7 @@
                 <li><p class="inline-hints notice">This <%%= @<%= singular_table_name %>.class.to_s.downcase %> is viewable at: <span id="location-url-hint"><%%= link_to @<%= singular_table_name %>.location.url,@<%= singular_table_name %>.location.url %></span></p></li>
                 <%%= location_fields.input :url, :label => "Custom URL", :hint => "Used to override the default URL", :input_html => {:id => "location_url" } %>
                 <%%= location_fields.input :parent_id, :as => :hidden %>
+                <%%= location_fields.input :tree_id, :as => :hidden %>
                 <%% unless Cable.special_actions.empty? %>
                   <%%= location_fields.input :special_action, :label => "Special Action", :as => :select, :collection => Cable.special_actions, :hint => "(Optional)" %>
                 <%% end %>
