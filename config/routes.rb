@@ -32,5 +32,7 @@ Rails.application.routes.draw do
   
   match '/admin' => 'admin#index'
   match '/admin(/:action(/:id))' => 'admin'
-  match '*url' => 'main#find_by_url'
+  # match '*url' => 'main#find_by_url'
+  match '*url' => 'main#find_by_url', :constraints => { :url => /!([^\s]+(\.(?i)(css|js|jpg|png|gif|bmp))$)/ }
+  
 end
