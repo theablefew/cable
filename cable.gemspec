@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{cable}
-  s.version = "1.0.13"
+  s.name = "cable"
+  s.version = "1.0.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = %q{2011-09-08}
-  s.description = %q{Cable is a CMS for developers.}
-  s.email = %q{spencer@theablefew.com}
+  s.date = "2011-10-27"
+  s.description = "Cable is a CMS for developers."
+  s.email = "spencer@theablefew.com"
   s.files = [
     "VERSION",
     "app/controllers/admin/cable_settings_controller.rb",
@@ -216,8 +216,8 @@ Gem::Specification.new do |s|
   ]
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Cable CMS Engine for Rails 3}
+  s.rubygems_version = "1.8.10"
+  s.summary = "Cable CMS Engine for Rails 3"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
