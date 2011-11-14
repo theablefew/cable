@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "cable"
-  s.version = "1.0.14"
+  s.version = "1.0.15"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "Mike Bishop", "The Able Few"]
-  s.date = "2011-10-27"
+  s.date = "2011-11-14"
   s.description = "Cable is a CMS for developers."
   s.email = "spencer@theablefew.com"
   s.files = [
