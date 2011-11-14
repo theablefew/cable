@@ -10,5 +10,8 @@
             <%= menu_fields.input :title , :label => "Menu Title", :hint => "If different than resource title."%>
         <% end %>
     <% end %>
-    <%= f.buttons %>
+    <%= f.buttons do %>
+        <%= f.commit_button %>
+        <%= link_to 'Destroy', [:admin, @location], :confirm => 'Are you sure?', :method => :delete %>
+    <% end %>
 <% end %>

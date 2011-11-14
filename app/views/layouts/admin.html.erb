@@ -32,7 +32,6 @@
           <% content_for :admin_sub_navigation do %>
               <%= render_navigation(:level => 2..5, :context => :admin) %>
           <% end %>
-        
         <% if single_column? %>
           <%= render :partial => "layouts/admin/single_column_layout" %>
         <% else %>
