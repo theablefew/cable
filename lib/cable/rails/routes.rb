@@ -1,27 +1,27 @@
 module ActionDispatch::Routing
   class Mapper
-   
-    # Is equivelant to 
-    #  
+
+    # Is equivelant to
+    #
     # namespace :admin do
     #   resource :product
     # end
     #
     #
-    
+
     def cable_to(*resources, &block)
 
       options = resources.extract_options!
       path = "admin"
       admin_namespace = { :path => path, :as => path, :module => path,
                            :shallow_path => path, :shallow_prefix => path }
-      scope(admin_namespace) do 
+      scope(admin_namespace) do
 
         if apply_common_behavior_for(:resources, resources, options, &block)
           return self
         end
 
-        resource_scope(Resource.new(resources.pop, options)) do
+        resource_scope(:resource, Resource.new(resources.pop, options)) do
           yield if block_given?
 
           collection do
@@ -43,7 +43,7 @@ module ActionDispatch::Routing
       end
       self
     end
-    
-    
+
+
   end
 end
