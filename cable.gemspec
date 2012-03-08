@@ -59,7 +59,7 @@ Gem::Specification.new do |s|
     "config/admin_navigation.rb",
     "config/navigation.rb",
     "config/routes.rb",
-    "config/tiny_mce.yml",
+    "config/tinymce.yml",
     "lib/cable.rb",
     "lib/cable/acts_as_cable.rb",
     "lib/cable/acts_as_maskable.rb",
