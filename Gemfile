@@ -6,7 +6,7 @@ gem 'orm_adapter'
 gem 'rainbow'
 gem 'jquery-rails'
 gem 'seedbed', '1.1.1'
-gem 'tiny_mce'
+gem 'tinymce-rails'
 gem 'formtastic'
 gem 'cocoon'
 gem 'simple-navigation'
@@ -16,7 +16,7 @@ gem 'schemata', '>=0.1.0'
 gem 'wirble'
 gem 'annotate'
 gem 'kaminari'
-gem 'rake', '0.8.7'
+gem 'rake'
 
 group :development do
   # gem "shoulda", ">= 0"
