@@ -134,7 +134,7 @@ module Cable
         end
     
         def copy_tiny_mce_config
-          copy_file 'config/tiny_mce.yml', 'config/tiny_mce.yml' if yes?( "Would you like to copy Cable's default tiny_mce.yml configuration?", :yellow )
+          copy_file 'config/tinymce.yml', 'config/tinymce.yml' if yes?( "Would you like to copy Cable's default tinymce.yml configuration?", :yellow )
         end
         
         def install_default_resource_template

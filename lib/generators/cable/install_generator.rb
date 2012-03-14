@@ -44,7 +44,7 @@ module Cable
         end
         
         def copy_tiny_mce_config
-          copy_file 'config/tiny_mce.yml', 'config/tiny_mce.yml'
+          copy_file 'config/tinymce.yml', 'config/tinymce.yml'
         end
         
         def create_blocks
