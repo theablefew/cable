@@ -1,6 +1,6 @@
 class Cable::Caching::Cache < ActiveRecord::Base
   
-  self.table_name "cable_cache_settings"
+  set_table_name "cable_cache_settings"
   
   def self.cached
     self.cached_files.collect do |path|

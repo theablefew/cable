@@ -1,3 +1,3 @@
 class Cable::Setting < ActiveRecord::Base
-    self.table_name 'cable_settings'
+  set_table_name 'cable_settings'
 end

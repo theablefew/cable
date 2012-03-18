@@ -6,7 +6,7 @@ class Cable::Locations::Location < ActiveRecord::Base
 
   #after_save { Location.clear_cached_locations; Menu.clear_cached_menus }
   
-  self.table_name "locations"
+  set_table_name "locations"
   
   belongs_to :locatable, :polymorphic => true, :dependent => :destroy
   # after_save :generate_marketable_url
